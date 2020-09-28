@@ -54,7 +54,7 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonStockAdd = new System.Windows.Forms.Button();
-            this.buttonStockChangeAmount = new System.Windows.Forms.Button();
+            this.buttonStockEditProduct = new System.Windows.Forms.Button();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -326,7 +326,7 @@
             // 
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.buttonStockAdd);
-            this.tabPage2.Controls.Add(this.buttonStockChangeAmount);
+            this.tabPage2.Controls.Add(this.buttonStockEditProduct);
             this.tabPage2.Controls.Add(this.dataGridViewStock);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -356,15 +356,15 @@
             this.buttonStockAdd.Text = "Add Product";
             this.buttonStockAdd.UseVisualStyleBackColor = true;
             // 
-            // buttonStockChangeAmount
+            // buttonStockEditProduct
             // 
-            this.buttonStockChangeAmount.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonStockChangeAmount.Location = new System.Drawing.Point(324, 371);
-            this.buttonStockChangeAmount.Name = "buttonStockChangeAmount";
-            this.buttonStockChangeAmount.Size = new System.Drawing.Size(124, 23);
-            this.buttonStockChangeAmount.TabIndex = 1;
-            this.buttonStockChangeAmount.Text = "Change Amount";
-            this.buttonStockChangeAmount.UseVisualStyleBackColor = true;
+            this.buttonStockEditProduct.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonStockEditProduct.Location = new System.Drawing.Point(324, 371);
+            this.buttonStockEditProduct.Name = "buttonStockEditProduct";
+            this.buttonStockEditProduct.Size = new System.Drawing.Size(124, 23);
+            this.buttonStockEditProduct.TabIndex = 1;
+            this.buttonStockEditProduct.Text = "Edit Product";
+            this.buttonStockEditProduct.UseVisualStyleBackColor = true;
             // 
             // dataGridViewStock
             // 
@@ -509,7 +509,7 @@
         private System.Windows.Forms.DataGridView dataGridViewStock;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonStockAdd;
-        private System.Windows.Forms.Button buttonStockChangeAmount;
+        private System.Windows.Forms.Button buttonStockEditProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn productBrand;
         private System.Windows.Forms.DataGridViewTextBoxColumn productCode;
