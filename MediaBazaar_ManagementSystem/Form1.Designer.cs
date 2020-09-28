@@ -30,28 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonStockAdd = new System.Windows.Forms.Button();
-            this.buttonStockChangeAmount = new System.Windows.Forms.Button();
-            this.dataGridViewStock = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
-            this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
-            this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
-            this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
-            this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,15 +41,35 @@
             this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonEmployeeModify = new System.Windows.Forms.Button();
-            this.buttonEmployeesRemove = new System.Windows.Forms.Button();
-            this.buttonEmployeesAdd = new System.Windows.Forms.Button();
-            this.labelEmployeesSelected = new System.Windows.Forms.Label();
+            this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
+            this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
+            this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
+            this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
+            this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
             this.listBoxEmployeesSelected = new System.Windows.Forms.ListBox();
+            this.labelEmployeesSelected = new System.Windows.Forms.Label();
+            this.buttonEmployeesAdd = new System.Windows.Forms.Button();
+            this.buttonEmployeesRemove = new System.Windows.Forms.Button();
+            this.buttonEmployeeModify = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStockAdd = new System.Windows.Forms.Button();
+            this.buttonStockChangeAmount = new System.Windows.Forms.Button();
+            this.dataGridViewStock = new System.Windows.Forms.DataGridView();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
             this.splitContainerEmployeesPrimary.Panel1.SuspendLayout();
             this.splitContainerEmployeesPrimary.Panel2.SuspendLayout();
@@ -79,6 +79,8 @@
             this.splitContainerEmployeesSecondary.Panel1.SuspendLayout();
             this.splitContainerEmployeesSecondary.Panel2.SuspendLayout();
             this.splitContainerEmployeesSecondary.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -106,6 +108,219 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Employees";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // splitContainerEmployeesPrimary
+            // 
+            this.splitContainerEmployeesPrimary.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainerEmployeesPrimary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerEmployeesPrimary.Location = new System.Drawing.Point(3, 3);
+            this.splitContainerEmployeesPrimary.Name = "splitContainerEmployeesPrimary";
+            // 
+            // splitContainerEmployeesPrimary.Panel1
+            // 
+            this.splitContainerEmployeesPrimary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesPrimary.Panel1.Controls.Add(this.dataGridView1);
+            // 
+            // splitContainerEmployeesPrimary.Panel2
+            // 
+            this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
+            this.splitContainerEmployeesPrimary.Panel2MinSize = 200;
+            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(762, 394);
+            this.splitContainerEmployeesPrimary.SplitterDistance = 558;
+            this.splitContainerEmployeesPrimary.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.employeeID,
+            this.employeeName,
+            this.employeeDepartment,
+            this.employeeFunction,
+            this.employeeEmail,
+            this.employeePhoneNumber,
+            this.employeeAddress,
+            this.employeeDOB,
+            this.employeeBSN});
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(552, 388);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // employeeID
+            // 
+            this.employeeID.HeaderText = "ID";
+            this.employeeID.Name = "employeeID";
+            this.employeeID.Width = 50;
+            // 
+            // employeeName
+            // 
+            this.employeeName.HeaderText = "Employee name";
+            this.employeeName.Name = "employeeName";
+            this.employeeName.Width = 150;
+            // 
+            // employeeDepartment
+            // 
+            this.employeeDepartment.HeaderText = "Department";
+            this.employeeDepartment.Name = "employeeDepartment";
+            this.employeeDepartment.Width = 75;
+            // 
+            // employeeFunction
+            // 
+            this.employeeFunction.HeaderText = "Function";
+            this.employeeFunction.Name = "employeeFunction";
+            // 
+            // employeeEmail
+            // 
+            this.employeeEmail.HeaderText = "Email";
+            this.employeeEmail.Name = "employeeEmail";
+            // 
+            // employeePhoneNumber
+            // 
+            this.employeePhoneNumber.HeaderText = "Phone number";
+            this.employeePhoneNumber.Name = "employeePhoneNumber";
+            // 
+            // employeeAddress
+            // 
+            this.employeeAddress.HeaderText = "Address";
+            this.employeeAddress.Name = "employeeAddress";
+            // 
+            // employeeDOB
+            // 
+            this.employeeDOB.HeaderText = "Date of birth";
+            this.employeeDOB.Name = "employeeDOB";
+            // 
+            // employeeBSN
+            // 
+            this.employeeBSN.HeaderText = "BSN";
+            this.employeeBSN.Name = "employeeBSN";
+            // 
+            // splitContainerEmployeesSecondary
+            // 
+            this.splitContainerEmployeesSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerEmployeesSecondary.BackColor = System.Drawing.Color.Snow;
+            this.splitContainerEmployeesSecondary.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerEmployeesSecondary.IsSplitterFixed = true;
+            this.splitContainerEmployeesSecondary.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerEmployeesSecondary.Name = "splitContainerEmployeesSecondary";
+            this.splitContainerEmployeesSecondary.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerEmployeesSecondary.Panel1
+            // 
+            this.splitContainerEmployeesSecondary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentRemove);
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentAdd);
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.textBoxEmployeesDepartmentName);
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.labelEmployeesDepartmentName);
+            this.splitContainerEmployeesSecondary.Panel1MinSize = 85;
+            // 
+            // splitContainerEmployeesSecondary.Panel2
+            // 
+            this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.listBoxEmployeesSelected);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
+            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(197, 394);
+            this.splitContainerEmployeesSecondary.SplitterDistance = 85;
+            this.splitContainerEmployeesSecondary.TabIndex = 0;
+            // 
+            // buttonEmployeesDepartmentRemove
+            // 
+            this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(116, 45);
+            this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
+            this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
+            this.buttonEmployeesDepartmentRemove.TabIndex = 3;
+            this.buttonEmployeesDepartmentRemove.Text = "Remove";
+            this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonEmployeesDepartmentAdd
+            // 
+            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
+            this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
+            this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonEmployeesDepartmentAdd.TabIndex = 2;
+            this.buttonEmployeesDepartmentAdd.Text = "Add";
+            this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
+            // 
+            // textBoxEmployeesDepartmentName
+            // 
+            this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
+            this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
+            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(188, 20);
+            this.textBoxEmployeesDepartmentName.TabIndex = 1;
+            // 
+            // labelEmployeesDepartmentName
+            // 
+            this.labelEmployeesDepartmentName.AutoSize = true;
+            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
+            this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
+            this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
+            this.labelEmployeesDepartmentName.TabIndex = 0;
+            this.labelEmployeesDepartmentName.Text = "Department name";
+            // 
+            // listBoxEmployeesSelected
+            // 
+            this.listBoxEmployeesSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxEmployeesSelected.FormattingEnabled = true;
+            this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
+            this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
+            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(194, 186);
+            this.listBoxEmployeesSelected.TabIndex = 4;
+            // 
+            // labelEmployeesSelected
+            // 
+            this.labelEmployeesSelected.AutoSize = true;
+            this.labelEmployeesSelected.Location = new System.Drawing.Point(3, 4);
+            this.labelEmployeesSelected.Name = "labelEmployeesSelected";
+            this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
+            this.labelEmployeesSelected.TabIndex = 3;
+            this.labelEmployeesSelected.Text = "Selected Employee";
+            // 
+            // buttonEmployeesAdd
+            // 
+            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 218);
+            this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeesAdd.TabIndex = 2;
+            this.buttonEmployeesAdd.Text = "Add new employee";
+            this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
+            // 
+            // buttonEmployeesRemove
+            // 
+            this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 276);
+            this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
+            this.buttonEmployeesRemove.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeesRemove.TabIndex = 1;
+            this.buttonEmployeesRemove.Text = "Remove selected employee";
+            this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonEmployeeModify
+            // 
+            this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 247);
+            this.buttonEmployeeModify.Name = "buttonEmployeeModify";
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeeModify.TabIndex = 0;
+            this.buttonEmployeeModify.Text = "Modify selected employee";
+            this.buttonEmployeeModify.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -171,24 +386,6 @@
             this.dataGridViewStock.Size = new System.Drawing.Size(756, 359);
             this.dataGridViewStock.TabIndex = 0;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(768, 400);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Statistics";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(768, 400);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Scheduling";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // productName
             // 
             this.productName.HeaderText = "Product Name";
@@ -232,232 +429,58 @@
             this.productDescription.MinimumWidth = 50;
             this.productDescription.Name = "productDescription";
             // 
-            // splitContainerEmployeesPrimary
+            // tabPage3
             // 
-            this.splitContainerEmployeesPrimary.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainerEmployeesPrimary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerEmployeesPrimary.Location = new System.Drawing.Point(3, 3);
-            this.splitContainerEmployeesPrimary.Name = "splitContainerEmployeesPrimary";
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(768, 400);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Statistics";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // splitContainerEmployeesPrimary.Panel1
+            // tabPage4
             // 
-            this.splitContainerEmployeesPrimary.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesPrimary.Panel1.Controls.Add(this.dataGridView1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(768, 400);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Scheduling";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // splitContainerEmployeesPrimary.Panel2
+            // buttonLogin
             // 
-            this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
-            this.splitContainerEmployeesPrimary.Panel2MinSize = 200;
-            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(762, 394);
-            this.splitContainerEmployeesPrimary.SplitterDistance = 558;
-            this.splitContainerEmployeesPrimary.TabIndex = 0;
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(712, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // labelWelcomeText
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.employeeID,
-            this.employeeName,
-            this.employeeDepartment,
-            this.employeeFunction,
-            this.employeeEmail,
-            this.employeePhoneNumber,
-            this.employeeAddress,
-            this.employeeDOB,
-            this.employeeBSN});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(552, 388);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // splitContainerEmployeesSecondary
-            // 
-            this.splitContainerEmployeesSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainerEmployeesSecondary.BackColor = System.Drawing.Color.Snow;
-            this.splitContainerEmployeesSecondary.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainerEmployeesSecondary.IsSplitterFixed = true;
-            this.splitContainerEmployeesSecondary.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerEmployeesSecondary.Name = "splitContainerEmployeesSecondary";
-            this.splitContainerEmployeesSecondary.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainerEmployeesSecondary.Panel1
-            // 
-            this.splitContainerEmployeesSecondary.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentRemove);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentAdd);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.textBoxEmployeesDepartmentName);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.labelEmployeesDepartmentName);
-            this.splitContainerEmployeesSecondary.Panel1MinSize = 85;
-            // 
-            // splitContainerEmployeesSecondary.Panel2
-            // 
-            this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.listBoxEmployeesSelected);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
-            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(197, 394);
-            this.splitContainerEmployeesSecondary.SplitterDistance = 85;
-            this.splitContainerEmployeesSecondary.TabIndex = 0;
-            // 
-            // labelEmployeesDepartmentName
-            // 
-            this.labelEmployeesDepartmentName.AutoSize = true;
-            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
-            this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
-            this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
-            this.labelEmployeesDepartmentName.TabIndex = 0;
-            this.labelEmployeesDepartmentName.Text = "Department name";
-            // 
-            // textBoxEmployeesDepartmentName
-            // 
-            this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
-            this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(188, 20);
-            this.textBoxEmployeesDepartmentName.TabIndex = 1;
-            // 
-            // buttonEmployeesDepartmentAdd
-            // 
-            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
-            this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
-            this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
-            this.buttonEmployeesDepartmentAdd.TabIndex = 2;
-            this.buttonEmployeesDepartmentAdd.Text = "Add";
-            this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
-            // 
-            // buttonEmployeesDepartmentRemove
-            // 
-            this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(116, 45);
-            this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
-            this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
-            this.buttonEmployeesDepartmentRemove.TabIndex = 3;
-            this.buttonEmployeesDepartmentRemove.Text = "Remove";
-            this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
-            // 
-            // employeeID
-            // 
-            this.employeeID.HeaderText = "ID";
-            this.employeeID.Name = "employeeID";
-            this.employeeID.Width = 50;
-            // 
-            // employeeName
-            // 
-            this.employeeName.HeaderText = "Employee name";
-            this.employeeName.Name = "employeeName";
-            this.employeeName.Width = 150;
-            // 
-            // employeeDepartment
-            // 
-            this.employeeDepartment.HeaderText = "Department";
-            this.employeeDepartment.Name = "employeeDepartment";
-            this.employeeDepartment.Width = 75;
-            // 
-            // employeeFunction
-            // 
-            this.employeeFunction.HeaderText = "Function";
-            this.employeeFunction.Name = "employeeFunction";
-            // 
-            // employeeEmail
-            // 
-            this.employeeEmail.HeaderText = "Email";
-            this.employeeEmail.Name = "employeeEmail";
-            // 
-            // employeePhoneNumber
-            // 
-            this.employeePhoneNumber.HeaderText = "Phone number";
-            this.employeePhoneNumber.Name = "employeePhoneNumber";
-            // 
-            // employeeAddress
-            // 
-            this.employeeAddress.HeaderText = "Address";
-            this.employeeAddress.Name = "employeeAddress";
-            // 
-            // employeeDOB
-            // 
-            this.employeeDOB.HeaderText = "Date of birth";
-            this.employeeDOB.Name = "employeeDOB";
-            // 
-            // employeeBSN
-            // 
-            this.employeeBSN.HeaderText = "BSN";
-            this.employeeBSN.Name = "employeeBSN";
-            // 
-            // buttonEmployeeModify
-            // 
-            this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 247);
-            this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(188, 23);
-            this.buttonEmployeeModify.TabIndex = 0;
-            this.buttonEmployeeModify.Text = "Modify selected employee";
-            this.buttonEmployeeModify.UseVisualStyleBackColor = true;
-            // 
-            // buttonEmployeesRemove
-            // 
-            this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 276);
-            this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(188, 23);
-            this.buttonEmployeesRemove.TabIndex = 1;
-            this.buttonEmployeesRemove.Text = "Remove selected employee";
-            this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
-            // 
-            // buttonEmployeesAdd
-            // 
-            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 218);
-            this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(188, 23);
-            this.buttonEmployeesAdd.TabIndex = 2;
-            this.buttonEmployeesAdd.Text = "Add new employee";
-            this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
-            // 
-            // labelEmployeesSelected
-            // 
-            this.labelEmployeesSelected.AutoSize = true;
-            this.labelEmployeesSelected.Location = new System.Drawing.Point(3, 4);
-            this.labelEmployeesSelected.Name = "labelEmployeesSelected";
-            this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
-            this.labelEmployeesSelected.TabIndex = 3;
-            this.labelEmployeesSelected.Text = "Selected Employee";
-            // 
-            // listBoxEmployeesSelected
-            // 
-            this.listBoxEmployeesSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxEmployeesSelected.FormattingEnabled = true;
-            this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
-            this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
-            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(194, 186);
-            this.listBoxEmployeesSelected.TabIndex = 4;
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(587, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome, USERNAME";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelWelcomeText);
+            this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "Form1";
             this.Text = "Media Bazaar Management System";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).EndInit();
             this.splitContainerEmployeesPrimary.Panel1.ResumeLayout(false);
             this.splitContainerEmployeesPrimary.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).EndInit();
@@ -469,7 +492,10 @@
             this.splitContainerEmployeesSecondary.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).EndInit();
             this.splitContainerEmployeesSecondary.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -513,6 +539,8 @@
         private System.Windows.Forms.Button buttonEmployeesRemove;
         private System.Windows.Forms.Button buttonEmployeeModify;
         private System.Windows.Forms.ListBox listBoxEmployeesSelected;
+        private System.Windows.Forms.Button buttonLogin;
+        private System.Windows.Forms.Label labelWelcomeText;
     }
 }
 
