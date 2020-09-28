@@ -1,6 +1,6 @@
 ﻿namespace MediaBazaar_ManagementSystem
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -475,7 +475,7 @@
             this.employeeBSN.HeaderText = "BSN";
             this.employeeBSN.Name = "employeeBSN";
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -484,7 +484,7 @@
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
             this.MinimumSize = new System.Drawing.Size(600, 400);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.Text = "Media Bazaar Management System";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
