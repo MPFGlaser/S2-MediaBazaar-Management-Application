@@ -32,15 +32,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
@@ -68,6 +59,16 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -141,6 +142,7 @@
             this.employeeName,
             this.employeeDepartment,
             this.employeeFunction,
+            this.employeeUsername,
             this.employeeEmail,
             this.employeePhoneNumber,
             this.employeeAddress,
@@ -150,54 +152,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(552, 388);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // employeeID
-            // 
-            this.employeeID.HeaderText = "ID";
-            this.employeeID.Name = "employeeID";
-            this.employeeID.Width = 50;
-            // 
-            // employeeName
-            // 
-            this.employeeName.HeaderText = "Employee name";
-            this.employeeName.Name = "employeeName";
-            this.employeeName.Width = 150;
-            // 
-            // employeeDepartment
-            // 
-            this.employeeDepartment.HeaderText = "Department";
-            this.employeeDepartment.Name = "employeeDepartment";
-            this.employeeDepartment.Width = 75;
-            // 
-            // employeeFunction
-            // 
-            this.employeeFunction.HeaderText = "Function";
-            this.employeeFunction.Name = "employeeFunction";
-            // 
-            // employeeEmail
-            // 
-            this.employeeEmail.HeaderText = "Email";
-            this.employeeEmail.Name = "employeeEmail";
-            // 
-            // employeePhoneNumber
-            // 
-            this.employeePhoneNumber.HeaderText = "Phone number";
-            this.employeePhoneNumber.Name = "employeePhoneNumber";
-            // 
-            // employeeAddress
-            // 
-            this.employeeAddress.HeaderText = "Address";
-            this.employeeAddress.Name = "employeeAddress";
-            // 
-            // employeeDOB
-            // 
-            this.employeeDOB.HeaderText = "Date of birth";
-            this.employeeDOB.Name = "employeeDOB";
-            // 
-            // employeeBSN
-            // 
-            this.employeeBSN.HeaderText = "BSN";
-            this.employeeBSN.Name = "employeeBSN";
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -468,6 +422,59 @@
             this.labelWelcomeText.Text = "Welcome, USERNAME";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // employeeID
+            // 
+            this.employeeID.HeaderText = "ID";
+            this.employeeID.Name = "employeeID";
+            this.employeeID.Width = 50;
+            // 
+            // employeeName
+            // 
+            this.employeeName.HeaderText = "Employee name";
+            this.employeeName.Name = "employeeName";
+            this.employeeName.Width = 150;
+            // 
+            // employeeDepartment
+            // 
+            this.employeeDepartment.HeaderText = "Department";
+            this.employeeDepartment.Name = "employeeDepartment";
+            this.employeeDepartment.Width = 75;
+            // 
+            // employeeFunction
+            // 
+            this.employeeFunction.HeaderText = "Function";
+            this.employeeFunction.Name = "employeeFunction";
+            // 
+            // employeeUsername
+            // 
+            this.employeeUsername.HeaderText = "Username";
+            this.employeeUsername.Name = "employeeUsername";
+            // 
+            // employeeEmail
+            // 
+            this.employeeEmail.HeaderText = "Email";
+            this.employeeEmail.Name = "employeeEmail";
+            // 
+            // employeePhoneNumber
+            // 
+            this.employeePhoneNumber.HeaderText = "Phone number";
+            this.employeePhoneNumber.Name = "employeePhoneNumber";
+            // 
+            // employeeAddress
+            // 
+            this.employeeAddress.HeaderText = "Address";
+            this.employeeAddress.Name = "employeeAddress";
+            // 
+            // employeeDOB
+            // 
+            this.employeeDOB.HeaderText = "Date of birth";
+            this.employeeDOB.Name = "employeeDOB";
+            // 
+            // employeeBSN
+            // 
+            this.employeeBSN.HeaderText = "BSN";
+            this.employeeBSN.Name = "employeeBSN";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,15 +532,6 @@
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
         private System.Windows.Forms.Button buttonEmployeesDepartmentRemove;
         private System.Windows.Forms.Button buttonEmployeesDepartmentAdd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDepartment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeFunction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeePhoneNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDOB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeBSN;
         private System.Windows.Forms.Label labelEmployeesSelected;
         private System.Windows.Forms.Button buttonEmployeesAdd;
         private System.Windows.Forms.Button buttonEmployeesRemove;
@@ -541,6 +539,16 @@
         private System.Windows.Forms.ListBox listBoxEmployeesSelected;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelWelcomeText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDepartment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeFunction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeUsername;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeePhoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDOB;
+        private System.Windows.Forms.DataGridViewTextBoxColumn employeeBSN;
     }
 }
 
