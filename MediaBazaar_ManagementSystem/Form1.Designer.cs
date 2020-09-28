@@ -279,7 +279,7 @@
             this.splitContainerEmployeesSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainerEmployeesSecondary.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainerEmployeesSecondary.BackColor = System.Drawing.Color.Snow;
             this.splitContainerEmployeesSecondary.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerEmployeesSecondary.IsSplitterFixed = true;
             this.splitContainerEmployeesSecondary.Location = new System.Drawing.Point(0, 0);
@@ -303,7 +303,7 @@
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
-            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(200, 394);
+            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(197, 394);
             this.splitContainerEmployeesSecondary.SplitterDistance = 85;
             this.splitContainerEmployeesSecondary.TabIndex = 0;
             // 
@@ -322,7 +322,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
             this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(194, 20);
+            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(188, 20);
             this.textBoxEmployeesDepartmentName.TabIndex = 1;
             // 
             // buttonEmployeesDepartmentAdd
@@ -337,7 +337,7 @@
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(122, 45);
+            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(116, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
@@ -396,9 +396,9 @@
             // 
             this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 250);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 247);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(194, 23);
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(188, 23);
             this.buttonEmployeeModify.TabIndex = 0;
             this.buttonEmployeeModify.Text = "Modify selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
@@ -407,9 +407,9 @@
             // 
             this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 279);
+            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 276);
             this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(194, 23);
+            this.buttonEmployeesRemove.Size = new System.Drawing.Size(188, 23);
             this.buttonEmployeesRemove.TabIndex = 1;
             this.buttonEmployeesRemove.Text = "Remove selected employee";
             this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
@@ -418,9 +418,9 @@
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 221);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 218);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(194, 23);
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(188, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
@@ -442,7 +442,7 @@
             this.listBoxEmployeesSelected.FormattingEnabled = true;
             this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
             this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
-            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(194, 199);
+            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(194, 186);
             this.listBoxEmployeesSelected.TabIndex = 4;
             // 
             // Form1
