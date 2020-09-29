@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint67 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint68 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint69 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint70 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint71 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint72 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -75,11 +75,11 @@
             this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.DataButton = new System.Windows.Forms.Button();
+            this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.DataButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -460,6 +460,39 @@
             this.tabPage3.Text = "Statistics";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // DataButton
+            // 
+            this.DataButton.Location = new System.Drawing.Point(661, 51);
+            this.DataButton.Name = "DataButton";
+            this.DataButton.Size = new System.Drawing.Size(75, 40);
+            this.DataButton.TabIndex = 1;
+            this.DataButton.Text = "Add Some Data";
+            this.DataButton.UseVisualStyleBackColor = true;
+            this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
+            // 
+            // StatisticChart
+            // 
+            chartArea12.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea12);
+            this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend12.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend12);
+            this.StatisticChart.Location = new System.Drawing.Point(0, 0);
+            this.StatisticChart.Name = "StatisticChart";
+            series12.ChartArea = "ChartArea1";
+            series12.Legend = "Legend1";
+            series12.Name = "TestData";
+            series12.Points.Add(dataPoint67);
+            series12.Points.Add(dataPoint68);
+            series12.Points.Add(dataPoint69);
+            series12.Points.Add(dataPoint70);
+            series12.Points.Add(dataPoint71);
+            series12.Points.Add(dataPoint72);
+            this.StatisticChart.Series.Add(series12);
+            this.StatisticChart.Size = new System.Drawing.Size(768, 400);
+            this.StatisticChart.TabIndex = 0;
+            this.StatisticChart.Text = "chart1";
+            // 
             // tabPage4
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -489,39 +522,6 @@
             this.labelWelcomeText.TabIndex = 2;
             this.labelWelcomeText.Text = "Welcome, USERNAME";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // StatisticChart
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea3);
-            this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend3);
-            this.StatisticChart.Location = new System.Drawing.Point(0, 0);
-            this.StatisticChart.Name = "StatisticChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "TestData";
-            series3.Points.Add(dataPoint13);
-            series3.Points.Add(dataPoint14);
-            series3.Points.Add(dataPoint15);
-            series3.Points.Add(dataPoint16);
-            series3.Points.Add(dataPoint17);
-            series3.Points.Add(dataPoint18);
-            this.StatisticChart.Series.Add(series3);
-            this.StatisticChart.Size = new System.Drawing.Size(768, 400);
-            this.StatisticChart.TabIndex = 0;
-            this.StatisticChart.Text = "chart1";
-            // 
-            // DataButton
-            // 
-            this.DataButton.Location = new System.Drawing.Point(661, 51);
-            this.DataButton.Name = "DataButton";
-            this.DataButton.Size = new System.Drawing.Size(75, 40);
-            this.DataButton.TabIndex = 1;
-            this.DataButton.Text = "Add Some Data";
-            this.DataButton.UseVisualStyleBackColor = true;
-            this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
             // MainWindow
             // 
