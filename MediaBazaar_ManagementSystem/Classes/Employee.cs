@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem.classes
 {
@@ -99,5 +100,10 @@ namespace MediaBazaar_ManagementSystem.classes
             get { return dateOfBirth; }
             set { dateOfBirth = value; }
         }
+
+        //public enum Function
+        //{
+        //    Function functions;
+        //}
     }
 }

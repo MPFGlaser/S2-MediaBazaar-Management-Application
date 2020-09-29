@@ -12,8 +12,7 @@ namespace MediaBazaar_ManagementSystem.classes
     {
         private List<Employee> employees = new List<Employee>();
 
-        EmployeeManager()
-        { }
+        EmployeeManager() { }
 
         public void AddEmployee(int id, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
         {
