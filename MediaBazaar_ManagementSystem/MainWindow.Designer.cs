@@ -78,7 +78,7 @@
             this.DataButton = new System.Windows.Forms.Button();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainerScheduling1 = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
@@ -96,6 +96,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
+            this.comboBoxStatisticsDepartment = new System.Windows.Forms.ComboBox();
+            this.buttonStatisticsDepartment = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonStatisticsEmployee = new System.Windows.Forms.Button();
+            this.comboBoxStatisticsEmployee = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -112,13 +119,17 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).BeginInit();
+            this.splitContainerScheduling1.Panel1.SuspendLayout();
+            this.splitContainerScheduling1.Panel2.SuspendLayout();
+            this.splitContainerScheduling1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
+            this.splitContainerStatistics1.Panel1.SuspendLayout();
+            this.splitContainerStatistics1.Panel2.SuspendLayout();
+            this.splitContainerStatistics1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -475,8 +486,7 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.DataButton);
-            this.tabPage3.Controls.Add(this.StatisticChart);
+            this.tabPage3.Controls.Add(this.splitContainerStatistics1);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1131, 411);
@@ -487,11 +497,11 @@
             // DataButton
             // 
             this.DataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataButton.Location = new System.Drawing.Point(1010, 47);
+            this.DataButton.Location = new System.Drawing.Point(47, 368);
             this.DataButton.Name = "DataButton";
             this.DataButton.Size = new System.Drawing.Size(75, 40);
             this.DataButton.TabIndex = 1;
-            this.DataButton.Text = "Add Some Data";
+            this.DataButton.Text = "Generate Some Data";
             this.DataButton.UseVisualStyleBackColor = true;
             this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
@@ -514,13 +524,13 @@
             series1.Points.Add(dataPoint5);
             series1.Points.Add(dataPoint6);
             this.StatisticChart.Series.Add(series1);
-            this.StatisticChart.Size = new System.Drawing.Size(1131, 411);
+            this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.splitContainer1);
+            this.tabPage4.Controls.Add(this.splitContainerScheduling1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(1131, 411);
@@ -528,32 +538,32 @@
             this.tabPage4.Text = "Scheduling";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // splitContainer1
+            // splitContainerScheduling1
             // 
-            this.splitContainer1.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainerScheduling1.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainerScheduling1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerScheduling1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerScheduling1.IsSplitterFixed = true;
+            this.splitContainerScheduling1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerScheduling1.Name = "splitContainerScheduling1";
+            this.splitContainerScheduling1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer1.Panel1
+            // splitContainerScheduling1.Panel1
             // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.button3);
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainerScheduling1.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.label2);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.button3);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.button2);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.groupBox1);
             // 
-            // splitContainer1.Panel2
+            // splitContainerScheduling1.Panel2
             // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1131, 411);
-            this.splitContainer1.SplitterDistance = 106;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainerScheduling1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerScheduling1.Panel2.Controls.Add(this.flowLayoutPanel1);
+            this.splitContainerScheduling1.Size = new System.Drawing.Size(1131, 411);
+            this.splitContainerScheduling1.SplitterDistance = 106;
+            this.splitContainerScheduling1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -754,6 +764,97 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Function";
             // 
+            // splitContainerStatistics1
+            // 
+            this.splitContainerStatistics1.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainerStatistics1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerStatistics1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerStatistics1.Name = "splitContainerStatistics1";
+            // 
+            // splitContainerStatistics1.Panel1
+            // 
+            this.splitContainerStatistics1.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerStatistics1.Panel1.Controls.Add(this.StatisticChart);
+            // 
+            // splitContainerStatistics1.Panel2
+            // 
+            this.splitContainerStatistics1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.label4);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.buttonStatisticsEmployee);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.comboBoxStatisticsEmployee);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.label3);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.buttonStatisticsDepartment);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.comboBoxStatisticsDepartment);
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.DataButton);
+            this.splitContainerStatistics1.Panel2MinSize = 125;
+            this.splitContainerStatistics1.Size = new System.Drawing.Size(1131, 411);
+            this.splitContainerStatistics1.SplitterDistance = 1002;
+            this.splitContainerStatistics1.TabIndex = 2;
+            // 
+            // comboBoxStatisticsDepartment
+            // 
+            this.comboBoxStatisticsDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxStatisticsDepartment.FormattingEnabled = true;
+            this.comboBoxStatisticsDepartment.Location = new System.Drawing.Point(5, 28);
+            this.comboBoxStatisticsDepartment.Name = "comboBoxStatisticsDepartment";
+            this.comboBoxStatisticsDepartment.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxStatisticsDepartment.TabIndex = 2;
+            // 
+            // buttonStatisticsDepartment
+            // 
+            this.buttonStatisticsDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStatisticsDepartment.Location = new System.Drawing.Point(5, 56);
+            this.buttonStatisticsDepartment.Name = "buttonStatisticsDepartment";
+            this.buttonStatisticsDepartment.Size = new System.Drawing.Size(117, 23);
+            this.buttonStatisticsDepartment.TabIndex = 4;
+            this.buttonStatisticsDepartment.Text = "Get statistics";
+            this.buttonStatisticsDepartment.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Select a department";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(5, 98);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Select an employee";
+            // 
+            // buttonStatisticsEmployee
+            // 
+            this.buttonStatisticsEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStatisticsEmployee.Location = new System.Drawing.Point(5, 145);
+            this.buttonStatisticsEmployee.Name = "buttonStatisticsEmployee";
+            this.buttonStatisticsEmployee.Size = new System.Drawing.Size(117, 23);
+            this.buttonStatisticsEmployee.TabIndex = 7;
+            this.buttonStatisticsEmployee.Text = "Get statistics";
+            this.buttonStatisticsEmployee.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxStatisticsEmployee
+            // 
+            this.comboBoxStatisticsEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxStatisticsEmployee.FormattingEnabled = true;
+            this.comboBoxStatisticsEmployee.Location = new System.Drawing.Point(5, 117);
+            this.comboBoxStatisticsEmployee.Name = "comboBoxStatisticsEmployee";
+            this.comboBoxStatisticsEmployee.Size = new System.Drawing.Size(117, 21);
+            this.comboBoxStatisticsEmployee.TabIndex = 6;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -783,15 +884,20 @@
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).EndInit();
             this.tabPage4.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.splitContainerScheduling1.Panel1.ResumeLayout(false);
+            this.splitContainerScheduling1.Panel1.PerformLayout();
+            this.splitContainerScheduling1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).EndInit();
+            this.splitContainerScheduling1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.splitContainerStatistics1.Panel1.ResumeLayout(false);
+            this.splitContainerStatistics1.Panel2.ResumeLayout(false);
+            this.splitContainerStatistics1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).EndInit();
+            this.splitContainerStatistics1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -842,7 +948,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeBSN;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
         private System.Windows.Forms.Button DataButton;
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainerScheduling1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private CalendarDayControl calendarDayControl1;
         private CalendarDayControl calendarDayControl2;
@@ -858,6 +964,13 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.SplitContainer splitContainerStatistics1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonStatisticsEmployee;
+        private System.Windows.Forms.ComboBox comboBoxStatisticsEmployee;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonStatisticsDepartment;
+        private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
     }
 }
 
