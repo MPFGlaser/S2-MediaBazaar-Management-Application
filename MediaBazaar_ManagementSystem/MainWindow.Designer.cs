@@ -78,11 +78,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
-<<<<<<< HEAD
-=======
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.DataButton = new System.Windows.Forms.Button();
->>>>>>> 5d6391a... Added statistics with random data
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -493,8 +490,6 @@
             this.labelWelcomeText.Text = "Welcome, USERNAME";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-<<<<<<< HEAD
-=======
             // StatisticChart
             // 
             chartArea3.Name = "ChartArea1";
@@ -528,7 +523,6 @@
             this.DataButton.UseVisualStyleBackColor = true;
             this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
->>>>>>> 5d6391a... Added statistics with random data
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
