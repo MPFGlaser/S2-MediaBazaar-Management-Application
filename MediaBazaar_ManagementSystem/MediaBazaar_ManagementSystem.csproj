@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalendarDayControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CalendarDayControl.Designer.cs">
+      <DependentUpon>CalendarDayControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CalendarDayControl.resx">
+      <DependentUpon>CalendarDayControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EmployeeDetailsWindow.resx">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
