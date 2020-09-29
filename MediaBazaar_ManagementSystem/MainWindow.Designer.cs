@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint67 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint68 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint69 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint70 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint71 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint72 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -78,8 +78,17 @@
             this.DataButton = new System.Windows.Forms.Button();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.calendarDayControl1 = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControl2 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.calendarDayControl3 = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControl4 = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControl5 = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControl6 = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControl7 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -95,6 +104,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,7 +123,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(776, 426);
+            this.tabControl1.Size = new System.Drawing.Size(1139, 437);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -118,7 +132,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(768, 400);
+            this.tabPage1.Size = new System.Drawing.Size(1131, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Employees";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -140,8 +154,8 @@
             this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
             this.splitContainerEmployeesPrimary.Panel2MinSize = 200;
-            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(762, 394);
-            this.splitContainerEmployeesPrimary.SplitterDistance = 558;
+            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(1125, 405);
+            this.splitContainerEmployeesPrimary.SplitterDistance = 823;
             this.splitContainerEmployeesPrimary.TabIndex = 0;
             // 
             // dataGridView1
@@ -163,7 +177,7 @@
             this.employeeBSN});
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(552, 388);
+            this.dataGridView1.Size = new System.Drawing.Size(817, 425);
             this.dataGridView1.TabIndex = 0;
             // 
             // employeeID
@@ -248,14 +262,14 @@
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
-            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(197, 394);
+            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(295, 431);
             this.splitContainerEmployeesSecondary.SplitterDistance = 85;
             this.splitContainerEmployeesSecondary.TabIndex = 0;
             // 
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(116, 45);
+            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(214, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
@@ -277,7 +291,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
             this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(188, 20);
+            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
             this.textBoxEmployeesDepartmentName.TabIndex = 1;
             // 
             // labelEmployeesDepartmentName
@@ -297,7 +311,7 @@
             this.listBoxEmployeesSelected.FormattingEnabled = true;
             this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
             this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
-            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(194, 186);
+            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(291, 186);
             this.listBoxEmployeesSelected.TabIndex = 4;
             // 
             // labelEmployeesSelected
@@ -313,9 +327,9 @@
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 218);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(3, 281);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(286, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
@@ -324,9 +338,9 @@
             // 
             this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 276);
+            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 339);
             this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeesRemove.Size = new System.Drawing.Size(286, 23);
             this.buttonEmployeesRemove.TabIndex = 1;
             this.buttonEmployeesRemove.Text = "Remove selected employee";
             this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
@@ -335,9 +349,9 @@
             // 
             this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 247);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 310);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(188, 23);
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(286, 23);
             this.buttonEmployeeModify.TabIndex = 0;
             this.buttonEmployeeModify.Text = "Modify selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
@@ -351,7 +365,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(768, 400);
+            this.tabPage2.Size = new System.Drawing.Size(1131, 411);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -359,7 +373,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(638, 371);
+            this.button1.Location = new System.Drawing.Point(997, 382);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 23);
             this.button1.TabIndex = 3;
@@ -369,7 +383,7 @@
             // buttonStockAdd
             // 
             this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStockAdd.Location = new System.Drawing.Point(6, 371);
+            this.buttonStockAdd.Location = new System.Drawing.Point(6, 382);
             this.buttonStockAdd.Name = "buttonStockAdd";
             this.buttonStockAdd.Size = new System.Drawing.Size(124, 23);
             this.buttonStockAdd.TabIndex = 2;
@@ -379,7 +393,7 @@
             // buttonStockEditProduct
             // 
             this.buttonStockEditProduct.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonStockEditProduct.Location = new System.Drawing.Point(324, 371);
+            this.buttonStockEditProduct.Location = new System.Drawing.Point(503, 382);
             this.buttonStockEditProduct.Name = "buttonStockEditProduct";
             this.buttonStockEditProduct.Size = new System.Drawing.Size(124, 23);
             this.buttonStockEditProduct.TabIndex = 1;
@@ -403,7 +417,7 @@
             this.productDescription});
             this.dataGridViewStock.Location = new System.Drawing.Point(6, 6);
             this.dataGridViewStock.Name = "dataGridViewStock";
-            this.dataGridViewStock.Size = new System.Drawing.Size(756, 359);
+            this.dataGridViewStock.Size = new System.Drawing.Size(1115, 370);
             this.dataGridViewStock.TabIndex = 0;
             // 
             // productName
@@ -455,7 +469,7 @@
             this.tabPage3.Controls.Add(this.StatisticChart);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(768, 400);
+            this.tabPage3.Size = new System.Drawing.Size(1131, 411);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Statistics";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -472,40 +486,97 @@
             // 
             // StatisticChart
             // 
-            chartArea12.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea12);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend12.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend12);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series12.ChartArea = "ChartArea1";
-            series12.Legend = "Legend1";
-            series12.Name = "TestData";
-            series12.Points.Add(dataPoint67);
-            series12.Points.Add(dataPoint68);
-            series12.Points.Add(dataPoint69);
-            series12.Points.Add(dataPoint70);
-            series12.Points.Add(dataPoint71);
-            series12.Points.Add(dataPoint72);
-            this.StatisticChart.Series.Add(series12);
-            this.StatisticChart.Size = new System.Drawing.Size(768, 400);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
+            this.StatisticChart.Size = new System.Drawing.Size(1131, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.splitContainer1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(768, 400);
+            this.tabPage4.Size = new System.Drawing.Size(1131, 411);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Scheduling";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.White;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
+            this.splitContainer1.Size = new System.Drawing.Size(1131, 411);
+            this.splitContainer1.SplitterDistance = 118;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl1);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl2);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl3);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl4);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl5);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl6);
+            this.flowLayoutPanel1.Controls.Add(this.calendarDayControl7);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1131, 289);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // calendarDayControl1
+            // 
+            this.calendarDayControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl1.Location = new System.Drawing.Point(3, 3);
+            this.calendarDayControl1.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl1.Name = "calendarDayControl1";
+            this.calendarDayControl1.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl1.TabIndex = 0;
+            // 
+            // calendarDayControl2
+            // 
+            this.calendarDayControl2.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl2.Location = new System.Drawing.Point(164, 3);
+            this.calendarDayControl2.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl2.Name = "calendarDayControl2";
+            this.calendarDayControl2.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl2.TabIndex = 1;
+            // 
             // buttonLogin
             // 
             this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(712, 5);
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLogin.TabIndex = 1;
@@ -516,18 +587,68 @@
             // 
             this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(587, 10);
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
             this.labelWelcomeText.Name = "labelWelcomeText";
             this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
             this.labelWelcomeText.TabIndex = 2;
             this.labelWelcomeText.Text = "Welcome, USERNAME";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // calendarDayControl3
+            // 
+            this.calendarDayControl3.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl3.Location = new System.Drawing.Point(325, 3);
+            this.calendarDayControl3.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl3.Name = "calendarDayControl3";
+            this.calendarDayControl3.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl3.TabIndex = 2;
+            // 
+            // calendarDayControl4
+            // 
+            this.calendarDayControl4.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl4.Location = new System.Drawing.Point(486, 3);
+            this.calendarDayControl4.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl4.Name = "calendarDayControl4";
+            this.calendarDayControl4.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl4.TabIndex = 3;
+            // 
+            // calendarDayControl5
+            // 
+            this.calendarDayControl5.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl5.Location = new System.Drawing.Point(647, 3);
+            this.calendarDayControl5.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl5.Name = "calendarDayControl5";
+            this.calendarDayControl5.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl5.TabIndex = 4;
+            // 
+            // calendarDayControl6
+            // 
+            this.calendarDayControl6.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl6.Location = new System.Drawing.Point(808, 3);
+            this.calendarDayControl6.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl6.Name = "calendarDayControl6";
+            this.calendarDayControl6.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl6.TabIndex = 5;
+            // 
+            // calendarDayControl7
+            // 
+            this.calendarDayControl7.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControl7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControl7.Location = new System.Drawing.Point(969, 3);
+            this.calendarDayControl7.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControl7.Name = "calendarDayControl7";
+            this.calendarDayControl7.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControl7.TabIndex = 6;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1159, 461);
             this.Controls.Add(this.labelWelcomeText);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
@@ -551,6 +672,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,6 +727,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeBSN;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
         private System.Windows.Forms.Button DataButton;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private CalendarDayControl calendarDayControl1;
+        private CalendarDayControl calendarDayControl2;
+        private CalendarDayControl calendarDayControl3;
+        private CalendarDayControl calendarDayControl4;
+        private CalendarDayControl calendarDayControl5;
+        private CalendarDayControl calendarDayControl6;
+        private CalendarDayControl calendarDayControl7;
     }
 }
 
