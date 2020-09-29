@@ -32,6 +32,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
@@ -59,16 +69,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -152,6 +152,59 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(552, 388);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // employeeID
+            // 
+            this.employeeID.HeaderText = "ID";
+            this.employeeID.Name = "employeeID";
+            this.employeeID.Width = 50;
+            // 
+            // employeeName
+            // 
+            this.employeeName.HeaderText = "Employee name";
+            this.employeeName.Name = "employeeName";
+            this.employeeName.Width = 150;
+            // 
+            // employeeDepartment
+            // 
+            this.employeeDepartment.HeaderText = "Department";
+            this.employeeDepartment.Name = "employeeDepartment";
+            this.employeeDepartment.Width = 75;
+            // 
+            // employeeFunction
+            // 
+            this.employeeFunction.HeaderText = "Function";
+            this.employeeFunction.Name = "employeeFunction";
+            // 
+            // employeeUsername
+            // 
+            this.employeeUsername.HeaderText = "Username";
+            this.employeeUsername.Name = "employeeUsername";
+            // 
+            // employeeEmail
+            // 
+            this.employeeEmail.HeaderText = "Email";
+            this.employeeEmail.Name = "employeeEmail";
+            // 
+            // employeePhoneNumber
+            // 
+            this.employeePhoneNumber.HeaderText = "Phone number";
+            this.employeePhoneNumber.Name = "employeePhoneNumber";
+            // 
+            // employeeAddress
+            // 
+            this.employeeAddress.HeaderText = "Address";
+            this.employeeAddress.Name = "employeeAddress";
+            // 
+            // employeeDOB
+            // 
+            this.employeeDOB.HeaderText = "Date of birth";
+            this.employeeDOB.Name = "employeeDOB";
+            // 
+            // employeeBSN
+            // 
+            this.employeeBSN.HeaderText = "BSN";
+            this.employeeBSN.Name = "employeeBSN";
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -421,59 +474,6 @@
             this.labelWelcomeText.TabIndex = 2;
             this.labelWelcomeText.Text = "Welcome, USERNAME";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // employeeID
-            // 
-            this.employeeID.HeaderText = "ID";
-            this.employeeID.Name = "employeeID";
-            this.employeeID.Width = 50;
-            // 
-            // employeeName
-            // 
-            this.employeeName.HeaderText = "Employee name";
-            this.employeeName.Name = "employeeName";
-            this.employeeName.Width = 150;
-            // 
-            // employeeDepartment
-            // 
-            this.employeeDepartment.HeaderText = "Department";
-            this.employeeDepartment.Name = "employeeDepartment";
-            this.employeeDepartment.Width = 75;
-            // 
-            // employeeFunction
-            // 
-            this.employeeFunction.HeaderText = "Function";
-            this.employeeFunction.Name = "employeeFunction";
-            // 
-            // employeeUsername
-            // 
-            this.employeeUsername.HeaderText = "Username";
-            this.employeeUsername.Name = "employeeUsername";
-            // 
-            // employeeEmail
-            // 
-            this.employeeEmail.HeaderText = "Email";
-            this.employeeEmail.Name = "employeeEmail";
-            // 
-            // employeePhoneNumber
-            // 
-            this.employeePhoneNumber.HeaderText = "Phone number";
-            this.employeePhoneNumber.Name = "employeePhoneNumber";
-            // 
-            // employeeAddress
-            // 
-            this.employeeAddress.HeaderText = "Address";
-            this.employeeAddress.Name = "employeeAddress";
-            // 
-            // employeeDOB
-            // 
-            this.employeeDOB.HeaderText = "Date of birth";
-            this.employeeDOB.Name = "employeeDOB";
-            // 
-            // employeeBSN
-            // 
-            this.employeeBSN.HeaderText = "BSN";
-            this.employeeBSN.Name = "employeeBSN";
             // 
             // MainWindow
             // 

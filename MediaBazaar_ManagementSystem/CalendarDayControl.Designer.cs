@@ -77,7 +77,7 @@
             // 
             this.textBoxCalendarDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCalendarDate.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCalendarDate.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxCalendarDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCalendarDate.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCalendarDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -93,7 +93,7 @@
             // 
             this.textBoxCalendarDay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCalendarDay.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCalendarDay.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxCalendarDay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCalendarDay.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCalendarDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -108,14 +108,14 @@
             // textBoxCapacityEvening
             // 
             this.textBoxCapacityEvening.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCapacityEvening.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCapacityEvening.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxCapacityEvening.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCapacityEvening.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCapacityEvening.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxCapacityEvening.Location = new System.Drawing.Point(193, 104);
+            this.textBoxCapacityEvening.Location = new System.Drawing.Point(196, 104);
             this.textBoxCapacityEvening.Name = "textBoxCapacityEvening";
             this.textBoxCapacityEvening.ReadOnly = true;
-            this.textBoxCapacityEvening.Size = new System.Drawing.Size(68, 16);
+            this.textBoxCapacityEvening.Size = new System.Drawing.Size(65, 16);
             this.textBoxCapacityEvening.TabIndex = 5;
             this.textBoxCapacityEvening.Text = "11/15";
             this.textBoxCapacityEvening.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -123,14 +123,14 @@
             // textBoxCapacityAfternoon
             // 
             this.textBoxCapacityAfternoon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCapacityAfternoon.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCapacityAfternoon.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxCapacityAfternoon.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCapacityAfternoon.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCapacityAfternoon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxCapacityAfternoon.Location = new System.Drawing.Point(193, 59);
+            this.textBoxCapacityAfternoon.Location = new System.Drawing.Point(196, 59);
             this.textBoxCapacityAfternoon.Name = "textBoxCapacityAfternoon";
             this.textBoxCapacityAfternoon.ReadOnly = true;
-            this.textBoxCapacityAfternoon.Size = new System.Drawing.Size(68, 16);
+            this.textBoxCapacityAfternoon.Size = new System.Drawing.Size(65, 16);
             this.textBoxCapacityAfternoon.TabIndex = 4;
             this.textBoxCapacityAfternoon.Text = "20/20";
             this.textBoxCapacityAfternoon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -138,14 +138,14 @@
             // textBoxCapacityMorning
             // 
             this.textBoxCapacityMorning.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCapacityMorning.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxCapacityMorning.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxCapacityMorning.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCapacityMorning.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCapacityMorning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBoxCapacityMorning.Location = new System.Drawing.Point(193, 14);
+            this.textBoxCapacityMorning.Location = new System.Drawing.Point(196, 14);
             this.textBoxCapacityMorning.Name = "textBoxCapacityMorning";
             this.textBoxCapacityMorning.ReadOnly = true;
-            this.textBoxCapacityMorning.Size = new System.Drawing.Size(68, 16);
+            this.textBoxCapacityMorning.Size = new System.Drawing.Size(65, 16);
             this.textBoxCapacityMorning.TabIndex = 3;
             this.textBoxCapacityMorning.Text = "09/15";
             this.textBoxCapacityMorning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -192,6 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.splitContainer1);
             this.Name = "CalendarDayControl";
             this.Size = new System.Drawing.Size(264, 228);
