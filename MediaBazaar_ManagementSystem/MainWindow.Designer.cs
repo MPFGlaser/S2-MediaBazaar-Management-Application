@@ -89,12 +89,12 @@
             this.calendarDayControl5 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl6 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl7 = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.buttonSchedulingPrevious = new System.Windows.Forms.Button();
+            this.buttonSchedulingNext = new System.Windows.Forms.Button();
+            this.comboBoxSchedulingFunction = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.comboBoxStatisticsDepartment = new System.Windows.Forms.ComboBox();
@@ -103,6 +103,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.buttonStatisticsEmployee = new System.Windows.Forms.Button();
             this.comboBoxStatisticsEmployee = new System.Windows.Forms.ComboBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -124,7 +125,7 @@
             this.splitContainerScheduling1.Panel2.SuspendLayout();
             this.splitContainerScheduling1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
             this.splitContainerStatistics1.Panel1.SuspendLayout();
@@ -552,9 +553,9 @@
             // 
             this.splitContainerScheduling1.Panel1.BackColor = System.Drawing.Color.White;
             this.splitContainerScheduling1.Panel1.Controls.Add(this.label2);
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBox1);
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.button3);
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.button2);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingFunction);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingNext);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingPrevious);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainerScheduling1.Panel2
@@ -675,25 +676,25 @@
             this.calendarDayControl7.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControl7.TabIndex = 6;
             // 
-            // numericUpDown1
+            // numericUpDownSchedulingWeek
             // 
-            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.numericUpDown1.Location = new System.Drawing.Point(261, 30);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numericUpDownSchedulingWeek.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.numericUpDownSchedulingWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.numericUpDownSchedulingWeek.Location = new System.Drawing.Point(261, 30);
+            this.numericUpDownSchedulingWeek.Maximum = new decimal(new int[] {
             52,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.numericUpDownSchedulingWeek.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(63, 45);
-            this.numericUpDown1.TabIndex = 0;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDownSchedulingWeek.Name = "numericUpDownSchedulingWeek";
+            this.numericUpDownSchedulingWeek.Size = new System.Drawing.Size(63, 45);
+            this.numericUpDownSchedulingWeek.TabIndex = 0;
+            this.numericUpDownSchedulingWeek.Value = new decimal(new int[] {
             36,
             0,
             0,
@@ -714,7 +715,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.numericUpDownSchedulingWeek);
             this.groupBox1.Location = new System.Drawing.Point(400, 3);
             this.groupBox1.MaximumSize = new System.Drawing.Size(330, 100);
             this.groupBox1.MinimumSize = new System.Drawing.Size(330, 100);
@@ -723,36 +724,36 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
-            // button2
+            // buttonSchedulingPrevious
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
-            this.button2.Location = new System.Drawing.Point(294, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 100);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "<";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonSchedulingPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonSchedulingPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
+            this.buttonSchedulingPrevious.Location = new System.Drawing.Point(294, 3);
+            this.buttonSchedulingPrevious.Name = "buttonSchedulingPrevious";
+            this.buttonSchedulingPrevious.Size = new System.Drawing.Size(100, 100);
+            this.buttonSchedulingPrevious.TabIndex = 3;
+            this.buttonSchedulingPrevious.Text = "<";
+            this.buttonSchedulingPrevious.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // buttonSchedulingNext
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
-            this.button3.Location = new System.Drawing.Point(736, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 100);
-            this.button3.TabIndex = 4;
-            this.button3.Text = ">";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonSchedulingNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.buttonSchedulingNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
+            this.buttonSchedulingNext.Location = new System.Drawing.Point(736, 4);
+            this.buttonSchedulingNext.Name = "buttonSchedulingNext";
+            this.buttonSchedulingNext.Size = new System.Drawing.Size(100, 100);
+            this.buttonSchedulingNext.TabIndex = 4;
+            this.buttonSchedulingNext.Text = ">";
+            this.buttonSchedulingNext.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // comboBoxSchedulingFunction
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1002, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 5;
+            this.comboBoxSchedulingFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSchedulingFunction.FormattingEnabled = true;
+            this.comboBoxSchedulingFunction.Location = new System.Drawing.Point(1002, 4);
+            this.comboBoxSchedulingFunction.Name = "comboBoxSchedulingFunction";
+            this.comboBoxSchedulingFunction.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSchedulingFunction.TabIndex = 5;
             // 
             // label2
             // 
@@ -890,7 +891,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).EndInit();
             this.splitContainerScheduling1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
@@ -959,11 +960,11 @@
         private CalendarDayControl calendarDayControl7;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NumericUpDown numericUpDownSchedulingWeek;
+        private System.Windows.Forms.Button buttonSchedulingNext;
+        private System.Windows.Forms.Button buttonSchedulingPrevious;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSchedulingFunction;
         private System.Windows.Forms.SplitContainer splitContainerStatistics1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonStatisticsEmployee;
@@ -971,6 +972,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonStatisticsDepartment;
         private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
