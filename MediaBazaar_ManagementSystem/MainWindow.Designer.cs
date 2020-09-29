@@ -62,7 +62,7 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStockToggleActive = new System.Windows.Forms.Button();
             this.buttonStockAdd = new System.Windows.Forms.Button();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
@@ -380,7 +380,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.buttonStockToggleActive);
             this.tabPage2.Controls.Add(this.buttonStockAdd);
             this.tabPage2.Controls.Add(this.buttonStockEditProduct);
             this.tabPage2.Controls.Add(this.dataGridViewStock);
@@ -392,15 +392,15 @@
             this.tabPage2.Text = "Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonStockToggleActive
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(997, 382);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Toggle Active/Inactive";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonStockToggleActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStockToggleActive.Location = new System.Drawing.Point(997, 382);
+            this.buttonStockToggleActive.Name = "buttonStockToggleActive";
+            this.buttonStockToggleActive.Size = new System.Drawing.Size(124, 23);
+            this.buttonStockToggleActive.TabIndex = 3;
+            this.buttonStockToggleActive.Text = "Toggle Active/Inactive";
+            this.buttonStockToggleActive.UseVisualStyleBackColor = true;
             // 
             // buttonStockAdd
             // 
@@ -912,7 +912,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dataGridViewStock;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStockToggleActive;
         private System.Windows.Forms.Button buttonStockAdd;
         private System.Windows.Forms.Button buttonStockEditProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
