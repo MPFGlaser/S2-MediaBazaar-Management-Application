@@ -47,6 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Day.cs" />
+    <Compile Include="Classes\Department.cs" />
+    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\EmployeeManager.cs" />
+    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Shift.cs" />
+    <Compile Include="Classes\StockManager.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Function.cs" />
+    <Compile Include="Form1.cs">
     <Compile Include="CalendarDayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
