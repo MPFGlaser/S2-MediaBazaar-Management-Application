@@ -56,7 +56,6 @@
     <Compile Include="Classes\StockManager.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Function.cs" />
-    <Compile Include="Form1.cs">
     <Compile Include="CalendarDayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
