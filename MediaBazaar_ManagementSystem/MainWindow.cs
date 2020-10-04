@@ -78,6 +78,7 @@ namespace MediaBazaar_ManagementSystem
             if(edw.ShowDialog() == DialogResult.OK)
             {
                 dbhandler.CreateEmployee(edw.Employee);
+                PopulateEmployeesTable();
             }
         }
     }
