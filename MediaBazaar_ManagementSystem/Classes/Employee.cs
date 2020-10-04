@@ -8,15 +8,16 @@ using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem.classes
 {
-    class Employee
+    public class Employee
     {
         private int id, phoneNumber, spousePhone, bsn;
         private string firstName, surName, userName, password, email, address, spouseName;
+        private bool active;
         private DateTime dateOfBirth;
 
-        public Employee(int id, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
+        public Employee(bool active, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
         {
-            this.id = id;
+            this.active = active;
             this.firstName = firstName;
             this.surName = surName;
             this.userName = userName;
@@ -33,6 +34,11 @@ namespace MediaBazaar_ManagementSystem.classes
         public int Id
         {
             get { return id; }
+        }
+
+        public bool Active
+        {
+            get { return active; }
         }
 
         public int PhoneNumber

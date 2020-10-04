@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
-    class Shift
+    public class Shift
     {
         private int id;
         private List<Employee> employees;

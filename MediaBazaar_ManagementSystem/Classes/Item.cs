@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
-    class Item
+    public class Item
     {
         private int id, quatity;
         private string name, manufacturer, description;

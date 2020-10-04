@@ -29,127 +29,113 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxBsn = new System.Windows.Forms.TextBox();
+            this.label = new System.Windows.Forms.Label();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPDWFirstName = new System.Windows.Forms.TextBox();
-            this.buttonPDWConfirm = new System.Windows.Forms.Button();
-            this.buttonPDWCancel = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
+            this.textBoxPhoneNumber = new System.Windows.Forms.TextBox();
+            this.textBoxLastName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxPasswordConfirm = new System.Windows.Forms.TextBox();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.buttonEDWConfirm = new System.Windows.Forms.Button();
+            this.buttonEDWCancel = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxSpouseName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dateTimePickerDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dateTimePickerDateOfBirth);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.textBoxBsn);
+            this.groupBox1.Controls.Add(this.label);
+            this.groupBox1.Controls.Add(this.textBoxEmail);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.textBoxAddress);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBoxPDWFirstName);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBoxFirstName);
+            this.groupBox1.Controls.Add(this.textBoxPhoneNumber);
+            this.groupBox1.Controls.Add(this.textBoxLastName);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.textBoxPasswordConfirm);
+            this.groupBox1.Controls.Add(this.textBoxUsername);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.textBoxPassword);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 347);
+            this.groupBox1.Size = new System.Drawing.Size(200, 427);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Employee\'s personal details";
             // 
-            // label6
+            // label9
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 211);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "Last name";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 367);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(29, 13);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "BSN";
             // 
-            // textBox5
+            // textBoxBsn
             // 
-            this.textBox5.Location = new System.Drawing.Point(5, 227);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(127, 20);
-            this.textBox5.TabIndex = 27;
+            this.textBoxBsn.Location = new System.Drawing.Point(5, 383);
+            this.textBoxBsn.Name = "textBoxBsn";
+            this.textBoxBsn.Size = new System.Drawing.Size(127, 20);
+            this.textBoxBsn.TabIndex = 33;
             // 
-            // label5
+            // label
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 172);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 13);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Confirm password";
+            this.label.AutoSize = true;
+            this.label.Location = new System.Drawing.Point(6, 328);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(72, 13);
+            this.label.TabIndex = 32;
+            this.label.Text = "Email address";
             // 
-            // textBox4
+            // textBoxEmail
             // 
-            this.textBox4.Location = new System.Drawing.Point(5, 188);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.PasswordChar = '•';
-            this.textBox4.Size = new System.Drawing.Size(127, 20);
-            this.textBox4.TabIndex = 25;
-            this.textBox4.UseSystemPasswordChar = true;
+            this.textBoxEmail.Location = new System.Drawing.Point(5, 344);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(127, 20);
+            this.textBoxEmail.TabIndex = 31;
             // 
-            // label4
+            // label7
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 133);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Password";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 289);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "Address";
             // 
-            // textBox3
+            // textBoxAddress
             // 
-            this.textBox3.Location = new System.Drawing.Point(5, 149);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '•';
-            this.textBox3.Size = new System.Drawing.Size(127, 20);
-            this.textBox3.TabIndex = 23;
-            this.textBox3.UseSystemPasswordChar = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Username";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(5, 110);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(127, 20);
-            this.textBox2.TabIndex = 21;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Last name";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(5, 71);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(127, 20);
-            this.textBox1.TabIndex = 19;
+            this.textBoxAddress.Location = new System.Drawing.Point(5, 305);
+            this.textBoxAddress.Name = "textBoxAddress";
+            this.textBoxAddress.Size = new System.Drawing.Size(127, 20);
+            this.textBoxAddress.TabIndex = 29;
             // 
             // label1
             // 
@@ -160,39 +146,190 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "First name";
             // 
-            // textBoxPDWFirstName
+            // label6
             // 
-            this.textBoxPDWFirstName.Location = new System.Drawing.Point(5, 32);
-            this.textBoxPDWFirstName.Name = "textBoxPDWFirstName";
-            this.textBoxPDWFirstName.Size = new System.Drawing.Size(127, 20);
-            this.textBoxPDWFirstName.TabIndex = 17;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 250);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Phone number";
             // 
-            // buttonPDWConfirm
+            // textBoxFirstName
             // 
-            this.buttonPDWConfirm.Location = new System.Drawing.Point(347, 476);
-            this.buttonPDWConfirm.Name = "buttonPDWConfirm";
-            this.buttonPDWConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonPDWConfirm.TabIndex = 16;
-            this.buttonPDWConfirm.Text = "Confirm";
-            this.buttonPDWConfirm.UseVisualStyleBackColor = true;
+            this.textBoxFirstName.Location = new System.Drawing.Point(5, 32);
+            this.textBoxFirstName.Name = "textBoxFirstName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(127, 20);
+            this.textBoxFirstName.TabIndex = 17;
             // 
-            // buttonPDWCancel
+            // textBoxPhoneNumber
             // 
-            this.buttonPDWCancel.Location = new System.Drawing.Point(12, 476);
-            this.buttonPDWCancel.Name = "buttonPDWCancel";
-            this.buttonPDWCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonPDWCancel.TabIndex = 15;
-            this.buttonPDWCancel.Text = "Cancel";
-            this.buttonPDWCancel.UseVisualStyleBackColor = true;
+            this.textBoxPhoneNumber.Location = new System.Drawing.Point(5, 266);
+            this.textBoxPhoneNumber.Name = "textBoxPhoneNumber";
+            this.textBoxPhoneNumber.Size = new System.Drawing.Size(127, 20);
+            this.textBoxPhoneNumber.TabIndex = 27;
+            // 
+            // textBoxLastName
+            // 
+            this.textBoxLastName.Location = new System.Drawing.Point(5, 71);
+            this.textBoxLastName.Name = "textBoxLastName";
+            this.textBoxLastName.Size = new System.Drawing.Size(127, 20);
+            this.textBoxLastName.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 211);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Confirm password";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Last name";
+            // 
+            // textBoxPasswordConfirm
+            // 
+            this.textBoxPasswordConfirm.Location = new System.Drawing.Point(5, 227);
+            this.textBoxPasswordConfirm.Name = "textBoxPasswordConfirm";
+            this.textBoxPasswordConfirm.PasswordChar = '•';
+            this.textBoxPasswordConfirm.Size = new System.Drawing.Size(127, 20);
+            this.textBoxPasswordConfirm.TabIndex = 25;
+            this.textBoxPasswordConfirm.UseSystemPasswordChar = true;
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(5, 149);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(127, 20);
+            this.textBoxUsername.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 172);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Password";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 133);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Username";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(5, 188);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '•';
+            this.textBoxPassword.Size = new System.Drawing.Size(127, 20);
+            this.textBoxPassword.TabIndex = 23;
+            this.textBoxPassword.UseSystemPasswordChar = true;
+            // 
+            // buttonEDWConfirm
+            // 
+            this.buttonEDWConfirm.Location = new System.Drawing.Point(347, 476);
+            this.buttonEDWConfirm.Name = "buttonEDWConfirm";
+            this.buttonEDWConfirm.Size = new System.Drawing.Size(75, 23);
+            this.buttonEDWConfirm.TabIndex = 16;
+            this.buttonEDWConfirm.Text = "Confirm";
+            this.buttonEDWConfirm.UseVisualStyleBackColor = true;
+            this.buttonEDWConfirm.Click += new System.EventHandler(this.buttonEDWConfirm_Click);
+            // 
+            // buttonEDWCancel
+            // 
+            this.buttonEDWCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonEDWCancel.Location = new System.Drawing.Point(12, 476);
+            this.buttonEDWCancel.Name = "buttonEDWCancel";
+            this.buttonEDWCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonEDWCancel.TabIndex = 15;
+            this.buttonEDWCancel.Text = "Cancel";
+            this.buttonEDWCancel.UseVisualStyleBackColor = true;
+            this.buttonEDWCancel.Click += new System.EventHandler(this.buttonEDWCancel_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.textBoxSpouseName);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.textBoxSpousePhone);
+            this.groupBox2.Location = new System.Drawing.Point(219, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 30;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Spouse\'s details";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "Name";
+            // 
+            // textBoxSpouseName
+            // 
+            this.textBoxSpouseName.Location = new System.Drawing.Point(5, 32);
+            this.textBoxSpouseName.Name = "textBoxSpouseName";
+            this.textBoxSpouseName.Size = new System.Drawing.Size(127, 20);
+            this.textBoxSpouseName.TabIndex = 35;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 55);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 13);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "Phone number";
+            // 
+            // textBoxSpousePhone
+            // 
+            this.textBoxSpousePhone.Location = new System.Drawing.Point(5, 71);
+            this.textBoxSpousePhone.Name = "textBoxSpousePhone";
+            this.textBoxSpousePhone.Size = new System.Drawing.Size(127, 20);
+            this.textBoxSpousePhone.TabIndex = 37;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 13);
+            this.label11.TabIndex = 35;
+            this.label11.Text = "Date of birth";
+            // 
+            // dateTimePickerDateOfBirth
+            // 
+            this.dateTimePickerDateOfBirth.Location = new System.Drawing.Point(5, 110);
+            this.dateTimePickerDateOfBirth.Name = "dateTimePickerDateOfBirth";
+            this.dateTimePickerDateOfBirth.Size = new System.Drawing.Size(127, 20);
+            this.dateTimePickerDateOfBirth.TabIndex = 36;
             // 
             // EmployeeDetailsWindow
             // 
+            this.AcceptButton = this.buttonEDWConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonEDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 511);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonPDWConfirm);
-            this.Controls.Add(this.buttonPDWCancel);
+            this.Controls.Add(this.buttonEDWConfirm);
+            this.Controls.Add(this.buttonEDWCancel);
             this.MaximumSize = new System.Drawing.Size(450, 550);
             this.MinimumSize = new System.Drawing.Size(450, 550);
             this.Name = "EmployeeDetailsWindow";
@@ -200,6 +337,8 @@
             this.Text = "EmployeeDetailsWindow";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -208,18 +347,31 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxPhoneNumber;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxPasswordConfirm;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxLastName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxPDWFirstName;
-        private System.Windows.Forms.Button buttonPDWConfirm;
-        private System.Windows.Forms.Button buttonPDWCancel;
+        private System.Windows.Forms.TextBox textBoxFirstName;
+        private System.Windows.Forms.Button buttonEDWConfirm;
+        private System.Windows.Forms.Button buttonEDWCancel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxBsn;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.TextBox textBoxEmail;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxAddress;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxSpouseName;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBoxSpousePhone;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDateOfBirth;
+        private System.Windows.Forms.Label label11;
     }
 }

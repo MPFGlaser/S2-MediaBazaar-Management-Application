@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
-    class Day
+    public class Day
     {
         private DateTime date;
         private List<Shift> shifts;
