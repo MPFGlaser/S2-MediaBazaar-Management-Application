@@ -53,8 +53,8 @@ namespace MediaBazaar_ManagementSystem.Classes
 
         private void CreateConnectionStringFile()
         {
-            FileStream fs;
-            StreamWriter sw;
+            FileStream fs = null;
+            StreamWriter sw = null;
 
             try
             {
