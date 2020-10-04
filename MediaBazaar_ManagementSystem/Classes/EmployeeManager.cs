@@ -16,7 +16,7 @@ namespace MediaBazaar_ManagementSystem.classes
 
         public void AddEmployee(bool active, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
         {
-            employees.Add(new Employee(active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone));
+            employees.Add(new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone));
         }
 
         public void RemoveEmployee(int id)
@@ -31,7 +31,7 @@ namespace MediaBazaar_ManagementSystem.classes
 
         public Employee GetEmployee(int id)
         {
-            return new Employee(true, "Placeholder", "Placeholder", "Placeholder", "Placeholder", "Placeholder", 1, "Placeholder", new DateTime(2011, 6, 10), 1, "Placeholder", 1);
+            return new Employee(0 ,true, "Placeholder", "Placeholder", "Placeholder", "Placeholder", "Placeholder", 1, "Placeholder", new DateTime(2011, 6, 10), 1, "Placeholder", 1);
         }
 
         public void Schedule(int id, int shiftId)

@@ -32,7 +32,7 @@ namespace MediaBazaar_ManagementSystem
             int bsn = Convert.ToInt32(textBoxBsn.Text);
             string spouseName = textBoxSpouseName.Text;
             int spousePhone = Convert.ToInt32(textBoxSpousePhone.Text);
-            employee = new Employee(true, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+            employee = new Employee(0, true, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
         }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)

@@ -24,7 +24,39 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
-            dbhandler.GetEmployees();
+            PopulateEmployeesTable();
+        }
+
+        private void PopulateEmployeesTable()
+        {
+            dataGridViewEmployees.Rows.Clear();
+
+            try
+            {
+                foreach (Employee e in dbhandler.GetEmployees())
+                {
+                    int rowId = dataGridViewEmployees.Rows.Add();
+
+                    DataGridViewRow row = dataGridViewEmployees.Rows[rowId];
+
+                    row.Cells["id"].Value = e.Id;
+                    row.Cells["active"].Value = e.Active;
+                    row.Cells["firstName"].Value = e.FirstName;
+                    row.Cells["surName"].Value = e.SurName;
+                    row.Cells["username"].Value = e.UserName;
+                    row.Cells["phoneNumber"].Value = e.PhoneNumber;
+                    row.Cells["address"].Value = e.Address;
+                    row.Cells["emailAddress"].Value = e.Email;
+                    row.Cells["dateOfBirth"].Value = e.DateOfBirth;
+                    row.Cells["bsn"].Value = e.Bsn;
+                    row.Cells["spouseName"].Value = e.SpouseName;
+                    row.Cells["spousePhoneNumber"].Value = e.SpousePhone;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting employee info.\n" + ex.ToString());
+            }
         }
 
         private void DataButton_Click(object sender, EventArgs e)

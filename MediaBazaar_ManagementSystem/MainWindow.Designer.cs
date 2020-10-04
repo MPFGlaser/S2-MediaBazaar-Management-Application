@@ -40,17 +40,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.employeeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeFunction = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeUsername = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDOB = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBSN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewEmployees = new System.Windows.Forms.DataGridView();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
@@ -94,6 +84,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.calendarDayControl1 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl2 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl3 = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -101,16 +94,25 @@
             this.calendarDayControl5 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl6 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl7 = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.active = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.spouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.spousePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
             this.splitContainerEmployeesPrimary.Panel1.SuspendLayout();
             this.splitContainerEmployeesPrimary.Panel2.SuspendLayout();
             this.splitContainerEmployeesPrimary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).BeginInit();
             this.splitContainerEmployeesSecondary.Panel1.SuspendLayout();
             this.splitContainerEmployeesSecondary.Panel2.SuspendLayout();
@@ -169,7 +171,7 @@
             // splitContainerEmployeesPrimary.Panel1
             // 
             this.splitContainerEmployeesPrimary.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesPrimary.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainerEmployeesPrimary.Panel1.Controls.Add(this.dataGridViewEmployees);
             // 
             // splitContainerEmployeesPrimary.Panel2
             // 
@@ -180,80 +182,30 @@
             this.splitContainerEmployeesPrimary.SplitterDistance = 823;
             this.splitContainerEmployeesPrimary.TabIndex = 0;
             // 
-            // dataGridView1
+            // dataGridViewEmployees
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dataGridViewEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.employeeID,
-            this.employeeName,
-            this.employeeDepartment,
-            this.employeeFunction,
-            this.employeeUsername,
-            this.employeeEmail,
-            this.employeePhoneNumber,
-            this.employeeAddress,
-            this.employeeDOB,
-            this.employeeBSN});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(817, 425);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // employeeID
-            // 
-            this.employeeID.HeaderText = "ID";
-            this.employeeID.Name = "employeeID";
-            this.employeeID.Width = 50;
-            // 
-            // employeeName
-            // 
-            this.employeeName.HeaderText = "Employee name";
-            this.employeeName.Name = "employeeName";
-            this.employeeName.Width = 150;
-            // 
-            // employeeDepartment
-            // 
-            this.employeeDepartment.HeaderText = "Department";
-            this.employeeDepartment.Name = "employeeDepartment";
-            this.employeeDepartment.Width = 75;
-            // 
-            // employeeFunction
-            // 
-            this.employeeFunction.HeaderText = "Function";
-            this.employeeFunction.Name = "employeeFunction";
-            // 
-            // employeeUsername
-            // 
-            this.employeeUsername.HeaderText = "Username";
-            this.employeeUsername.Name = "employeeUsername";
-            // 
-            // employeeEmail
-            // 
-            this.employeeEmail.HeaderText = "Email";
-            this.employeeEmail.Name = "employeeEmail";
-            // 
-            // employeePhoneNumber
-            // 
-            this.employeePhoneNumber.HeaderText = "Phone number";
-            this.employeePhoneNumber.Name = "employeePhoneNumber";
-            // 
-            // employeeAddress
-            // 
-            this.employeeAddress.HeaderText = "Address";
-            this.employeeAddress.Name = "employeeAddress";
-            // 
-            // employeeDOB
-            // 
-            this.employeeDOB.HeaderText = "Date of birth";
-            this.employeeDOB.Name = "employeeDOB";
-            // 
-            // employeeBSN
-            // 
-            this.employeeBSN.HeaderText = "BSN";
-            this.employeeBSN.Name = "employeeBSN";
+            this.dataGridViewEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.active,
+            this.firstName,
+            this.surName,
+            this.username,
+            this.phoneNumber,
+            this.address,
+            this.emailAddress,
+            this.dateOfBirth,
+            this.bsn,
+            this.spouseName,
+            this.spousePhoneNumber});
+            this.dataGridViewEmployees.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewEmployees.Name = "dataGridViewEmployees";
+            this.dataGridViewEmployees.ReadOnly = true;
+            this.dataGridViewEmployees.Size = new System.Drawing.Size(817, 399);
+            this.dataGridViewEmployees.TabIndex = 0;
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -766,6 +718,27 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome, USERNAME";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // calendarDayControl1
             // 
             this.calendarDayControl1.BackColor = System.Drawing.SystemColors.Window;
@@ -836,26 +809,77 @@
             this.calendarDayControl7.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControl7.TabIndex = 6;
             // 
-            // buttonLogin
+            // id
             // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
             // 
-            // labelWelcomeText
+            // active
             // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome, USERNAME";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.active.HeaderText = "Active";
+            this.active.Name = "active";
+            this.active.ReadOnly = true;
+            // 
+            // firstName
+            // 
+            this.firstName.HeaderText = "First Name";
+            this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
+            // 
+            // surName
+            // 
+            this.surName.HeaderText = "Surname";
+            this.surName.Name = "surName";
+            this.surName.ReadOnly = true;
+            // 
+            // username
+            // 
+            this.username.HeaderText = "Username";
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            // 
+            // address
+            // 
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            // 
+            // emailAddress
+            // 
+            this.emailAddress.HeaderText = "Email";
+            this.emailAddress.Name = "emailAddress";
+            this.emailAddress.ReadOnly = true;
+            // 
+            // dateOfBirth
+            // 
+            this.dateOfBirth.HeaderText = "Date of Birth";
+            this.dateOfBirth.Name = "dateOfBirth";
+            this.dateOfBirth.ReadOnly = true;
+            // 
+            // bsn
+            // 
+            this.bsn.HeaderText = "BSN";
+            this.bsn.Name = "bsn";
+            this.bsn.ReadOnly = true;
+            // 
+            // spouseName
+            // 
+            this.spouseName.HeaderText = "Spouse name";
+            this.spouseName.Name = "spouseName";
+            this.spouseName.ReadOnly = true;
+            // 
+            // spousePhoneNumber
+            // 
+            this.spousePhoneNumber.HeaderText = "Spouse phone";
+            this.spousePhoneNumber.Name = "spousePhoneNumber";
+            this.spousePhoneNumber.ReadOnly = true;
             // 
             // MainWindow
             // 
@@ -874,7 +898,7 @@
             this.splitContainerEmployeesPrimary.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).EndInit();
             this.splitContainerEmployeesPrimary.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployees)).EndInit();
             this.splitContainerEmployeesSecondary.Panel1.ResumeLayout(false);
             this.splitContainerEmployeesSecondary.Panel1.PerformLayout();
             this.splitContainerEmployeesSecondary.Panel2.ResumeLayout(false);
@@ -925,7 +949,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn productDescription;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesSecondary;
         private System.Windows.Forms.TextBox textBoxEmployeesDepartmentName;
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
@@ -938,16 +962,6 @@
         private System.Windows.Forms.ListBox listBoxEmployeesSelected;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelWelcomeText;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDepartment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeFunction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeUsername;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeePhoneNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeDOB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn employeeBSN;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
         private System.Windows.Forms.Button DataButton;
         private System.Windows.Forms.SplitContainer splitContainerScheduling1;
@@ -974,6 +988,18 @@
         private System.Windows.Forms.Button buttonStatisticsDepartment;
         private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn active;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bsn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn spouseName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn spousePhoneNumber;
     }
 }
 

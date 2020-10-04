@@ -29,8 +29,8 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @password, @phoneNumber, @address, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions)";
             MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@id", 0);
-            command.Parameters.AddWithValue("@active", true);
+            command.Parameters.AddWithValue("@id", employee.Id);
+            command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
             command.Parameters.AddWithValue("@username", employee.UserName);
@@ -70,6 +70,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
+                int id;
                 bool active;
                 string firstName;
                 string surName;
@@ -86,6 +87,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 while (reader.Read())
                 {
+                    id = Convert.ToInt32(reader["id"]);
                     active = Convert.ToBoolean(reader["active"]);
                     firstName = Convert.ToString(reader["firstName"]);
                     surName = Convert.ToString(reader["surName"]);
@@ -100,7 +102,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                     bsn = Convert.ToInt32(reader["bsn"]);
                     // Add functions
 
-                    Employee emp = new Employee(active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
                     e.Add(emp);
                 }
             }

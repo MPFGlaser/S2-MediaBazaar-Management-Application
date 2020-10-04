@@ -15,8 +15,9 @@ namespace MediaBazaar_ManagementSystem.classes
         private bool active;
         private DateTime dateOfBirth;
 
-        public Employee(bool active, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
+        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
         {
+            this.id = id;
             this.active = active;
             this.firstName = firstName;
             this.surName = surName;
