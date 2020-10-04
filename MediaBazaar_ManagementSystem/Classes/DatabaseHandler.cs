@@ -15,6 +15,7 @@ namespace MediaBazaar_ManagementSystem.Classes
     {
         MySqlConnection conn;
         string connectionString;
+        string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstring.cfg";
 
         public DatabaseHandler()
         {
@@ -29,7 +30,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             try
             {
-                fs = new FileStream("/connectionstring.cfg", FileMode.Open, FileAccess.Read);
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
                 sr = new StreamReader(fs);
 
                 connectionString = sr.ReadToEnd();
@@ -60,7 +61,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             try
             {
-                fs = new FileStream("/connectionstring.cfg", FileMode.Create, FileAccess.Write);
+                fs = new FileStream(path, FileMode.Create, FileAccess.Write);
                 sw = new StreamWriter(fs);
 
                 sw.Write("server=localhost;database=name;uid=username;password=secret");

@@ -30,5 +30,10 @@ namespace MediaBazaar_ManagementSystem
                 TestDataPoints.Points.Add(data, i);
             }
         }
+
+        private void buttonEmployeesAdd_Click(object sender, EventArgs e)
+        {
+            Classes.DatabaseHandler dbhandler = new Classes.DatabaseHandler();
+        }
     }
 }
