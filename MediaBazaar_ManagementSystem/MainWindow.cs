@@ -33,7 +33,7 @@ namespace MediaBazaar_ManagementSystem
 
             try
             {
-                foreach (Employee e in dbhandler.GetEmployees())
+                foreach (Employee e in dbhandler.GetEmployeesFromDB())
                 {
                     int rowId = dataGridViewEmployees.Rows.Add();
 

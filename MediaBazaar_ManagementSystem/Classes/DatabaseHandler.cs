@@ -59,7 +59,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
-        public List<Employee> GetEmployees()
+        public List<Employee> GetEmployeesFromDB()
         {
             List<Employee> e = new List<Employee>();
             String sql = "SELECT * FROM employees";
