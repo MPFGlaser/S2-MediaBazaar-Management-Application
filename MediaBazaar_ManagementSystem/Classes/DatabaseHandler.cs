@@ -21,6 +21,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             GetConnectionString();
         }
 
+        // Gets the connection string from a config file
         public void GetConnectionString()
         {
             FileStream fs = null;
@@ -51,6 +52,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        // Creates a new config file with default values 
         private void CreateConnectionStringFile()
         {
             FileStream fs = null;
@@ -61,7 +63,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 fs = new FileStream("/connectionstring.cfg", FileMode.Create, FileAccess.Write);
                 sw = new StreamWriter(fs);
 
-                sw.Write("server=localhost;database=pcs3;uid=root;password=secret");
+                sw.Write("server=localhost;database=name;uid=username;password=secret");
             }
             catch (IOException)
             {
