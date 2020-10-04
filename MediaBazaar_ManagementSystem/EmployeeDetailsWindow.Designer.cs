@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePickerDateOfBirth = new System.Windows.Forms.DateTimePicker();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxBsn = new System.Windows.Forms.TextBox();
             this.label = new System.Windows.Forms.Label();
@@ -54,8 +56,6 @@
             this.textBoxSpouseName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.dateTimePickerDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +88,22 @@
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Employee\'s personal details";
+            // 
+            // dateTimePickerDateOfBirth
+            // 
+            this.dateTimePickerDateOfBirth.Location = new System.Drawing.Point(5, 110);
+            this.dateTimePickerDateOfBirth.Name = "dateTimePickerDateOfBirth";
+            this.dateTimePickerDateOfBirth.Size = new System.Drawing.Size(127, 20);
+            this.dateTimePickerDateOfBirth.TabIndex = 36;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 94);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 13);
+            this.label11.TabIndex = 35;
+            this.label11.Text = "Date of birth";
             // 
             // label9
             // 
@@ -157,6 +173,7 @@
             // 
             // textBoxFirstName
             // 
+            this.textBoxFirstName.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxFirstName.Location = new System.Drawing.Point(5, 32);
             this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(127, 20);
@@ -302,22 +319,6 @@
             this.textBoxSpousePhone.Name = "textBoxSpousePhone";
             this.textBoxSpousePhone.Size = new System.Drawing.Size(127, 20);
             this.textBoxSpousePhone.TabIndex = 37;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 94);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 13);
-            this.label11.TabIndex = 35;
-            this.label11.Text = "Date of birth";
-            // 
-            // dateTimePickerDateOfBirth
-            // 
-            this.dateTimePickerDateOfBirth.Location = new System.Drawing.Point(5, 110);
-            this.dateTimePickerDateOfBirth.Name = "dateTimePickerDateOfBirth";
-            this.dateTimePickerDateOfBirth.Size = new System.Drawing.Size(127, 20);
-            this.dateTimePickerDateOfBirth.TabIndex = 36;
             // 
             // EmployeeDetailsWindow
             // 
