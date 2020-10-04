@@ -59,6 +59,63 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        public List<Employee> GetEmployees()
+        {
+            List<Employee> e = new List<Employee>();
+            String sql = "SELECT * FROM employees";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                bool active;
+                string firstName;
+                string surName;
+                string userName;
+                string password;
+                string email;
+                int phoneNumber;
+                string address;
+                DateTime dateOfBirth;
+                int bsn;
+                string spouseName;
+                int spousePhone;
+                // Add functions
+
+                while (reader.Read())
+                {
+                    active = Convert.ToBoolean(reader["active"]);
+                    firstName = Convert.ToString(reader["firstName"]);
+                    surName = Convert.ToString(reader["surName"]);
+                    userName = Convert.ToString(reader["username"]);
+                    password = Convert.ToString(reader["password"]);
+                    phoneNumber = Convert.ToInt32(reader["phoneNumber"]);
+                    address = Convert.ToString(reader["address"]);
+                    email = Convert.ToString(reader["emailAddress"]);
+                    dateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
+                    spouseName = Convert.ToString(reader["spouseName"]);
+                    spousePhone = Convert.ToInt32(reader["spousePhoneNUmber"]);
+                    bsn = Convert.ToInt32(reader["bsn"]);
+                    // Add functions
+
+                    Employee emp = new Employee(active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    e.Add(emp);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving employees.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return e;
+        }
+
         // Gets the connection string from a config file
         public void GetConnectionString()
         {

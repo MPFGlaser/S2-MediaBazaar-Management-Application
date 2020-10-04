@@ -24,6 +24,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
+            dbhandler.GetEmployees();
         }
 
         private void DataButton_Click(object sender, EventArgs e)
