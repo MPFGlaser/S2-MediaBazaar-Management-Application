@@ -27,7 +27,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             InitializeComboBoxShiftTime();
             PopulateComboBoxShiftTime();
-            LoadEmployees();
+            LoadEmployees(working);
             this.date = date;
             this.shiftTime = shiftTime;
             this.comboBoxShiftTime.SelectedItem = shiftTime;
@@ -37,15 +37,24 @@ namespace MediaBazaar_ManagementSystem
             AddEmployeeListToShift(working);
         }
 
-        private void LoadEmployees()
+        private void LoadEmployees(List<Employee> working)
         {
             dbhandler = new DatabaseHandler();
             List<Employee> allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
+
+            foreach(Employee e in working)
+            {
+                workingEmployeeIds.Add(e.Id);
+            }
+
             foreach(Employee e in allActiveEmployees)
             {
-                comboBoxSelectEmployees.DisplayMember = "Text";
-                comboBoxSelectEmployees.ValueMember = "Employee";
-                comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                if (!workingEmployeeIds.Contains(e.Id))
+                {
+                    comboBoxSelectEmployees.DisplayMember = "Text";
+                    comboBoxSelectEmployees.ValueMember = "Employee";
+                    comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                }
             }
         }
 
