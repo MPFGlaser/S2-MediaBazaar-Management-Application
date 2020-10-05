@@ -57,9 +57,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
             this.employeeSpecificsGroup = new System.Windows.Forms.GroupBox();
-            this.textBoxFunctions = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBoxFunctions = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -338,22 +338,6 @@
             this.employeeSpecificsGroup.Text = "Employee specifics";
             this.employeeSpecificsGroup.Visible = false;
             // 
-            // textBoxFunctions
-            // 
-            this.textBoxFunctions.Location = new System.Drawing.Point(5, 59);
-            this.textBoxFunctions.Name = "textBoxFunctions";
-            this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
-            this.textBoxFunctions.TabIndex = 39;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 43);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 13);
-            this.label13.TabIndex = 40;
-            this.label13.Text = "Functions";
-            // 
             // checkBoxActive
             // 
             this.checkBoxActive.AutoSize = true;
@@ -365,6 +349,22 @@
             this.checkBoxActive.TabIndex = 41;
             this.checkBoxActive.Text = "Active";
             this.checkBoxActive.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 43);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "Functions";
+            // 
+            // textBoxFunctions
+            // 
+            this.textBoxFunctions.Location = new System.Drawing.Point(5, 59);
+            this.textBoxFunctions.Name = "textBoxFunctions";
+            this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
+            this.textBoxFunctions.TabIndex = 39;
             // 
             // EmployeeDetailsWindow
             // 
@@ -382,7 +382,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 550);
             this.Name = "EmployeeDetailsWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "EmployeeDetailsWindow";
+            this.Text = "Add a new employee";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

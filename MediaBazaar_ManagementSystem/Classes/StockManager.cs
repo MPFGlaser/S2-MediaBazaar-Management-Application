@@ -15,7 +15,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
         public void AddItem(int id, string name, string manufacturer, float price)
         {
-            items.Add(new Item(id, name, manufacturer, price));
+            //items.Add(new Item(id, name, manufacturer, price));
         }
 
         public void RemoveItem(int id)
@@ -28,11 +28,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             //Display all item information
         }
 
-        public Item GetItem(int id)
-        {
-            //Return item with the given id
-            return new Item(1, "Placeholder", "Placeholder", 0);
-        }
+        //public Item GetItem(int id)
+        //{
+        //    //Return item with the given id
+        //    //return new Item(1, "Placeholder", "Placeholder", 0);
+        //}
 
         public float[] ViewStatistics(int[] id)
         {

@@ -47,35 +47,21 @@
             this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.spouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.spousePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
             this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
-            this.listBoxEmployeesSelected = new System.Windows.Forms.ListBox();
+            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
             this.buttonEmployeesAdd = new System.Windows.Forms.Button();
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonStockToggleActive = new System.Windows.Forms.Button();
             this.buttonStockAdd = new System.Windows.Forms.Button();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
-            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCategory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -96,6 +82,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
             this.calendarDayControl1 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl2 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl3 = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -103,9 +93,15 @@
             this.calendarDayControl5 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl6 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl7 = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.productId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -177,13 +173,15 @@
             // 
             this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
-            this.splitContainerEmployeesPrimary.Panel2MinSize = 200;
+            this.splitContainerEmployeesPrimary.Panel2MinSize = 298;
             this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(1125, 405);
             this.splitContainerEmployeesPrimary.SplitterDistance = 823;
             this.splitContainerEmployeesPrimary.TabIndex = 0;
             // 
             // dataGridViewEmployees
             // 
+            this.dataGridViewEmployees.AllowUserToAddRows = false;
+            this.dataGridViewEmployees.AllowUserToDeleteRows = false;
             this.dataGridViewEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -195,15 +193,13 @@
             this.surName,
             this.username,
             this.phoneNumber,
-            this.address,
-            this.emailAddress,
-            this.dateOfBirth,
-            this.bsn,
-            this.spouseName,
-            this.spousePhoneNumber});
+            this.emailAddress});
             this.dataGridViewEmployees.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewEmployees.MultiSelect = false;
             this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.ReadOnly = true;
+            this.dataGridViewEmployees.RowHeadersWidth = 21;
+            this.dataGridViewEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEmployees.Size = new System.Drawing.Size(817, 399);
             this.dataGridViewEmployees.TabIndex = 0;
             // 
@@ -212,72 +208,49 @@
             this.id.HeaderText = "ID";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Width = 50;
             // 
             // active
             // 
             this.active.HeaderText = "Active";
             this.active.Name = "active";
             this.active.ReadOnly = true;
+            this.active.Width = 50;
             // 
             // firstName
             // 
             this.firstName.HeaderText = "First Name";
             this.firstName.Name = "firstName";
             this.firstName.ReadOnly = true;
+            this.firstName.Width = 150;
             // 
             // surName
             // 
             this.surName.HeaderText = "Surname";
             this.surName.Name = "surName";
             this.surName.ReadOnly = true;
+            this.surName.Width = 160;
             // 
             // username
             // 
             this.username.HeaderText = "Username";
             this.username.Name = "username";
             this.username.ReadOnly = true;
+            this.username.Width = 130;
             // 
             // phoneNumber
             // 
             this.phoneNumber.HeaderText = "Phone Number";
             this.phoneNumber.Name = "phoneNumber";
             this.phoneNumber.ReadOnly = true;
-            // 
-            // address
-            // 
-            this.address.HeaderText = "Address";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
+            this.phoneNumber.Width = 125;
             // 
             // emailAddress
             // 
             this.emailAddress.HeaderText = "Email";
             this.emailAddress.Name = "emailAddress";
             this.emailAddress.ReadOnly = true;
-            // 
-            // dateOfBirth
-            // 
-            this.dateOfBirth.HeaderText = "Date of Birth";
-            this.dateOfBirth.Name = "dateOfBirth";
-            this.dateOfBirth.ReadOnly = true;
-            // 
-            // bsn
-            // 
-            this.bsn.HeaderText = "BSN";
-            this.bsn.Name = "bsn";
-            this.bsn.ReadOnly = true;
-            // 
-            // spouseName
-            // 
-            this.spouseName.HeaderText = "Spouse name";
-            this.spouseName.Name = "spouseName";
-            this.spouseName.ReadOnly = true;
-            // 
-            // spousePhoneNumber
-            // 
-            this.spousePhoneNumber.HeaderText = "Spouse phone";
-            this.spousePhoneNumber.Name = "spousePhoneNumber";
-            this.spousePhoneNumber.ReadOnly = true;
+            this.emailAddress.Width = 129;
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -303,7 +276,7 @@
             // splitContainerEmployeesSecondary.Panel2
             // 
             this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.listBoxEmployeesSelected);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.checkBoxShowInactive);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
@@ -315,6 +288,7 @@
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesDepartmentRemove.Enabled = false;
             this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(214, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
@@ -324,6 +298,7 @@
             // 
             // buttonEmployeesDepartmentAdd
             // 
+            this.buttonEmployeesDepartmentAdd.Enabled = false;
             this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
             this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
@@ -335,6 +310,7 @@
             // 
             this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEmployeesDepartmentName.Enabled = false;
             this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
             this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
             this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
@@ -343,22 +319,23 @@
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
+            this.labelEmployeesDepartmentName.Enabled = false;
             this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
             this.labelEmployeesDepartmentName.Text = "Department name";
             // 
-            // listBoxEmployeesSelected
+            // checkBoxShowInactive
             // 
-            this.listBoxEmployeesSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxEmployeesSelected.FormattingEnabled = true;
-            this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
-            this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
-            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(291, 238);
-            this.listBoxEmployeesSelected.TabIndex = 4;
+            this.checkBoxShowInactive.AutoSize = true;
+            this.checkBoxShowInactive.Location = new System.Drawing.Point(6, 50);
+            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
+            this.checkBoxShowInactive.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxShowInactive.TabIndex = 4;
+            this.checkBoxShowInactive.Text = "Show inactive employees";
+            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
             // 
             // labelEmployeesSelected
             // 
@@ -371,11 +348,10 @@
             // 
             // buttonEmployeesAdd
             // 
-            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(6, 264);
+            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(286, 23);
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
@@ -394,19 +370,17 @@
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(6, 293);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(286, 23);
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
-            this.buttonEmployeeModify.Text = "Modify selected employee";
+            this.buttonEmployeeModify.Text = "View/Edit selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
             this.buttonEmployeeModify.Click += new System.EventHandler(this.buttonEmployeeModify_Click);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.buttonStockToggleActive);
+            this.tabPage2.Controls.Add(this.checkBoxShowInactiveItems);
             this.tabPage2.Controls.Add(this.buttonStockAdd);
             this.tabPage2.Controls.Add(this.buttonStockEditProduct);
             this.tabPage2.Controls.Add(this.dataGridViewStock);
@@ -418,16 +392,6 @@
             this.tabPage2.Text = "Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // buttonStockToggleActive
-            // 
-            this.buttonStockToggleActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStockToggleActive.Location = new System.Drawing.Point(997, 382);
-            this.buttonStockToggleActive.Name = "buttonStockToggleActive";
-            this.buttonStockToggleActive.Size = new System.Drawing.Size(124, 23);
-            this.buttonStockToggleActive.TabIndex = 3;
-            this.buttonStockToggleActive.Text = "Toggle Active/Inactive";
-            this.buttonStockToggleActive.UseVisualStyleBackColor = true;
-            // 
             // buttonStockAdd
             // 
             this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -437,6 +401,7 @@
             this.buttonStockAdd.TabIndex = 2;
             this.buttonStockAdd.Text = "Add Product";
             this.buttonStockAdd.UseVisualStyleBackColor = true;
+            this.buttonStockAdd.Click += new System.EventHandler(this.buttonStockAdd_Click);
             // 
             // buttonStockEditProduct
             // 
@@ -447,69 +412,34 @@
             this.buttonStockEditProduct.TabIndex = 1;
             this.buttonStockEditProduct.Text = "Edit Product";
             this.buttonStockEditProduct.UseVisualStyleBackColor = true;
+            this.buttonStockEditProduct.Click += new System.EventHandler(this.buttonStockEditProduct_Click);
             // 
             // dataGridViewStock
             // 
+            this.dataGridViewStock.AllowUserToAddRows = false;
+            this.dataGridViewStock.AllowUserToDeleteRows = false;
             this.dataGridViewStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.productName,
-            this.productBrand,
-            this.productCode,
-            this.productCategory,
-            this.productQuantity,
-            this.productPrice,
+            this.productId,
+            this.name,
+            this.brand,
+            this.code,
+            this.category,
+            this.quantity,
+            this.price,
             this.productActive,
-            this.productDescription});
+            this.description});
             this.dataGridViewStock.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewStock.MultiSelect = false;
             this.dataGridViewStock.Name = "dataGridViewStock";
+            this.dataGridViewStock.ReadOnly = true;
+            this.dataGridViewStock.RowHeadersWidth = 21;
+            this.dataGridViewStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStock.Size = new System.Drawing.Size(1115, 370);
             this.dataGridViewStock.TabIndex = 0;
-            // 
-            // productName
-            // 
-            this.productName.HeaderText = "Product Name";
-            this.productName.Name = "productName";
-            // 
-            // productBrand
-            // 
-            this.productBrand.HeaderText = "Brand";
-            this.productBrand.Name = "productBrand";
-            // 
-            // productCode
-            // 
-            this.productCode.HeaderText = "Code";
-            this.productCode.Name = "productCode";
-            // 
-            // productCategory
-            // 
-            this.productCategory.HeaderText = "Category";
-            this.productCategory.Name = "productCategory";
-            // 
-            // productQuantity
-            // 
-            this.productQuantity.HeaderText = "Quantity";
-            this.productQuantity.Name = "productQuantity";
-            // 
-            // productPrice
-            // 
-            this.productPrice.HeaderText = "Price";
-            this.productPrice.Name = "productPrice";
-            // 
-            // productActive
-            // 
-            this.productActive.HeaderText = "Active";
-            this.productActive.Name = "productActive";
-            this.productActive.Width = 50;
-            // 
-            // productDescription
-            // 
-            this.productDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productDescription.HeaderText = "Description";
-            this.productDescription.MinimumWidth = 50;
-            this.productDescription.Name = "productDescription";
             // 
             // tabPage3
             // 
@@ -791,6 +721,39 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome, USERNAME";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // checkBoxShowInactiveItems
+            // 
+            this.checkBoxShowInactiveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxShowInactiveItems.AutoSize = true;
+            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(984, 386);
+            this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
+            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxShowInactiveItems.TabIndex = 5;
+            this.checkBoxShowInactiveItems.Text = "Show inactive products";
+            this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactiveItems.CheckedChanged += new System.EventHandler(this.checkBoxShowInactiveItems_CheckedChanged);
+            // 
             // calendarDayControl1
             // 
             this.calendarDayControl1.BackColor = System.Drawing.SystemColors.Window;
@@ -861,26 +824,63 @@
             this.calendarDayControl7.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControl7.TabIndex = 6;
             // 
-            // buttonLogin
+            // productId
             // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.productId.HeaderText = "ID";
+            this.productId.Name = "productId";
+            this.productId.ReadOnly = true;
+            this.productId.Width = 50;
             // 
-            // labelWelcomeText
+            // name
             // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome, USERNAME";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.name.HeaderText = "Product Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // brand
+            // 
+            this.brand.HeaderText = "Brand";
+            this.brand.Name = "brand";
+            this.brand.ReadOnly = true;
+            // 
+            // code
+            // 
+            this.code.HeaderText = "Code";
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            // 
+            // category
+            // 
+            this.category.HeaderText = "Category";
+            this.category.Name = "category";
+            this.category.ReadOnly = true;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // productActive
+            // 
+            this.productActive.HeaderText = "Active";
+            this.productActive.Name = "productActive";
+            this.productActive.ReadOnly = true;
+            this.productActive.Width = 50;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 50;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
             // MainWindow
             // 
@@ -907,6 +907,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).EndInit();
             this.splitContainerEmployeesSecondary.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
@@ -938,17 +939,8 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dataGridViewStock;
-        private System.Windows.Forms.Button buttonStockToggleActive;
         private System.Windows.Forms.Button buttonStockAdd;
         private System.Windows.Forms.Button buttonStockEditProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productBrand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCategory;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productQuantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productDescription;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesSecondary;
@@ -960,7 +952,6 @@
         private System.Windows.Forms.Button buttonEmployeesAdd;
         private System.Windows.Forms.Button buttonEmployeesRemove;
         private System.Windows.Forms.Button buttonEmployeeModify;
-        private System.Windows.Forms.ListBox listBoxEmployeesSelected;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelWelcomeText;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
@@ -995,12 +986,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn surName;
         private System.Windows.Forms.DataGridViewTextBoxColumn username;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirth;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bsn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn spouseName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn spousePhoneNumber;
+        private System.Windows.Forms.CheckBox checkBoxShowInactive;
+        private System.Windows.Forms.CheckBox checkBoxShowInactiveItems;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
     }
 }
 
