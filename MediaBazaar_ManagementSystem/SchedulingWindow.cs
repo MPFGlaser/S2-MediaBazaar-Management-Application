@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -18,19 +19,20 @@ namespace MediaBazaar_ManagementSystem
         DatabaseHandler dbhandler;
         private Shift currentShift;
         private DateTime date;
-        private int shiftTime;
+        private ShiftTime shiftTime;
         List<int> workingEmployeeIds = new List<int>();
 
-        public SchedulingWindow(string dateAndMonth, string weekDay, int timeOfShift, DateTime date)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
+            PopulateComboBoxShiftTime();
             LoadEmployees();
             this.date = date;
-            this.shiftTime = timeOfShift;
+            this.shiftTime = shiftTime;
+            this.comboBoxShiftTime.SelectedItem = shiftTime;
             textBoxWeekDay.Text = weekDay;
             textBoxCalendarDate.Text = dateAndMonth;
-            comboBoxShiftTime.SelectedIndex = timeOfShift - 1;
         }
 
         private void LoadEmployees()
@@ -50,9 +52,14 @@ namespace MediaBazaar_ManagementSystem
             this.comboBoxShiftTime.SelectedIndexChanged += new System.EventHandler(comboBoxShiftTime_SelectedIndexChanged);
         }
 
+        private void PopulateComboBoxShiftTime()
+        {
+            this.comboBoxShiftTime.DataSource = Enum.GetValues(typeof(ShiftTime));
+        }
+
         private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            shiftTime = comboBoxShiftTime.SelectedIndex + 1;
+            this.shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
         }
 
         private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)

@@ -131,6 +131,8 @@ namespace MediaBazaar_ManagementSystem
 
             textBoxPassword.Enabled = false;
             textBoxPasswordConfirm.Enabled = false;
+            labelPassword.Enabled = false;
+            labelPasswordc.Enabled = false;
 
             textBoxFirstName.Text = employee.FirstName;
             textBoxLastName.Text = employee.SurName;

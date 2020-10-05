@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using MediaBazaar_ManagementSystem.Models;
+using MediaBazaar_ManagementSystem.Classes;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -15,10 +17,12 @@ namespace MediaBazaar_ManagementSystem
     {
         SchedulingWindow schedule;
         private DateTime date;
+        DatabaseHandler dbhandler;
 
         public CalendarDayControl()
         {
             InitializeComponent();
+            dbhandler = new DatabaseHandler();
         }
 
         public void DisplayCorrectDate(DateTime date, string weekday)
@@ -30,10 +34,37 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonMorning_Click(object sender, EventArgs e)
         {
-            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, 1, date);
-            if (schedule.ShowDialog() == DialogResult.OK)
+            if(dbhandler.GetShift(date, ShiftTime.Morning) == null)
             {
-                Console.WriteLine("It happended");
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date);
+                if (schedule.ShowDialog() == DialogResult.OK)
+                {
+                    Console.WriteLine("It happended");
+                }
+            }                        
+        }
+
+        private void buttonAfternoon_Click(object sender, EventArgs e)
+        {
+            if (dbhandler.GetShift(date, ShiftTime.Afternoon) == null)
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date);
+                if (schedule.ShowDialog() == DialogResult.OK)
+                {
+                    Console.WriteLine("It happended");
+                }
+            }
+        }
+
+        private void buttonEvening_Click(object sender, EventArgs e)
+        {
+            if (dbhandler.GetShift(date, ShiftTime.Evening) == null)
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date);
+                if (schedule.ShowDialog() == DialogResult.OK)
+                {
+                    Console.WriteLine("It happended");
+                }
             }
         }
     }

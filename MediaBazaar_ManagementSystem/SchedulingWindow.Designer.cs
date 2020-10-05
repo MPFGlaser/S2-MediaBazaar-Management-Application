@@ -46,7 +46,7 @@
             this.textBoxCalendarDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCalendarDate.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCalendarDate.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxCalendarDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCalendarDate.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxCalendarDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
@@ -80,10 +80,6 @@
             // 
             this.comboBoxShiftTime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxShiftTime.FormattingEnabled = true;
-            this.comboBoxShiftTime.Items.AddRange(new object[] {
-            "Morning",
-            "Afternoon",
-            "Evening"});
             this.comboBoxShiftTime.Location = new System.Drawing.Point(249, 38);
             this.comboBoxShiftTime.Name = "comboBoxShiftTime";
             this.comboBoxShiftTime.Size = new System.Drawing.Size(108, 21);
@@ -133,7 +129,7 @@
             this.textBoxWeekDay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxWeekDay.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxWeekDay.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxWeekDay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxWeekDay.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.textBoxWeekDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);

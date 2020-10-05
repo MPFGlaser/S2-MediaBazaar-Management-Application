@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Models;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -329,7 +330,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", shift.Id);
             command.Parameters.AddWithValue("@date", shift.Date);
-            command.Parameters.AddWithValue("@shiftType", GetShiftTypeString(shift.ShiftType));
+            command.Parameters.AddWithValue("@shiftType", shift.ShiftTime);
 
             try
             {
@@ -373,23 +374,81 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
-        private string GetShiftTypeString(int ShiftType)
+        public Shift GetShift(DateTime date, ShiftTime shiftTime)
         {
-            string shiftTypeString = string.Empty;
-            switch (ShiftType)
+            Shift shift = null;
+            string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
+            String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@date", dateSql);
+            command.Parameters.AddWithValue("@shiftType", shiftTime);
+
+            try
             {
-                case 1:
-                    shiftTypeString = "Morning";
-                    break;
-                case 2:
-                    shiftTypeString = "Afternoon";
-                    break;
-                case 3:
-                    shiftTypeString = "Evening";
-                    break;
+                conn.Open();
+                int shiftExists = Convert.ToInt32(command.ExecuteScalar());
+                if (shiftExists != 0)
+                {
+                    String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+                    MySqlCommand command1 = new MySqlCommand(sql1, conn);
+                    command1.Parameters.AddWithValue("@date", dateSql);
+                    command1.Parameters.AddWithValue("@shiftType", shiftTime);
+                    MySqlDataReader reader = command1.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
+                    }                    
+                }
             }
-            return shiftTypeString;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return shift;
         }
+
+        //public List<Employee> GetShiftEmployees(int shiftId)
+        //{
+        //    Shift shift = null;
+        //    string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
+        //    String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
+        //    MySqlCommand command = new MySqlCommand(sql, conn);
+        //    command.Parameters.AddWithValue("@date", dateSql);
+        //    command.Parameters.AddWithValue("@shiftType", shiftTime);
+
+        //    try
+        //    {
+        //        conn.Open();
+        //        int shiftExists = Convert.ToInt32(command.ExecuteScalar());
+        //        if (shiftExists != 0)
+        //        {
+        //            String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+        //            MySqlCommand command1 = new MySqlCommand(sql1, conn);
+        //            command1.Parameters.AddWithValue("@date", dateSql);
+        //            command1.Parameters.AddWithValue("@shiftType", shiftTime);
+        //            MySqlDataReader reader = command1.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+
+        //    return shift;
+        //}
 
         public Item GetItem(int id)
         {
