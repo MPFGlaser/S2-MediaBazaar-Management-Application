@@ -8,16 +8,22 @@ namespace MediaBazaar_ManagementSystem.Classes
 {
     public class Item
     {
-        private int id, quantity;
-        private string name, manufacturer, description;
-        private float price;
+        private int id, code, quantity;
+        private string name, brand, category, description;
+        private bool active;
+        private double price;
 
-        public Item(int id, string name, string manufacturer, float price)
+        public Item(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description)
         {
             this.id = id;
             this.name = name;
-            this.manufacturer = manufacturer;
+            this.brand = brand;
+            this.code = code;
+            this.category = category;
+            this.quantity = quantity;
             this.price = price;
+            this.active = active;
+            this.description = description;
         }
 
         public int Id
@@ -25,7 +31,13 @@ namespace MediaBazaar_ManagementSystem.Classes
             get { return id; }
         }
 
-        public int Quatity
+        public int Code
+        {
+            get { return code; }
+            set { code = value; }
+        }
+
+        public int Quantity
         {
             get { return quantity; }
             set { quantity = value; }
@@ -36,18 +48,31 @@ namespace MediaBazaar_ManagementSystem.Classes
             get { return name; }
             set { name = value; }
         }
-        public string Manufacturer
+        public string Brand
         {
-            get { return manufacturer; }
-            set { manufacturer = value; }
+            get { return brand; }
+            set { brand = value; }
         }
+
+        public string Category
+        {
+            get { return category; }
+            set { category = value; }
+        }
+
         public string Description
         {
             get { return description; }
             set { description = value; }
         }
 
-        public float Price
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
+
+        public double Price
         {
             get { return price; }
             set { price = value; }
