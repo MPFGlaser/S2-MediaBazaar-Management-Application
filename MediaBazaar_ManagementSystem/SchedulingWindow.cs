@@ -57,14 +57,14 @@ namespace MediaBazaar_ManagementSystem
                 listBoxCurrentEmployees.DisplayMember = "Text";
                 listBoxCurrentEmployees.ValueMember = "Employee";
                 listBoxCurrentEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
-
-                foreach(Item i in comboBoxSelectEmployees.Items)
-                {
-                    if((i as dynamic).Employee == (comboBoxSelectEmployees.SelectedItem as dynamic).Employee)
-                    {
-                        comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                    }
-                }
+                comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
+                //foreach(Item i in comboBoxSelectEmployees.Items)
+                //{
+                //    if((i as dynamic).Employee == (comboBoxSelectEmployees.SelectedItem as dynamic).Employee)
+                //    {
+                //        comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
+                //    }
+                //}
                 comboBoxSelectEmployees.SelectedIndex = -1;
             }
         }
@@ -76,7 +76,7 @@ namespace MediaBazaar_ManagementSystem
             comboBoxSelectEmployees.ValueMember = "Employee";
             comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
 
-            listBoxCurrentEmployees.Items.Remove(selected);
+            listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
         }
     }
 }
