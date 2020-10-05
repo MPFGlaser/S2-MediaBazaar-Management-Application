@@ -27,7 +27,7 @@ namespace MediaBazaar_ManagementSystem
 
         public Item Item
         {
-            get { return this.Item; }
+            get { return this.item; }
         }
 
         private void CreateItem(string name, string brand, int code, string category, int quantity, double price, bool active, string description)
@@ -46,6 +46,7 @@ namespace MediaBazaar_ManagementSystem
             editing = true;
             editId = item.Id;
 
+            labelID.Text = item.Id.ToString();
             numericUpDownPrice.Value = Convert.ToDecimal(item.Price);
             numericUpDownQuantity.Value = item.Quantity;
             textBoxName.Text = item.Name;
@@ -53,34 +54,35 @@ namespace MediaBazaar_ManagementSystem
             textBoxCode.Text = item.Code.ToString();
             textBoxCategory.Text = item.Category;
             richTextBoxDescription.Text = item.Description;
+            checkBoxActive.Checked = item.Active;
         }
 
         private void buttonPDWConfirm_Click(object sender, EventArgs e)
         {
             ResetBoxColors();
 
-            double price = Convert.ToDouble(numericUpDownPrice);
+            double price = Convert.ToDouble(numericUpDownPrice.Value);
             int quantity = Convert.ToInt32(numericUpDownQuantity.Value);
             bool active = checkBoxActive.Checked;
             string name = textBoxName.Text;
             string brand = textBoxBrand.Text;
-            int code = Convert.ToInt32(textBoxCode);
+            int code = Convert.ToInt32(textBoxCode.Text);
             string category = textBoxCategory.Text;
             string description = richTextBoxDescription.Text;
 
-            if (name != "")
+            if (name == "")
             {
                 textBoxName.BackColor = Color.LightCoral;
             }
-            else if (brand != "")
+            else if (brand == "")
             {
                 textBoxBrand.BackColor = Color.LightCoral;
             }
-            else if (code.ToString() != "")
+            else if (code.ToString() == "")
             {
                 textBoxCode.BackColor = Color.LightCoral;
             }
-            else if (category != "")
+            else if (category == "")
             {
                 textBoxCategory.BackColor = Color.LightCoral;
             }

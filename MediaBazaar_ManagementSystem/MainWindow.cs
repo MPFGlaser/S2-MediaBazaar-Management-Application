@@ -17,6 +17,7 @@ namespace MediaBazaar_ManagementSystem
     {
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
+        ProductDetailsWindow pdw;
 
         public MainWindow()
         {
@@ -24,7 +25,9 @@ namespace MediaBazaar_ManagementSystem
 
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
+            PopulateItemsTable();
             HideInactiveEmployees(true);
+            HideInactiveItems(true);
 
             // Removes statistics tab until implementation is finished in the future.
             tabControl1.TabPages.Remove(tabPage3);
@@ -49,6 +52,35 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["username"].Value = e.UserName;
                     row.Cells["phoneNumber"].Value = e.PhoneNumber;
                     row.Cells["emailAddress"].Value = e.Email;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting employee info.\n" + ex.ToString());
+            }
+        }
+
+        private void PopulateItemsTable()
+        {
+            dataGridViewStock.Rows.Clear();
+
+            try
+            {
+                foreach (Item i in dbhandler.GetItemsFromDB())
+                {
+                    int rowId = dataGridViewStock.Rows.Add();
+
+                    DataGridViewRow row = dataGridViewStock.Rows[rowId];
+
+                    row.Cells["productId"].Value = i.Id;
+                    row.Cells["name"].Value = i.Name;
+                    row.Cells["brand"].Value = i.Brand;
+                    row.Cells["code"].Value = i.Code;
+                    row.Cells["category"].Value = i.Category;
+                    row.Cells["quantity"].Value = i.Quantity;
+                    row.Cells["price"].Value = i.Price;
+                    row.Cells["productActive"].Value = i.Active;
+                    row.Cells["description"].Value = i.Description;                    
                 }
             }
             catch (Exception ex)
@@ -83,7 +115,6 @@ namespace MediaBazaar_ManagementSystem
         private void buttonEmployeeModify_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
-            //int id = Convert.ToInt32(dataGridViewEmployees.SelectedRows);
             Employee toEdit = dbhandler.GetEmployee(id);
             edw = new EmployeeDetailsWindow();
             edw.AddEmployeeData(toEdit);
@@ -91,6 +122,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
+                HideInactiveEmployees(!checkBoxShowInactive.Checked);
             }
         }
 
@@ -103,6 +135,18 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 HideInactiveEmployees(true);
+            }
+        }
+
+        private void checkBoxShowInactiveItems_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShowInactiveItems.Checked)
+            {
+                HideInactiveItems(false);
+            }
+            else
+            {
+                HideInactiveItems(true);
             }
         }
 
@@ -127,6 +171,54 @@ namespace MediaBazaar_ManagementSystem
                         row.Visible = true;
                     }
                 }
+            }
+        }
+
+        private void HideInactiveItems(bool visible)
+        {
+            if (visible)
+            {
+                foreach (DataGridViewRow row in dataGridViewStock.Rows)
+                {
+                    if (!(bool)row.Cells["productActive"].Value)
+                    {
+                        row.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dataGridViewStock.Rows)
+                {
+                    if (!(bool)row.Cells["productActive"].Value)
+                    {
+                        row.Visible = true;
+                    }
+                }
+            }
+        }
+
+        private void buttonStockEditProduct_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+            Item toEdit = dbhandler.GetItem(id);
+            pdw = new ProductDetailsWindow();
+            pdw.AddItemData(toEdit);
+            if (pdw.ShowDialog() == DialogResult.OK)
+            {
+                dbhandler.UpdateItem(pdw.Item);
+                PopulateItemsTable();
+                HideInactiveItems(!checkBoxShowInactiveItems.Checked);
+            }
+        }
+
+        private void buttonStockAdd_Click(object sender, EventArgs e)
+        {
+            pdw = new ProductDetailsWindow();
+            if (pdw.ShowDialog() == DialogResult.OK)
+            {
+                dbhandler.CreateItem(pdw.Item);
+                PopulateItemsTable();
             }
         }
     }

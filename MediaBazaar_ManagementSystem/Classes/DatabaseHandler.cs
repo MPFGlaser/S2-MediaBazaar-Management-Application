@@ -201,7 +201,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
         public void UpdateItem(Item item)
         {
-            String sql = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
+            String sql = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description  WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -231,7 +231,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         public Item GetItem(int id)
         {
             Item item = null;
-            String sql = "SELECT id, name, brand, code, category, quantity, price, active, description WHERE id=@itemId)";
+            String sql = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@itemId", id);
             try

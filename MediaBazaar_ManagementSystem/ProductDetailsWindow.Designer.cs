@@ -134,10 +134,8 @@
             // 
             this.textBoxCategory.Location = new System.Drawing.Point(11, 179);
             this.textBoxCategory.Name = "textBoxCategory";
-            this.textBoxCategory.PasswordChar = '•';
             this.textBoxCategory.Size = new System.Drawing.Size(411, 20);
             this.textBoxCategory.TabIndex = 7;
-            this.textBoxCategory.UseSystemPasswordChar = true;
             // 
             // label5
             // 
@@ -171,9 +169,9 @@
             this.labelID.AutoSize = true;
             this.labelID.Location = new System.Drawing.Point(391, 7);
             this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(31, 13);
+            this.labelID.Size = new System.Drawing.Size(29, 13);
             this.labelID.TabIndex = 15;
-            this.labelID.Text = "1337";
+            this.labelID.Text = "TBD";
             // 
             // label8
             // 
@@ -197,6 +195,11 @@
             // 
             this.numericUpDownPrice.DecimalPlaces = 2;
             this.numericUpDownPrice.Location = new System.Drawing.Point(11, 23);
+            this.numericUpDownPrice.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.numericUpDownPrice.Name = "numericUpDownPrice";
             this.numericUpDownPrice.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownPrice.TabIndex = 1;
@@ -204,12 +207,19 @@
             // numericUpDownQuantity
             // 
             this.numericUpDownQuantity.Location = new System.Drawing.Point(161, 23);
+            this.numericUpDownQuantity.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
             this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownQuantity.TabIndex = 2;
             // 
             // checkBoxActive
             // 
+            this.checkBoxActive.Checked = true;
+            this.checkBoxActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxActive.Location = new System.Drawing.Point(299, 26);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(62, 17);
