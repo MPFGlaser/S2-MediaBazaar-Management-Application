@@ -9,33 +9,38 @@ namespace MediaBazaar_ManagementSystem.Classes
 {
     public class Shift
     {
-        private int id;
-        private List<Employee> employees;
-        private DateTime startTime, endTime;
+        private int id, shiftType;
+        private List<int> employeeIds;
+        private DateTime date;
 
-        public Shift(int id, DateTime startTime, DateTime endTime)
+        public Shift(int id, DateTime date, int shiftType)
         {
             this.id = id;
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.date = date;
+            this.shiftType = shiftType;
         }
 
-        public List<Employee> Employees
+        public int Id
         {
-            get { return employees; }
-            set { employees = value; }
+            get { return id; }
         }
 
-        public DateTime StartTime
+        public List<int> EmployeeIds
         {
-            get { return startTime; }
-            set { startTime = value; }
+            get { return employeeIds; }
+            set { employeeIds = value; }
         }
 
-        public DateTime EndTime
+        public DateTime Date
         {
-            get { return endTime; }
-            set { endTime = value; }
+            get { return date; }
+            set { date = value; }
+        }
+
+        public int ShiftType
+        {
+            get { return shiftType; }
+            set { shiftType = value; }
         }
     }
 }

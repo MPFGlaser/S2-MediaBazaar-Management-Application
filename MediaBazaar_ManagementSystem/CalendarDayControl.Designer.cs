@@ -154,6 +154,7 @@
             this.buttonMorning.TabIndex = 0;
             this.buttonMorning.Text = "Morning\r\n(8:00 - 12:30)";
             this.buttonMorning.UseVisualStyleBackColor = true;
+            this.buttonMorning.Click += new System.EventHandler(this.buttonMorning_Click);
             // 
             // buttonAfternoon
             // 

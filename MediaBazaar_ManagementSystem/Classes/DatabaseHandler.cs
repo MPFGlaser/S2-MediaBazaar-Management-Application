@@ -121,6 +121,54 @@ namespace MediaBazaar_ManagementSystem.Classes
             return toReturn;
         }
 
+        public List<Employee> GetActiveEmployeesFromDB()
+        {
+            List<Employee> e = new List<Employee>();
+            String sql = "SELECT * FROM employees WHERE active = 1";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int id, bsn;
+                bool active;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
+                DateTime dateOfBirth;
+
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader["id"]);
+                    active = Convert.ToBoolean(reader["active"]);
+                    firstName = Convert.ToString(reader["firstName"]);
+                    surName = Convert.ToString(reader["surName"]);
+                    userName = Convert.ToString(reader["username"]);
+                    password = Convert.ToString(reader["password"]);
+                    phoneNumber = Convert.ToString(reader["phoneNumber"]);
+                    address = Convert.ToString(reader["address"]);
+                    email = Convert.ToString(reader["emailAddress"]);
+                    dateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
+                    spouseName = Convert.ToString(reader["spouseName"]);
+                    spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
+                    bsn = Convert.ToInt32(reader["bsn"]);
+
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    e.Add(emp);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving employees.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return e;
+        }
+
         public List<Employee> GetEmployeesFromDB()
         {
             List<Employee> e = new List<Employee>();
@@ -227,6 +275,93 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
         }
+        
+        public void AddShiftToDb(Shift shift)
+        {
+            int shiftId = 0;
+            String sql = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@id", shift.Id);
+            command.Parameters.AddWithValue("@date", shift.Date);
+            command.Parameters.AddWithValue("@shiftType", GetShiftTypeString(shift.ShiftType));
+
+            try
+            {
+                conn.Open();
+                shiftId = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+
+                foreach (int employeeId in shift.EmployeeIds)
+                {
+                    AddIdToShift(shiftId, employeeId);
+                }
+            }
+        }
+        
+        public void AddIdToShift(int shiftId, int employeeId)
+        {
+            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@employeeId", employeeId);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private string GetShiftTypeString(int ShiftType)
+        {
+            string shiftTypeString = string.Empty;
+            switch (ShiftType)
+            {
+                case 1:
+                    shiftTypeString = "Morning";
+                    break;
+                case 2:
+                    shiftTypeString = "Afternoon";
+                    break;
+                case 3:
+                    shiftTypeString = "Evening";
+                    break;
+            }
+            return shiftTypeString;
+        }
+
+        private string GetShiftTypeString(int ShiftType)
+        {
+            string shiftTypeString = string.Empty;
+            switch (ShiftType)
+            {
+                case 1:
+                    shiftTypeString = "Morning";
+                    break;
+                case 2:
+                    shiftTypeString = "Afternoon";
+                    break;
+                case 3:
+                    shiftTypeString = "Evening";
+                    break;
+            }
+            return shiftTypeString;
+        }
 
         public Item GetItem(int id)
         {
@@ -298,7 +433,6 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             return items;
         }
-
 
         // Gets the connection string from a config file
         public void GetConnectionString()
