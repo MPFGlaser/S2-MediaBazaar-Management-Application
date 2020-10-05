@@ -331,20 +331,26 @@ namespace MediaBazaar_ManagementSystem.Classes
         public Shift GetShift(DateTime date, ShiftTime shiftTime)
         {
             Shift shift = null;
-            String sql = "SELECT 1 FROM shifts WHERE date = @date, shiftType = @shiftType";
+            string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
+            String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
             MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@date", date);
+            command.Parameters.AddWithValue("@date", dateSql);
             command.Parameters.AddWithValue("@shiftType", shiftTime);
 
             try
             {
-                conn.Open();                
-                if(command.ExecuteScalar() != null)
+                conn.Open();
+                int shiftExists = Convert.ToInt32(command.ExecuteScalar());
+                if (shiftExists != 0)
                 {
-                    MySqlDataReader reader = command.ExecuteReader();
+                    String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+                    MySqlCommand command1 = new MySqlCommand(sql1, conn);
+                    command1.Parameters.AddWithValue("@date", dateSql);
+                    command1.Parameters.AddWithValue("@shiftType", shiftTime);
+                    MySqlDataReader reader = command1.ExecuteReader();
                     while (reader.Read())
                     {
-                        shift = new Shift(Convert.ToInt32(reader[0]), Convert.ToDateTime(reader[1]), (ShiftTime)reader[2]);
+                        shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
                     }                    
                 }
             }
@@ -359,6 +365,44 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             return shift;
         }
+
+        //public List<Employee> GetShiftEmployees(int shiftId)
+        //{
+        //    Shift shift = null;
+        //    string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
+        //    String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
+        //    MySqlCommand command = new MySqlCommand(sql, conn);
+        //    command.Parameters.AddWithValue("@date", dateSql);
+        //    command.Parameters.AddWithValue("@shiftType", shiftTime);
+
+        //    try
+        //    {
+        //        conn.Open();
+        //        int shiftExists = Convert.ToInt32(command.ExecuteScalar());
+        //        if (shiftExists != 0)
+        //        {
+        //            String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+        //            MySqlCommand command1 = new MySqlCommand(sql1, conn);
+        //            command1.Parameters.AddWithValue("@date", dateSql);
+        //            command1.Parameters.AddWithValue("@shiftType", shiftTime);
+        //            MySqlDataReader reader = command1.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+
+        //    return shift;
+        //}
 
         public Item GetItem(int id)
         {
