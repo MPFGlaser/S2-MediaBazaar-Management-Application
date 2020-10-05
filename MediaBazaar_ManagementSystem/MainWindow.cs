@@ -16,31 +16,25 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
-        LoginWindow login;
-        Boolean loggedin = false;
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
 
-        public MainWindow()
+        public MainWindow(bool login, string name)
         {
-            InitializeComponent();
-            InitializeNumericUpDown();
-
-            if (!loggedin)
+            if (login)
             {
-                login = new LoginWindow();
-                if (login.ShowDialog() == DialogResult.OK)
-                {
-                    labelWelcomeText.Text += ", " + login.Name;
+                
+                    labelWelcomeText.Text += ", " + name;
                     DisplayInformation();
-                }
             }
             else
             {
                 DisplayInformation();
-            }
+                InitializeComponent();
+                InitializeNumericUpDown();
+            }            
         }
 
         private void DisplayInformation()

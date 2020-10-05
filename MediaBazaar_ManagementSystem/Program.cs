@@ -14,9 +14,25 @@ namespace MediaBazaar_ManagementSystem
         [STAThread]
         static void Main()
         {
+            bool loggedin = false;
+            LoginWindow login;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+
+            if (!loggedin)
+            {
+                login = new LoginWindow();
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+
+                    Application.Run(new MainWindow(true, login.Name));
+                }
+                else
+                {
+                    login.Close();
+                }
+            }
         }
     }
 }
