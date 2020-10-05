@@ -54,28 +54,31 @@
             // 
             // buttonPDWCancel
             // 
+            this.buttonPDWCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonPDWCancel.Location = new System.Drawing.Point(12, 476);
             this.buttonPDWCancel.Name = "buttonPDWCancel";
             this.buttonPDWCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonPDWCancel.TabIndex = 0;
+            this.buttonPDWCancel.TabIndex = 10;
             this.buttonPDWCancel.Text = "Cancel";
             this.buttonPDWCancel.UseVisualStyleBackColor = true;
+            this.buttonPDWCancel.Click += new System.EventHandler(this.buttonPDWCancel_Click);
             // 
             // buttonPDWConfirm
             // 
             this.buttonPDWConfirm.Location = new System.Drawing.Point(347, 476);
             this.buttonPDWConfirm.Name = "buttonPDWConfirm";
             this.buttonPDWConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonPDWConfirm.TabIndex = 1;
+            this.buttonPDWConfirm.TabIndex = 9;
             this.buttonPDWConfirm.Text = "Confirm";
             this.buttonPDWConfirm.UseVisualStyleBackColor = true;
+            this.buttonPDWConfirm.Click += new System.EventHandler(this.buttonPDWConfirm_Click);
             // 
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(11, 62);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(411, 20);
-            this.textBoxName.TabIndex = 2;
+            this.textBoxName.TabIndex = 4;
             // 
             // label1
             // 
@@ -91,7 +94,7 @@
             this.textBoxBrand.Location = new System.Drawing.Point(11, 101);
             this.textBoxBrand.Name = "textBoxBrand";
             this.textBoxBrand.Size = new System.Drawing.Size(411, 20);
-            this.textBoxBrand.TabIndex = 4;
+            this.textBoxBrand.TabIndex = 5;
             // 
             // label2
             // 
@@ -133,7 +136,7 @@
             this.textBoxCategory.Name = "textBoxCategory";
             this.textBoxCategory.PasswordChar = '•';
             this.textBoxCategory.Size = new System.Drawing.Size(411, 20);
-            this.textBoxCategory.TabIndex = 8;
+            this.textBoxCategory.TabIndex = 7;
             this.textBoxCategory.UseSystemPasswordChar = true;
             // 
             // label5
@@ -196,21 +199,21 @@
             this.numericUpDownPrice.Location = new System.Drawing.Point(11, 23);
             this.numericUpDownPrice.Name = "numericUpDownPrice";
             this.numericUpDownPrice.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownPrice.TabIndex = 18;
+            this.numericUpDownPrice.TabIndex = 1;
             // 
             // numericUpDownQuantity
             // 
             this.numericUpDownQuantity.Location = new System.Drawing.Point(161, 23);
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
             this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownQuantity.TabIndex = 19;
+            this.numericUpDownQuantity.TabIndex = 2;
             // 
             // checkBoxActive
             // 
             this.checkBoxActive.Location = new System.Drawing.Point(299, 26);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(62, 17);
-            this.checkBoxActive.TabIndex = 0;
+            this.checkBoxActive.TabIndex = 3;
             this.checkBoxActive.Text = "Active";
             this.checkBoxActive.UseVisualStyleBackColor = true;
             // 
@@ -219,13 +222,15 @@
             this.richTextBoxDescription.Location = new System.Drawing.Point(11, 219);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
             this.richTextBoxDescription.Size = new System.Drawing.Size(411, 251);
-            this.richTextBoxDescription.TabIndex = 20;
+            this.richTextBoxDescription.TabIndex = 8;
             this.richTextBoxDescription.Text = "";
             // 
             // ProductDetailsWindow
             // 
+            this.AcceptButton = this.buttonPDWConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonPDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 511);
             this.Controls.Add(this.richTextBoxDescription);
             this.Controls.Add(this.checkBoxActive);
@@ -248,7 +253,7 @@
             this.Controls.Add(this.buttonPDWConfirm);
             this.Controls.Add(this.buttonPDWCancel);
             this.Name = "ProductDetailsWindow";
-            this.Text = "ProductDetailsWindow";
+            this.Text = "Add a product";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             this.ResumeLayout(false);
