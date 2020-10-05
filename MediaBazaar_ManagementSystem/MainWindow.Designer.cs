@@ -93,6 +93,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
+            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -100,12 +106,6 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
-            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -797,6 +797,39 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(52, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonReloadDatabaseEntries
+            // 
+            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
+            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(815, 4);
+            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
+            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
+            this.buttonReloadDatabaseEntries.TabIndex = 5;
+            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
+            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
+            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -866,39 +899,6 @@
             this.calendarDayControlSunday.Name = "calendarDayControlSunday";
             this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
-            // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            // 
-            // labelWelcomeText
-            // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome, USERNAME";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // buttonReloadDatabaseEntries
-            // 
-            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
-            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(815, 4);
-            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
-            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
-            this.buttonReloadDatabaseEntries.TabIndex = 5;
-            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
-            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
             // 
             // MainWindow
             // 
