@@ -181,7 +181,7 @@
             this.MaximumSize = new System.Drawing.Size(523, 431);
             this.MinimumSize = new System.Drawing.Size(523, 431);
             this.Name = "SchedulingWindow";
-            this.Text = "Scheduling a shift";
+            this.Text = "Schedule a shift";
             this.ResumeLayout(false);
             this.PerformLayout();
 
