@@ -93,6 +93,7 @@
             this.comboBoxSelectEmployees.Location = new System.Drawing.Point(41, 127);
             this.comboBoxSelectEmployees.Name = "comboBoxSelectEmployees";
             this.comboBoxSelectEmployees.Size = new System.Drawing.Size(186, 21);
+            this.comboBoxSelectEmployees.Sorted = true;
             this.comboBoxSelectEmployees.TabIndex = 3;
             this.comboBoxSelectEmployees.Text = "Select an employee";
             // 
@@ -122,6 +123,7 @@
             this.listBoxCurrentEmployees.Location = new System.Drawing.Point(445, 127);
             this.listBoxCurrentEmployees.Name = "listBoxCurrentEmployees";
             this.listBoxCurrentEmployees.Size = new System.Drawing.Size(290, 251);
+            this.listBoxCurrentEmployees.Sorted = true;
             this.listBoxCurrentEmployees.TabIndex = 10;
             // 
             // textBoxWeekDay
