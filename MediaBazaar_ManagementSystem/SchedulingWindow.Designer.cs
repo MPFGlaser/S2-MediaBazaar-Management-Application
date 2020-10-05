@@ -37,6 +37,8 @@
             this.buttonRemoveEmployeeFromShift = new System.Windows.Forms.Button();
             this.listBoxCurrentEmployees = new System.Windows.Forms.ListBox();
             this.textBoxWeekDay = new System.Windows.Forms.TextBox();
+            this.buttonScheduleConfirm = new System.Windows.Forms.Button();
+            this.buttonScheduleCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxCalendarDate
@@ -143,11 +145,34 @@
             this.textBoxWeekDay.Text = "Monday";
             this.textBoxWeekDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // buttonScheduleConfirm
+            // 
+            this.buttonScheduleConfirm.Location = new System.Drawing.Point(660, 404);
+            this.buttonScheduleConfirm.Name = "buttonScheduleConfirm";
+            this.buttonScheduleConfirm.Size = new System.Drawing.Size(75, 23);
+            this.buttonScheduleConfirm.TabIndex = 39;
+            this.buttonScheduleConfirm.Text = "Confirm";
+            this.buttonScheduleConfirm.UseVisualStyleBackColor = true;
+            this.buttonScheduleConfirm.Click += new System.EventHandler(this.buttonScheduleConfirm_Click);
+            // 
+            // buttonScheduleCancel
+            // 
+            this.buttonScheduleCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonScheduleCancel.Location = new System.Drawing.Point(249, 404);
+            this.buttonScheduleCancel.Name = "buttonScheduleCancel";
+            this.buttonScheduleCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonScheduleCancel.TabIndex = 38;
+            this.buttonScheduleCancel.Text = "Cancel";
+            this.buttonScheduleCancel.UseVisualStyleBackColor = true;
+            this.buttonScheduleCancel.Click += new System.EventHandler(this.buttonScheduleCancel_Click);
+            // 
             // SchedulingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonScheduleConfirm);
+            this.Controls.Add(this.buttonScheduleCancel);
             this.Controls.Add(this.textBoxWeekDay);
             this.Controls.Add(this.listBoxCurrentEmployees);
             this.Controls.Add(this.buttonRemoveEmployeeFromShift);
@@ -175,5 +200,7 @@
         private System.Windows.Forms.Button buttonRemoveEmployeeFromShift;
         private System.Windows.Forms.ListBox listBoxCurrentEmployees;
         private System.Windows.Forms.TextBox textBoxWeekDay;
+        private System.Windows.Forms.Button buttonScheduleConfirm;
+        private System.Windows.Forms.Button buttonScheduleCancel;
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,16 +16,21 @@ namespace MediaBazaar_ManagementSystem
     public partial class SchedulingWindow : Form
     {
         DatabaseHandler dbhandler;
-        private Shift currentShift = new Shift(1, DateTime.Now, 1);
+        private Shift currentShift;
+        private DateTime date;
+        private int shiftTime;
+        List<int> workingEmployeeIds = new List<int>();
 
-        public SchedulingWindow(string dateAndMonth, string weekDay, int shifTime)
+        public SchedulingWindow(string dateAndMonth, string weekDay, int timeOfShift, DateTime date)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
             LoadEmployees();
+            this.date = date;
+            this.shiftTime = timeOfShift;
             textBoxWeekDay.Text = weekDay;
             textBoxCalendarDate.Text = dateAndMonth;
-            comboBoxShiftTime.SelectedIndex = shifTime - 1;
+            comboBoxShiftTime.SelectedIndex = timeOfShift - 1;
         }
 
         private void LoadEmployees()
@@ -57,14 +63,8 @@ namespace MediaBazaar_ManagementSystem
                 listBoxCurrentEmployees.DisplayMember = "Text";
                 listBoxCurrentEmployees.ValueMember = "Employee";
                 listBoxCurrentEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                //foreach(Item i in comboBoxSelectEmployees.Items)
-                //{
-                //    if((i as dynamic).Employee == (comboBoxSelectEmployees.SelectedItem as dynamic).Employee)
-                //    {
-                //        comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                //    }
-                //}
                 comboBoxSelectEmployees.SelectedIndex = -1;
             }
         }
@@ -77,6 +77,28 @@ namespace MediaBazaar_ManagementSystem
             comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
 
             listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+        }
+
+        private void buttonScheduleConfirm_Click(object sender, EventArgs e)
+        {
+            dbhandler = new DatabaseHandler();
+            foreach (dynamic emp in listBoxCurrentEmployees.Items)
+            {
+                workingEmployeeIds.Add((emp).Employee.Id);
+            }
+
+            currentShift = new Shift(0, date, shiftTime);
+            currentShift.EmployeeIds = workingEmployeeIds;
+
+            dbhandler.AddShiftToDb(currentShift);
+
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void buttonScheduleCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

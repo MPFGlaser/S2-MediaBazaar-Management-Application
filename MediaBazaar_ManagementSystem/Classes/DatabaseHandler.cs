@@ -136,7 +136,6 @@ namespace MediaBazaar_ManagementSystem.Classes
                 bool active;
                 string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
                 DateTime dateOfBirth;
-                // Add functions
 
                 while (reader.Read())
                 {
@@ -153,7 +152,6 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
-                    // Add functions
 
                     Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
                     e.Add(emp);
@@ -219,6 +217,75 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
 
             return e;
+        }
+
+        public void AddShiftToDb(Shift shift)
+        {
+            int shiftId = 0;
+            String sql = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@id", shift.Id);
+            command.Parameters.AddWithValue("@date", shift.Date);
+            command.Parameters.AddWithValue("@shiftType", GetShiftTypeString(shift.ShiftType));
+
+            try
+            {
+                conn.Open();
+                shiftId = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+
+                foreach (int employeeId in shift.EmployeeIds)
+                {
+                    AddIdToShift(shiftId, employeeId);
+                }
+            }
+        }
+
+        public void AddIdToShift(int shiftId, int employeeId)
+        {
+            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@employeeId", employeeId);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private string GetShiftTypeString(int ShiftType)
+        {
+            string shiftTypeString = string.Empty;
+            switch (ShiftType)
+            {
+                case 1:
+                    shiftTypeString = "Morning";
+                    break;
+                case 2:
+                    shiftTypeString = "Afternoon";
+                    break;
+                case 3:
+                    shiftTypeString = "Evening";
+                    break;
+            }
+            return shiftTypeString;
         }
 
         // Gets the connection string from a config file

@@ -10,10 +10,9 @@ namespace MediaBazaar_ManagementSystem.Classes
     public class Shift
     {
         private int id, shiftType;
-        private List<Employee> employees;
+        private List<int> employeeIds;
         private DateTime date;
 
-        //Perhaps change starttime and endtime to date and shifttype (morning, afternoon, evening)
         public Shift(int id, DateTime date, int shiftType)
         {
             this.id = id;
@@ -21,10 +20,15 @@ namespace MediaBazaar_ManagementSystem.Classes
             this.shiftType = shiftType;
         }
 
-        public List<Employee> Employees
+        public int Id
         {
-            get { return employees; }
-            set { employees = value; }
+            get { return id; }
+        }
+
+        public List<int> EmployeeIds
+        {
+            get { return employeeIds; }
+            set { employeeIds = value; }
         }
 
         public DateTime Date
