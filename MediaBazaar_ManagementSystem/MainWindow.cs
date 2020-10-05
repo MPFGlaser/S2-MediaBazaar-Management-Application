@@ -15,14 +15,13 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
-        private EmployeeManager employeeManager;
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
 
         public MainWindow()
         {
             InitializeComponent();
-            employeeManager = new EmployeeManager();
+
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             HideInactiveEmployees(true);
