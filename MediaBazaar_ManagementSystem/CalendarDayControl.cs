@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
+using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -30,7 +31,25 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonMorning_Click(object sender, EventArgs e)
         {
-            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, 1, date);
+            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date);
+            if (schedule.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine("It happended");
+            }
+        }
+
+        private void buttonAfternoon_Click(object sender, EventArgs e)
+        {
+            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date);
+            if (schedule.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine("It happended");
+            }
+        }
+
+        private void buttonEvening_Click(object sender, EventArgs e)
+        {
+            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date);
             if (schedule.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine("It happended");

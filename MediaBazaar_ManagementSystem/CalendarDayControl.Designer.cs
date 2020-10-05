@@ -142,6 +142,7 @@
             this.buttonEvening.TabIndex = 2;
             this.buttonEvening.Text = "Evening\r\n(17:00 - 21:30)";
             this.buttonEvening.UseVisualStyleBackColor = true;
+            this.buttonEvening.Click += new System.EventHandler(this.buttonEvening_Click);
             // 
             // buttonMorning
             // 
@@ -166,6 +167,7 @@
             this.buttonAfternoon.TabIndex = 1;
             this.buttonAfternoon.Text = "Afternoon\r\n(12:30 - 17:00)";
             this.buttonAfternoon.UseVisualStyleBackColor = true;
+            this.buttonAfternoon.Click += new System.EventHandler(this.buttonAfternoon_Click);
             // 
             // textBoxCapacityEvening
             // 

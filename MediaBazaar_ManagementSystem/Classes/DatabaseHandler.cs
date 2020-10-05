@@ -283,7 +283,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", shift.Id);
             command.Parameters.AddWithValue("@date", shift.Date);
-            command.Parameters.AddWithValue("@shiftType", GetShiftTypeString(shift.ShiftType));
+            command.Parameters.AddWithValue("@shiftType", shift.ShiftTime);
 
             try
             {
@@ -325,24 +325,6 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Close();
             }
-        }
-
-        private string GetShiftTypeString(int ShiftType)
-        {
-            string shiftTypeString = string.Empty;
-            switch (ShiftType)
-            {
-                case 1:
-                    shiftTypeString = "Morning";
-                    break;
-                case 2:
-                    shiftTypeString = "Afternoon";
-                    break;
-                case 3:
-                    shiftTypeString = "Evening";
-                    break;
-            }
-            return shiftTypeString;
         }
 
         public Item GetItem(int id)

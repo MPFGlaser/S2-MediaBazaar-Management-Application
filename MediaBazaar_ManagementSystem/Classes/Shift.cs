@@ -1,4 +1,5 @@
 ﻿using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,16 @@ namespace MediaBazaar_ManagementSystem.Classes
 {
     public class Shift
     {
-        private int id, shiftType;
+        private int id;
         private List<int> employeeIds;
         private DateTime date;
+        private ShiftTime shiftTime;
 
-        public Shift(int id, DateTime date, int shiftType)
+        public Shift(int id, DateTime date, ShiftTime shiftTime)
         {
             this.id = id;
             this.date = date;
-            this.shiftType = shiftType;
+            this.shiftTime = shiftTime;
         }
 
         public int Id
@@ -37,10 +39,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             set { date = value; }
         }
 
-        public int ShiftType
+        public ShiftTime ShiftTime
         {
-            get { return shiftType; }
-            set { shiftType = value; }
+            get { return shiftTime; }
+            set { shiftTime = value; }
         }
     }
 }
