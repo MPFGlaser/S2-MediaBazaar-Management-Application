@@ -26,6 +26,9 @@ namespace MediaBazaar_ManagementSystem
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             HideInactiveEmployees(true);
+
+            // Removes statistics tab until implementation is finished in the future.
+            tabControl1.TabPages.Remove(tabPage3);
         }
 
         private void PopulateEmployeesTable()
