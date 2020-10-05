@@ -13,6 +13,8 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class CalendarDayControl : UserControl
     {
+        SchedulingWindow schedule;
+
         public CalendarDayControl()
         {
             InitializeComponent();
@@ -22,6 +24,15 @@ namespace MediaBazaar_ManagementSystem
         {
             textBoxCalendarDay.Text = weekday;
             textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
+        }
+
+        private void buttonMorning_Click(object sender, EventArgs e)
+        {
+            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, 1);
+            if (schedule.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine("It happended");
+            }
         }
     }
 }

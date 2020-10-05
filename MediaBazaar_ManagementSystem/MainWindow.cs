@@ -24,11 +24,17 @@ namespace MediaBazaar_ManagementSystem
         public MainWindow()
         {
             InitializeComponent();
+            InitializeNumericUpDown();
             employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             SetupCorrectWeekData();
+        }
+
+        private void InitializeNumericUpDown()
+        {
+            this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
         }
 
         private void PopulateEmployeesTable()
@@ -97,6 +103,11 @@ namespace MediaBazaar_ManagementSystem
                 dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
             }
+        }
+
+        private void numericUpDownSchedulingWeek_ValueChanged(Object sender, EventArgs e)
+        {
+            SetupCorrectWeekData();
         }
 
         private void SetupCorrectWeekData()

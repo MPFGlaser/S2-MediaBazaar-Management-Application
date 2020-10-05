@@ -9,15 +9,16 @@ namespace MediaBazaar_ManagementSystem.Classes
 {
     public class Shift
     {
-        private int id;
+        private int id, shiftType;
         private List<Employee> employees;
-        private DateTime startTime, endTime;
+        private DateTime date;
 
-        public Shift(int id, DateTime startTime, DateTime endTime)
+        //Perhaps change starttime and endtime to date and shifttype (morning, afternoon, evening)
+        public Shift(int id, DateTime date, int shiftType)
         {
             this.id = id;
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.date = date;
+            this.shiftType = shiftType;
         }
 
         public List<Employee> Employees
@@ -26,16 +27,16 @@ namespace MediaBazaar_ManagementSystem.Classes
             set { employees = value; }
         }
 
-        public DateTime StartTime
+        public DateTime Date
         {
-            get { return startTime; }
-            set { startTime = value; }
+            get { return date; }
+            set { date = value; }
         }
 
-        public DateTime EndTime
+        public int ShiftType
         {
-            get { return endTime; }
-            set { endTime = value; }
+            get { return shiftType; }
+            set { shiftType = value; }
         }
     }
 }
