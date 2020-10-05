@@ -22,7 +22,7 @@ namespace MediaBazaar_ManagementSystem
         private ShiftTime shiftTime;
         List<int> workingEmployeeIds = new List<int>();
 
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -33,6 +33,8 @@ namespace MediaBazaar_ManagementSystem
             this.comboBoxShiftTime.SelectedItem = shiftTime;
             textBoxWeekDay.Text = weekDay;
             textBoxCalendarDate.Text = dateAndMonth;
+
+            AddEmployeeListToShift(working);
         }
 
         private void LoadEmployees()
@@ -60,6 +62,16 @@ namespace MediaBazaar_ManagementSystem
         private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
         {
             this.shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
+        }
+
+        private void AddEmployeeListToShift(List<Employee> toAddToShift)
+        {
+            foreach(Employee e in toAddToShift)
+            {
+                listBoxCurrentEmployees.DisplayMember = "Text";
+                listBoxCurrentEmployees.ValueMember = "Employee";
+                listBoxCurrentEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+            }
         }
 
         private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)
