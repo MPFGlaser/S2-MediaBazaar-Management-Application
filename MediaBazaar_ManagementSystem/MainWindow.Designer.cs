@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -59,9 +60,19 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
             this.buttonStockAdd = new System.Windows.Forms.Button();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
+            this.productId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -82,34 +93,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
-            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.productId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
+            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -400,6 +396,18 @@
             this.tabPage2.Text = "Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // checkBoxShowInactiveItems
+            // 
+            this.checkBoxShowInactiveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxShowInactiveItems.AutoSize = true;
+            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(984, 386);
+            this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
+            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxShowInactiveItems.TabIndex = 5;
+            this.checkBoxShowInactiveItems.Text = "Show inactive products";
+            this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactiveItems.CheckedChanged += new System.EventHandler(this.checkBoxShowInactiveItems_CheckedChanged);
+            // 
             // buttonStockAdd
             // 
             this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -448,6 +456,64 @@
             this.dataGridViewStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStock.Size = new System.Drawing.Size(1115, 370);
             this.dataGridViewStock.TabIndex = 0;
+            // 
+            // productId
+            // 
+            this.productId.HeaderText = "ID";
+            this.productId.Name = "productId";
+            this.productId.ReadOnly = true;
+            this.productId.Width = 50;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Product Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            // 
+            // brand
+            // 
+            this.brand.HeaderText = "Brand";
+            this.brand.Name = "brand";
+            this.brand.ReadOnly = true;
+            // 
+            // code
+            // 
+            this.code.HeaderText = "Code";
+            this.code.Name = "code";
+            this.code.ReadOnly = true;
+            // 
+            // category
+            // 
+            this.category.HeaderText = "Category";
+            this.category.Name = "category";
+            this.category.ReadOnly = true;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            // 
+            // productActive
+            // 
+            this.productActive.HeaderText = "Active";
+            this.productActive.Name = "productActive";
+            this.productActive.ReadOnly = true;
+            this.productActive.Width = 50;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 50;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
             // 
             // tabPage3
             // 
@@ -731,167 +797,6 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            // 
-            // labelWelcomeText
-            // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome, USERNAME";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // checkBoxShowInactiveItems
-            // 
-            this.checkBoxShowInactiveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxShowInactiveItems.AutoSize = true;
-            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(984, 386);
-            this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
-            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
-            this.checkBoxShowInactiveItems.TabIndex = 5;
-            this.checkBoxShowInactiveItems.Text = "Show inactive products";
-            this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
-            this.checkBoxShowInactiveItems.CheckedChanged += new System.EventHandler(this.checkBoxShowInactiveItems_CheckedChanged);
-            // 
-            // calendarDayControl1
-            // 
-            this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlMonday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlMonday.Location = new System.Drawing.Point(3, 3);
-            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.Name = "calendarDayControl1";
-            this.calendarDayControlMonday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.TabIndex = 0;
-            // 
-            // calendarDayControl2
-            // 
-            this.calendarDayControlTuesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlTuesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlTuesday.Location = new System.Drawing.Point(164, 3);
-            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.Name = "calendarDayControl2";
-            this.calendarDayControlTuesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.TabIndex = 1;
-            // 
-            // calendarDayControl3
-            // 
-            this.calendarDayControlWednesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlWednesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlWednesday.Location = new System.Drawing.Point(325, 3);
-            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.Name = "calendarDayControl3";
-            this.calendarDayControlWednesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.TabIndex = 2;
-            // 
-            // calendarDayControl4
-            // 
-            this.calendarDayControlThursday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlThursday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlThursday.Location = new System.Drawing.Point(486, 3);
-            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.Name = "calendarDayControl4";
-            this.calendarDayControlThursday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.TabIndex = 3;
-            // 
-            // calendarDayControl5
-            // 
-            this.calendarDayControlFriday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlFriday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlFriday.Location = new System.Drawing.Point(647, 3);
-            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.Name = "calendarDayControl5";
-            this.calendarDayControlFriday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.TabIndex = 4;
-            // 
-            // calendarDayControl6
-            // 
-            this.calendarDayControlSaturday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSaturday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSaturday.Location = new System.Drawing.Point(808, 3);
-            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.Name = "calendarDayControl6";
-            this.calendarDayControlSaturday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.TabIndex = 5;
-            // 
-            // calendarDayControl7
-            // 
-            this.calendarDayControlSunday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSunday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSunday.Location = new System.Drawing.Point(969, 3);
-            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.Name = "calendarDayControl7";
-            this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.TabIndex = 6;
-            // 
-            // productId
-            // 
-            this.productId.HeaderText = "ID";
-            this.productId.Name = "productId";
-            this.productId.ReadOnly = true;
-            this.productId.Width = 50;
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Product Name";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            // 
-            // brand
-            // 
-            this.brand.HeaderText = "Brand";
-            this.brand.Name = "brand";
-            this.brand.ReadOnly = true;
-            // 
-            // code
-            // 
-            this.code.HeaderText = "Code";
-            this.code.Name = "code";
-            this.code.ReadOnly = true;
-            // 
-            // category
-            // 
-            this.category.HeaderText = "Category";
-            this.category.Name = "category";
-            this.category.ReadOnly = true;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Price";
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            // 
-            // productActive
-            // 
-            this.productActive.HeaderText = "Active";
-            this.productActive.Name = "productActive";
-            this.productActive.ReadOnly = true;
-            this.productActive.Width = 50;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.description.HeaderText = "Description";
-            this.description.MinimumWidth = 50;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -962,11 +867,45 @@
             this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome, USERNAME";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonReloadDatabaseEntries
+            // 
+            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
+            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(815, 4);
+            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
+            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
+            this.buttonReloadDatabaseEntries.TabIndex = 5;
+            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
+            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 461);
+            this.Controls.Add(this.buttonReloadDatabaseEntries);
             this.Controls.Add(this.labelWelcomeText);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
@@ -1083,6 +1022,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.Button buttonReloadDatabaseEntries;
+        private System.Windows.Forms.ToolTip toolTipReloadDb;
     }
 }
 

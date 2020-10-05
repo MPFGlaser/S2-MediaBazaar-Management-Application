@@ -29,6 +29,7 @@ namespace MediaBazaar_ManagementSystem
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             SetupCorrectWeekData();
+            toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Database Entries");
         }
 
         private void InitializeNumericUpDown()
@@ -43,6 +44,13 @@ namespace MediaBazaar_ManagementSystem
 
             // Removes statistics tab until implementation is finished in the future.
             tabControl1.TabPages.Remove(tabPage3);
+        }
+
+        private void buttonReloadDatabaseEntries_Click(object sender, EventArgs e)
+        {
+            PopulateEmployeesTable();
+            PopulateItemsTable();
+            MessageBox.Show("Database Reloaded");
         }
 
         private void PopulateEmployeesTable()
