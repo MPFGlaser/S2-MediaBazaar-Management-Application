@@ -86,12 +86,11 @@ namespace MediaBazaar_ManagementSystem
         {
             int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
             Employee toEdit = dbhandler.GetEmployee(id);
-            string functions = dbhandler.GetFunction(id);
             edw = new EmployeeDetailsWindow();
             edw.AddEmployeeData(toEdit);
             if (edw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.UpdateEmployee(edw.Employee, functions);
+                dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
             }
         }

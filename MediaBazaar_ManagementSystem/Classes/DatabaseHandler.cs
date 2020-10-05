@@ -59,7 +59,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
-        public void UpdateEmployee(Employee employee, string function)
+        public void UpdateEmployee(Employee employee)
         {
             String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, phoneNumber = @phoneNumber, address = @address, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
@@ -75,7 +75,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
             command.Parameters.AddWithValue("@spousePhoneNumber", employee.SpousePhone);
             command.Parameters.AddWithValue("@bsn", employee.Bsn);
-            command.Parameters.AddWithValue("@function", function);
+            command.Parameters.AddWithValue("@function", 1337);
 
             try
             {
@@ -107,34 +107,6 @@ namespace MediaBazaar_ManagementSystem.Classes
                 while (reader.Read())
                 {
                     toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return toReturn;
-        }
-
-        public string GetFunction(int id)
-        {
-            string toReturn = "0";
-            String sql = "SELECT functions FROM employees WHERE id = @employeeId";
-            MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@employeeId", id);
-
-            try
-            {
-                conn.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    toReturn = reader[0].ToString();
                 }
             }
             catch (Exception ex)
