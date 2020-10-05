@@ -25,8 +25,7 @@ namespace MediaBazaar_ManagementSystem
                 login = new LoginWindow();
                 if (login.ShowDialog() == DialogResult.OK)
                 {
-
-                    Application.Run(new MainWindow(true, login.Name));
+                    Application.Run(new MainWindow(login.UserName));
                 }
                 else
                 {
