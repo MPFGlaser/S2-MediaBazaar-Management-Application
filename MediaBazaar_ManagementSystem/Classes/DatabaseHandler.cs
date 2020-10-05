@@ -345,24 +345,6 @@ namespace MediaBazaar_ManagementSystem.Classes
             return shiftTypeString;
         }
 
-        private string GetShiftTypeString(int ShiftType)
-        {
-            string shiftTypeString = string.Empty;
-            switch (ShiftType)
-            {
-                case 1:
-                    shiftTypeString = "Morning";
-                    break;
-                case 2:
-                    shiftTypeString = "Afternoon";
-                    break;
-                case 3:
-                    shiftTypeString = "Evening";
-                    break;
-            }
-            return shiftTypeString;
-        }
-
         public Item GetItem(int id)
         {
             Item item = null;

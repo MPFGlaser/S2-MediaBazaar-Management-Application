@@ -25,7 +25,6 @@ namespace MediaBazaar_ManagementSystem
         {
             InitializeComponent();
             InitializeNumericUpDown();
-            employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
