@@ -136,7 +136,6 @@ namespace MediaBazaar_ManagementSystem.Classes
                 bool active;
                 string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
                 DateTime dateOfBirth;
-                // Add functions
 
                 while (reader.Read())
                 {
@@ -259,6 +258,43 @@ namespace MediaBazaar_ManagementSystem.Classes
         public List<Item> GetItemsFromDB()
         {
             List<Item> items = new List<Item>();
+            String sql = "SELECT * FROM items";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader =  command.ExecuteReader();
+
+                int id, code, quantity;
+                string name, brand, category, description;
+                double price;
+                bool active;
+
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader["id"]);
+                    code = Convert.ToInt32(reader["code"]);
+                    quantity = Convert.ToInt32(reader["quantity"]);
+                    name = Convert.ToString(reader["name"]);
+                    brand = Convert.ToString(reader["brand"]);
+                    category = Convert.ToString(reader["category"]);
+                    description = Convert.ToString(reader["description"]);
+                    price = Convert.ToDouble(reader["price"]);
+                    active = Convert.ToBoolean(reader["active"]);
+
+                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
+                    items.Add(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving items.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
 
             return items;
         }
