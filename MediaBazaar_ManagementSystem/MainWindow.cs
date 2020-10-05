@@ -294,6 +294,11 @@ namespace MediaBazaar_ManagementSystem
             SetupCorrectWeekData();
         }
 
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void buttonSchedulingNext_Click(object sender, EventArgs e)
         {
             if(numericUpDownSchedulingWeek.Value == 52)

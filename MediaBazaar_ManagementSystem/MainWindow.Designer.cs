@@ -808,6 +808,7 @@
             this.buttonLogin.TabIndex = 1;
             this.buttonLogin.Text = "Log out";
             this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // labelWelcomeText
             // 
