@@ -16,31 +16,17 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
-        LoginWindow login;
-        Boolean loggedin = false;
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
 
-        public MainWindow()
+        public MainWindow(string name)
         {
             InitializeComponent();
+            DisplayInformation();
             InitializeNumericUpDown();
-
-            if (!loggedin)
-            {
-                login = new LoginWindow();
-                if (login.ShowDialog() == DialogResult.OK)
-                {
-                    labelWelcomeText.Text += ", " + login.UserName;
-                    DisplayInformation();
-                }
-            }
-            else
-            {
-                DisplayInformation();
-            }
+            labelWelcomeText.Text = "Welcome, " + name;
         }
 
         private void DisplayInformation()
@@ -120,7 +106,7 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["quantity"].Value = i.Quantity;
                     row.Cells["price"].Value = i.Price;
                     row.Cells["productActive"].Value = i.Active;
-                    row.Cells["description"].Value = i.Description;                    
+                    row.Cells["description"].Value = i.Description;
                 }
             }
             catch (Exception ex)
@@ -136,7 +122,8 @@ namespace MediaBazaar_ManagementSystem
 
             TestDataPoints.Points.Clear();
 
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 10; i++)
+            {
                 int data = rand.Next(1, 101);
                 TestDataPoints.Points.Add(data, i);
             }
@@ -145,7 +132,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonEmployeesAdd_Click(object sender, EventArgs e)
         {
             edw = new EmployeeDetailsWindow();
-            if(edw.ShowDialog() == DialogResult.OK)
+            if (edw.ShowDialog() == DialogResult.OK)
             {
                 dbhandler.CreateEmployee(edw.Employee);
                 PopulateEmployeesTable();
@@ -296,7 +283,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonSchedulingNext_Click(object sender, EventArgs e)
         {
-            if(numericUpDownSchedulingWeek.Value == 52)
+            if (numericUpDownSchedulingWeek.Value == 52)
             {
                 numericUpDownSchedulingWeek.Value = 1;
             }
@@ -339,7 +326,7 @@ namespace MediaBazaar_ManagementSystem
             var result = firstThursday.AddDays(weekNum * 7);
 
             // Subtract 3 days from Thursday to get Monday, which is the first weekday in ISO8601
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
             }
