@@ -124,6 +124,7 @@ namespace MediaBazaar_ManagementSystem
 
         public void AddEmployeeData(Employee employee)
         {
+            this.Text = "Viewing/editing " + employee.FirstName + "'s details";
             employeeSpecificsGroup.Visible = true;
             editing = true;
             editId = employee.Id;
