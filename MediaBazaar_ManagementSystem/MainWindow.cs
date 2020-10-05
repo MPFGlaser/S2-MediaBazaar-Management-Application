@@ -45,12 +45,7 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["surName"].Value = e.SurName;
                     row.Cells["username"].Value = e.UserName;
                     row.Cells["phoneNumber"].Value = e.PhoneNumber;
-                    row.Cells["address"].Value = e.Address;
                     row.Cells["emailAddress"].Value = e.Email;
-                    row.Cells["dateOfBirth"].Value = e.DateOfBirth;
-                    row.Cells["bsn"].Value = e.Bsn;
-                    row.Cells["spouseName"].Value = e.SpouseName;
-                    row.Cells["spousePhoneNumber"].Value = e.SpousePhone;
                 }
             }
             catch (Exception ex)
