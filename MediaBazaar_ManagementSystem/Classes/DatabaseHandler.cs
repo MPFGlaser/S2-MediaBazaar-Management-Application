@@ -171,6 +171,99 @@ namespace MediaBazaar_ManagementSystem.Classes
             return e;
         }
 
+        public void CreateItem(Item item)
+        {
+            String sql = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@id", item.Id);
+            command.Parameters.AddWithValue("@name", item.Name);
+            command.Parameters.AddWithValue("@brand", item.Brand);
+            command.Parameters.AddWithValue("@code", item.Code);
+            command.Parameters.AddWithValue("@category", item.Category);
+            command.Parameters.AddWithValue("@quantity", item.Quantity);
+            command.Parameters.AddWithValue("@price", item.Price);
+            command.Parameters.AddWithValue("@active", item.Active);
+            command.Parameters.AddWithValue("@description", item.Description);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void UpdateItem(Item item)
+        {
+            String sql = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@id", item.Id);
+            command.Parameters.AddWithValue("@name", item.Name);
+            command.Parameters.AddWithValue("@brand", item.Brand);
+            command.Parameters.AddWithValue("@code", item.Code);
+            command.Parameters.AddWithValue("@category", item.Category);
+            command.Parameters.AddWithValue("@quantity", item.Quantity);
+            command.Parameters.AddWithValue("@price", item.Price);
+            command.Parameters.AddWithValue("@active", item.Active);
+            command.Parameters.AddWithValue("@description", item.Description);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Item GetItem(int id)
+        {
+            Item item = null;
+            String sql = "SELECT id, name, brand, code, category, quantity, price, active, description WHERE id=@itemId)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@itemId", id);
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    item = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return item;
+        }
+
+        public List<Item> GetItemsFromDB()
+        {
+            List<Item> items = new List<Item>();
+
+            return items;
+        }
+
+
         // Gets the connection string from a config file
         public void GetConnectionString()
         {
