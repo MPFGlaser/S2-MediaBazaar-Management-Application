@@ -412,43 +412,46 @@ namespace MediaBazaar_ManagementSystem.Classes
             return shift;
         }
 
-        //public List<Employee> GetShiftEmployees(int shiftId)
-        //{
-        //    Shift shift = null;
-        //    string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
-        //    String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
-        //    MySqlCommand command = new MySqlCommand(sql, conn);
-        //    command.Parameters.AddWithValue("@date", dateSql);
-        //    command.Parameters.AddWithValue("@shiftType", shiftTime);
+        public List<Employee> GetShiftEmployees(int shiftId)
+        {
+            List<Employee> shiftEmployees = new List<Employee>();
+            List<int> shiftEmployeeIds = new List<int>();
+            String sql = "SELECT count(*) FROM working_employees WHERE shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
 
-        //    try
-        //    {
-        //        conn.Open();
-        //        int shiftExists = Convert.ToInt32(command.ExecuteScalar());
-        //        if (shiftExists != 0)
-        //        {
-        //            String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
-        //            MySqlCommand command1 = new MySqlCommand(sql1, conn);
-        //            command1.Parameters.AddWithValue("@date", dateSql);
-        //            command1.Parameters.AddWithValue("@shiftType", shiftTime);
-        //            MySqlDataReader reader = command1.ExecuteReader();
-        //            while (reader.Read())
-        //            {
-        //                shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
+            try
+            {
+                conn.Open();
+                int shiftHasEmployees = Convert.ToInt32(command.ExecuteScalar());
+                if(shiftHasEmployees > 0)
+                {
+                    String sql2 = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
+                    MySqlCommand command2 = new MySqlCommand(sql2, conn);
+                    command2.Parameters.AddWithValue("@shiftId", shiftId);
+                    MySqlDataReader reader = command2.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        shiftEmployeeIds.Add(Convert.ToInt32(reader[0]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
 
-        //    return shift;
-        //}
+            foreach(int i in shiftEmployeeIds)
+            {
+                shiftEmployees.Add(GetEmployee(i));
+            }
+
+            return shiftEmployees;
+        }
 
         public Item GetItem(int id)
         {
