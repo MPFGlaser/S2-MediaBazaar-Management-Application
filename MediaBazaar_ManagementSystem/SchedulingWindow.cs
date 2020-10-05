@@ -107,5 +107,15 @@ namespace MediaBazaar_ManagementSystem
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void buttonNextDay_Click(object sender, EventArgs e)
+        {
+            date.AddDays(1);
+        }
+
+        private void buttonPreviousDay_Click(object sender, EventArgs e)
+        {
+            date.AddDays(-1);
+        }
     }
 }

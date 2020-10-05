@@ -64,6 +64,8 @@
             this.buttonPreviousDay.TabIndex = 4;
             this.buttonPreviousDay.Text = "<";
             this.buttonPreviousDay.UseVisualStyleBackColor = true;
+            this.buttonPreviousDay.Visible = false;
+            this.buttonPreviousDay.Click += new System.EventHandler(this.buttonPreviousDay_Click);
             // 
             // buttonNextDay
             // 
@@ -73,6 +75,8 @@
             this.buttonNextDay.TabIndex = 5;
             this.buttonNextDay.Text = ">";
             this.buttonNextDay.UseVisualStyleBackColor = true;
+            this.buttonNextDay.Visible = false;
+            this.buttonNextDay.Click += new System.EventHandler(this.buttonNextDay_Click);
             // 
             // comboBoxShiftTime
             // 
