@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint31 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint32 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint33 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint34 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint35 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint36 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -172,7 +172,7 @@
             // 
             this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
-            this.splitContainerEmployeesPrimary.Panel2MinSize = 200;
+            this.splitContainerEmployeesPrimary.Panel2MinSize = 298;
             this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(1125, 405);
             this.splitContainerEmployeesPrimary.SplitterDistance = 823;
             this.splitContainerEmployeesPrimary.TabIndex = 0;
@@ -238,6 +238,7 @@
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesDepartmentRemove.Enabled = false;
             this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(214, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
@@ -247,6 +248,7 @@
             // 
             // buttonEmployeesDepartmentAdd
             // 
+            this.buttonEmployeesDepartmentAdd.Enabled = false;
             this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
             this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
@@ -258,6 +260,7 @@
             // 
             this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEmployeesDepartmentName.Enabled = false;
             this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
             this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
             this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
@@ -266,6 +269,7 @@
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
+            this.labelEmployeesDepartmentName.Enabled = false;
             this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
@@ -283,8 +287,7 @@
             // 
             // buttonEmployeesAdd
             // 
-            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
             this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
@@ -306,8 +309,6 @@
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
             this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
@@ -462,23 +463,23 @@
             // 
             // StatisticChart
             // 
-            chartArea6.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea6);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend6.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend6);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "TestData";
-            series6.Points.Add(dataPoint31);
-            series6.Points.Add(dataPoint32);
-            series6.Points.Add(dataPoint33);
-            series6.Points.Add(dataPoint34);
-            series6.Points.Add(dataPoint35);
-            series6.Points.Add(dataPoint36);
-            this.StatisticChart.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
