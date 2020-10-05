@@ -16,6 +16,8 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
+        LoginWindow login;
+        Boolean loggedin = false;
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
@@ -25,6 +27,24 @@ namespace MediaBazaar_ManagementSystem
         {
             InitializeComponent();
             InitializeNumericUpDown();
+
+            if (!loggedin)
+            {
+                login = new LoginWindow();
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+                    labelWelcomeText.Text += ", " + login.UserName;
+                    DisplayInformation();
+                }
+            }
+            else
+            {
+                DisplayInformation();
+            }
+        }
+
+        private void DisplayInformation()
+        {
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);

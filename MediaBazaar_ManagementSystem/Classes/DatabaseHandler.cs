@@ -25,6 +25,52 @@ namespace MediaBazaar_ManagementSystem.Classes
             conn = new MySqlConnection(connectionString);
         }
 
+        public string LoginUser(string username, string password)
+        {
+            string selectedUsername = string.Empty;
+
+            String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
+
+            try
+            {
+                conn.Open();
+                int correctLogin = Convert.ToInt32(command.ExecuteScalar());
+                if(correctLogin > 0)
+                {
+                    String sql2 = "SELECT username FROM employees WHERE username = @username AND password = @password";
+                    MySqlCommand command2 = new MySqlCommand(sql2, conn);
+                    command2.Parameters.AddWithValue("@username", username);
+                    command2.Parameters.AddWithValue("@password", password);
+
+                    try
+                    {
+                        MySqlDataReader reader = command2.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            selectedUsername = reader[0].ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return selectedUsername;
+        }
+
         // Creates a new employee entry in the database
         public void CreateEmployee(Employee employee)
         {
