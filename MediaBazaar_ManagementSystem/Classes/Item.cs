@@ -8,7 +8,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 {
     public class Item
     {
-        private int id, quatity;
+        private int id, quantity;
         private string name, manufacturer, description;
         private float price;
 
@@ -27,8 +27,8 @@ namespace MediaBazaar_ManagementSystem.Classes
 
         public int Quatity
         {
-            get { return quatity; }
-            set { quatity = value; }
+            get { return quantity; }
+            set { quantity = value; }
         }
 
         public string Name
