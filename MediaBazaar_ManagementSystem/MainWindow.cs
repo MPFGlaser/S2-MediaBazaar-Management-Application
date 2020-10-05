@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Globalization;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -25,6 +26,7 @@ namespace MediaBazaar_ManagementSystem
             employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
+            numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
         }
 
         private void PopulateEmployeesTable()
@@ -93,6 +95,37 @@ namespace MediaBazaar_ManagementSystem
                 dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
             }
+        }
+
+        private void buttonSchedulingPrevious_Click(object sender, EventArgs e)
+        {
+            if (numericUpDownSchedulingWeek.Value == 1)
+            {
+                numericUpDownSchedulingWeek.Value = 52;
+            }
+            else
+            {
+                numericUpDownSchedulingWeek.Value -= 1;
+            }
+        }
+
+        private void buttonSchedulingNext_Click(object sender, EventArgs e)
+        {
+            if(numericUpDownSchedulingWeek.Value == 52)
+            {
+                numericUpDownSchedulingWeek.Value = 1;
+            }
+            else
+            {
+                numericUpDownSchedulingWeek.Value += 1;
+            }
+        }
+
+        private int GetWeekOfYear(DateTime currentDate)
+        {
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            int weekNumber = ci.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return weekNumber;
         }
     }
 }
