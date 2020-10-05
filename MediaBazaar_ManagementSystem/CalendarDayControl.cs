@@ -37,20 +37,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonMorning_Click(object sender, EventArgs e)
         {
+            shiftEmployees.Clear();
             newShift = dbhandler.GetShift(date, ShiftTime.Morning);
-           /* if (newShift == null)
-            {
-                
-            }
-            else
-            {
-                
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees);
-                if (schedule.ShowDialog() == DialogResult.OK)
-                {
-                    Console.WriteLine("It happended");
-                }
-            }*/
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
@@ -65,24 +53,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonAfternoon_Click(object sender, EventArgs e)
         {
+            shiftEmployees.Clear();
             newShift = dbhandler.GetShift(date, ShiftTime.Afternoon);
-            /*if (newShift == null)
-            {
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees);
-                if (schedule.ShowDialog() == DialogResult.OK)
-                {
-                    Console.WriteLine("It happended");
-                }
-            }
-            else
-            {
-                shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees);
-                if (schedule.ShowDialog() == DialogResult.OK)
-                {
-                    Console.WriteLine("It happended");
-                }
-            }*/
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
@@ -97,24 +69,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonEvening_Click(object sender, EventArgs e)
         {
+            shiftEmployees.Clear();
             newShift = dbhandler.GetShift(date, ShiftTime.Evening);
-            /*if (newShift == null)
-            {
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees);
-                if (schedule.ShowDialog() == DialogResult.OK)
-                {
-                    Console.WriteLine("It happended");
-                }
-            }
-            else
-            {
-                shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees);
-                if (schedule.ShowDialog() == DialogResult.OK)
-                {
-                    Console.WriteLine("It happended");
-                }
-            }*/
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
