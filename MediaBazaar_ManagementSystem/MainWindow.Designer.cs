@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint49 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint50 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint51 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint52 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint53 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint54 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -46,7 +46,6 @@
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
             this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
-            this.listBoxEmployeesSelected = new System.Windows.Forms.ListBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
             this.buttonEmployeesAdd = new System.Windows.Forms.Button();
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
@@ -101,6 +100,7 @@
             this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -226,7 +226,7 @@
             // splitContainerEmployeesSecondary.Panel2
             // 
             this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.listBoxEmployeesSelected);
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.checkBoxShowInactive);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
@@ -272,17 +272,6 @@
             this.labelEmployeesDepartmentName.TabIndex = 0;
             this.labelEmployeesDepartmentName.Text = "Department name";
             // 
-            // listBoxEmployeesSelected
-            // 
-            this.listBoxEmployeesSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBoxEmployeesSelected.FormattingEnabled = true;
-            this.listBoxEmployeesSelected.Location = new System.Drawing.Point(3, 20);
-            this.listBoxEmployeesSelected.Name = "listBoxEmployeesSelected";
-            this.listBoxEmployeesSelected.Size = new System.Drawing.Size(291, 238);
-            this.listBoxEmployeesSelected.TabIndex = 4;
-            // 
             // labelEmployeesSelected
             // 
             this.labelEmployeesSelected.AutoSize = true;
@@ -296,9 +285,9 @@
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(6, 264);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(286, 23);
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
@@ -319,9 +308,9 @@
             // 
             this.buttonEmployeeModify.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(6, 293);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(286, 23);
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
             this.buttonEmployeeModify.Text = "View/Edit selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
@@ -473,23 +462,23 @@
             // 
             // StatisticChart
             // 
-            chartArea9.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea9);
+            chartArea3.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea3);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend9.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend9);
+            legend3.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend3);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "TestData";
-            series9.Points.Add(dataPoint49);
-            series9.Points.Add(dataPoint50);
-            series9.Points.Add(dataPoint51);
-            series9.Points.Add(dataPoint52);
-            series9.Points.Add(dataPoint53);
-            series9.Points.Add(dataPoint54);
-            this.StatisticChart.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "TestData";
+            series3.Points.Add(dataPoint13);
+            series3.Points.Add(dataPoint14);
+            series3.Points.Add(dataPoint15);
+            series3.Points.Add(dataPoint16);
+            series3.Points.Add(dataPoint17);
+            series3.Points.Add(dataPoint18);
+            this.StatisticChart.Series.Add(series3);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -854,6 +843,17 @@
             this.emailAddress.ReadOnly = true;
             this.emailAddress.Width = 129;
             // 
+            // checkBoxShowInactive
+            // 
+            this.checkBoxShowInactive.AutoSize = true;
+            this.checkBoxShowInactive.Location = new System.Drawing.Point(6, 50);
+            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
+            this.checkBoxShowInactive.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxShowInactive.TabIndex = 4;
+            this.checkBoxShowInactive.Text = "Show inactive employees";
+            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -932,7 +932,6 @@
         private System.Windows.Forms.Button buttonEmployeesAdd;
         private System.Windows.Forms.Button buttonEmployeesRemove;
         private System.Windows.Forms.Button buttonEmployeeModify;
-        private System.Windows.Forms.ListBox listBoxEmployeesSelected;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Label labelWelcomeText;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
@@ -968,6 +967,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn username;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
+        private System.Windows.Forms.CheckBox checkBoxShowInactive;
     }
 }
 

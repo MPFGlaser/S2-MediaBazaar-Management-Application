@@ -25,6 +25,7 @@ namespace MediaBazaar_ManagementSystem
             employeeManager = new EmployeeManager();
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
+            HideInactiveEmployees(true);
         }
 
         private void PopulateEmployeesTable()
@@ -88,6 +89,42 @@ namespace MediaBazaar_ManagementSystem
             {
                 dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
+            }
+        }
+
+        private void checkBoxShowInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShowInactive.Checked)
+            {
+                HideInactiveEmployees(false);
+            }
+            else
+            {
+                HideInactiveEmployees(true);
+            }
+        }
+
+        private void HideInactiveEmployees(bool visible)
+        {
+            if (visible)
+            {
+                foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
+                {
+                    if (!(bool)row.Cells["active"].Value)
+                    {
+                        row.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
+                {
+                    if (!(bool)row.Cells["active"].Value)
+                    {
+                        row.Visible = true;
+                    }
+                }
             }
         }
     }
