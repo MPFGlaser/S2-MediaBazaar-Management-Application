@@ -33,7 +33,7 @@ namespace MediaBazaar_ManagementSystem
                 login = new LoginWindow();
                 if (login.ShowDialog() == DialogResult.OK)
                 {
-                    labelWelcomeText.Text += ", " + login.UserName;
+                    labelWelcomeText.Text += ", " + login.Name;
                     DisplayInformation();
                 }
             }
