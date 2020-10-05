@@ -9,6 +9,9 @@ namespace MediaBazaar_ManagementSystem
     public partial class EmployeeDetailsWindow : Form
     {
         private Employee employee;
+        private Boolean editing = false;
+        private int editId;
+        private string function = "1337";
 
         public EmployeeDetailsWindow()
         {
@@ -20,13 +23,16 @@ namespace MediaBazaar_ManagementSystem
             get { return this.employee; }
         }
 
-        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, int phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, int spousePhone)
+        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
         {
             
-            employee = new Employee(0, true, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
         }
 
-            
+        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
+        {
+            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+        }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)
         {
@@ -49,7 +55,11 @@ namespace MediaBazaar_ManagementSystem
             string address = textBoxAddress.Text;
             DateTime dateOfBirth = dateTimePickerDateOfBirth.Value;
             string spouseName = textBoxSpouseName.Text;
-            int phonenumber, spousePhone;
+            string phonenumber = textBoxPhoneNumber.Text;
+            string spousePhone = textBoxSpousePhone.Text;
+            Boolean active = checkBoxActive.Checked;
+
+            function = textBoxFunctions.Text;
 
             if (!checkName.IsMatch(firstName))
             {
@@ -64,7 +74,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 textBoxUsername.BackColor = Color.LightCoral;
             }
-            else if (!checkPassword.IsMatch(password))
+            else if (!checkPassword.IsMatch(password) && !editing)
             {
                 textBoxPassword.BackColor = Color.LightCoral;
             }
@@ -100,30 +110,41 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
-
-                if (textBoxPhoneNumber.Text.Length == 12)
+                if (editing)
                 {
-                    //phonenumber = Convert.ToInt32(textBoxPhoneNumber.Text.Substring(1)); -->Change phonenumber type to string
-                    phonenumber = Convert.ToInt32(textBoxPhoneNumber.Text);
+                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
                 }
                 else
                 {
-                    phonenumber = Convert.ToInt32(textBoxPhoneNumber.Text);
+                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
                 }
-
-                if(textBoxSpousePhone.Text.Length == 12)
-                {
-                    //spousePhone = Convert.ToInt32(textBoxSpousePhone.Text.Substring(1)); -->Change spousePhone type to string
-                    spousePhone = Convert.ToInt32(textBoxSpousePhone.Text);
-                }
-                else
-                {
-                    spousePhone = Convert.ToInt32(textBoxSpousePhone.Text);
-                }
-
-                CreateEmployee(true, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
                 this.DialogResult = DialogResult.OK;
             }
+        }
+
+        public void AddEmployeeData(Employee employee)
+        {
+            employeeSpecificsGroup.Visible = true;
+            editing = true;
+            editId = employee.Id;
+
+            textBoxPassword.Enabled = false;
+            textBoxPasswordConfirm.Enabled = false;
+
+            textBoxFirstName.Text = employee.FirstName;
+            textBoxLastName.Text = employee.SurName;
+            textBoxUsername.Text = employee.UserName;
+            textBoxPassword.Text = "";
+            textBoxPasswordConfirm.Text = "";
+            textBoxEmail.Text = employee.Email;
+            textBoxAddress.Text = employee.Address;
+            dateTimePickerDateOfBirth.Value = employee.DateOfBirth;
+            textBoxSpouseName.Text = employee.SpouseName;
+            textBoxPhoneNumber.Text = employee.PhoneNumber;
+            textBoxSpousePhone.Text = employee.SpousePhone;
+            textBoxBsn.Text = employee.Bsn.ToString();
+            checkBoxActive.Checked = employee.Active;
+            textBoxFunctions.Text = function.ToString();
         }
 
         private void ResetBoxColors()

@@ -56,8 +56,13 @@
             this.textBoxSpouseName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
+            this.employeeSpecificsGroup = new System.Windows.Forms.GroupBox();
+            this.textBoxFunctions = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.employeeSpecificsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -320,6 +325,47 @@
             this.textBoxSpousePhone.Size = new System.Drawing.Size(127, 20);
             this.textBoxSpousePhone.TabIndex = 37;
             // 
+            // employeeSpecificsGroup
+            // 
+            this.employeeSpecificsGroup.Controls.Add(this.checkBoxActive);
+            this.employeeSpecificsGroup.Controls.Add(this.label13);
+            this.employeeSpecificsGroup.Controls.Add(this.textBoxFunctions);
+            this.employeeSpecificsGroup.Location = new System.Drawing.Point(219, 136);
+            this.employeeSpecificsGroup.Name = "employeeSpecificsGroup";
+            this.employeeSpecificsGroup.Size = new System.Drawing.Size(200, 100);
+            this.employeeSpecificsGroup.TabIndex = 31;
+            this.employeeSpecificsGroup.TabStop = false;
+            this.employeeSpecificsGroup.Text = "Employee specifics";
+            this.employeeSpecificsGroup.Visible = false;
+            // 
+            // textBoxFunctions
+            // 
+            this.textBoxFunctions.Location = new System.Drawing.Point(5, 59);
+            this.textBoxFunctions.Name = "textBoxFunctions";
+            this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
+            this.textBoxFunctions.TabIndex = 39;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 43);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "Functions";
+            // 
+            // checkBoxActive
+            // 
+            this.checkBoxActive.AutoSize = true;
+            this.checkBoxActive.Checked = true;
+            this.checkBoxActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxActive.Location = new System.Drawing.Point(5, 19);
+            this.checkBoxActive.Name = "checkBoxActive";
+            this.checkBoxActive.Size = new System.Drawing.Size(56, 17);
+            this.checkBoxActive.TabIndex = 41;
+            this.checkBoxActive.Text = "Active";
+            this.checkBoxActive.UseVisualStyleBackColor = true;
+            // 
             // EmployeeDetailsWindow
             // 
             this.AcceptButton = this.buttonEDWConfirm;
@@ -327,6 +373,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 511);
+            this.Controls.Add(this.employeeSpecificsGroup);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonEDWConfirm);
@@ -340,6 +387,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.employeeSpecificsGroup.ResumeLayout(false);
+            this.employeeSpecificsGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +423,9 @@
         private System.Windows.Forms.TextBox textBoxSpousePhone;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateOfBirth;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.GroupBox employeeSpecificsGroup;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBoxFunctions;
+        private System.Windows.Forms.CheckBox checkBoxActive;
     }
 }

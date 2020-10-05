@@ -59,6 +59,96 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        public void UpdateEmployee(Employee employee, string function)
+        {
+            String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, phoneNumber = @phoneNumber, address = @address, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function WHERE id = @id";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@active", employee.Active);
+            command.Parameters.AddWithValue("@id", employee.Id);
+            command.Parameters.AddWithValue("@firstName", employee.FirstName);
+            command.Parameters.AddWithValue("@surName", employee.SurName);
+            command.Parameters.AddWithValue("@username", employee.UserName);
+            command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
+            command.Parameters.AddWithValue("@address", employee.Address);
+            command.Parameters.AddWithValue("@emailAddress", employee.Email);
+            command.Parameters.AddWithValue("@dateOfBirth", employee.DateOfBirth);
+            command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
+            command.Parameters.AddWithValue("@spousePhoneNumber", employee.SpousePhone);
+            command.Parameters.AddWithValue("@bsn", employee.Bsn);
+            command.Parameters.AddWithValue("@function", function);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Employee GetEmployee(int id)
+        {
+            Employee toReturn = null;
+
+            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber FROM employees WHERE id = @employeeId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@employeeId", id);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return toReturn;
+        }
+
+        public string GetFunction(int id)
+        {
+            string toReturn = "0";
+            String sql = "SELECT functions FROM employees WHERE id = @employeeId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@employeeId", id);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    toReturn = reader[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return toReturn;
+        }
+
         public List<Employee> GetEmployeesFromDB()
         {
             List<Employee> e = new List<Employee>();
@@ -70,19 +160,10 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id;
+                int id, bsn;
                 bool active;
-                string firstName;
-                string surName;
-                string userName;
-                string password;
-                string email;
-                int phoneNumber;
-                string address;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
                 DateTime dateOfBirth;
-                int bsn;
-                string spouseName;
-                int spousePhone;
                 // Add functions
 
                 while (reader.Read())
@@ -93,12 +174,12 @@ namespace MediaBazaar_ManagementSystem.Classes
                     surName = Convert.ToString(reader["surName"]);
                     userName = Convert.ToString(reader["username"]);
                     password = Convert.ToString(reader["password"]);
-                    phoneNumber = Convert.ToInt32(reader["phoneNumber"]);
+                    phoneNumber = Convert.ToString(reader["phoneNumber"]);
                     address = Convert.ToString(reader["address"]);
                     email = Convert.ToString(reader["emailAddress"]);
                     dateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
                     spouseName = Convert.ToString(reader["spouseName"]);
-                    spousePhone = Convert.ToInt32(reader["spousePhoneNUmber"]);
+                    spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
                     // Add functions
 

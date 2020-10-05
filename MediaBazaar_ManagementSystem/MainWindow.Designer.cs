@@ -41,6 +41,18 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewEmployees = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.active = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.spouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.spousePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
@@ -84,9 +96,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.calendarDayControl1 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl2 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl3 = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -94,18 +103,9 @@
             this.calendarDayControl5 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl6 = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControl7 = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.active = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.spouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.spousePhoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -206,6 +206,78 @@
             this.dataGridViewEmployees.ReadOnly = true;
             this.dataGridViewEmployees.Size = new System.Drawing.Size(817, 399);
             this.dataGridViewEmployees.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // active
+            // 
+            this.active.HeaderText = "Active";
+            this.active.Name = "active";
+            this.active.ReadOnly = true;
+            // 
+            // firstName
+            // 
+            this.firstName.HeaderText = "First Name";
+            this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
+            // 
+            // surName
+            // 
+            this.surName.HeaderText = "Surname";
+            this.surName.Name = "surName";
+            this.surName.ReadOnly = true;
+            // 
+            // username
+            // 
+            this.username.HeaderText = "Username";
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            // 
+            // address
+            // 
+            this.address.HeaderText = "Address";
+            this.address.Name = "address";
+            this.address.ReadOnly = true;
+            // 
+            // emailAddress
+            // 
+            this.emailAddress.HeaderText = "Email";
+            this.emailAddress.Name = "emailAddress";
+            this.emailAddress.ReadOnly = true;
+            // 
+            // dateOfBirth
+            // 
+            this.dateOfBirth.HeaderText = "Date of Birth";
+            this.dateOfBirth.Name = "dateOfBirth";
+            this.dateOfBirth.ReadOnly = true;
+            // 
+            // bsn
+            // 
+            this.bsn.HeaderText = "BSN";
+            this.bsn.Name = "bsn";
+            this.bsn.ReadOnly = true;
+            // 
+            // spouseName
+            // 
+            this.spouseName.HeaderText = "Spouse name";
+            this.spouseName.Name = "spouseName";
+            this.spouseName.ReadOnly = true;
+            // 
+            // spousePhoneNumber
+            // 
+            this.spousePhoneNumber.HeaderText = "Spouse phone";
+            this.spousePhoneNumber.Name = "spousePhoneNumber";
+            this.spousePhoneNumber.ReadOnly = true;
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -330,6 +402,7 @@
             this.buttonEmployeeModify.TabIndex = 0;
             this.buttonEmployeeModify.Text = "Modify selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
+            this.buttonEmployeeModify.Click += new System.EventHandler(this.buttonEmployeeModify_Click);
             // 
             // tabPage2
             // 
@@ -718,27 +791,6 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            // 
-            // labelWelcomeText
-            // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome, USERNAME";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // calendarDayControl1
             // 
             this.calendarDayControl1.BackColor = System.Drawing.SystemColors.Window;
@@ -809,77 +861,26 @@
             this.calendarDayControl7.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControl7.TabIndex = 6;
             // 
-            // id
+            // buttonLogin
             // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
             // 
-            // active
+            // labelWelcomeText
             // 
-            this.active.HeaderText = "Active";
-            this.active.Name = "active";
-            this.active.ReadOnly = true;
-            // 
-            // firstName
-            // 
-            this.firstName.HeaderText = "First Name";
-            this.firstName.Name = "firstName";
-            this.firstName.ReadOnly = true;
-            // 
-            // surName
-            // 
-            this.surName.HeaderText = "Surname";
-            this.surName.Name = "surName";
-            this.surName.ReadOnly = true;
-            // 
-            // username
-            // 
-            this.username.HeaderText = "Username";
-            this.username.Name = "username";
-            this.username.ReadOnly = true;
-            // 
-            // phoneNumber
-            // 
-            this.phoneNumber.HeaderText = "Phone Number";
-            this.phoneNumber.Name = "phoneNumber";
-            this.phoneNumber.ReadOnly = true;
-            // 
-            // address
-            // 
-            this.address.HeaderText = "Address";
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            // 
-            // emailAddress
-            // 
-            this.emailAddress.HeaderText = "Email";
-            this.emailAddress.Name = "emailAddress";
-            this.emailAddress.ReadOnly = true;
-            // 
-            // dateOfBirth
-            // 
-            this.dateOfBirth.HeaderText = "Date of Birth";
-            this.dateOfBirth.Name = "dateOfBirth";
-            this.dateOfBirth.ReadOnly = true;
-            // 
-            // bsn
-            // 
-            this.bsn.HeaderText = "BSN";
-            this.bsn.Name = "bsn";
-            this.bsn.ReadOnly = true;
-            // 
-            // spouseName
-            // 
-            this.spouseName.HeaderText = "Spouse name";
-            this.spouseName.Name = "spouseName";
-            this.spouseName.ReadOnly = true;
-            // 
-            // spousePhoneNumber
-            // 
-            this.spousePhoneNumber.HeaderText = "Spouse phone";
-            this.spousePhoneNumber.Name = "spousePhoneNumber";
-            this.spousePhoneNumber.ReadOnly = true;
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.AutoSize = true;
+            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(119, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome, USERNAME";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainWindow
             // 

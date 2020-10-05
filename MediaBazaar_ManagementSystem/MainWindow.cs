@@ -81,5 +81,19 @@ namespace MediaBazaar_ManagementSystem
                 PopulateEmployeesTable();
             }
         }
+
+        private void buttonEmployeeModify_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+            Employee toEdit = dbhandler.GetEmployee(id);
+            string functions = dbhandler.GetFunction(id);
+            edw = new EmployeeDetailsWindow();
+            edw.AddEmployeeData(toEdit);
+            if (edw.ShowDialog() == DialogResult.OK)
+            {
+                dbhandler.UpdateEmployee(edw.Employee, functions);
+                PopulateEmployeesTable();
+            }
+        }
     }
 }
