@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Models;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -325,6 +326,38 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Close();
             }
+        }
+
+        public Shift GetShift(DateTime date, ShiftTime shiftTime)
+        {
+            Shift shift = null;
+            String sql = "SELECT 1 FROM shifts WHERE date = @date, shiftType = @shiftType";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@date", date);
+            command.Parameters.AddWithValue("@shiftType", shiftTime);
+
+            try
+            {
+                conn.Open();                
+                if(command.ExecuteScalar() != null)
+                {
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        shift = new Shift(Convert.ToInt32(reader[0]), Convert.ToDateTime(reader[1]), (ShiftTime)reader[2]);
+                    }                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return shift;
         }
 
         public Item GetItem(int id)

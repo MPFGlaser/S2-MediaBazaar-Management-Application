@@ -42,11 +42,11 @@
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.textBoxPhoneNumber = new System.Windows.Forms.TextBox();
             this.textBoxLastName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelPasswordc = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxPasswordConfirm = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelPassword = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.buttonEDWConfirm = new System.Windows.Forms.Button();
@@ -80,11 +80,11 @@
             this.groupBox1.Controls.Add(this.textBoxFirstName);
             this.groupBox1.Controls.Add(this.textBoxPhoneNumber);
             this.groupBox1.Controls.Add(this.textBoxLastName);
-            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.labelPasswordc);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxPasswordConfirm);
             this.groupBox1.Controls.Add(this.textBoxUsername);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.labelPassword);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBoxPassword);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -198,14 +198,14 @@
             this.textBoxLastName.Size = new System.Drawing.Size(127, 20);
             this.textBoxLastName.TabIndex = 19;
             // 
-            // label5
+            // labelPasswordc
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 211);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 13);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Confirm password";
+            this.labelPasswordc.AutoSize = true;
+            this.labelPasswordc.Location = new System.Drawing.Point(6, 211);
+            this.labelPasswordc.Name = "labelPasswordc";
+            this.labelPasswordc.Size = new System.Drawing.Size(90, 13);
+            this.labelPasswordc.TabIndex = 26;
+            this.labelPasswordc.Text = "Confirm password";
             // 
             // label2
             // 
@@ -232,14 +232,14 @@
             this.textBoxUsername.Size = new System.Drawing.Size(127, 20);
             this.textBoxUsername.TabIndex = 21;
             // 
-            // label4
+            // labelPassword
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 172);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Password";
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(6, 172);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(53, 13);
+            this.labelPassword.TabIndex = 24;
+            this.labelPassword.Text = "Password";
             // 
             // label3
             // 
@@ -398,9 +398,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxPhoneNumber;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelPasswordc;
         private System.Windows.Forms.TextBox textBoxPasswordConfirm;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxUsername;

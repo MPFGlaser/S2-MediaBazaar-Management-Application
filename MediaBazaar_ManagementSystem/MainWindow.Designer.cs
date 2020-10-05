@@ -691,6 +691,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
+            this.label2.Enabled = false;
             this.label2.Location = new System.Drawing.Point(948, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
@@ -700,6 +701,7 @@
             // comboBoxSchedulingFunction
             // 
             this.comboBoxSchedulingFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSchedulingFunction.Enabled = false;
             this.comboBoxSchedulingFunction.FormattingEnabled = true;
             this.comboBoxSchedulingFunction.Location = new System.Drawing.Point(1002, 4);
             this.comboBoxSchedulingFunction.Name = "comboBoxSchedulingFunction";
