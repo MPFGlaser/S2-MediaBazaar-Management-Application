@@ -15,6 +15,7 @@ namespace MediaBazaar_ManagementSystem
     public partial class LoginWindow : Form
     {
         DatabaseHandler dbhandler;
+        private string userName;
 
         public LoginWindow()
         {
@@ -27,14 +28,18 @@ namespace MediaBazaar_ManagementSystem
             string loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
             if (loggedInUser != string.Empty)
             {
+                this.userName = loggedInUser;
                 this.DialogResult = DialogResult.OK;
             }
             else
             {
                 MessageBox.Show("Invalid Credentials");
             }
+        }
 
-            
+        public string UserName
+        {
+            get { return userName; }
         }
     }
 }

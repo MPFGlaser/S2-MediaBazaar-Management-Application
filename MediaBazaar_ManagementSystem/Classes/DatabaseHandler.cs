@@ -46,7 +46,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                     try
                     {
-                        MySqlDataReader reader = command.ExecuteReader();
+                        MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
                             selectedUsername = reader[0].ToString();
