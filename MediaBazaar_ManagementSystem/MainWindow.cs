@@ -80,6 +80,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonEmployeeModify_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+            //int id = Convert.ToInt32(dataGridViewEmployees.SelectedRows);
             Employee toEdit = dbhandler.GetEmployee(id);
             edw = new EmployeeDetailsWindow();
             edw.AddEmployeeData(toEdit);
