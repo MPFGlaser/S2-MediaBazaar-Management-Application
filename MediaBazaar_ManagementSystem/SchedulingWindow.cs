@@ -52,7 +52,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            //Load different shift
+            shiftTime = comboBoxShiftTime.SelectedIndex + 1;
         }
 
         private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)
