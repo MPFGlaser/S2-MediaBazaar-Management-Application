@@ -19,6 +19,7 @@ namespace MediaBazaar_ManagementSystem
         private EmployeeManager employeeManager;
         DatabaseHandler dbhandler;
         EmployeeDetailsWindow edw;
+        List<DateTime> weekDays = new List<DateTime>();
 
         public MainWindow()
         {
@@ -27,6 +28,7 @@ namespace MediaBazaar_ManagementSystem
             dbhandler = new Classes.DatabaseHandler();
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
+            SetupCorrectWeekData();
         }
 
         private void PopulateEmployeesTable()
@@ -97,6 +99,20 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        private void SetupCorrectWeekData()
+        {
+            int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
+            weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
+
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday");
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday");
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday");
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday");
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday");
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday");
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday");
+        }
+
         private void buttonSchedulingPrevious_Click(object sender, EventArgs e)
         {
             if (numericUpDownSchedulingWeek.Value == 1)
@@ -107,6 +123,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 numericUpDownSchedulingWeek.Value -= 1;
             }
+            SetupCorrectWeekData();
         }
 
         private void buttonSchedulingNext_Click(object sender, EventArgs e)
@@ -119,6 +136,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 numericUpDownSchedulingWeek.Value += 1;
             }
+            SetupCorrectWeekData();
         }
 
         private int GetWeekOfYear(DateTime currentDate)
@@ -126,6 +144,38 @@ namespace MediaBazaar_ManagementSystem
             CultureInfo ci = CultureInfo.CurrentCulture;
             int weekNumber = ci.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
             return weekNumber;
+        }
+
+        public static List<DateTime> FirstDateOfWeekISO8601(int year, int weekOfYear)
+        {
+            List<DateTime> daysBasedOnWeekNumber = new List<DateTime>();
+            DateTime jan1 = new DateTime(year, 1, 1);
+            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            // Use first Thursday in January to get first week of the year as
+            // it will never be in Week 52/53
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            var weekNum = weekOfYear;
+            // As we're adding days to a date in Week 1,
+            // we need to subtract 1 in order to get the right date for week #1
+            if (firstWeek == 1)
+            {
+                weekNum -= 1;
+            }
+
+            // Using the first Thursday as starting week ensures that we are starting in the right year
+            // then we add number of weeks multiplied with days
+            var result = firstThursday.AddDays(weekNum * 7);
+
+            // Subtract 3 days from Thursday to get Monday, which is the first weekday in ISO8601
+            for(int i = 0; i < 7; i++)
+            {
+                daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
+            }
+            return daysBasedOnWeekNumber;
         }
     }
 }
