@@ -42,7 +42,7 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                dbhandler.ClearShift(newShift.Id);
+                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -64,7 +64,7 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                dbhandler.ClearShift(newShift.Id);
+                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -84,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                dbhandler.ClearShift(newShift.Id);
+                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
             else

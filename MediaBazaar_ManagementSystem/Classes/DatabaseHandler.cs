@@ -9,6 +9,7 @@ using MediaBazaar_ManagementSystem.classes;
 using MediaBazaar_ManagementSystem.Models;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 
 
 namespace MediaBazaar_ManagementSystem.Classes
@@ -32,7 +33,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@username", username);
-            command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@password", SHA512(password));
 
             try
             {
@@ -43,7 +44,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                     String sql2 = "SELECT username FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
-                    command2.Parameters.AddWithValue("@password", password);
+                    command2.Parameters.AddWithValue("@password", SHA512(password));
 
                     try
                     {
@@ -81,7 +82,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
             command.Parameters.AddWithValue("@username", employee.UserName);
-            command.Parameters.AddWithValue("@password", employee.Password);
+            command.Parameters.AddWithValue("@password", SHA512(employee.Password));
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
             command.Parameters.AddWithValue("@emailAddress", employee.Email);
@@ -363,7 +364,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             try
             {
                 conn.Open();
-                command.ExecuteNonQuery();
+                int test = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -545,6 +546,22 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
 
             return items;
+        }
+
+        private string SHA512(string input)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            using (var hash = System.Security.Cryptography.SHA512.Create())
+            {
+                var hashedInputBytes = hash.ComputeHash(bytes);
+
+                // Convert to text
+                // StringBuilder Capacity is 128, because 512 bits / 8 bits in byte * 2 symbols for byte 
+                var hashedInputStringBuilder = new System.Text.StringBuilder(128);
+                foreach (var b in hashedInputBytes)
+                    hashedInputStringBuilder.Append(b.ToString("X2"));
+                return hashedInputStringBuilder.ToString();
+            }
         }
 
         // Gets the connection string from a config file
