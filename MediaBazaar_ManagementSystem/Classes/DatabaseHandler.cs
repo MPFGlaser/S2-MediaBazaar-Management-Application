@@ -363,7 +363,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             try
             {
                 conn.Open();
-                command.ExecuteNonQuery();
+                int test = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

@@ -117,6 +117,8 @@ namespace MediaBazaar_ManagementSystem
         private void buttonScheduleConfirm_Click(object sender, EventArgs e)
         {
             dbhandler = new DatabaseHandler();
+            workingEmployeeIds = null;
+            workingEmployeeIds = new List<int>();
             foreach (dynamic emp in listBoxCurrentEmployees.Items)
             {
                 workingEmployeeIds.Add((emp).Employee.Id);
@@ -127,6 +129,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (isEditing)
             {
+                dbhandler.ClearShift(oldId);
                 foreach(int i in workingEmployeeIds)
                 {
                     dbhandler.AddIdToShift(oldId, i);
