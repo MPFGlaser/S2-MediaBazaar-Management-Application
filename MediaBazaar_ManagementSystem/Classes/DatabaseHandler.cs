@@ -345,13 +345,36 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Close();
 
+                //ClearShift(shiftId);
+
                 foreach (int employeeId in shift.EmployeeIds)
                 {
                     AddIdToShift(shiftId, employeeId);
                 }
             }
         }
-        
+
+        public void ClearShift(int shiftId)
+        {
+            String sql = "DELETE FROM working_employees WHERE shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public void AddIdToShift(int shiftId, int employeeId)
         {
             String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
@@ -397,7 +420,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                     while (reader.Read())
                     {
                         shift = new Shift(Convert.ToInt32(reader[0]), date, shiftTime);
-                    }                    
+                    }
                 }
             }
             catch (Exception ex)

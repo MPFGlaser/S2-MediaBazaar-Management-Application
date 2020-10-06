@@ -21,8 +21,10 @@ namespace MediaBazaar_ManagementSystem
         private DateTime date;
         private ShiftTime shiftTime;
         List<int> workingEmployeeIds = new List<int>();
+        private bool isEditing;
+        private int oldId;
 
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -33,6 +35,8 @@ namespace MediaBazaar_ManagementSystem
             this.comboBoxShiftTime.SelectedItem = shiftTime;
             textBoxWeekDay.Text = weekDay;
             textBoxCalendarDate.Text = dateAndMonth;
+            this.isEditing = editing;
+            this.oldId = oldShiftId;
 
             AddEmployeeListToShift(working);
         }
@@ -99,12 +103,15 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonRemoveEmployeeFromShift_Click(object sender, EventArgs e)
         {
-            Employee selected = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
-            comboBoxSelectEmployees.DisplayMember = "Text";
-            comboBoxSelectEmployees.ValueMember = "Employee";
-            comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+            if(listBoxCurrentEmployees.SelectedIndex != -1)
+            {
+                Employee selected = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+                comboBoxSelectEmployees.DisplayMember = "Text";
+                comboBoxSelectEmployees.ValueMember = "Employee";
+                comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
 
-            listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+                listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+            }
         }
 
         private void buttonScheduleConfirm_Click(object sender, EventArgs e)
@@ -118,8 +125,17 @@ namespace MediaBazaar_ManagementSystem
             currentShift = new Shift(0, date, shiftTime);
             currentShift.EmployeeIds = workingEmployeeIds;
 
-            dbhandler.AddShiftToDb(currentShift);
-
+            if (isEditing)
+            {
+                foreach(int i in workingEmployeeIds)
+                {
+                    dbhandler.AddIdToShift(oldId, i);
+                }
+            }
+            else
+            {
+                dbhandler.AddShiftToDb(currentShift);
+            }
             this.DialogResult = DialogResult.OK;
         }
 

@@ -42,9 +42,15 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                dbhandler.ClearShift(newShift.Id);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
+            }
+            else
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
             }
 
-            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees);
+            
             if (schedule.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine("It happended");
@@ -58,9 +64,13 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                dbhandler.ClearShift(newShift.Id);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
-
-            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees);
+            else
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
+            }
             if (schedule.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine("It happended");
@@ -74,9 +84,13 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                dbhandler.ClearShift(newShift.Id);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
-
-            schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees);
+            else
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, false, 0);
+            }
             if (schedule.ShowDialog() == DialogResult.OK)
             {
                 Console.WriteLine("It happended");
