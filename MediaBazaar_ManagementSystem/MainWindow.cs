@@ -79,6 +79,15 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["phoneNumber"].Value = e.PhoneNumber;
                     row.Cells["emailAddress"].Value = e.Email;
                 }
+
+                if (checkBoxShowInactive.Checked)
+                {
+                    HideInactiveEmployees(false);
+                }
+                else
+                {
+                    HideInactiveEmployees(true);
+                }
             }
             catch (Exception ex)
             {
@@ -107,6 +116,15 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["price"].Value = i.Price;
                     row.Cells["productActive"].Value = i.Active;
                     row.Cells["description"].Value = i.Description;
+                }
+
+                if (checkBoxShowInactiveItems.Checked)
+                {
+                    HideInactiveItems(false);
+                }
+                else
+                {
+                    HideInactiveItems(true);
                 }
             }
             catch (Exception ex)
