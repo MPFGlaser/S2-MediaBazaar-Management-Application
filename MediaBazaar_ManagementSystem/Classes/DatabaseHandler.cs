@@ -543,7 +543,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             return items;
         }
 
-        public int Occupation(int shiftId)
+        public int ShiftOccupation(int shiftId)
         {
             int occupation = 0;
 
@@ -566,6 +566,30 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
 
             return occupation;
+        }
+
+        public int ShiftExist(DateTime date, ShiftTime shiftTime)
+        {
+            int shiftId = 0;
+            String sql = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@date", date);
+            command.Parameters.AddWithValue("@shiftType", shiftTime);
+
+            try
+            {
+                conn.Open();
+                shiftId = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return shiftId;
         }
 
         private string SHA512(string input)

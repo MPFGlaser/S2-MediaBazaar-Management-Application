@@ -38,49 +38,37 @@ namespace MediaBazaar_ManagementSystem
         private void SetShiftOccupation()
         {
             dbhandler = new DatabaseHandler();
-            //textBoxCapacityMorning.Text = dbhandler.Occupation(1).ToString();
-            int occupationAfternoon = dbhandler.Occupation(0);
-            int occupationEvening = dbhandler.Occupation(0);
 
-            if (DoesShiftExist(ShiftTime.Morning))
+            int shiftMorningId = dbhandler.ShiftExist(date, ShiftTime.Morning);
+            int shiftAfternoonId = dbhandler.ShiftExist(date, ShiftTime.Afternoon);
+            int shiftEveningId = dbhandler.ShiftExist(date, ShiftTime.Evening);
+
+            if (shiftMorningId != 0)
             {
-                Shift shift = dbhandler.GetShift(date, ShiftTime.Morning);
-                textBoxCapacityMorning.Text = dbhandler.Occupation(shift.Id).ToString();
+                textBoxCapacityMorning.Text = dbhandler.ShiftOccupation(shiftMorningId).ToString();
             }
             else
             {
                 textBoxCapacityMorning.Text = "N/A";
             }
 
-            if (DoesShiftExist(ShiftTime.Afternoon))
+            if (shiftAfternoonId != 0)
             {
-                Shift shift = dbhandler.GetShift(date, ShiftTime.Afternoon);
-                textBoxCapacityAfternoon.Text = dbhandler.Occupation(shift.Id).ToString();
+                textBoxCapacityAfternoon.Text = dbhandler.ShiftOccupation(shiftAfternoonId).ToString();
             }
             else
             {
                 textBoxCapacityAfternoon.Text = "N/A";
             }
 
-            if (DoesShiftExist(ShiftTime.Evening))
+            if (shiftEveningId != 0)
             {
-                Shift shift = dbhandler.GetShift(date, ShiftTime.Evening);
-                textBoxCapacityEvening.Text = dbhandler.Occupation(shift.Id).ToString();
+                textBoxCapacityEvening.Text = dbhandler.ShiftOccupation(shiftEveningId).ToString();
             }
             else
             {
                 textBoxCapacityEvening.Text = "N/A";
             }
-        }
-
-        private bool DoesShiftExist(ShiftTime shiftTime)
-        {
-            Shift shift = dbhandler.GetShift(date, shiftTime);
-            if(shift != null)
-            {
-                return true;
-            }
-            return false;
         }
 
         private void buttonMorning_Click(object sender, EventArgs e)
