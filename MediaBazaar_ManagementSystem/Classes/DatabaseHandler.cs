@@ -1,15 +1,10 @@
-﻿using System;
+﻿using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Models;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Models;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using System.Security.Cryptography;
 
 
 namespace MediaBazaar_ManagementSystem.Classes
@@ -546,6 +541,31 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
 
             return items;
+        }
+
+        public int Occupation(int shiftId)
+        {
+            int occupation = 0;
+
+            String sql = "SELECT COUNT(shiftId) FROM working_employees WHERE shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                conn.Open();
+                occupation = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return occupation;
         }
 
         private string SHA512(string input)
