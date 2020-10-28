@@ -58,56 +58,68 @@ namespace MediaBazaar_ManagementSystem
             string phonenumber = textBoxPhoneNumber.Text;
             string spousePhone = textBoxSpousePhone.Text;
             Boolean active = checkBoxActive.Checked;
+            Boolean allCorrect = true;
 
             function = textBoxFunctions.Text;
 
             if (!checkName.IsMatch(firstName))
             {
-
+                allCorrect = false;
                 textBoxFirstName.BackColor = Color.LightCoral;
             }
-            else if (!checkName.IsMatch(lastName))
+            if (!checkName.IsMatch(lastName))
             {
+                allCorrect = false;
                 textBoxLastName.BackColor = Color.LightCoral;
             }
-            else if (!checkUserName.IsMatch(username))
+            if (!checkUserName.IsMatch(username))
             {
+                allCorrect = false;
                 textBoxUsername.BackColor = Color.LightCoral;
             }
-            else if (!checkPassword.IsMatch(password) && !editing)
+            if (!checkPassword.IsMatch(password) && !editing)
             {
+                allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
             }
-            else if (password != passwordConfirm)
+            if (password != passwordConfirm || passwordConfirm == "")
             {
+                allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
                 textBoxPasswordConfirm.BackColor = Color.LightCoral;
             }
-            else if (!checkPhoneNumber.IsMatch(textBoxPhoneNumber.Text))
+            if (!checkPhoneNumber.IsMatch(textBoxPhoneNumber.Text))
             {
+                allCorrect = false;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
             }
-            else if (!checkAddress.IsMatch(address))
+            if (!checkAddress.IsMatch(address))
             {
+                allCorrect = false;
                 textBoxAddress.BackColor = Color.LightCoral;
             }
-            else if (!checkEmail.IsMatch(email))
+            if (!checkEmail.IsMatch(email))
             {
+                allCorrect = false;
                 textBoxEmail.BackColor = Color.LightCoral;
             }
-            else if (!checkBSN.IsMatch(textBoxBsn.Text))
+            if (!checkBSN.IsMatch(textBoxBsn.Text))
             {
+                allCorrect = false;
                 textBoxBsn.BackColor = Color.LightCoral;
             }
-            else if (!checkName.IsMatch(spouseName))
+            if (!checkName.IsMatch(spouseName))
             {
+                allCorrect = false;
                 textBoxSpouseName.BackColor = Color.LightCoral;
             }
-            else if (!checkPhoneNumber.IsMatch(textBoxSpousePhone.Text))
+            if (!checkPhoneNumber.IsMatch(textBoxSpousePhone.Text))
             {
+                allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
-            else
+
+            if (allCorrect)
             {
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
                 if (editing)
