@@ -32,42 +32,55 @@ namespace MediaBazaar_ManagementSystem
             this.date = date;
             textBoxCalendarDay.Text = weekday;
             textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
-            SetShiftOccupation();
+            SetShiftOccupation(ShiftTime.Morning);
+            SetShiftOccupation(ShiftTime.Afternoon);
+            SetShiftOccupation(ShiftTime.Evening);
         }
 
-        private void SetShiftOccupation()
+        private void SetShiftOccupation(ShiftTime shiftTime)
         {
             dbhandler = new DatabaseHandler();
 
-            int shiftMorningId = dbhandler.ShiftExist(date, ShiftTime.Morning);
-            int shiftAfternoonId = dbhandler.ShiftExist(date, ShiftTime.Afternoon);
-            int shiftEveningId = dbhandler.ShiftExist(date, ShiftTime.Evening);
+            switch (shiftTime)
+            {
+                case ShiftTime.Morning:
+                    int shiftMorningId = dbhandler.ShiftExist(date, ShiftTime.Morning);
+                    if (shiftMorningId != 0)
+                    {
+                        textBoxCapacityMorning.Text = dbhandler.ShiftOccupation(shiftMorningId).ToString();
+                    }
+                    else
+                    {
+                        textBoxCapacityMorning.Text = "N/A";
+                    }
+                    break;
 
-            if (shiftMorningId != 0)
-            {
-                textBoxCapacityMorning.Text = dbhandler.ShiftOccupation(shiftMorningId).ToString();
-            }
-            else
-            {
-                textBoxCapacityMorning.Text = "N/A";
-            }
+                case ShiftTime.Afternoon:
+                    int shiftAfternoonId = dbhandler.ShiftExist(date, ShiftTime.Afternoon);
+                    if (shiftAfternoonId != 0)
+                    {
+                        textBoxCapacityAfternoon.Text = dbhandler.ShiftOccupation(shiftAfternoonId).ToString();
+                    }
+                    else
+                    {
+                        textBoxCapacityAfternoon.Text = "N/A";
+                    }
+                    break;
 
-            if (shiftAfternoonId != 0)
-            {
-                textBoxCapacityAfternoon.Text = dbhandler.ShiftOccupation(shiftAfternoonId).ToString();
-            }
-            else
-            {
-                textBoxCapacityAfternoon.Text = "N/A";
-            }
+                case ShiftTime.Evening:
+                    int shiftEveningId = dbhandler.ShiftExist(date, ShiftTime.Evening);
+                    if (shiftEveningId != 0)
+                    {
+                        textBoxCapacityEvening.Text = dbhandler.ShiftOccupation(shiftEveningId).ToString();
+                    }
+                    else
+                    {
+                        textBoxCapacityEvening.Text = "N/A";
+                    }
+                    break;
 
-            if (shiftEveningId != 0)
-            {
-                textBoxCapacityEvening.Text = dbhandler.ShiftOccupation(shiftEveningId).ToString();
-            }
-            else
-            {
-                textBoxCapacityEvening.Text = "N/A";
+                default:
+                    break;
             }
         }
 
@@ -79,18 +92,16 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
             }
-
             
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Morning);
             }
         }
 
@@ -102,16 +113,16 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
             }
+
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Afternoon);
             }
         }
 
@@ -123,7 +134,6 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -132,7 +142,7 @@ namespace MediaBazaar_ManagementSystem
             }
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Evening);
             }
         }
     }
