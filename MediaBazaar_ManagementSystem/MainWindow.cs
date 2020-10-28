@@ -56,6 +56,7 @@ namespace MediaBazaar_ManagementSystem
         {
             PopulateEmployeesTable();
             PopulateItemsTable();
+            SetupCorrectWeekData();
             MessageBox.Show("Database Reloaded");
         }
 
