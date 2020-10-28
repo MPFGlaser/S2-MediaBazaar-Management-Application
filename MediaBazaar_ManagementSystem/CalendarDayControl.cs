@@ -25,7 +25,6 @@ namespace MediaBazaar_ManagementSystem
         public CalendarDayControl()
         {
             InitializeComponent();
-            dbhandler = new DatabaseHandler();
         }
 
         public void DisplayCorrectDate(DateTime date, string weekday)
@@ -38,6 +37,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonMorning_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Morning);
             if (newShift != null)
             {
@@ -60,6 +60,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonAfternoon_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Afternoon);
             if (newShift != null)
             {
@@ -80,6 +81,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonEvening_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Evening);
             if (newShift != null)
             {
