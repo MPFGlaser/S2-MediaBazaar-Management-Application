@@ -302,7 +302,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Restart();
+            Environment.Exit(0);
         }
 
         private void buttonSchedulingNext_Click(object sender, EventArgs e)

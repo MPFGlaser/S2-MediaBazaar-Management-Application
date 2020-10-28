@@ -14,11 +14,16 @@ namespace MediaBazaar_ManagementSystem
         [STAThread]
         static void Main()
         {
-            bool loggedin = false;
-            LoginWindow login;
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            createLogin();
+        }
+
+        public static void createLogin()
+        {
+            bool loggedin = false;
+            LoginWindow login;
 
             if (!loggedin)
             {
