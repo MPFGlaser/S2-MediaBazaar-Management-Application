@@ -82,7 +82,7 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
             }
-            if (password != passwordConfirm || passwordConfirm == "")
+            if ((password != passwordConfirm || passwordConfirm == "") && !editing)
             {
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
