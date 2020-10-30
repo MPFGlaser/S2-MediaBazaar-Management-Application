@@ -286,13 +286,15 @@ namespace MediaBazaar_ManagementSystem
             int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
             weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
 
-            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday");
-            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday");
-            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday");
-            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday");
-            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday");
-            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday");
-            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday");
+            List<Shift> allWeekShifts = dbhandler.getWeekData(weekDays[0], weekDays[6]);
+
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts);
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts);
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
         }
 
         private void buttonSchedulingPrevious_Click(object sender, EventArgs e)

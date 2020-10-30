@@ -182,7 +182,7 @@
             this.textBoxCapacityEvening.ReadOnly = true;
             this.textBoxCapacityEvening.Size = new System.Drawing.Size(44, 16);
             this.textBoxCapacityEvening.TabIndex = 5;
-            this.textBoxCapacityEvening.Text = "11/15";
+            this.textBoxCapacityEvening.Text = "N/A";
             this.textBoxCapacityEvening.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxCapacityMorning
@@ -198,7 +198,7 @@
             this.textBoxCapacityMorning.ReadOnly = true;
             this.textBoxCapacityMorning.Size = new System.Drawing.Size(44, 16);
             this.textBoxCapacityMorning.TabIndex = 3;
-            this.textBoxCapacityMorning.Text = "09/15";
+            this.textBoxCapacityMorning.Text = "N/A";
             this.textBoxCapacityMorning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxCapacityAfternoon
@@ -213,7 +213,7 @@
             this.textBoxCapacityAfternoon.ReadOnly = true;
             this.textBoxCapacityAfternoon.Size = new System.Drawing.Size(44, 16);
             this.textBoxCapacityAfternoon.TabIndex = 4;
-            this.textBoxCapacityAfternoon.Text = "20/20";
+            this.textBoxCapacityAfternoon.Text = "N/A";
             this.textBoxCapacityAfternoon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // contextMenuStrip1
