@@ -21,9 +21,9 @@ namespace MediaBazaar_ManagementSystem.Classes
             conn = new MySqlConnection(connectionString);
         }
 
-        public List<string> LoginUser(string username, string password)
+        public Employee LoginUser(string username, string password)
         {
-            List<string> userData = new List<string>();
+            Employee toReturn = null;
 
             String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(sql, conn);
@@ -36,7 +36,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
                 if(correctLogin > 0)
                 {
-                    String sql2 = "SELECT username, functions FROM employees WHERE username = @username AND password = @password";
+                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
                     command2.Parameters.AddWithValue("@password", SHA512(password));
@@ -46,8 +46,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                         MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
-                            userData.Add(reader[0].ToString());
-                            userData.Add(reader[1].ToString());
+                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]));
                         }
                     }
                     catch (Exception ex)
@@ -65,22 +64,25 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
 
-            return userData;
+            return toReturn;
         }
 
         // Creates a new employee entry in the database
         public void CreateEmployee(Employee employee)
         {
-            String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @password, @phoneNumber, @address, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions)";
+            String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
             command.Parameters.AddWithValue("@username", employee.UserName);
+            command.Parameters.AddWithValue("@picture", "TempPicture"); //TEMP HAS TO CHANGE
             command.Parameters.AddWithValue("@password", SHA512(employee.Password));
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
+            command.Parameters.AddWithValue("@city", "TempCity"); //TEMP HAS TO CHANGE
+            command.Parameters.AddWithValue("@postalcode", "4901HE"); //TEMP HAS TO CHANGE
             command.Parameters.AddWithValue("@emailAddress", employee.Email);
             command.Parameters.AddWithValue("@dateOfBirth", employee.DateOfBirth);
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
@@ -105,21 +107,24 @@ namespace MediaBazaar_ManagementSystem.Classes
 
         public void UpdateEmployee(Employee employee)
         {
-            String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, phoneNumber = @phoneNumber, address = @address, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function WHERE id = @id";
+            String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
             command.Parameters.AddWithValue("@username", employee.UserName);
+            command.Parameters.AddWithValue("@picture", "TempPicture"); //TEMP HAS TO CHANGE
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
+            command.Parameters.AddWithValue("@city", "TempCity"); //TEMP HAS TO CHANGE
+            command.Parameters.AddWithValue("@postalcode", "4901HE"); //TEMP HAS TO CHANGE
             command.Parameters.AddWithValue("@emailAddress", employee.Email);
             command.Parameters.AddWithValue("@dateOfBirth", employee.DateOfBirth);
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
             command.Parameters.AddWithValue("@spousePhoneNumber", employee.SpousePhone);
             command.Parameters.AddWithValue("@bsn", employee.Bsn);
-            command.Parameters.AddWithValue("@function", 1337);
+            command.Parameters.AddWithValue("@function", employee.Function);
 
             try
             {
@@ -140,7 +145,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             Employee toReturn = null;
 
-            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber FROM employees WHERE id = @employeeId";
+            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions FROM employees WHERE id = @employeeId";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@employeeId", id);
 
@@ -150,7 +155,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString());
+                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]));
                 }
             }
             catch (Exception ex)
@@ -176,7 +181,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, bsn;
+                int id, bsn, function;
                 bool active;
                 string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
                 DateTime dateOfBirth;
@@ -196,8 +201,9 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
+                    function = Convert.ToInt32(reader["function"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
                     e.Add(emp);
                 }
             }
@@ -224,7 +230,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, bsn;
+                int id, bsn, function;
                 bool active;
                 string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
                 DateTime dateOfBirth;
@@ -244,9 +250,10 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
+                    function = Convert.ToInt32(reader["functions"]);
                     // Add functions
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
                     e.Add(emp);
                 }
             }

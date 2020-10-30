@@ -5,17 +5,18 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using MediaBazaar_ManagementSystem.Models;
+using MySql.Data.X.XDevAPI.Common;
 
 namespace MediaBazaar_ManagementSystem.classes
 {
     public class Employee
     {
-        private int id, bsn;
+        private int id, bsn, function;
         private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone;
         private bool active;
         private DateTime dateOfBirth;
 
-        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
+        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function)
         {
             this.id = id;
             this.active = active;
@@ -30,6 +31,7 @@ namespace MediaBazaar_ManagementSystem.classes
             this.bsn = bsn;
             this.spouseName = spouseName;
             this.spousePhone = spousePhone;
+            this.function = function;
         }
 
         public int Id
@@ -106,6 +108,12 @@ namespace MediaBazaar_ManagementSystem.classes
         {
             get { return dateOfBirth; }
             set { dateOfBirth = value; }
+        }
+
+        public int Function
+        {
+            get { return function; }
+            set { function = value; }
         }
 
         //public enum Function

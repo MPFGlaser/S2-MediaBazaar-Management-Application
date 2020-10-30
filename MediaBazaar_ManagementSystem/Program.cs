@@ -30,7 +30,7 @@ namespace MediaBazaar_ManagementSystem
                 login = new LoginWindow();
                 if (login.ShowDialog() == DialogResult.OK)
                 {
-                    Application.Run(new MainWindow(login.UserName, login.Function));
+                    Application.Run(new MainWindow(login.LoggedInUser));
                 }
                 else
                 {
