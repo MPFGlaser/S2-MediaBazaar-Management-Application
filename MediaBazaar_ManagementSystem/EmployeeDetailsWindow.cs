@@ -11,7 +11,6 @@ namespace MediaBazaar_ManagementSystem
         private Employee employee;
         private Boolean editing = false;
         private int editId;
-        private string function = "1337";
 
         public EmployeeDetailsWindow()
         {
@@ -60,8 +59,6 @@ namespace MediaBazaar_ManagementSystem
             string spousePhone = textBoxSpousePhone.Text;
             Boolean active = checkBoxActive.Checked;
             Boolean allCorrect = true;
-
-            function = textBoxFunctions.Text;
 
             if (!checkName.IsMatch(firstName))
             {
@@ -166,7 +163,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.Text = employee.SpousePhone;
             textBoxBsn.Text = employee.Bsn.ToString();
             checkBoxActive.Checked = employee.Active;
-            textBoxFunctions.Text = function.ToString();
+            textBoxFunctions.Text = employee.Function.ToString();
         }
 
         private void ResetBoxColors()

@@ -21,9 +21,9 @@ namespace MediaBazaar_ManagementSystem.Classes
             conn = new MySqlConnection(connectionString);
         }
 
-        public List<string> LoginUser(string username, string password)
+        public Employee LoginUser(string username, string password)
         {
-            List<string> userData = new List<string>();
+            Employee toReturn = null;
 
             String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(sql, conn);
@@ -36,7 +36,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
                 if(correctLogin > 0)
                 {
-                    String sql2 = "SELECT username, functions FROM employees WHERE username = @username AND password = @password";
+                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
                     command2.Parameters.AddWithValue("@password", SHA512(password));
@@ -46,8 +46,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                         MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
-                            userData.Add(reader[0].ToString());
-                            userData.Add(reader[1].ToString());
+                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]));
                         }
                     }
                     catch (Exception ex)
@@ -65,7 +64,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
 
-            return userData;
+            return toReturn;
         }
 
         // Creates a new employee entry in the database
