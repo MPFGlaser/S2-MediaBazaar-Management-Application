@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+using Microsoft.VisualBasic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -366,6 +367,17 @@ namespace MediaBazaar_ManagementSystem
                 daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
             }
             return daysBasedOnWeekNumber;
+        }
+
+        private void buttonEmployeesDepartmentAdd_Click(object sender, EventArgs e)
+        {
+            string newDepartmentName = Interaction.InputBox("Department name:", "Create a new department");
+
+            if(newDepartmentName != string.Empty)
+            {
+                MessageBox.Show(newDepartmentName);
+            }
+            
         }
     }
 }
