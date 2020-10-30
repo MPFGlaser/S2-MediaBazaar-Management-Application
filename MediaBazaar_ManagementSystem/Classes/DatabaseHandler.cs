@@ -201,7 +201,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
-                    function = Convert.ToInt32(reader["function"]);
+                    function = Convert.ToInt32(reader["functions"]);
 
                     Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
                     e.Add(emp);

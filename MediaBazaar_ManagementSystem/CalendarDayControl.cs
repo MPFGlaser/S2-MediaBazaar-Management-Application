@@ -79,7 +79,7 @@ namespace MediaBazaar_ManagementSystem
             
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                SetShiftOccupation(ShiftTime.Morning, new List<int>());
+                SetShiftOccupation(ShiftTime.Morning, schedule.WorkingEmployeeIds);
             }
         }
 
@@ -100,7 +100,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                SetShiftOccupation(ShiftTime.Afternoon, new List<int>());
+                SetShiftOccupation(ShiftTime.Afternoon, schedule.WorkingEmployeeIds);
             }
         }
 
@@ -120,7 +120,7 @@ namespace MediaBazaar_ManagementSystem
             }
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                SetShiftOccupation(ShiftTime.Evening, new List<int>());
+                SetShiftOccupation(ShiftTime.Evening, schedule.WorkingEmployeeIds);
             }
         }
     }
