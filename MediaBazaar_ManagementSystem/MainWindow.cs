@@ -20,9 +20,11 @@ namespace MediaBazaar_ManagementSystem
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
+        Employee loggedInUser;
 
         public MainWindow(Employee loggedInUser)
         {
+            this.loggedInUser = loggedInUser;
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
@@ -50,6 +52,12 @@ namespace MediaBazaar_ManagementSystem
 
             // Removes statistics tab until implementation is finished in the future.
             tabControl1.TabPages.Remove(tabPage3);
+
+            if(loggedInUser.Function == 1)
+            {
+                tabControl1.TabPages.Remove(tabPage1);
+                tabControl1.TabPages.Remove(tabPage4);
+            }
         }
 
         private void buttonReloadDatabaseEntries_Click(object sender, EventArgs e)
