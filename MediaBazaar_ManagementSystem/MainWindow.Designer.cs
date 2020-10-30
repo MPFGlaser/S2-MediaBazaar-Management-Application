@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -52,7 +52,6 @@
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
-            this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
             this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
@@ -99,6 +98,7 @@
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
             this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
+            this.comboBoxAllDepartments = new System.Windows.Forms.ComboBox();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -271,9 +271,9 @@
             // splitContainerEmployeesSecondary.Panel1
             // 
             this.splitContainerEmployeesSecondary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.comboBoxAllDepartments);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentRemove);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentAdd);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.textBoxEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.labelEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1MinSize = 85;
             // 
@@ -298,10 +298,11 @@
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
             this.buttonEmployeesDepartmentRemove.Text = "Remove";
             this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
+            this.buttonEmployeesDepartmentRemove.Click += new System.EventHandler(this.buttonEmployeesDepartmentRemove_Click);
             // 
             // buttonEmployeesDepartmentAdd
             // 
-            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
+            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(6, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
             this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentAdd.TabIndex = 2;
@@ -309,19 +310,10 @@
             this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
             this.buttonEmployeesDepartmentAdd.Click += new System.EventHandler(this.buttonEmployeesDepartmentAdd_Click);
             // 
-            // textBoxEmployeesDepartmentName
-            // 
-            this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
-            this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
-            this.textBoxEmployeesDepartmentName.TabIndex = 1;
-            // 
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
-            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
+            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(6, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
@@ -341,7 +333,7 @@
             // labelEmployeesSelected
             // 
             this.labelEmployeesSelected.AutoSize = true;
-            this.labelEmployeesSelected.Location = new System.Drawing.Point(3, 4);
+            this.labelEmployeesSelected.Location = new System.Drawing.Point(6, 5);
             this.labelEmployeesSelected.Name = "labelEmployeesSelected";
             this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
             this.labelEmployeesSelected.TabIndex = 3;
@@ -350,7 +342,7 @@
             // buttonEmployeesAdd
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 21);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
             this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
@@ -371,7 +363,7 @@
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(2, 21);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
             this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
@@ -551,23 +543,23 @@
             // 
             // StatisticChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "TestData";
-            series2.Points.Add(dataPoint7);
-            series2.Points.Add(dataPoint8);
-            series2.Points.Add(dataPoint9);
-            series2.Points.Add(dataPoint10);
-            series2.Points.Add(dataPoint11);
-            series2.Points.Add(dataPoint12);
-            this.StatisticChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -830,6 +822,15 @@
             this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
             this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
             // 
+            // comboBoxAllDepartments
+            // 
+            this.comboBoxAllDepartments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAllDepartments.FormattingEnabled = true;
+            this.comboBoxAllDepartments.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxAllDepartments.Name = "comboBoxAllDepartments";
+            this.comboBoxAllDepartments.Size = new System.Drawing.Size(286, 21);
+            this.comboBoxAllDepartments.TabIndex = 5;
+            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -963,7 +964,6 @@
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesSecondary;
-        private System.Windows.Forms.TextBox textBoxEmployeesDepartmentName;
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
         private System.Windows.Forms.Button buttonEmployeesDepartmentRemove;
         private System.Windows.Forms.Button buttonEmployeesDepartmentAdd;
@@ -1024,6 +1024,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
+        private System.Windows.Forms.ComboBox comboBoxAllDepartments;
     }
 }
 

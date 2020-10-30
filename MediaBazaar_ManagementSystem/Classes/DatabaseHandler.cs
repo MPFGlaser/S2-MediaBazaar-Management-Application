@@ -730,5 +730,74 @@ namespace MediaBazaar_ManagementSystem.Classes
                 }
             }
         }
+
+        public void CreateNewDepartment(string departmentName)
+        {
+            String sql = "INSERT INTO departments (departmentName) VALUES (@departmentName)";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@departmentName", departmentName);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public void RemoveDepartment(string departmentName)
+        {
+            String sql = "DELETE FROM departments WHERE departmentName = @departmentName";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@departmentName", departmentName);
+
+            try
+            {
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<string> GetAllDepartments()
+        {
+            List<string> allDepartments = new List<string>();
+            String sql = "SELECT departmentName FROM departments";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    allDepartments.Add(reader[0].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return allDepartments;
+        }
     }
 }

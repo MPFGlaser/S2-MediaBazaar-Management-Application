@@ -29,6 +29,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
+            LoadAllDepartments();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
         }
 
@@ -66,6 +67,7 @@ namespace MediaBazaar_ManagementSystem
             PopulateEmployeesTable();
             PopulateItemsTable();
             SetupCorrectWeekData();
+            LoadAllDepartments();
             MessageBox.Show("Database Reloaded");
         }
 
@@ -375,9 +377,33 @@ namespace MediaBazaar_ManagementSystem
 
             if(newDepartmentName != string.Empty)
             {
-                MessageBox.Show(newDepartmentName);
+                dbhandler = new Classes.DatabaseHandler();
+                dbhandler.CreateNewDepartment(newDepartmentName);
+                comboBoxAllDepartments.Items.Add(newDepartmentName);
             }
             
+        }
+
+        private void buttonEmployeesDepartmentRemove_Click(object sender, EventArgs e)
+        {
+            string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
+            if (departmentToRemove != string.Empty)
+            {
+                dbhandler = new Classes.DatabaseHandler();
+                dbhandler.RemoveDepartment(departmentToRemove);
+                comboBoxAllDepartments.Items.Remove(departmentToRemove);
+            }
+        }
+
+        private void LoadAllDepartments()
+        {
+            dbhandler = new Classes.DatabaseHandler();
+            List<string> allDepartments = dbhandler.GetAllDepartments();
+
+            foreach (string departmentName in allDepartments)
+            {
+                comboBoxAllDepartments.Items.Add(departmentName);
+            }
         }
     }
 }
