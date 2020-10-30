@@ -52,7 +52,6 @@
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
-            this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
             this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
@@ -99,6 +98,7 @@
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
             this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
+            this.comboBoxAllDepartments = new System.Windows.Forms.ComboBox();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -271,9 +271,9 @@
             // splitContainerEmployeesSecondary.Panel1
             // 
             this.splitContainerEmployeesSecondary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.comboBoxAllDepartments);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentRemove);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentAdd);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.textBoxEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.labelEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1MinSize = 85;
             // 
@@ -292,39 +292,28 @@
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Enabled = false;
             this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(214, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
             this.buttonEmployeesDepartmentRemove.Text = "Remove";
             this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
+            this.buttonEmployeesDepartmentRemove.Click += new System.EventHandler(this.buttonEmployeesDepartmentRemove_Click);
             // 
             // buttonEmployeesDepartmentAdd
             // 
-            this.buttonEmployeesDepartmentAdd.Enabled = false;
-            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
+            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(6, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
             this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentAdd.TabIndex = 2;
             this.buttonEmployeesDepartmentAdd.Text = "Add";
             this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
-            // 
-            // textBoxEmployeesDepartmentName
-            // 
-            this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEmployeesDepartmentName.Enabled = false;
-            this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
-            this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
-            this.textBoxEmployeesDepartmentName.TabIndex = 1;
+            this.buttonEmployeesDepartmentAdd.Click += new System.EventHandler(this.buttonEmployeesDepartmentAdd_Click);
             // 
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
-            this.labelEmployeesDepartmentName.Enabled = false;
-            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
+            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(6, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
@@ -344,7 +333,7 @@
             // labelEmployeesSelected
             // 
             this.labelEmployeesSelected.AutoSize = true;
-            this.labelEmployeesSelected.Location = new System.Drawing.Point(3, 4);
+            this.labelEmployeesSelected.Location = new System.Drawing.Point(6, 5);
             this.labelEmployeesSelected.Name = "labelEmployeesSelected";
             this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
             this.labelEmployeesSelected.TabIndex = 3;
@@ -353,7 +342,7 @@
             // buttonEmployeesAdd
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 21);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
             this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
@@ -374,7 +363,7 @@
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(2, 21);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
             this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
@@ -833,6 +822,15 @@
             this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
             this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
             // 
+            // comboBoxAllDepartments
+            // 
+            this.comboBoxAllDepartments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAllDepartments.FormattingEnabled = true;
+            this.comboBoxAllDepartments.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxAllDepartments.Name = "comboBoxAllDepartments";
+            this.comboBoxAllDepartments.Size = new System.Drawing.Size(286, 21);
+            this.comboBoxAllDepartments.TabIndex = 5;
+            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -966,7 +964,6 @@
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesSecondary;
-        private System.Windows.Forms.TextBox textBoxEmployeesDepartmentName;
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
         private System.Windows.Forms.Button buttonEmployeesDepartmentRemove;
         private System.Windows.Forms.Button buttonEmployeesDepartmentAdd;
@@ -1027,6 +1024,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
+        private System.Windows.Forms.ComboBox comboBoxAllDepartments;
     }
 }
 

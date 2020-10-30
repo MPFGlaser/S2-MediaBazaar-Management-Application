@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+using Microsoft.VisualBasic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -28,6 +29,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
+            LoadAllDepartments();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
         }
 
@@ -65,6 +67,7 @@ namespace MediaBazaar_ManagementSystem
             PopulateEmployeesTable();
             PopulateItemsTable();
             SetupCorrectWeekData();
+            LoadAllDepartments();
             MessageBox.Show("Database Reloaded");
         }
 
@@ -366,6 +369,41 @@ namespace MediaBazaar_ManagementSystem
                 daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
             }
             return daysBasedOnWeekNumber;
+        }
+
+        private void buttonEmployeesDepartmentAdd_Click(object sender, EventArgs e)
+        {
+            string newDepartmentName = Interaction.InputBox("Department name:", "Create a new department");
+
+            if(newDepartmentName != string.Empty)
+            {
+                dbhandler = new Classes.DatabaseHandler();
+                dbhandler.CreateNewDepartment(newDepartmentName);
+                comboBoxAllDepartments.Items.Add(newDepartmentName);
+            }
+            
+        }
+
+        private void buttonEmployeesDepartmentRemove_Click(object sender, EventArgs e)
+        {
+            string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
+            if (departmentToRemove != string.Empty)
+            {
+                dbhandler = new Classes.DatabaseHandler();
+                dbhandler.RemoveDepartment(departmentToRemove);
+                comboBoxAllDepartments.Items.Remove(departmentToRemove);
+            }
+        }
+
+        private void LoadAllDepartments()
+        {
+            dbhandler = new Classes.DatabaseHandler();
+            List<string> allDepartments = dbhandler.GetAllDepartments();
+
+            foreach (string departmentName in allDepartments)
+            {
+                comboBoxAllDepartments.Items.Add(departmentName);
+            }
         }
     }
 }
