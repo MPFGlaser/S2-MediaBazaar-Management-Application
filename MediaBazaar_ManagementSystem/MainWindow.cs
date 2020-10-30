@@ -26,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
-            labelWelcomeText.Text = "Welcome, " + name + " Functions: " + function;
+            labelWelcomeText.Text = "Welcome, " + name;
         }
 
         private void DisplayInformation()

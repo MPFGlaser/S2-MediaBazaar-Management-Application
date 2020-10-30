@@ -26,12 +26,12 @@ namespace MediaBazaar_ManagementSystem
         private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
         {
             
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337);
         }
 
-        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
+        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function)
         {
-            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
         }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)
@@ -45,6 +45,7 @@ namespace MediaBazaar_ManagementSystem
             Regex checkPassword = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
             Regex checkAddress = new Regex(@"^[A-Za-z]+(?:\s[A-Za-z0-9'_-]+)+$");
             Regex checkBSN = new Regex(@"^[0-9]*\d{9}$");
+            Regex checkNumbers = new Regex(@"^[0-9]+$");
 
             string firstName = textBoxFirstName.Text;
             string lastName = textBoxLastName.Text;
@@ -118,13 +119,19 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
+            if (!checkNumbers.IsMatch(textBoxFunctions.Text))
+            {
+                allCorrect = false;
+                textBoxFunctions.BackColor = Color.LightCoral;
+            }
 
             if (allCorrect)
             {
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
+                int function = Convert.ToInt32(textBoxFunctions.Text);
                 if (editing)
                 {
-                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
                 }
                 else
                 {
