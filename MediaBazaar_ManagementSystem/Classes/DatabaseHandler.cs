@@ -401,6 +401,64 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        public List<Shift> getWeekData(DateTime dateMonday, DateTime dateSunday)
+        {
+            List<Shift> weekShifts = new List<Shift>();
+            Shift temp;
+            List<int> workingEmployeeIds;
+
+            string dateMondaySql = dateMonday.ToString("yyyy-MM-dd");
+            string dateSundaySql = dateSunday.ToString("yyyy-MM-dd");
+
+            String sql = "SELECT * FROM shifts WHERE date >= @dateMonday AND date <= @dateSunday";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@dateMonday", dateMondaySql);
+            command.Parameters.AddWithValue("@dateSunday", dateSundaySql);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    
+                    temp = new Shift(Convert.ToInt32(reader[0]), (DateTime)reader[1], (ShiftTime)reader[2]);
+                    weekShifts.Add(temp);
+                }
+
+                reader.Close();
+
+                foreach(Shift s in weekShifts)
+                {
+                    workingEmployeeIds = new List<int>();
+
+                    String getEmployeesSql = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
+                    MySqlCommand getEmployeesCommand = new MySqlCommand(getEmployeesSql, conn);
+                    getEmployeesCommand.Parameters.AddWithValue("@shiftId", s.Id);
+
+                    MySqlDataReader getEmployeesReader = getEmployeesCommand.ExecuteReader();
+                    while (getEmployeesReader.Read())
+                    {
+                        workingEmployeeIds.Add(Convert.ToInt32(getEmployeesReader[0]));
+                    }
+
+                    getEmployeesReader.Close();
+
+                    s.EmployeeIds = workingEmployeeIds;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return weekShifts;
+        }
+
         public Shift GetShift(DateTime date, ShiftTime shiftTime)
         {
             Shift shift = null;

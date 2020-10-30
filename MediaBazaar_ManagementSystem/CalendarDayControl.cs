@@ -32,56 +32,56 @@ namespace MediaBazaar_ManagementSystem
             this.date = date;
             textBoxCalendarDay.Text = weekday;
             textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
-            SetShiftOccupation(ShiftTime.Morning);
-            SetShiftOccupation(ShiftTime.Afternoon);
-            SetShiftOccupation(ShiftTime.Evening);
+            //SetShiftOccupation(ShiftTime.Morning);
+            //SetShiftOccupation(ShiftTime.Afternoon);
+            //SetShiftOccupation(ShiftTime.Evening);
         }
 
         private void SetShiftOccupation(ShiftTime shiftTime)
         {
-            dbhandler = new DatabaseHandler();
+           // dbhandler = new DatabaseHandler();
 
-            switch (shiftTime)
-            {
-                case ShiftTime.Morning:
-                    int shiftMorningId = dbhandler.ShiftExist(date, ShiftTime.Morning);
-                    if (shiftMorningId != 0)
-                    {
-                        textBoxCapacityMorning.Text = dbhandler.ShiftOccupation(shiftMorningId).ToString();
-                    }
-                    else
-                    {
-                        textBoxCapacityMorning.Text = "N/A";
-                    }
-                    break;
+            //switch (shiftTime)
+            //{
+                //case ShiftTime.Morning:
+                    //int shiftMorningId = dbhandler.ShiftExist(date, ShiftTime.Morning);
+                    //if (shiftMorningId != 0)
+                    //{
+                        //textBoxCapacityMorning.Text = dbhandler.ShiftOccupation(shiftMorningId).ToString();
+                    //}
+                    //else
+                    //{
+                        //textBoxCapacityMorning.Text = "N/A";
+                   // }
+                   // break;
 
-                case ShiftTime.Afternoon:
-                    int shiftAfternoonId = dbhandler.ShiftExist(date, ShiftTime.Afternoon);
-                    if (shiftAfternoonId != 0)
-                    {
-                        textBoxCapacityAfternoon.Text = dbhandler.ShiftOccupation(shiftAfternoonId).ToString();
-                    }
-                    else
-                    {
-                        textBoxCapacityAfternoon.Text = "N/A";
-                    }
-                    break;
+                //case ShiftTime.Afternoon:
+                   // int shiftAfternoonId = dbhandler.ShiftExist(date, ShiftTime.Afternoon);
+                   // if (shiftAfternoonId != 0)
+                   // {
+                   //     textBoxCapacityAfternoon.Text = dbhandler.ShiftOccupation(shiftAfternoonId).ToString();
+                  //  }
+                  //  else
+                  //  {
+                  //      textBoxCapacityAfternoon.Text = "N/A";
+                  //  }
+                  //  break;
 
-                case ShiftTime.Evening:
-                    int shiftEveningId = dbhandler.ShiftExist(date, ShiftTime.Evening);
-                    if (shiftEveningId != 0)
-                    {
-                        textBoxCapacityEvening.Text = dbhandler.ShiftOccupation(shiftEveningId).ToString();
-                    }
-                    else
-                    {
-                        textBoxCapacityEvening.Text = "N/A";
-                    }
-                    break;
+                //case ShiftTime.Evening:
+                   // int shiftEveningId = dbhandler.ShiftExist(date, ShiftTime.Evening);
+                   // if (shiftEveningId != 0)
+                   // {
+                   //     textBoxCapacityEvening.Text = dbhandler.ShiftOccupation(shiftEveningId).ToString();
+                   // }
+                  //  else
+                   // {
+                   //     textBoxCapacityEvening.Text = "N/A";
+                   // }
+                   // break;
 
-                default:
-                    break;
-            }
+               // default:
+                   // break;
+            //}
         }
 
         private void buttonMorning_Click(object sender, EventArgs e)
