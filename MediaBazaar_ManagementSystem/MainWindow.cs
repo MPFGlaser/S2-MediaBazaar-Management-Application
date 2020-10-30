@@ -21,12 +21,12 @@ namespace MediaBazaar_ManagementSystem
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
 
-        public MainWindow(string name)
+        public MainWindow(string name, int function)
         {
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
-            labelWelcomeText.Text = "Welcome, " + name;
+            labelWelcomeText.Text = "Welcome, " + name + " Functions: " + function;
         }
 
         private void DisplayInformation()

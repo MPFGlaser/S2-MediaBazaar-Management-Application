@@ -16,6 +16,7 @@ namespace MediaBazaar_ManagementSystem
     {
         DatabaseHandler dbhandler;
         private string userName;
+        private int function;
 
         public LoginWindow()
         {
@@ -25,10 +26,11 @@ namespace MediaBazaar_ManagementSystem
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             dbhandler = new DatabaseHandler();
-            string loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
-            if (loggedInUser != string.Empty)
+            List<string> loginData = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
+            if(loginData.Any())
             {
-                this.userName = loggedInUser;
+                this.userName = loginData[0];
+                this.function = Convert.ToInt32(loginData[1]);
                 this.DialogResult = DialogResult.OK;
             }
             else
@@ -40,6 +42,11 @@ namespace MediaBazaar_ManagementSystem
         public string UserName
         {
             get { return userName; }
+        }
+
+        public int Function
+        {
+            get { return function;  }
         }
     }
 }

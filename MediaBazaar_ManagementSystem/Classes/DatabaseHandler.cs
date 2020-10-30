@@ -21,9 +21,9 @@ namespace MediaBazaar_ManagementSystem.Classes
             conn = new MySqlConnection(connectionString);
         }
 
-        public string LoginUser(string username, string password)
+        public List<string> LoginUser(string username, string password)
         {
-            string selectedUsername = string.Empty;
+            List<string> userData = new List<string>();
 
             String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(sql, conn);
@@ -36,7 +36,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
                 if(correctLogin > 0)
                 {
-                    String sql2 = "SELECT username FROM employees WHERE username = @username AND password = @password";
+                    String sql2 = "SELECT username, functions FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
                     command2.Parameters.AddWithValue("@password", SHA512(password));
@@ -46,7 +46,8 @@ namespace MediaBazaar_ManagementSystem.Classes
                         MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
-                            selectedUsername = reader[0].ToString();
+                            userData.Add(reader[0].ToString());
+                            userData.Add(reader[1].ToString());
                         }
                     }
                     catch (Exception ex)
@@ -64,7 +65,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
 
-            return selectedUsername;
+            return userData;
         }
 
         // Creates a new employee entry in the database
