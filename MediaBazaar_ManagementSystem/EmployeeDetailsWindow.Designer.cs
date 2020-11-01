@@ -99,7 +99,7 @@
             this.dateTimePickerDateOfBirth.Location = new System.Drawing.Point(5, 110);
             this.dateTimePickerDateOfBirth.Name = "dateTimePickerDateOfBirth";
             this.dateTimePickerDateOfBirth.Size = new System.Drawing.Size(127, 20);
-            this.dateTimePickerDateOfBirth.TabIndex = 36;
+            this.dateTimePickerDateOfBirth.TabIndex = 20;
             // 
             // label11
             // 
@@ -264,7 +264,7 @@
             this.buttonEDWConfirm.Location = new System.Drawing.Point(347, 476);
             this.buttonEDWConfirm.Name = "buttonEDWConfirm";
             this.buttonEDWConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonEDWConfirm.TabIndex = 16;
+            this.buttonEDWConfirm.TabIndex = 42;
             this.buttonEDWConfirm.Text = "Confirm";
             this.buttonEDWConfirm.UseVisualStyleBackColor = true;
             this.buttonEDWConfirm.Click += new System.EventHandler(this.buttonEDWConfirm_Click);
@@ -275,7 +275,7 @@
             this.buttonEDWCancel.Location = new System.Drawing.Point(12, 476);
             this.buttonEDWCancel.Name = "buttonEDWCancel";
             this.buttonEDWCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonEDWCancel.TabIndex = 15;
+            this.buttonEDWCancel.TabIndex = 43;
             this.buttonEDWCancel.Text = "Cancel";
             this.buttonEDWCancel.UseVisualStyleBackColor = true;
             this.buttonEDWCancel.Click += new System.EventHandler(this.buttonEDWCancel_Click);
@@ -346,7 +346,7 @@
             this.checkBoxActive.Location = new System.Drawing.Point(5, 19);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxActive.TabIndex = 41;
+            this.checkBoxActive.TabIndex = 39;
             this.checkBoxActive.Text = "Active";
             this.checkBoxActive.UseVisualStyleBackColor = true;
             // 
@@ -364,7 +364,7 @@
             this.textBoxFunctions.Location = new System.Drawing.Point(5, 59);
             this.textBoxFunctions.Name = "textBoxFunctions";
             this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
-            this.textBoxFunctions.TabIndex = 39;
+            this.textBoxFunctions.TabIndex = 41;
             // 
             // EmployeeDetailsWindow
             // 
