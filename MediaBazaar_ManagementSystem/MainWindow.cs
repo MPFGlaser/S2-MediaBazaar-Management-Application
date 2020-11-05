@@ -386,12 +386,14 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonEmployeesDepartmentRemove_Click(object sender, EventArgs e)
         {
-            string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
-            if (departmentToRemove != string.Empty)
-            {
-                dbhandler = new Classes.DatabaseHandler();
-                dbhandler.RemoveDepartment(departmentToRemove);
-                comboBoxAllDepartments.Items.Remove(departmentToRemove);
+            if (comboBoxAllDepartments.SelectedIndex != -1) {
+                string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
+                if (departmentToRemove != string.Empty)
+                {
+                    dbhandler = new Classes.DatabaseHandler();
+                    dbhandler.RemoveDepartment(departmentToRemove);
+                    comboBoxAllDepartments.Items.Remove(departmentToRemove);
+                }
             }
         }
 

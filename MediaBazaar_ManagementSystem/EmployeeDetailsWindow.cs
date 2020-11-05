@@ -22,15 +22,15 @@ namespace MediaBazaar_ManagementSystem
             get { return this.employee; }
         }
 
-        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone)
+        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city)
         {
             
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city);
         }
 
-        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function)
+        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city)
         {
-            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
+            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
         }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)
@@ -45,6 +45,7 @@ namespace MediaBazaar_ManagementSystem
             Regex checkAddress = new Regex(@"^[A-Za-z]+(?:\s[A-Za-z0-9'_-]+)+$");
             Regex checkBSN = new Regex(@"^[0-9]*\d{9}$");
             Regex checkNumbers = new Regex(@"^[0-9]+$");
+            Regex checkPostalCode = new Regex(@"^[0-9]{4}[ ]?[a-zA-Z]{2}$");
 
             string firstName = textBoxFirstName.Text;
             string lastName = textBoxLastName.Text;
@@ -57,6 +58,8 @@ namespace MediaBazaar_ManagementSystem
             string spouseName = textBoxSpouseName.Text;
             string phonenumber = textBoxPhoneNumber.Text;
             string spousePhone = textBoxSpousePhone.Text;
+            string postalCode = textBoxPostalCode.Text;
+            string city = textBoxCity.Text;
             Boolean active = checkBoxActive.Checked;
             Boolean allCorrect = true;
 
@@ -121,6 +124,16 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxFunctions.BackColor = Color.LightCoral;
             }
+            if (!checkName.IsMatch(textBoxCity.Text))
+            {
+                allCorrect = false;
+                textBoxCity.BackColor = Color.LightCoral;
+            }
+            if (!checkPostalCode.IsMatch(textBoxPostalCode.Text))
+            {
+                allCorrect = false;
+                textBoxPostalCode.BackColor = Color.LightCoral;
+            }
 
             if (allCorrect)
             {
@@ -128,11 +141,11 @@ namespace MediaBazaar_ManagementSystem
                 int function = Convert.ToInt32(textBoxFunctions.Text);
                 if (editing)
                 {
-                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
+                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
                 }
                 else
                 {
-                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone);
+                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city);
                 }
                 this.DialogResult = DialogResult.OK;
             }
@@ -156,7 +169,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxPassword.Text = "";
             textBoxPasswordConfirm.Text = "";
             textBoxEmail.Text = employee.Email;
-            textBoxAddress.Text = employee.Address;
+            textBoxPostalCode.Text = employee.Address;
             dateTimePickerDateOfBirth.Value = employee.DateOfBirth;
             textBoxSpouseName.Text = employee.SpouseName;
             textBoxPhoneNumber.Text = employee.PhoneNumber;
@@ -164,6 +177,8 @@ namespace MediaBazaar_ManagementSystem
             textBoxBsn.Text = employee.Bsn.ToString();
             checkBoxActive.Checked = employee.Active;
             textBoxFunctions.Text = employee.Function.ToString();
+            textBoxPostalCode.Text = employee.PostalCode;
+            textBoxCity.Text = employee.City;
         }
 
         private void ResetBoxColors()
@@ -176,10 +191,12 @@ namespace MediaBazaar_ManagementSystem
             textBoxPasswordConfirm.BackColor = Color.FromName("Window");
             textBoxEmail.BackColor = Color.FromName("Window");
             textBoxPhoneNumber.BackColor = Color.FromName("Window");
-            textBoxAddress.BackColor = Color.FromName("Window");
+            textBoxPostalCode.BackColor = Color.FromName("Window");
             textBoxBsn.BackColor = Color.FromName("Window");
             textBoxSpouseName.BackColor = Color.FromName("Window");
             textBoxSpousePhone.BackColor = Color.FromName("Window");
+            textBoxPostalCode.BackColor = Color.FromName("Window");
+            textBoxCity.BackColor = Color.FromName("Window");
         }
 
         private void buttonEDWCancel_Click(object sender, System.EventArgs e)

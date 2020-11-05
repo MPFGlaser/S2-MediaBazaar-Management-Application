@@ -12,11 +12,11 @@ namespace MediaBazaar_ManagementSystem.classes
     public class Employee
     {
         private int id, bsn, function;
-        private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone;
+        private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone, postalCode, city;
         private bool active;
         private DateTime dateOfBirth;
 
-        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function)
+        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city)
         {
             this.id = id;
             this.active = active;
@@ -32,6 +32,8 @@ namespace MediaBazaar_ManagementSystem.classes
             this.spouseName = spouseName;
             this.spousePhone = spousePhone;
             this.function = function;
+            this.postalCode = postalCode;
+            this.city = city;
         }
 
         public int Id
@@ -114,6 +116,18 @@ namespace MediaBazaar_ManagementSystem.classes
         {
             get { return function; }
             set { function = value; }
+        }
+
+        public string PostalCode
+        {
+            get { return postalCode; }
+            set { postalCode = value; }
+        }
+
+        public string City
+        {
+            get { return city; }
+            set { city = value; }
         }
 
         //public enum Function
