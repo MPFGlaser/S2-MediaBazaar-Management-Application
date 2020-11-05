@@ -36,7 +36,7 @@
             this.label = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBoxAddress = new System.Windows.Forms.TextBox();
+            this.textBoxPostalCode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -60,6 +60,10 @@
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxFunctions = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxAddress = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxCity = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -67,15 +71,19 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.textBoxCity);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.textBoxBsn);
+            this.groupBox1.Controls.Add(this.textBoxAddress);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.dateTimePickerDateOfBirth);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.textBoxBsn);
             this.groupBox1.Controls.Add(this.label);
             this.groupBox1.Controls.Add(this.textBoxEmail);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBoxAddress);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.textBoxPostalCode);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.textBoxFirstName);
             this.groupBox1.Controls.Add(this.textBoxPhoneNumber);
@@ -89,7 +97,7 @@
             this.groupBox1.Controls.Add(this.textBoxPassword);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 427);
+            this.groupBox1.Size = new System.Drawing.Size(200, 487);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Employee\'s personal details";
@@ -99,7 +107,7 @@
             this.dateTimePickerDateOfBirth.Location = new System.Drawing.Point(5, 110);
             this.dateTimePickerDateOfBirth.Name = "dateTimePickerDateOfBirth";
             this.dateTimePickerDateOfBirth.Size = new System.Drawing.Size(127, 20);
-            this.dateTimePickerDateOfBirth.TabIndex = 20;
+            this.dateTimePickerDateOfBirth.TabIndex = 50;
             // 
             // label11
             // 
@@ -113,7 +121,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 367);
+            this.label9.Location = new System.Drawing.Point(6, 446);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 13);
             this.label9.TabIndex = 34;
@@ -121,15 +129,15 @@
             // 
             // textBoxBsn
             // 
-            this.textBoxBsn.Location = new System.Drawing.Point(5, 383);
+            this.textBoxBsn.Location = new System.Drawing.Point(5, 462);
             this.textBoxBsn.Name = "textBoxBsn";
             this.textBoxBsn.Size = new System.Drawing.Size(127, 20);
-            this.textBoxBsn.TabIndex = 33;
+            this.textBoxBsn.TabIndex = 37;
             // 
             // label
             // 
             this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(6, 328);
+            this.label.Location = new System.Drawing.Point(6, 289);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(72, 13);
             this.label.TabIndex = 32;
@@ -137,26 +145,26 @@
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(5, 344);
+            this.textBoxEmail.Location = new System.Drawing.Point(5, 305);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(127, 20);
-            this.textBoxEmail.TabIndex = 31;
+            this.textBoxEmail.TabIndex = 29;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 289);
+            this.label7.Location = new System.Drawing.Point(6, 367);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 30;
-            this.label7.Text = "Address";
+            this.label7.Text = "Postal Code";
             // 
-            // textBoxAddress
+            // textBoxPostalCode
             // 
-            this.textBoxAddress.Location = new System.Drawing.Point(5, 305);
-            this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(127, 20);
-            this.textBoxAddress.TabIndex = 29;
+            this.textBoxPostalCode.Location = new System.Drawing.Point(5, 383);
+            this.textBoxPostalCode.Name = "textBoxPostalCode";
+            this.textBoxPostalCode.Size = new System.Drawing.Size(127, 20);
+            this.textBoxPostalCode.TabIndex = 33;
             // 
             // label1
             // 
@@ -261,10 +269,10 @@
             // 
             // buttonEDWConfirm
             // 
-            this.buttonEDWConfirm.Location = new System.Drawing.Point(347, 476);
+            this.buttonEDWConfirm.Location = new System.Drawing.Point(344, 526);
             this.buttonEDWConfirm.Name = "buttonEDWConfirm";
             this.buttonEDWConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonEDWConfirm.TabIndex = 42;
+            this.buttonEDWConfirm.TabIndex = 47;
             this.buttonEDWConfirm.Text = "Confirm";
             this.buttonEDWConfirm.UseVisualStyleBackColor = true;
             this.buttonEDWConfirm.Click += new System.EventHandler(this.buttonEDWConfirm_Click);
@@ -272,10 +280,10 @@
             // buttonEDWCancel
             // 
             this.buttonEDWCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonEDWCancel.Location = new System.Drawing.Point(12, 476);
+            this.buttonEDWCancel.Location = new System.Drawing.Point(12, 526);
             this.buttonEDWCancel.Name = "buttonEDWCancel";
             this.buttonEDWCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonEDWCancel.TabIndex = 43;
+            this.buttonEDWCancel.TabIndex = 49;
             this.buttonEDWCancel.Text = "Cancel";
             this.buttonEDWCancel.UseVisualStyleBackColor = true;
             this.buttonEDWCancel.Click += new System.EventHandler(this.buttonEDWCancel_Click);
@@ -307,7 +315,7 @@
             this.textBoxSpouseName.Location = new System.Drawing.Point(5, 32);
             this.textBoxSpouseName.Name = "textBoxSpouseName";
             this.textBoxSpouseName.Size = new System.Drawing.Size(127, 20);
-            this.textBoxSpouseName.TabIndex = 35;
+            this.textBoxSpouseName.TabIndex = 39;
             // 
             // label10
             // 
@@ -323,7 +331,7 @@
             this.textBoxSpousePhone.Location = new System.Drawing.Point(5, 71);
             this.textBoxSpousePhone.Name = "textBoxSpousePhone";
             this.textBoxSpousePhone.Size = new System.Drawing.Size(127, 20);
-            this.textBoxSpousePhone.TabIndex = 37;
+            this.textBoxSpousePhone.TabIndex = 41;
             // 
             // employeeSpecificsGroup
             // 
@@ -332,7 +340,7 @@
             this.employeeSpecificsGroup.Controls.Add(this.textBoxFunctions);
             this.employeeSpecificsGroup.Location = new System.Drawing.Point(219, 136);
             this.employeeSpecificsGroup.Name = "employeeSpecificsGroup";
-            this.employeeSpecificsGroup.Size = new System.Drawing.Size(200, 100);
+            this.employeeSpecificsGroup.Size = new System.Drawing.Size(200, 123);
             this.employeeSpecificsGroup.TabIndex = 31;
             this.employeeSpecificsGroup.TabStop = false;
             this.employeeSpecificsGroup.Text = "Employee specifics";
@@ -346,14 +354,14 @@
             this.checkBoxActive.Location = new System.Drawing.Point(5, 19);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxActive.TabIndex = 39;
+            this.checkBoxActive.TabIndex = 43;
             this.checkBoxActive.Text = "Active";
             this.checkBoxActive.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 43);
+            this.label13.Location = new System.Drawing.Point(7, 39);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 13);
             this.label13.TabIndex = 40;
@@ -361,10 +369,42 @@
             // 
             // textBoxFunctions
             // 
-            this.textBoxFunctions.Location = new System.Drawing.Point(5, 59);
+            this.textBoxFunctions.Location = new System.Drawing.Point(6, 55);
             this.textBoxFunctions.Name = "textBoxFunctions";
             this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
-            this.textBoxFunctions.TabIndex = 41;
+            this.textBoxFunctions.TabIndex = 45;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 328);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Address";
+            // 
+            // textBoxAddress
+            // 
+            this.textBoxAddress.Location = new System.Drawing.Point(5, 344);
+            this.textBoxAddress.Name = "textBoxAddress";
+            this.textBoxAddress.Size = new System.Drawing.Size(127, 20);
+            this.textBoxAddress.TabIndex = 31;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 407);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 13);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "City";
+            // 
+            // textBoxCity
+            // 
+            this.textBoxCity.Location = new System.Drawing.Point(5, 423);
+            this.textBoxCity.Name = "textBoxCity";
+            this.textBoxCity.Size = new System.Drawing.Size(127, 20);
+            this.textBoxCity.TabIndex = 35;
             // 
             // EmployeeDetailsWindow
             // 
@@ -372,14 +412,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEDWCancel;
-            this.ClientSize = new System.Drawing.Size(434, 511);
+            this.ClientSize = new System.Drawing.Size(434, 561);
             this.Controls.Add(this.employeeSpecificsGroup);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonEDWConfirm);
             this.Controls.Add(this.buttonEDWCancel);
-            this.MaximumSize = new System.Drawing.Size(450, 550);
-            this.MinimumSize = new System.Drawing.Size(450, 550);
+            this.MaximumSize = new System.Drawing.Size(450, 600);
+            this.MinimumSize = new System.Drawing.Size(450, 600);
             this.Name = "EmployeeDetailsWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Add a new employee";
@@ -415,7 +455,7 @@
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxAddress;
+        private System.Windows.Forms.TextBox textBoxPostalCode;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxSpouseName;
@@ -427,5 +467,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBoxFunctions;
         private System.Windows.Forms.CheckBox checkBoxActive;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxCity;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxAddress;
     }
 }

@@ -36,7 +36,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
                 if(correctLogin > 0)
                 {
-                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions FROM employees WHERE username = @username AND password = @password";
+                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
                     command2.Parameters.AddWithValue("@password", SHA512(password));
@@ -46,7 +46,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                         MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
-                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]));
+                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString());
                         }
                     }
                     catch (Exception ex)
@@ -81,8 +81,8 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@password", SHA512(employee.Password));
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
-            command.Parameters.AddWithValue("@city", "TempCity"); //TEMP HAS TO CHANGE
-            command.Parameters.AddWithValue("@postalcode", "4901HE"); //TEMP HAS TO CHANGE
+            command.Parameters.AddWithValue("@city", employee.City);
+            command.Parameters.AddWithValue("@postalcode", employee.PostalCode);
             command.Parameters.AddWithValue("@emailAddress", employee.Email);
             command.Parameters.AddWithValue("@dateOfBirth", employee.DateOfBirth);
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
@@ -117,8 +117,8 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@picture", "TempPicture"); //TEMP HAS TO CHANGE
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
-            command.Parameters.AddWithValue("@city", "TempCity"); //TEMP HAS TO CHANGE
-            command.Parameters.AddWithValue("@postalcode", "4901HE"); //TEMP HAS TO CHANGE
+            command.Parameters.AddWithValue("@city", employee.City);
+            command.Parameters.AddWithValue("@postalcode", employee.PostalCode);
             command.Parameters.AddWithValue("@emailAddress", employee.Email);
             command.Parameters.AddWithValue("@dateOfBirth", employee.DateOfBirth);
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
@@ -145,7 +145,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             Employee toReturn = null;
 
-            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions FROM employees WHERE id = @employeeId";
+            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city FROM employees WHERE id = @employeeId";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@employeeId", id);
 
@@ -155,7 +155,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]));
+                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString());
                 }
             }
             catch (Exception ex)
@@ -183,7 +183,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 int id, bsn, function;
                 bool active;
-                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city;
                 DateTime dateOfBirth;
 
                 while (reader.Read())
@@ -202,8 +202,10 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
                     function = Convert.ToInt32(reader["functions"]);
+                    postalCode = Convert.ToString(reader["postalcode"]);
+                    city = Convert.ToString(reader["city"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
                     e.Add(emp);
                 }
             }
@@ -232,7 +234,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 int id, bsn, function;
                 bool active;
-                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city;
                 DateTime dateOfBirth;
 
                 while (reader.Read())
@@ -251,9 +253,10 @@ namespace MediaBazaar_ManagementSystem.Classes
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
                     function = Convert.ToInt32(reader["functions"]);
-                    // Add functions
+                    postalCode = Convert.ToString(reader["postalcode"]);
+                    city = Convert.ToString(reader["city"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
                     e.Add(emp);
                 }
             }
