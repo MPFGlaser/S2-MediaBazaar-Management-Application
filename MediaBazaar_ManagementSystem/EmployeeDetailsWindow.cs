@@ -119,7 +119,7 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
-            if (!checkNumbers.IsMatch(textBoxFunctions.Text))
+            if (!checkNumbers.IsMatch(textBoxFunctions.Text) && editing)
             {
                 allCorrect = false;
                 textBoxFunctions.BackColor = Color.LightCoral;
@@ -138,9 +138,9 @@ namespace MediaBazaar_ManagementSystem
             if (allCorrect)
             {
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
-                int function = Convert.ToInt32(textBoxFunctions.Text);
                 if (editing)
                 {
+                    int function = Convert.ToInt32(textBoxFunctions.Text);
                     UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
                 }
                 else
@@ -169,7 +169,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxPassword.Text = "";
             textBoxPasswordConfirm.Text = "";
             textBoxEmail.Text = employee.Email;
-            textBoxPostalCode.Text = employee.Address;
+            textBoxAddress.Text = employee.Address;
             dateTimePickerDateOfBirth.Value = employee.DateOfBirth;
             textBoxSpouseName.Text = employee.SpouseName;
             textBoxPhoneNumber.Text = employee.PhoneNumber;
@@ -191,7 +191,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxPasswordConfirm.BackColor = Color.FromName("Window");
             textBoxEmail.BackColor = Color.FromName("Window");
             textBoxPhoneNumber.BackColor = Color.FromName("Window");
-            textBoxPostalCode.BackColor = Color.FromName("Window");
+            textBoxAddress.BackColor = Color.FromName("Window");
             textBoxBsn.BackColor = Color.FromName("Window");
             textBoxSpouseName.BackColor = Color.FromName("Window");
             textBoxSpousePhone.BackColor = Color.FromName("Window");
