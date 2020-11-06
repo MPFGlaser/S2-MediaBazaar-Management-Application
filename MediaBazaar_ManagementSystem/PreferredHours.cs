@@ -24,6 +24,11 @@ namespace MediaBazaar_ManagementSystem
             PrefillCheckboxes(input);
         }
 
+        public string PreferredHoursString
+        {
+            get { return this.preferredHours; }
+        }
+
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             AssemblePreferredHours();

@@ -11,6 +11,8 @@ namespace MediaBazaar_ManagementSystem
         private Employee employee;
         private Boolean editing = false;
         private int editId;
+        string preferredHours = "000000000000000000000";
+        PreferredHours ph;
 
         public EmployeeDetailsWindow()
         {
@@ -22,15 +24,15 @@ namespace MediaBazaar_ManagementSystem
             get { return this.employee; }
         }
 
-        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city)
+        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours)
         {
             
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
         }
 
-        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city)
+        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours)
         {
-            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
+            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
         }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)
@@ -141,11 +143,11 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
+                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
                 }
                 else
                 {
-                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city);
+                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours);
                 }
                 this.DialogResult = DialogResult.OK;
             }
@@ -179,6 +181,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxFunctions.Text = employee.Function.ToString();
             textBoxPostalCode.Text = employee.PostalCode;
             textBoxCity.Text = employee.City;
+            preferredHours = employee.PreferredHours;
         }
 
         private void ResetBoxColors()
@@ -203,6 +206,15 @@ namespace MediaBazaar_ManagementSystem
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void buttonPreferredShifts_Click(object sender, EventArgs e)
+        {
+            ph = new PreferredHours(preferredHours);
+            if (ph.ShowDialog() == DialogResult.OK)
+            {
+                preferredHours = ph.PreferredHoursString;
+            }
         }
     }
 }
