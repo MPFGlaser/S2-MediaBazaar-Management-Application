@@ -379,6 +379,7 @@
             this.buttonConfirm.TabIndex = 5;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = true;
+            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
             // 
             // PreferredHours
             // 
