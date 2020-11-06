@@ -1,4 +1,5 @@
 ﻿using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Classes;
 using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class EmployeeDetailsWindow : Form
     {
+        DatabaseHandler dbhandler;
         private Employee employee;
         private Boolean editing = false;
         private int editId;
@@ -22,15 +24,18 @@ namespace MediaBazaar_ManagementSystem
             get { return this.employee; }
         }
 
-        private void CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city)
+        private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city)
         {
-            
+            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city);
+            return dbhandler.CreateEmployee(employee);
         }
 
-        private void UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city)
+        private bool UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city)
         {
+            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
+            return dbhandler.UpdateEmployee(employee);
         }
 
         private void buttonEDWConfirm_Click(object sender, System.EventArgs e)
@@ -137,17 +142,21 @@ namespace MediaBazaar_ManagementSystem
 
             if (allCorrect)
             {
+                bool succesfulExecution;
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
+                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city);
                 }
                 else
                 {
-                    CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city);
+                    succesfulExecution = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city);
                 }
-                this.DialogResult = DialogResult.OK;
+                if (succesfulExecution)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
         }
 

@@ -164,7 +164,6 @@ namespace MediaBazaar_ManagementSystem
             edw = new EmployeeDetailsWindow();
             if (edw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.CreateEmployee(edw.Employee);
                 PopulateEmployeesTable();
             }
         }
@@ -177,7 +176,6 @@ namespace MediaBazaar_ManagementSystem
             edw.AddEmployeeData(toEdit);
             if (edw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
                 HideInactiveEmployees(!checkBoxShowInactive.Checked);
             }
