@@ -84,6 +84,12 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreferredHours.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreferredHours.Designer.cs">
+      <DependentUpon>PreferredHours.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProductDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreferredHours.resx">
+      <DependentUpon>PreferredHours.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProductDetailsWindow.resx">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
