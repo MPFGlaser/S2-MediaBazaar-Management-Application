@@ -68,8 +68,10 @@ namespace MediaBazaar_ManagementSystem.Classes
         }
 
         // Creates a new employee entry in the database
-        public void CreateEmployee(Employee employee)
+        public bool CreateEmployee(Employee employee)
         {
+            bool succesfulExecution = false;
+            int rowsAffected = 0;
             String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", employee.Id);
@@ -94,20 +96,32 @@ namespace MediaBazaar_ManagementSystem.Classes
             try
             {
                 conn.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
+                if(rowsAffected > 0)
+                {
+                    succesfulExecution = true;
+                }
+                else
+                {
+                    succesfulExecution = false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                succesfulExecution = false;
             }
             finally
             {
                 conn.Close();
             }
+            return succesfulExecution;
         }
 
-        public void UpdateEmployee(Employee employee)
+        public bool UpdateEmployee(Employee employee)
         {
+            bool succesfulExecution = false;
+            int rowsAffected = 0;
             String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@active", employee.Active);
@@ -131,16 +145,26 @@ namespace MediaBazaar_ManagementSystem.Classes
             try
             {
                 conn.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    succesfulExecution = true;
+                }
+                else
+                {
+                    succesfulExecution = false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                succesfulExecution = false;
             }
             finally
             {
                 conn.Close();
             }
+            return succesfulExecution;
         }
 
         public Employee GetEmployee(int id)
