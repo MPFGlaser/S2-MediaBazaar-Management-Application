@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+using Microsoft.VisualBasic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -20,13 +21,16 @@ namespace MediaBazaar_ManagementSystem
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
+        Employee loggedInUser;
 
-        public MainWindow(string name)
+        public MainWindow(Employee loggedInUser)
         {
+            this.loggedInUser = loggedInUser;
             InitializeComponent();
             DisplayInformation();
             InitializeNumericUpDown();
-            labelWelcomeText.Text = "Welcome, " + name;
+            LoadAllDepartments();
+            labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
         }
 
         private void DisplayInformation()
@@ -50,12 +54,20 @@ namespace MediaBazaar_ManagementSystem
 
             // Removes statistics tab until implementation is finished in the future.
             tabControl1.TabPages.Remove(tabPage3);
+
+            if(loggedInUser.Function == 1)
+            {
+                tabControl1.TabPages.Remove(tabPage1);
+                tabControl1.TabPages.Remove(tabPage4);
+            }
         }
 
         private void buttonReloadDatabaseEntries_Click(object sender, EventArgs e)
         {
             PopulateEmployeesTable();
             PopulateItemsTable();
+            SetupCorrectWeekData();
+            LoadAllDepartments();
             MessageBox.Show("Database Reloaded");
         }
 
@@ -78,6 +90,15 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["username"].Value = e.UserName;
                     row.Cells["phoneNumber"].Value = e.PhoneNumber;
                     row.Cells["emailAddress"].Value = e.Email;
+                }
+
+                if (checkBoxShowInactive.Checked)
+                {
+                    HideInactiveEmployees(false);
+                }
+                else
+                {
+                    HideInactiveEmployees(true);
                 }
             }
             catch (Exception ex)
@@ -108,6 +129,15 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["productActive"].Value = i.Active;
                     row.Cells["description"].Value = i.Description;
                 }
+
+                if (checkBoxShowInactiveItems.Checked)
+                {
+                    HideInactiveItems(false);
+                }
+                else
+                {
+                    HideInactiveItems(true);
+                }
             }
             catch (Exception ex)
             {
@@ -134,7 +164,6 @@ namespace MediaBazaar_ManagementSystem
             edw = new EmployeeDetailsWindow();
             if (edw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.CreateEmployee(edw.Employee);
                 PopulateEmployeesTable();
             }
         }
@@ -147,7 +176,6 @@ namespace MediaBazaar_ManagementSystem
             edw.AddEmployeeData(toEdit);
             if (edw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.UpdateEmployee(edw.Employee);
                 PopulateEmployeesTable();
                 HideInactiveEmployees(!checkBoxShowInactive.Checked);
             }
@@ -259,13 +287,15 @@ namespace MediaBazaar_ManagementSystem
             int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
             weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
 
-            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday");
-            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday");
-            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday");
-            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday");
-            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday");
-            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday");
-            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday");
+            List<Shift> allWeekShifts = dbhandler.getWeekData(weekDays[0], weekDays[6]);
+
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts);
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts);
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
         }
 
         private void buttonSchedulingPrevious_Click(object sender, EventArgs e)
@@ -283,7 +313,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Restart();
+            Environment.Exit(0);
         }
 
         private void buttonSchedulingNext_Click(object sender, EventArgs e)
@@ -336,6 +367,43 @@ namespace MediaBazaar_ManagementSystem
                 daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
             }
             return daysBasedOnWeekNumber;
+        }
+
+        private void buttonEmployeesDepartmentAdd_Click(object sender, EventArgs e)
+        {
+            string newDepartmentName = Interaction.InputBox("Department name:", "Create a new department");
+
+            if(newDepartmentName != string.Empty)
+            {
+                dbhandler = new Classes.DatabaseHandler();
+                dbhandler.CreateNewDepartment(newDepartmentName);
+                comboBoxAllDepartments.Items.Add(newDepartmentName);
+            }
+            
+        }
+
+        private void buttonEmployeesDepartmentRemove_Click(object sender, EventArgs e)
+        {
+            if (comboBoxAllDepartments.SelectedIndex != -1) {
+                string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
+                if (departmentToRemove != string.Empty)
+                {
+                    dbhandler = new Classes.DatabaseHandler();
+                    dbhandler.RemoveDepartment(departmentToRemove);
+                    comboBoxAllDepartments.Items.Remove(departmentToRemove);
+                }
+            }
+        }
+
+        private void LoadAllDepartments()
+        {
+            dbhandler = new Classes.DatabaseHandler();
+            List<string> allDepartments = dbhandler.GetAllDepartments();
+
+            foreach (string departmentName in allDepartments)
+            {
+                comboBoxAllDepartments.Items.Add(departmentName);
+            }
         }
     }
 }

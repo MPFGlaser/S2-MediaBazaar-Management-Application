@@ -50,9 +50,9 @@
             this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
+            this.comboBoxAllDepartments = new System.Windows.Forms.ComboBox();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
-            this.textBoxEmployeesDepartmentName = new System.Windows.Forms.TextBox();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
             this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
@@ -60,9 +60,7 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
-            this.buttonStockAdd = new System.Windows.Forms.Button();
-            this.buttonStockEditProduct = new System.Windows.Forms.Button();
+            this.splitContainerStockPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
             this.productId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,6 +71,15 @@
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainerStockSecondary = new System.Windows.Forms.SplitContainer();
+            this.comboBoxStockCategory = new System.Windows.Forms.ComboBox();
+            this.buttonStockCategoryRemove = new System.Windows.Forms.Button();
+            this.buttonStockCategoryAdd = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
+            this.buttonStockEditProduct = new System.Windows.Forms.Button();
+            this.buttonStockAdd = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -118,7 +125,15 @@
             this.splitContainerEmployeesSecondary.Panel2.SuspendLayout();
             this.splitContainerEmployeesSecondary.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockPrimary)).BeginInit();
+            this.splitContainerStockPrimary.Panel1.SuspendLayout();
+            this.splitContainerStockPrimary.Panel2.SuspendLayout();
+            this.splitContainerStockPrimary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockSecondary)).BeginInit();
+            this.splitContainerStockSecondary.Panel1.SuspendLayout();
+            this.splitContainerStockSecondary.Panel2.SuspendLayout();
+            this.splitContainerStockSecondary.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
             this.splitContainerStatistics1.Panel1.SuspendLayout();
@@ -186,9 +201,6 @@
             // 
             this.dataGridViewEmployees.AllowUserToAddRows = false;
             this.dataGridViewEmployees.AllowUserToDeleteRows = false;
-            this.dataGridViewEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -198,13 +210,14 @@
             this.username,
             this.phoneNumber,
             this.emailAddress});
-            this.dataGridViewEmployees.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewEmployees.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewEmployees.MultiSelect = false;
             this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.ReadOnly = true;
             this.dataGridViewEmployees.RowHeadersWidth = 21;
             this.dataGridViewEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEmployees.Size = new System.Drawing.Size(817, 399);
+            this.dataGridViewEmployees.Size = new System.Drawing.Size(823, 405);
             this.dataGridViewEmployees.TabIndex = 0;
             // 
             // id
@@ -258,10 +271,8 @@
             // 
             // splitContainerEmployeesSecondary
             // 
-            this.splitContainerEmployeesSecondary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainerEmployeesSecondary.BackColor = System.Drawing.Color.Snow;
+            this.splitContainerEmployeesSecondary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerEmployeesSecondary.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerEmployeesSecondary.IsSplitterFixed = true;
             this.splitContainerEmployeesSecondary.Location = new System.Drawing.Point(0, 0);
@@ -271,9 +282,9 @@
             // splitContainerEmployeesSecondary.Panel1
             // 
             this.splitContainerEmployeesSecondary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.comboBoxAllDepartments);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentRemove);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.buttonEmployeesDepartmentAdd);
-            this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.textBoxEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1.Controls.Add(this.labelEmployeesDepartmentName);
             this.splitContainerEmployeesSecondary.Panel1MinSize = 85;
             // 
@@ -285,46 +296,46 @@
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
-            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(295, 431);
+            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(298, 405);
             this.splitContainerEmployeesSecondary.SplitterDistance = 85;
             this.splitContainerEmployeesSecondary.TabIndex = 0;
+            // 
+            // comboBoxAllDepartments
+            // 
+            this.comboBoxAllDepartments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxAllDepartments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAllDepartments.FormattingEnabled = true;
+            this.comboBoxAllDepartments.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxAllDepartments.Name = "comboBoxAllDepartments";
+            this.comboBoxAllDepartments.Size = new System.Drawing.Size(286, 21);
+            this.comboBoxAllDepartments.TabIndex = 5;
             // 
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Enabled = false;
-            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(214, 45);
+            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(217, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
             this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
             this.buttonEmployeesDepartmentRemove.Text = "Remove";
             this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
+            this.buttonEmployeesDepartmentRemove.Click += new System.EventHandler(this.buttonEmployeesDepartmentRemove_Click);
             // 
             // buttonEmployeesDepartmentAdd
             // 
-            this.buttonEmployeesDepartmentAdd.Enabled = false;
-            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(3, 45);
+            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(6, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
             this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentAdd.TabIndex = 2;
             this.buttonEmployeesDepartmentAdd.Text = "Add";
             this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
-            // 
-            // textBoxEmployeesDepartmentName
-            // 
-            this.textBoxEmployeesDepartmentName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEmployeesDepartmentName.Enabled = false;
-            this.textBoxEmployeesDepartmentName.Location = new System.Drawing.Point(3, 19);
-            this.textBoxEmployeesDepartmentName.Name = "textBoxEmployeesDepartmentName";
-            this.textBoxEmployeesDepartmentName.Size = new System.Drawing.Size(286, 20);
-            this.textBoxEmployeesDepartmentName.TabIndex = 1;
+            this.buttonEmployeesDepartmentAdd.Click += new System.EventHandler(this.buttonEmployeesDepartmentAdd_Click);
             // 
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
-            this.labelEmployeesDepartmentName.Enabled = false;
-            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(0, 3);
+            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(6, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
@@ -344,7 +355,7 @@
             // labelEmployeesSelected
             // 
             this.labelEmployeesSelected.AutoSize = true;
-            this.labelEmployeesSelected.Location = new System.Drawing.Point(3, 4);
+            this.labelEmployeesSelected.Location = new System.Drawing.Point(6, 5);
             this.labelEmployeesSelected.Name = "labelEmployeesSelected";
             this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
             this.labelEmployeesSelected.TabIndex = 3;
@@ -353,7 +364,7 @@
             // buttonEmployeesAdd
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(150, 20);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(153, 21);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
             this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
@@ -365,16 +376,16 @@
             // 
             this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 339);
+            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 313);
             this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(286, 23);
+            this.buttonEmployeesRemove.Size = new System.Drawing.Size(289, 23);
             this.buttonEmployeesRemove.TabIndex = 1;
             this.buttonEmployeesRemove.Text = "Remove selected employee";
             this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(3, 20);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(2, 21);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
             this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
@@ -384,10 +395,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBoxShowInactiveItems);
-            this.tabPage2.Controls.Add(this.buttonStockAdd);
-            this.tabPage2.Controls.Add(this.buttonStockEditProduct);
-            this.tabPage2.Controls.Add(this.dataGridViewStock);
+            this.tabPage2.Controls.Add(this.splitContainerStockPrimary);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -396,47 +404,31 @@
             this.tabPage2.Text = "Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // checkBoxShowInactiveItems
+            // splitContainerStockPrimary
             // 
-            this.checkBoxShowInactiveItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxShowInactiveItems.AutoSize = true;
-            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(984, 386);
-            this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
-            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
-            this.checkBoxShowInactiveItems.TabIndex = 5;
-            this.checkBoxShowInactiveItems.Text = "Show inactive products";
-            this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
-            this.checkBoxShowInactiveItems.CheckedChanged += new System.EventHandler(this.checkBoxShowInactiveItems_CheckedChanged);
+            this.splitContainerStockPrimary.BackColor = System.Drawing.Color.LightGray;
+            this.splitContainerStockPrimary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerStockPrimary.Location = new System.Drawing.Point(3, 3);
+            this.splitContainerStockPrimary.Name = "splitContainerStockPrimary";
             // 
-            // buttonStockAdd
+            // splitContainerStockPrimary.Panel1
             // 
-            this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonStockAdd.Location = new System.Drawing.Point(6, 382);
-            this.buttonStockAdd.Name = "buttonStockAdd";
-            this.buttonStockAdd.Size = new System.Drawing.Size(124, 23);
-            this.buttonStockAdd.TabIndex = 2;
-            this.buttonStockAdd.Text = "Add Product";
-            this.buttonStockAdd.UseVisualStyleBackColor = true;
-            this.buttonStockAdd.Click += new System.EventHandler(this.buttonStockAdd_Click);
+            this.splitContainerStockPrimary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockPrimary.Panel1.Controls.Add(this.dataGridViewStock);
             // 
-            // buttonStockEditProduct
+            // splitContainerStockPrimary.Panel2
             // 
-            this.buttonStockEditProduct.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonStockEditProduct.Location = new System.Drawing.Point(503, 382);
-            this.buttonStockEditProduct.Name = "buttonStockEditProduct";
-            this.buttonStockEditProduct.Size = new System.Drawing.Size(124, 23);
-            this.buttonStockEditProduct.TabIndex = 1;
-            this.buttonStockEditProduct.Text = "Edit Product";
-            this.buttonStockEditProduct.UseVisualStyleBackColor = true;
-            this.buttonStockEditProduct.Click += new System.EventHandler(this.buttonStockEditProduct_Click);
+            this.splitContainerStockPrimary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockPrimary.Panel2.Controls.Add(this.splitContainerStockSecondary);
+            this.splitContainerStockPrimary.Panel2MinSize = 298;
+            this.splitContainerStockPrimary.Size = new System.Drawing.Size(1125, 405);
+            this.splitContainerStockPrimary.SplitterDistance = 823;
+            this.splitContainerStockPrimary.TabIndex = 6;
             // 
             // dataGridViewStock
             // 
             this.dataGridViewStock.AllowUserToAddRows = false;
             this.dataGridViewStock.AllowUserToDeleteRows = false;
-            this.dataGridViewStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.productId,
@@ -448,13 +440,14 @@
             this.price,
             this.productActive,
             this.description});
-            this.dataGridViewStock.Location = new System.Drawing.Point(6, 6);
+            this.dataGridViewStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewStock.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewStock.MultiSelect = false;
             this.dataGridViewStock.Name = "dataGridViewStock";
             this.dataGridViewStock.ReadOnly = true;
             this.dataGridViewStock.RowHeadersWidth = 21;
             this.dataGridViewStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStock.Size = new System.Drawing.Size(1115, 370);
+            this.dataGridViewStock.Size = new System.Drawing.Size(823, 405);
             this.dataGridViewStock.TabIndex = 0;
             // 
             // productId
@@ -514,6 +507,118 @@
             this.description.MinimumWidth = 50;
             this.description.Name = "description";
             this.description.ReadOnly = true;
+            // 
+            // splitContainerStockSecondary
+            // 
+            this.splitContainerStockSecondary.BackColor = System.Drawing.Color.Snow;
+            this.splitContainerStockSecondary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerStockSecondary.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerStockSecondary.Name = "splitContainerStockSecondary";
+            this.splitContainerStockSecondary.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerStockSecondary.Panel1
+            // 
+            this.splitContainerStockSecondary.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockSecondary.Panel1.Controls.Add(this.comboBoxStockCategory);
+            this.splitContainerStockSecondary.Panel1.Controls.Add(this.buttonStockCategoryRemove);
+            this.splitContainerStockSecondary.Panel1.Controls.Add(this.buttonStockCategoryAdd);
+            this.splitContainerStockSecondary.Panel1.Controls.Add(this.label6);
+            this.splitContainerStockSecondary.Panel1MinSize = 85;
+            // 
+            // splitContainerStockSecondary.Panel2
+            // 
+            this.splitContainerStockSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.label5);
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.checkBoxShowInactiveItems);
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockEditProduct);
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockAdd);
+            this.splitContainerStockSecondary.Size = new System.Drawing.Size(298, 405);
+            this.splitContainerStockSecondary.SplitterDistance = 85;
+            this.splitContainerStockSecondary.TabIndex = 0;
+            // 
+            // comboBoxStockCategory
+            // 
+            this.comboBoxStockCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxStockCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxStockCategory.Enabled = false;
+            this.comboBoxStockCategory.FormattingEnabled = true;
+            this.comboBoxStockCategory.Location = new System.Drawing.Point(6, 19);
+            this.comboBoxStockCategory.Name = "comboBoxStockCategory";
+            this.comboBoxStockCategory.Size = new System.Drawing.Size(286, 21);
+            this.comboBoxStockCategory.TabIndex = 9;
+            // 
+            // buttonStockCategoryRemove
+            // 
+            this.buttonStockCategoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStockCategoryRemove.Enabled = false;
+            this.buttonStockCategoryRemove.Location = new System.Drawing.Point(217, 45);
+            this.buttonStockCategoryRemove.Name = "buttonStockCategoryRemove";
+            this.buttonStockCategoryRemove.Size = new System.Drawing.Size(75, 23);
+            this.buttonStockCategoryRemove.TabIndex = 8;
+            this.buttonStockCategoryRemove.Text = "Remove";
+            this.buttonStockCategoryRemove.UseVisualStyleBackColor = true;
+            // 
+            // buttonStockCategoryAdd
+            // 
+            this.buttonStockCategoryAdd.Enabled = false;
+            this.buttonStockCategoryAdd.Location = new System.Drawing.Point(6, 45);
+            this.buttonStockCategoryAdd.Name = "buttonStockCategoryAdd";
+            this.buttonStockCategoryAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonStockCategoryAdd.TabIndex = 7;
+            this.buttonStockCategoryAdd.Text = "Add";
+            this.buttonStockCategoryAdd.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Enabled = false;
+            this.label6.Location = new System.Drawing.Point(6, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Category name";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 5);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Selected Product";
+            // 
+            // checkBoxShowInactiveItems
+            // 
+            this.checkBoxShowInactiveItems.AutoSize = true;
+            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(6, 50);
+            this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
+            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
+            this.checkBoxShowInactiveItems.TabIndex = 5;
+            this.checkBoxShowInactiveItems.Text = "Show inactive products";
+            this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactiveItems.CheckedChanged += new System.EventHandler(this.checkBoxShowInactiveItems_CheckedChanged);
+            // 
+            // buttonStockEditProduct
+            // 
+            this.buttonStockEditProduct.Location = new System.Drawing.Point(2, 21);
+            this.buttonStockEditProduct.Name = "buttonStockEditProduct";
+            this.buttonStockEditProduct.Size = new System.Drawing.Size(141, 23);
+            this.buttonStockEditProduct.TabIndex = 1;
+            this.buttonStockEditProduct.Text = "View/Edit selected";
+            this.buttonStockEditProduct.UseVisualStyleBackColor = true;
+            this.buttonStockEditProduct.Click += new System.EventHandler(this.buttonStockEditProduct_Click);
+            // 
+            // buttonStockAdd
+            // 
+            this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStockAdd.Location = new System.Drawing.Point(153, 21);
+            this.buttonStockAdd.Name = "buttonStockAdd";
+            this.buttonStockAdd.Size = new System.Drawing.Size(142, 23);
+            this.buttonStockAdd.TabIndex = 2;
+            this.buttonStockAdd.Text = "Add Product";
+            this.buttonStockAdd.UseVisualStyleBackColor = true;
+            this.buttonStockAdd.Click += new System.EventHandler(this.buttonStockAdd_Click);
             // 
             // tabPage3
             // 
@@ -813,20 +918,20 @@
             // labelWelcomeText
             // 
             this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.AutoSize = true;
-            this.labelWelcomeText.Location = new System.Drawing.Point(946, 10);
+            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
             this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(52, 13);
+            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
             this.labelWelcomeText.TabIndex = 2;
             this.labelWelcomeText.Text = "Welcome";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // buttonReloadDatabaseEntries
             // 
+            this.buttonReloadDatabaseEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
             this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(815, 4);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
             this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
             this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
             this.buttonReloadDatabaseEntries.TabIndex = 5;
@@ -929,8 +1034,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).EndInit();
             this.splitContainerEmployeesSecondary.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.splitContainerStockPrimary.Panel1.ResumeLayout(false);
+            this.splitContainerStockPrimary.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockPrimary)).EndInit();
+            this.splitContainerStockPrimary.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStock)).EndInit();
+            this.splitContainerStockSecondary.Panel1.ResumeLayout(false);
+            this.splitContainerStockSecondary.Panel1.PerformLayout();
+            this.splitContainerStockSecondary.Panel2.ResumeLayout(false);
+            this.splitContainerStockSecondary.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockSecondary)).EndInit();
+            this.splitContainerStockSecondary.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
             this.splitContainerStatistics1.Panel2.ResumeLayout(false);
@@ -949,7 +1063,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -966,7 +1079,6 @@
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesSecondary;
-        private System.Windows.Forms.TextBox textBoxEmployeesDepartmentName;
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
         private System.Windows.Forms.Button buttonEmployeesDepartmentRemove;
         private System.Windows.Forms.Button buttonEmployeesDepartmentAdd;
@@ -1027,6 +1139,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
+        private System.Windows.Forms.ComboBox comboBoxAllDepartments;
+        private System.Windows.Forms.SplitContainer splitContainerStockPrimary;
+        private System.Windows.Forms.SplitContainer splitContainerStockSecondary;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxStockCategory;
+        private System.Windows.Forms.Button buttonStockCategoryRemove;
+        private System.Windows.Forms.Button buttonStockCategoryAdd;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -25,66 +25,93 @@ namespace MediaBazaar_ManagementSystem
         public CalendarDayControl()
         {
             InitializeComponent();
-            dbhandler = new DatabaseHandler();
         }
 
-        public void DisplayCorrectDate(DateTime date, string weekday)
+        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
         {
             this.date = date;
             textBoxCalendarDay.Text = weekday;
             textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
+            foreach (Shift s in allWeekShifts)
+            {
+                if(s.Date == date)
+                {
+                    SetShiftOccupation(s.ShiftTime, s.EmployeeIds);
+                }
+            }
+        }
+
+        private void SetShiftOccupation(ShiftTime shiftTime, List<int> employeeIds)
+        {
+            switch (shiftTime)
+            {
+                case ShiftTime.Morning:
+                    textBoxCapacityMorning.Text = employeeIds.Count().ToString();
+                    break;
+
+                case ShiftTime.Afternoon:
+                    textBoxCapacityAfternoon.Text = employeeIds.Count().ToString();
+                    break;
+
+                case ShiftTime.Evening:
+                    textBoxCapacityEvening.Text = employeeIds.Count().ToString();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void buttonMorning_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Morning);
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
             }
-
             
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Morning, schedule.WorkingEmployeeIds);
             }
         }
 
         private void buttonAfternoon_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Afternoon);
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
             }
+
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Afternoon, schedule.WorkingEmployeeIds);
             }
         }
 
         private void buttonEvening_Click(object sender, EventArgs e)
         {
             shiftEmployees.Clear();
+            dbhandler = new DatabaseHandler();
             newShift = dbhandler.GetShift(date, ShiftTime.Evening);
             if (newShift != null)
             {
                 shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
-                //dbhandler.ClearShift(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -93,7 +120,7 @@ namespace MediaBazaar_ManagementSystem
             }
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                Console.WriteLine("It happended");
+                SetShiftOccupation(ShiftTime.Evening, schedule.WorkingEmployeeIds);
             }
         }
     }

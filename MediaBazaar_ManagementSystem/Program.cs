@@ -14,18 +14,23 @@ namespace MediaBazaar_ManagementSystem
         [STAThread]
         static void Main()
         {
-            bool loggedin = false;
-            LoginWindow login;
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            createLogin();
+        }
+
+        public static void createLogin()
+        {
+            bool loggedin = false;
+            LoginWindow login;
 
             if (!loggedin)
             {
                 login = new LoginWindow();
                 if (login.ShowDialog() == DialogResult.OK)
                 {
-                    Application.Run(new MainWindow(login.UserName));
+                    Application.Run(new MainWindow(login.LoggedInUser));
                 }
                 else
                 {

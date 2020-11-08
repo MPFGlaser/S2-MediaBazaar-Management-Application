@@ -15,7 +15,7 @@ namespace MediaBazaar_ManagementSystem
     public partial class LoginWindow : Form
     {
         DatabaseHandler dbhandler;
-        private string userName;
+        private Employee loggedInUser;
 
         public LoginWindow()
         {
@@ -25,10 +25,10 @@ namespace MediaBazaar_ManagementSystem
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             dbhandler = new DatabaseHandler();
-            string loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
-            if (loggedInUser != string.Empty)
+            //List<string> loginData = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
+            this.loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
+            if (loggedInUser != null)
             {
-                this.userName = loggedInUser;
                 this.DialogResult = DialogResult.OK;
             }
             else
@@ -37,9 +37,9 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        public string UserName
+        public Employee LoggedInUser
         {
-            get { return userName; }
+            get { return loggedInUser; }
         }
     }
 }

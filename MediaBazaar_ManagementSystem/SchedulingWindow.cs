@@ -157,5 +157,10 @@ namespace MediaBazaar_ManagementSystem
         {
             date.AddDays(-1);
         }
+
+        public List<int> WorkingEmployeeIds
+        {
+            get { return workingEmployeeIds; }
+        }
     }
 }

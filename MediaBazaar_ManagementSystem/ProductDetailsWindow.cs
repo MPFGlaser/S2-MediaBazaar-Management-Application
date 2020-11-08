@@ -62,7 +62,7 @@ namespace MediaBazaar_ManagementSystem
             ResetBoxColors();
 
             Regex checkStandardInput = new Regex(@"^[^\s].*");
-            Regex checkCategory = new Regex(@"^[a-zA-Z\s]*$");
+            Regex checkCategory = new Regex(@"^[a-zA-Z\s]+$");
             Regex checkCode = new Regex(@"^[0-9]*\d{4,15}$");
 
             double price = Convert.ToDouble(numericUpDownPrice.Value);
@@ -72,24 +72,29 @@ namespace MediaBazaar_ManagementSystem
             string brand = textBoxBrand.Text;
             string category = textBoxCategory.Text;
             string description = richTextBoxDescription.Text;
+            Boolean allCorrect = true;
 
             if (!checkStandardInput.IsMatch(name))
             {
+                allCorrect = false;
                 textBoxName.BackColor = Color.LightCoral;
             }
-            else if (!checkStandardInput.IsMatch(brand))
+            if (!checkStandardInput.IsMatch(brand))
             {
+                allCorrect = false;
                 textBoxBrand.BackColor = Color.LightCoral;
             }
-            else if (!checkCategory.IsMatch(category))
+            if (!checkCategory.IsMatch(category))
             {
+                allCorrect = false;
                 textBoxCategory.BackColor = Color.LightCoral;
             }
-            else if (!checkCode.IsMatch(textBoxCode.Text))
+            if (!checkCode.IsMatch(textBoxCode.Text))
             {
+                allCorrect = false;
                 textBoxCode.BackColor = Color.LightCoral;
             }
-            else
+            if(allCorrect)
             {
                 int code = Convert.ToInt32(textBoxCode.Text);
                 if (editing)
