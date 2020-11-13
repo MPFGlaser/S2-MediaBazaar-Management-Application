@@ -11,6 +11,9 @@ using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem.classes
 {
+    /// <summary>
+    /// Class for an employee object. Contains all relevant information that's also found in the database's employee table.
+    /// </summary>
     public class Employee
     {
         private int id, bsn, function;
@@ -39,6 +42,7 @@ namespace MediaBazaar_ManagementSystem.classes
             this.preferredHours = preferredHours;
         }
 
+        #region Properties
         public int Id
         {
             get { return id; }
@@ -142,6 +146,7 @@ namespace MediaBazaar_ManagementSystem.classes
         //public enum Function
         //{
         //    Function functions;
-        //}
+        //} 
+        #endregion
     }
 }
