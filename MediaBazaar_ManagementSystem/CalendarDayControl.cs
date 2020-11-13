@@ -77,10 +77,13 @@ namespace MediaBazaar_ManagementSystem
                     break;
             }
         }
-        #endregion
 
-        #region Button-related functions
-        private void buttonMorning_Click(object sender, EventArgs e)
+        // The code below needs to be refactored into something not as messy as this, as well as into something following proper programming standards.
+
+        /// <summary>
+        /// Gets the data for the morning shift of the given day.
+        /// </summary>
+        private void getMorningShift()
         {
             // Refreshes the shift data from the database
             shiftEmployees.Clear();
@@ -105,7 +108,10 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private void buttonAfternoon_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Gets the data for the afternoon shift of the given day.
+        /// </summary>
+        private void getAfternoonShift()
         {
             // Refreshes the shift data from the database
             shiftEmployees.Clear();
@@ -130,7 +136,10 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private void buttonEvening_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Gets the data for the evening shift of the given day.
+        /// </summary>
+        private void getEveningShift()
         {
             // Refreshes the shift data from the database
             shiftEmployees.Clear();
@@ -153,6 +162,23 @@ namespace MediaBazaar_ManagementSystem
             {
                 SetShiftOccupation(ShiftTime.Evening, schedule.WorkingEmployeeIds);
             }
+        }
+        #endregion
+
+        #region Button-related functions
+        private void buttonMorning_Click(object sender, EventArgs e)
+        {
+            getMorningShift();
+        }
+
+        private void buttonAfternoon_Click(object sender, EventArgs e)
+        {
+            getAfternoonShift();
+        }
+
+        private void buttonEvening_Click(object sender, EventArgs e)
+        {
+            getEveningShift();
         }
         #endregion
     }
