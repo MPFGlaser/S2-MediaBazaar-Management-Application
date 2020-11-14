@@ -22,10 +22,11 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        private void Login()
         {
             dbhandler = new DatabaseHandler();
-            //List<string> loginData = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
+
+            // Asks the database to check if the entered details match those in the database
             this.loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
             if (loggedInUser != null)
             {
@@ -35,6 +36,11 @@ namespace MediaBazaar_ManagementSystem
             {
                 MessageBox.Show("Invalid Credentials");
             }
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            Login();
         }
 
         public Employee LoggedInUser
