@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Class for everything related to aa shift, as it appears in the database.
+    /// </summary>
     public class Shift
     {
         private int id;
