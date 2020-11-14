@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Class for department objects
+    /// </summary>
     public class Department
     {
         private int id;
