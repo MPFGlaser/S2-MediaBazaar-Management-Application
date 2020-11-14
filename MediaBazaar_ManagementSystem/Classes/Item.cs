@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Class for Item objects. Stores all values pertaining to an item as they would appear in the database.
+    /// </summary>
     public class Item
     {
         private int id, code, quantity;

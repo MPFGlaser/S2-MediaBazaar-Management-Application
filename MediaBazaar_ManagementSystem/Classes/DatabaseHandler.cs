@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Class to handle everything database-related
+    /// </summary>
     public class DatabaseHandler
     {
         MySqlConnection conn;
@@ -21,15 +24,88 @@ namespace MediaBazaar_ManagementSystem.Classes
             conn = new MySqlConnection(connectionString);
         }
 
+        #region Database Connection
+        /// <summary>
+        /// Function to get the connection string from a config file
+        /// </summary>
+        public void GetConnectionString()
+        {
+            FileStream fs = null;
+            StreamReader sr = null;
+
+            try
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(fs);
+
+                connectionString = sr.ReadToEnd();
+            }
+            catch (FileNotFoundException)
+            {
+                CreateConnectionStringFile();
+                MessageBox.Show("No connection file found. Empty file has been created in application root directory.");
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Error reading file");
+            }
+            finally
+            {
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Function to create a new config file with default values 
+        /// </summary>
+        private void CreateConnectionStringFile()
+        {
+            FileStream fs = null;
+            StreamWriter sw = null;
+
+            try
+            {
+                fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                sw = new StreamWriter(fs);
+
+                sw.Write("server=localhost;database=name;uid=username;password=secret");
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Error creating file");
+            }
+            finally
+            {
+                if (sw != null)
+                {
+                    sw.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region User login
+        /// <summary>
+        /// Function to check if the entered login details match those found in the database
+        /// <para>If they match, the user may be logged in</para>
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>An instance of Employee with all the data present in the database of the logged-in employee</returns>
         public Employee LoginUser(string username, string password)
         {
             Employee toReturn = null;
 
+            // Prepares the SQL statement
             String sql = "SELECT count(*) FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", SHA512(password));
 
+            // Checks if the values entered correspond with those in the database
             try
             {
                 conn.Open();
@@ -66,8 +142,14 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             return toReturn;
         }
+        #endregion
 
-        // Creates a new employee entry in the database
+        #region Employees
+        /// <summary>
+        /// Function to add an employee to the database
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public bool CreateEmployee(Employee employee)
         {
             bool succesfulExecution = false;
@@ -97,7 +179,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Open();
                 rowsAffected = command.ExecuteNonQuery();
-                if(rowsAffected > 0)
+                if (rowsAffected > 0)
                 {
                     succesfulExecution = true;
                 }
@@ -118,6 +200,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             return succesfulExecution;
         }
 
+        /// <summary>
+        /// Function to update an employee in the database
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public bool UpdateEmployee(Employee employee)
         {
             bool succesfulExecution = false;
@@ -167,6 +254,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             return succesfulExecution;
         }
 
+        /// <summary>
+        /// Function to get information from the database about an employee with a certain id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>An instance of Employee with all data found in the database relating to the employee with the entered id</returns>
         public Employee GetEmployee(int id)
         {
             Employee toReturn = null;
@@ -196,6 +288,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             return toReturn;
         }
 
+        /// <summary>
+        /// Function to get a list of employees from the database on the condition that they are marked as active
+        /// </summary>
+        /// <returns>A list of Employee objects with all data found about them in the database</returns>
         public List<Employee> GetActiveEmployeesFromDB()
         {
             List<Employee> e = new List<Employee>();
@@ -248,6 +344,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             return e;
         }
 
+        /// <summary>
+        /// A function to get a list of employees from the database
+        /// </summary>
+        /// <returns>A list of Employee objects containing all employees found in the database</returns>
         public List<Employee> GetEmployeesFromDB()
         {
             List<Employee> e = new List<Employee>();
@@ -299,7 +399,13 @@ namespace MediaBazaar_ManagementSystem.Classes
 
             return e;
         }
+        #endregion
 
+        #region Stock
+        /// <summary>
+        /// Function to add an item to the database
+        /// </summary>
+        /// <param name="item"></param>
         public void CreateItem(Item item)
         {
             String sql = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
@@ -329,6 +435,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// Function to update an item with the given id in the database
+        /// </summary>
+        /// <param name="item"></param>
         public void UpdateItem(Item item)
         {
             String sql = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description  WHERE id = @id";
@@ -357,7 +467,93 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
         }
-        
+
+        /// <summary>
+        /// Function to get an item from the database with a certain id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>An Item object with all data belonging to the item with that id, as found in the database</returns>
+        public Item GetItem(int id)
+        {
+            Item item = null;
+            String sql = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@itemId", id);
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    item = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return item;
+        }
+
+        /// <summary>
+        /// A function to get all items from the database
+        /// </summary>
+        /// <returns>A list of Item objects with all items found in the database</returns>
+        public List<Item> GetItemsFromDB()
+        {
+            List<Item> items = new List<Item>();
+            String sql = "SELECT * FROM items";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int id, code, quantity;
+                string name, brand, category, description;
+                double price;
+                bool active;
+
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader["id"]);
+                    code = Convert.ToInt32(reader["code"]);
+                    quantity = Convert.ToInt32(reader["quantity"]);
+                    name = Convert.ToString(reader["name"]);
+                    brand = Convert.ToString(reader["brand"]);
+                    category = Convert.ToString(reader["category"]);
+                    description = Convert.ToString(reader["description"]);
+                    price = Convert.ToDouble(reader["price"]);
+                    active = Convert.ToBoolean(reader["active"]);
+
+                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
+                    items.Add(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving items.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return items;
+        }
+        #endregion
+
+        #region Scheduling
+        /// <summary>
+        /// A function to add a shift to the database
+        /// </summary>
+        /// <param name="shift"></param>
         public void AddShiftToDb(Shift shift)
         {
             int shiftId = 0;
@@ -389,6 +585,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// A function to clear all information related to a shift with a given id from the database
+        /// </summary>
+        /// <param name="shiftId"></param>
         public void ClearShift(int shiftId)
         {
             String sql = "DELETE FROM working_employees WHERE shiftId = @shiftId";
@@ -410,6 +610,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// A function to add an employee id to a certain shift id in the database
+        /// </summary>
+        /// <param name="shiftId"></param>
+        /// <param name="employeeId"></param>
         public void AddIdToShift(int shiftId, int employeeId)
         {
             String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
@@ -432,6 +637,12 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// A function to get a list of shifts that are scheduled between two dates
+        /// </summary>
+        /// <param name="dateMonday"></param>
+        /// <param name="dateSunday"></param>
+        /// <returns>A list of Shift objects</returns>
         public List<Shift> getWeekData(DateTime dateMonday, DateTime dateSunday)
         {
             List<Shift> weekShifts = new List<Shift>();
@@ -452,14 +663,14 @@ namespace MediaBazaar_ManagementSystem.Classes
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    
+
                     temp = new Shift(Convert.ToInt32(reader[0]), (DateTime)reader[1], (ShiftTime)reader[2]);
                     weekShifts.Add(temp);
                 }
 
                 reader.Close();
 
-                foreach(Shift s in weekShifts)
+                foreach (Shift s in weekShifts)
                 {
                     workingEmployeeIds = new List<int>();
 
@@ -490,6 +701,12 @@ namespace MediaBazaar_ManagementSystem.Classes
             return weekShifts;
         }
 
+        /// <summary>
+        /// A function to get a shift from the database based on the time and date entered
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="shiftTime"></param>
+        /// <returns>A Shift object that matches the entered date and time</returns>
         public Shift GetShift(DateTime date, ShiftTime shiftTime)
         {
             Shift shift = null;
@@ -528,6 +745,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             return shift;
         }
 
+        /// <summary>
+        /// A function to get a list of employees that work a certain shift
+        /// </summary>
+        /// <param name="shiftId"></param>
+        /// <returns>A list of Employee items that are associated with a certain shift id</returns>
         public List<Employee> GetShiftEmployees(int shiftId)
         {
             List<Employee> shiftEmployees = new List<Employee>();
@@ -540,7 +762,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Open();
                 int shiftHasEmployees = Convert.ToInt32(command.ExecuteScalar());
-                if(shiftHasEmployees > 0)
+                if (shiftHasEmployees > 0)
                 {
                     String sql2 = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
@@ -561,7 +783,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
 
-            foreach(int i in shiftEmployeeIds)
+            foreach (int i in shiftEmployeeIds)
             {
                 shiftEmployees.Add(GetEmployee(i));
             }
@@ -569,77 +791,11 @@ namespace MediaBazaar_ManagementSystem.Classes
             return shiftEmployees;
         }
 
-        public Item GetItem(int id)
-        {
-            Item item = null;
-            String sql = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
-            MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@itemId", id);
-            try
-            {
-                conn.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    item = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return item;
-        }
-
-        public List<Item> GetItemsFromDB()
-        {
-            List<Item> items = new List<Item>();
-            String sql = "SELECT * FROM items";
-            MySqlCommand command = new MySqlCommand(sql, conn);
-
-            try
-            {
-                conn.Open();
-                MySqlDataReader reader =  command.ExecuteReader();
-
-                int id, code, quantity;
-                string name, brand, category, description;
-                double price;
-                bool active;
-
-                while (reader.Read())
-                {
-                    id = Convert.ToInt32(reader["id"]);
-                    code = Convert.ToInt32(reader["code"]);
-                    quantity = Convert.ToInt32(reader["quantity"]);
-                    name = Convert.ToString(reader["name"]);
-                    brand = Convert.ToString(reader["brand"]);
-                    category = Convert.ToString(reader["category"]);
-                    description = Convert.ToString(reader["description"]);
-                    price = Convert.ToDouble(reader["price"]);
-                    active = Convert.ToBoolean(reader["active"]);
-
-                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
-                    items.Add(i);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error retrieving items.\n" + ex.ToString());
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return items;
-        }
-
+        /// <summary>
+        /// A function to get the amount of employees that are assigned to a certain shift
+        /// </summary>
+        /// <param name="shiftId"></param>
+        /// <returns>The number of employees scheduled for that shift</returns>
         public int ShiftOccupation(int shiftId)
         {
             int occupation = 0;
@@ -665,6 +821,12 @@ namespace MediaBazaar_ManagementSystem.Classes
             return occupation;
         }
 
+        /// <summary>
+        /// A function to check if a shift exists on a certain time/date combination
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="shiftTime"></param>
+        /// <returns>The shift id if a shift exists, otherwise 0</returns>
         public int ShiftExist(DateTime date, ShiftTime shiftTime)
         {
             int shiftId = 0;
@@ -688,80 +850,13 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
             return shiftId;
         }
+        #endregion
 
-        private string SHA512(string input)
-        {
-            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-            using (var hash = System.Security.Cryptography.SHA512.Create())
-            {
-                var hashedInputBytes = hash.ComputeHash(bytes);
-
-                // Convert to text
-                // StringBuilder Capacity is 128, because 512 bits / 8 bits in byte * 2 symbols for byte 
-                var hashedInputStringBuilder = new System.Text.StringBuilder(128);
-                foreach (var b in hashedInputBytes)
-                    hashedInputStringBuilder.Append(b.ToString("X2"));
-                return hashedInputStringBuilder.ToString();
-            }
-        }
-
-        // Gets the connection string from a config file
-        public void GetConnectionString()
-        {
-            FileStream fs = null;
-            StreamReader sr = null;
-
-            try
-            {
-                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-                sr = new StreamReader(fs);
-
-                connectionString = sr.ReadToEnd();
-            }
-            catch (FileNotFoundException)
-            {
-                CreateConnectionStringFile();
-                MessageBox.Show("No connection file found. Empty file has been created in application root directory.");
-            }
-            catch (IOException)
-            {
-                MessageBox.Show("Error reading file");
-            }
-            finally
-            {
-                if(sr != null)
-                {
-                    sr.Close();
-                }
-            }
-        }
-
-        // Creates a new config file with default values 
-        private void CreateConnectionStringFile()
-        {
-            FileStream fs = null;
-            StreamWriter sw = null;
-
-            try
-            {
-                fs = new FileStream(path, FileMode.Create, FileAccess.Write);
-                sw = new StreamWriter(fs);
-
-                sw.Write("server=localhost;database=name;uid=username;password=secret");
-            }
-            catch (IOException)
-            {
-                MessageBox.Show("Error creating file");
-            }
-            finally
-            {
-                if(sw != null)
-                {
-                    sw.Close();
-                }
-            }
-        }
-
+        #region Departments
+        /// <summary>
+        /// A function to add a department to the database
+        /// </summary>
+        /// <param name="departmentName"></param>
         public void CreateNewDepartment(string departmentName)
         {
             String sql = "INSERT INTO departments (departmentName) VALUES (@departmentName)";
@@ -783,6 +878,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// A function to remove a department from the database
+        /// </summary>
+        /// <param name="departmentName"></param>
         public void RemoveDepartment(string departmentName)
         {
             String sql = "DELETE FROM departments WHERE departmentName = @departmentName";
@@ -804,6 +903,10 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
         }
 
+        /// <summary>
+        /// A function to get a list of all departments found in the database
+        /// </summary>
+        /// <returns>A list of Department objects matching those found in the database</returns>
         public List<string> GetAllDepartments()
         {
             List<string> allDepartments = new List<string>();
@@ -830,5 +933,33 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
             return allDepartments;
         }
+        #endregion
+
+        #region Statistics
+        // To be created
+        #endregion
+
+        #region Miscellaneous
+        /// <summary>
+        /// Function to hash a string with the SHA512 algorithm
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>A string hashed with SHA512</returns>
+        private string SHA512(string input)
+        {
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            using (var hash = System.Security.Cryptography.SHA512.Create())
+            {
+                var hashedInputBytes = hash.ComputeHash(bytes);
+
+                // Convert to text
+                // StringBuilder Capacity is 128, because 512 bits / 8 bits in byte * 2 symbols for byte 
+                var hashedInputStringBuilder = new System.Text.StringBuilder(128);
+                foreach (var b in hashedInputBytes)
+                    hashedInputStringBuilder.Append(b.ToString("X2"));
+                return hashedInputStringBuilder.ToString();
+            }
+        }
+        #endregion
     }
 }

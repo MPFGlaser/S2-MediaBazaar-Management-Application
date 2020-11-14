@@ -5,10 +5,15 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using MediaBazaar_ManagementSystem.Models;
-using MySql.Data.X.XDevAPI.Common;
+
+// I don't know what this does, but it gives errors.
+//using MySql.Data.X.XDevAPI.Common;
 
 namespace MediaBazaar_ManagementSystem.classes
 {
+    /// <summary>
+    /// Class for an employee object. Contains all relevant information that's also found in the database's employee table.
+    /// </summary>
     public class Employee
     {
         private int id, bsn, function;
@@ -37,6 +42,7 @@ namespace MediaBazaar_ManagementSystem.classes
             this.preferredHours = preferredHours;
         }
 
+        #region Properties
         public int Id
         {
             get { return id; }
@@ -140,6 +146,7 @@ namespace MediaBazaar_ManagementSystem.classes
         //public enum Function
         //{
         //    Function functions;
-        //}
+        //} 
+        #endregion
     }
 }

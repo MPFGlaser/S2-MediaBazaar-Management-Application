@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Management class for stock
+    /// <para>Currently unused.</para>
+    /// </summary>
     public class StockManager
     {
         List<Item> items = new List<Item>();
