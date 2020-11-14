@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem.Classes
 {
+    /// <summary>
+    /// Class for Day objects.
+    /// </summary>
     public class Day
     {
         private DateTime date;
