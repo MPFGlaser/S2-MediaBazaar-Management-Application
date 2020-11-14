@@ -24,11 +24,20 @@ namespace MediaBazaar_ManagementSystem
         private bool isEditing;
         private int oldId;
 
+        /// <summary>
+        /// A form in which the user can schedule and unschedule employees for a certain shift.
+        /// </summary>
+        /// <param name="dateAndMonth"></param>
+        /// <param name="weekDay"></param>
+        /// <param name="shiftTime"></param>
+        /// <param name="date"></param>
+        /// <param name="working"></param>
+        /// <param name="editing"></param>
+        /// <param name="oldShiftId"></param>
         public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
-            PopulateComboBoxShiftTime();
             LoadEmployees(working);
             this.date = date;
             this.shiftTime = shiftTime;
@@ -41,17 +50,27 @@ namespace MediaBazaar_ManagementSystem
             AddEmployeeListToShift(working);
         }
 
+        public List<int> WorkingEmployeeIds
+        {
+            get { return workingEmployeeIds; }
+        }
+
+        #region Logic
+        /// <summary>
+        /// Loads the employees which are working that shift
+        /// </summary>
+        /// <param name="working"></param>
         private void LoadEmployees(List<Employee> working)
         {
             dbhandler = new DatabaseHandler();
             List<Employee> allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
 
-            foreach(Employee e in working)
+            foreach (Employee e in working)
             {
                 workingEmployeeIds.Add(e.Id);
             }
 
-            foreach(Employee e in allActiveEmployees)
+            foreach (Employee e in allActiveEmployees)
             {
                 if (!workingEmployeeIds.Contains(e.Id))
                 {
@@ -62,24 +81,20 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        // Pre-fills the combobox for the shift time with all defined shift times. (Morning, afternoon, evening at the time of writing)
         private void InitializeComboBoxShiftTime()
         {
             this.comboBoxShiftTime.SelectedIndexChanged += new System.EventHandler(comboBoxShiftTime_SelectedIndexChanged);
-        }
-
-        private void PopulateComboBoxShiftTime()
-        {
             this.comboBoxShiftTime.DataSource = Enum.GetValues(typeof(ShiftTime));
         }
 
-        private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
-        {
-            this.shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
-        }
-
+        /// <summary>
+        /// Fills the listbox with employees that are currently scheduled for that shift.
+        /// </summary>
+        /// <param name="toAddToShift"></param>
         private void AddEmployeeListToShift(List<Employee> toAddToShift)
         {
-            foreach(Employee e in toAddToShift)
+            foreach (Employee e in toAddToShift)
             {
                 listBoxCurrentEmployees.DisplayMember = "Text";
                 listBoxCurrentEmployees.ValueMember = "Employee";
@@ -87,59 +102,109 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the database.
+        /// </summary>
+        private void Confirm()
         {
-            if(comboBoxSelectEmployees.SelectedIndex != -1)
-            {
-                Employee selected = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
-                listBoxCurrentEmployees.DisplayMember = "Text";
-                listBoxCurrentEmployees.ValueMember = "Employee";
-                listBoxCurrentEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
-
-                comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                comboBoxSelectEmployees.SelectedIndex = -1;
-            }
-        }
-
-        private void buttonRemoveEmployeeFromShift_Click(object sender, EventArgs e)
-        {
-            if(listBoxCurrentEmployees.SelectedIndex != -1)
-            {
-                Employee selected = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
-                comboBoxSelectEmployees.DisplayMember = "Text";
-                comboBoxSelectEmployees.ValueMember = "Employee";
-                comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
-
-                listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
-            }
-        }
-
-        private void buttonScheduleConfirm_Click(object sender, EventArgs e)
-        {
+            // Makes sure everything is set up correctly.
             dbhandler = new DatabaseHandler();
             workingEmployeeIds = null;
             workingEmployeeIds = new List<int>();
+
+            // Makes a list of all ids of the employees scheduled for that shift
             foreach (dynamic emp in listBoxCurrentEmployees.Items)
             {
                 workingEmployeeIds.Add((emp).Employee.Id);
             }
 
+            // Creates a new shift object and sets the list of employeeIds to the one we just created.
             currentShift = new Shift(0, date, shiftTime);
             currentShift.EmployeeIds = workingEmployeeIds;
 
+            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
             if (isEditing)
             {
+                // Removes all information about the shift in the database to prevent duplication of entries
                 dbhandler.ClearShift(oldId);
-                foreach(int i in workingEmployeeIds)
+
+                // Adds each employee id to the database with the correct shift id
+                foreach (int i in workingEmployeeIds)
                 {
                     dbhandler.AddIdToShift(oldId, i);
                 }
             }
             else
             {
+                // Adds each employee id to the database with the correct shift id
                 dbhandler.AddShiftToDb(currentShift);
             }
             this.DialogResult = DialogResult.OK;
+        }
+
+        /// <summary>
+        /// Adds the selected employee to the shift and removes it from the list of employees you can add to the shift.
+        /// </summary>
+        private void AddEmployeeToShift()
+        {
+            // Checks if there's actually an employee selected to be added
+            if (comboBoxSelectEmployees.SelectedIndex != -1)
+            {
+                // Ensures the right employee object is used
+                Employee selected = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+
+                // Adds the selected employee to the listbox with currently scheduled employees.
+                listBoxCurrentEmployees.DisplayMember = "Text";
+                listBoxCurrentEmployees.ValueMember = "Employee";
+                listBoxCurrentEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+
+                // Removes the employee from the list of available employees and resets the selection index.
+                comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
+                comboBoxSelectEmployees.SelectedIndex = -1;
+            }
+        }
+
+        /// <summary>
+        /// Removes the selected employee from the shift and re-adds it to the list of employees you can add to the shift.
+        /// </summary>
+        private void RemoveEmployeeFromShift()
+        {
+            // Checks if there's actually an employee selected to be removed
+            if (listBoxCurrentEmployees.SelectedIndex != -1)
+            {
+                // Ensures the right employee object is used
+                Employee selected = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+
+                // Adds the selected employee to the combobox of available employees.
+                comboBoxSelectEmployees.DisplayMember = "Text";
+                comboBoxSelectEmployees.ValueMember = "Employee";
+                comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+
+                // Removes the employee from the listbox of currently scheduled employee.
+                listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+            }
+        } 
+        #endregion
+
+        #region Control event handlers
+        private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
+        {
+            this.shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
+        }
+
+        private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)
+        {
+            AddEmployeeToShift();
+        }
+
+        private void buttonRemoveEmployeeFromShift_Click(object sender, EventArgs e)
+        {
+            RemoveEmployeeFromShift();
+        }
+
+        private void buttonScheduleConfirm_Click(object sender, EventArgs e)
+        {
+            Confirm();
         }
 
         private void buttonScheduleCancel_Click(object sender, EventArgs e)
@@ -156,11 +221,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonPreviousDay_Click(object sender, EventArgs e)
         {
             date.AddDays(-1);
-        }
-
-        public List<int> WorkingEmployeeIds
-        {
-            get { return workingEmployeeIds; }
-        }
+        } 
+        #endregion
     }
 }
