@@ -16,7 +16,7 @@ namespace MediaBazaar_ManagementSystem.Classes
     {
         MySqlConnection conn;
         string connectionString;
-        string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstring.cfg";
+        string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstringHome.cfg";
 
         public DatabaseHandler()
         {
@@ -617,7 +617,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// <param name="employeeId"></param>
         public void AddIdToShift(int shiftId, int employeeId)
         {
-            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
+            String sql = "INSERT INTO working_employees (shiftId, employeeId) VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@shiftId", shiftId);
             command.Parameters.AddWithValue("@employeeId", employeeId);
@@ -849,6 +849,37 @@ namespace MediaBazaar_ManagementSystem.Classes
                 conn.Close();
             }
             return shiftId;
+        }
+
+        public List<int> GetEmployeesPerDepartment(int shiftId, string departmentName)
+        {
+            List<int> employeeIds = new List<int>();
+            String sql = "SELECT employeeId FROM working_employees WHERE departmentId = (SELECT id FROM departments WHERE departmentName = @departmentName) AND shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@departmentName", departmentName);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    employeeIds.Add(Convert.ToInt32(reader[0]));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading employee id's from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return employeeIds;
         }
         #endregion
 
