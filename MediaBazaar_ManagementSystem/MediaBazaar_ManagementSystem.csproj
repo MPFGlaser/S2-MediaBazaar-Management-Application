@@ -109,7 +109,6 @@
     <Compile Include="LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="CalendarDayControl.cs">
       <SubType>UserControl</SubType>

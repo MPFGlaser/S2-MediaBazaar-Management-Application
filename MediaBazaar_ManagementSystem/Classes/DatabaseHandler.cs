@@ -851,12 +851,13 @@ namespace MediaBazaar_ManagementSystem.Classes
             return shiftId;
         }
 
-        public List<int> GetEmployeesPerDepartment(int shiftId, string departmentName)
+        public List<Employee> GetEmployeesPerDepartment(int shiftId, int departmentId)
         {
             List<int> employeeIds = new List<int>();
-            String sql = "SELECT employeeId FROM working_employees WHERE departmentId = (SELECT id FROM departments WHERE departmentName = @departmentName) AND shiftId = @shiftId";
+            List<Employee> employeesPerDepartment = new List<Employee>();
+            String sql = "SELECT employeeId FROM working_employees WHERE departmentId = @departmentId AND shiftId = @shiftId";
             MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@departmentName", departmentName);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
             command.Parameters.AddWithValue("@shiftId", shiftId);
 
             try
@@ -867,7 +868,6 @@ namespace MediaBazaar_ManagementSystem.Classes
                 {
                     employeeIds.Add(Convert.ToInt32(reader[0]));
                 }
-
                 reader.Close();
             }
             catch (Exception ex)
@@ -877,9 +877,14 @@ namespace MediaBazaar_ManagementSystem.Classes
             finally
             {
                 conn.Close();
+
+                foreach (int id in employeeIds)
+                {
+                    employeesPerDepartment.Add(GetEmployee(id));
+                }
             }
 
-            return employeeIds;
+            return employeesPerDepartment;
         }
         #endregion
 
@@ -913,11 +918,11 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to remove a department from the database
         /// </summary>
         /// <param name="departmentName"></param>
-        public void RemoveDepartment(string departmentName)
+        public void RemoveDepartment(int id)
         {
-            String sql = "DELETE FROM departments WHERE departmentName = @departmentName";
+            String sql = "DELETE FROM departments WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@departmentName", departmentName);
+            command.Parameters.AddWithValue("@id", id);
 
             try
             {
@@ -938,10 +943,10 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to get a list of all departments found in the database
         /// </summary>
         /// <returns>A list of Department objects matching those found in the database</returns>
-        public List<string> GetAllDepartments()
+        public List<Department> GetAllDepartments()
         {
-            List<string> allDepartments = new List<string>();
-            String sql = "SELECT departmentName FROM departments";
+            List<Department> allDepartments = new List<Department>();
+            String sql = "SELECT * FROM departments";
             MySqlCommand command = new MySqlCommand(sql, conn);
 
             try
@@ -951,7 +956,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 while (reader.Read())
                 {
-                    allDepartments.Add(reader[0].ToString());
+                    allDepartments.Add(new Department(Convert.ToInt32(reader[0]), reader[1].ToString()));
                 }
             }
             catch (Exception ex)
