@@ -148,7 +148,7 @@
             this.buttonScheduleConfirm.Name = "buttonScheduleConfirm";
             this.buttonScheduleConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonScheduleConfirm.TabIndex = 39;
-            this.buttonScheduleConfirm.Text = "Save";
+            this.buttonScheduleConfirm.Text = "Confirm";
             this.buttonScheduleConfirm.UseVisualStyleBackColor = true;
             this.buttonScheduleConfirm.Click += new System.EventHandler(this.buttonScheduleConfirm_Click);
             // 
