@@ -554,7 +554,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to add a shift to the database
         /// </summary>
         /// <param name="shift"></param>
-        public void AddShiftToDb(Shift shift)
+        public void AddShiftToDb(Shift shift, int departmentId)
         {
             int shiftId = 0;
             String sql = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
@@ -580,7 +580,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 foreach (int employeeId in shift.EmployeeIds)
                 {
-                    AddIdToShift(shiftId, employeeId);
+                    AddIdToShift(shiftId, employeeId, departmentId);
                 }
             }
         }
@@ -615,12 +615,13 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// </summary>
         /// <param name="shiftId"></param>
         /// <param name="employeeId"></param>
-        public void AddIdToShift(int shiftId, int employeeId)
+        public void AddIdToShift(int shiftId, int employeeId, int departmentId)
         {
-            String sql = "INSERT INTO working_employees (shiftId, employeeId) VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
+            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId, @departmentId)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@shiftId", shiftId);
             command.Parameters.AddWithValue("@employeeId", employeeId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
 
             try
             {

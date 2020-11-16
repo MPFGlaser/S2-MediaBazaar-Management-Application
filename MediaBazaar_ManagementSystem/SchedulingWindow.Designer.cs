@@ -148,7 +148,7 @@
             this.buttonScheduleConfirm.Name = "buttonScheduleConfirm";
             this.buttonScheduleConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonScheduleConfirm.TabIndex = 39;
-            this.buttonScheduleConfirm.Text = "Confirm";
+            this.buttonScheduleConfirm.Text = "Save";
             this.buttonScheduleConfirm.UseVisualStyleBackColor = true;
             this.buttonScheduleConfirm.Click += new System.EventHandler(this.buttonScheduleConfirm_Click);
             // 
@@ -159,7 +159,7 @@
             this.buttonScheduleCancel.Name = "buttonScheduleCancel";
             this.buttonScheduleCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonScheduleCancel.TabIndex = 38;
-            this.buttonScheduleCancel.Text = "Cancel";
+            this.buttonScheduleCancel.Text = "Close";
             this.buttonScheduleCancel.UseVisualStyleBackColor = true;
             this.buttonScheduleCancel.Click += new System.EventHandler(this.buttonScheduleCancel_Click);
             // 

@@ -20,7 +20,8 @@ namespace MediaBazaar_ManagementSystem
         private Shift currentShift;
         private DateTime date;
         private ShiftTime shiftTime;
-        List<int> workingEmployeeIds = new List<int>(), tempEmployeeList = new List<int>();
+        List<int> workingEmployeeIds = new List<int>();
+        List<Department> allDepartments = new List<Department>();
         private bool isEditing;
         private int oldId;
 
@@ -39,7 +40,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             InitializeComboBoxShiftTime();
             LoadEmployees(working);
-            LoadDepartments();
+            LoadDepartments(editing);
             this.date = date;
             this.shiftTime = shiftTime;
             this.comboBoxShiftTime.SelectedItem = shiftTime;
@@ -83,13 +84,22 @@ namespace MediaBazaar_ManagementSystem
         }
 
         //Loads all of the departmenst from the database
-        private void LoadDepartments()
+        private void LoadDepartments(bool editing)
         {
             dbhandler = new DatabaseHandler();
-            List<Department> allDepartments = dbhandler.GetAllDepartments();
+            allDepartments = dbhandler.GetAllDepartments();
 
             foreach (Department d in allDepartments)
             {
+                if (editing)
+                {
+                    List<Employee> employeesInDepartment = dbhandler.GetEmployeesPerDepartment(oldId, d.Id);
+                    if(employeesInDepartment.Count > 0)
+                    {
+                        d.Employees = employeesInDepartment;
+                    }     
+                }
+
                 comboBoxSelectDepartments.DisplayMember = "Text";
                 comboBoxSelectDepartments.ValueMember = "Department";
                 comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
@@ -121,9 +131,59 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the database.
         /// </summary>
-        private void Confirm()
+        private void Save()
         {
-            // Makes sure everything is set up correctly.
+            dbhandler = new DatabaseHandler();
+            foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+            {
+                Department dep = (depDynamic).Department;
+                Console.WriteLine("ID: " + dep.Id);
+                // Makes sure everything is set up correctly.
+                workingEmployeeIds = new List<int>();
+
+                // Makes a list of all ids of the employees scheduled for that shift
+                foreach (Employee emp in dep.Employees)
+                {
+                    workingEmployeeIds.Add(emp.Id);
+                }
+
+                // Creates a new shift object and sets the list of employeeIds to the one we just created.
+                currentShift = new Shift(0, date, shiftTime);
+                currentShift.EmployeeIds = workingEmployeeIds;
+
+                // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
+                if (isEditing)
+                {
+                    // Removes all information about the shift in the database to prevent duplication of entries
+                    dbhandler.ClearShift(oldId);
+
+                    // Adds each employee id to the database with the correct shift id
+                    foreach (int i in workingEmployeeIds)
+                    {
+                        dbhandler.AddIdToShift(oldId, i, dep.Id);
+                    }
+                }
+                else
+                {
+                    // Adds each employee id to the database with the correct shift id
+                    dbhandler.AddShiftToDb(currentShift, dep.Id);
+                }
+            }
+
+
+            /*
+             * selectedDepartment.Employees.Clear();
+            foreach (dynamic emp in listBoxCurrentEmployees.Items)
+            {
+                selectedDepartment.Employees.Add((emp).Employee);
+            }
+            foreach (Employee a in selectedDepartment.Employees)
+            {
+                Console.WriteLine(a.FirstName);
+            }
+             * 
+             * 
+             * // Makes sure everything is set up correctly.
             dbhandler = new DatabaseHandler();
             workingEmployeeIds = new List<int>();
 
@@ -131,11 +191,6 @@ namespace MediaBazaar_ManagementSystem
             foreach (dynamic emp in listBoxCurrentEmployees.Items)
             {
                 workingEmployeeIds.Add((emp).Employee.Id);
-            }
-
-            foreach(int id in tempEmployeeList)
-            {
-                workingEmployeeIds.Add(id);
             }
 
             // Creates a new shift object and sets the list of employeeIds to the one we just created.
@@ -158,8 +213,8 @@ namespace MediaBazaar_ManagementSystem
             {
                 // Adds each employee id to the database with the correct shift id
                 dbhandler.AddShiftToDb(currentShift);
-            }
-            this.DialogResult = DialogResult.OK;
+            }*/
+            //this.DialogResult = DialogResult.OK;
         }
 
         /// <summary>
@@ -224,7 +279,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonScheduleConfirm_Click(object sender, EventArgs e)
         {
-            Confirm();
+            Save();
         }
 
         private void buttonScheduleCancel_Click(object sender, EventArgs e)
@@ -245,33 +300,14 @@ namespace MediaBazaar_ManagementSystem
 
         private void comboBoxSelectDepartments_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
-            if(selectedDepartment != null)
+            /*Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
+            if (isEditing)
             {
-                if (isEditing)
-                {
-                    if (selectedDepartment.Employees != null && selectedDepartment.Employees.Count() > 0)
-                    {
-                        Console.WriteLine("Has employees");
-                        AddEmployeeListToShift(selectedDepartment.Employees);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No employees");
-                        dbhandler = new DatabaseHandler();
-                        List<Employee> employeesInDepartment = dbhandler.GetEmployeesPerDepartment(oldId, selectedDepartment.Id);
+                dbhandler = new DatabaseHandler();
+                List<Employee> employeesInDepartment = dbhandler.GetEmployeesPerDepartment(oldId, selectedDepartment.Id);
 
-                        AddEmployeeListToShift(employeesInDepartment);
-                    }
-                }
-
-                selectedDepartment.Employees = new List<Employee>();
-                foreach (dynamic emp in listBoxCurrentEmployees.Items)
-                {
-                    Employee currentEmployee = (emp as dynamic).Employee;
-                    selectedDepartment.Employees.Add(currentEmployee);
-                }
-            }
+                AddEmployeeListToShift(employeesInDepartment);
+            }*/
         }
 
         #endregion
