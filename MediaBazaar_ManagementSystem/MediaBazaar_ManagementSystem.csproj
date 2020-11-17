@@ -100,6 +100,8 @@
     <Compile Include="Classes\Day.cs" />
     <Compile Include="Classes\Department.cs" />
     <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\EmployeeMySQL.cs" />
+    <Compile Include="Classes\Encrypt.cs" />
     <Compile Include="Classes\IEmployeeStorage.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Shift.cs" />
