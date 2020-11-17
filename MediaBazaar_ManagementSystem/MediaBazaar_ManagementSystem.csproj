@@ -95,10 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ConnectionString.cs" />
     <Compile Include="Classes\DatabaseHandler.cs" />
     <Compile Include="Classes\Day.cs" />
     <Compile Include="Classes\Department.cs" />
     <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\IEmployeeStorage.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Shift.cs" />
     <Compile Include="Classes\StockManager.cs" />
