@@ -30,7 +30,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (IOException)
             {
-                MessageBox.Show("Error reading file");
+                MessageBox.Show(ErrorMessages.readError);
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (IOException)
             {
-                MessageBox.Show("Error creating file");
+                MessageBox.Show(ErrorMessages.createError);
             }
             finally
             {
