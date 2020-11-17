@@ -9,6 +9,8 @@ namespace MediaBazaar_ManagementSystem
     public partial class EmployeeDetailsWindow : Form
     {
         IEmployeeStorage employeeStorage;
+        IDepartmentStorage departmentStorage;
+
         private Employee employee;
         private Boolean editing = false;
         private int editId;
@@ -21,6 +23,7 @@ namespace MediaBazaar_ManagementSystem
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
+            departmentStorage = new DepartmentMySQL();
             LoadDepartments();
         }
 
@@ -288,8 +291,7 @@ namespace MediaBazaar_ManagementSystem
         // Loads all of the departmenst from the database and sets them into the combobox
         private void LoadDepartments()
         {
-            dbhandler = new DatabaseHandler();
-            allDepartments = dbhandler.GetAllDepartments();
+            allDepartments = departmentStorage.GetAll();
         }
         #endregion
 

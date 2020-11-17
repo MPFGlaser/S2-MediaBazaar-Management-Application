@@ -98,7 +98,9 @@
     <Compile Include="Classes\ConnectionString.cs" />
     <Compile Include="Classes\DatabaseHandler.cs" />
     <Compile Include="Classes\Day.cs" />
-    <Compile Include="Classes\Department.cs" />
+    <Compile Include="Classes\Department\Department.cs" />
+    <Compile Include="Classes\Department\DepartmentMySQL.cs" />
+    <Compile Include="Classes\Department\IDepartmentStorage.cs" />
     <Compile Include="Classes\Employee\Employee.cs" />
     <Compile Include="Classes\Employee\EmployeeMySQL.cs" />
     <Compile Include="Classes\Employee\Encrypt.cs" />
