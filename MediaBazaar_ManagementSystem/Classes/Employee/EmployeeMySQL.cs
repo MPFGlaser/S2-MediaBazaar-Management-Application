@@ -17,10 +17,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to update an employee in the database
+        /// Function to update an employee in the database.
         /// </summary>
         /// <param name="employee"></param>
-        /// <returns></returns>
+        /// <returns>Whether the creation was successful.</returns>
         public bool Create(Employee employee)
         {
             bool success = false;
@@ -73,10 +73,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to get information from the database about an employee with a certain id
+        /// Function to get information from the database about an employee with a certain id.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>An instance of Employee with all data found in the database relating to the employee with the entered id</returns>
+        /// <returns>An instance of Employee with all data found in the database relating to the employee with the entered id.</returns>
         public Employee Get(int id)
         {
             Employee output = null;
@@ -107,9 +107,9 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// A function to get a list of employees from the database
+        /// A function to get a list of employees from the database.
         /// </summary>
-        /// <returns>A list of Employee objects containing all employees found in the database</returns>
+        /// <returns>A list of Employee objects containing all employees found in the database.</returns>
         public List<Employee> GetAll(bool activeOnly)
         {
             List<Employee> output = new List<Employee>();
@@ -169,10 +169,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to update an employee in the database
+        /// Function to update an employee in the database.
         /// </summary>
         /// <param name="employee"></param>
-        /// <returns></returns>
+        /// <returns>Whether the update was successful.</returns>
         public bool Update(Employee employee)
         {
             bool success = false;
