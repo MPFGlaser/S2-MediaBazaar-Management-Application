@@ -30,38 +30,10 @@ namespace MediaBazaar_ManagementSystem
             this.loggedInUser = loggedInUser;
             InitializeComponent();
             DisplayInformation();
-            InitializeNumericUpDown();
-            LoadAllDepartments();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
             toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Database Entries");
-        }
-
-        #region Logic
-        #region Preparation
-        /// <summary>
-        /// Function to make sure all data is loaded into the user interface and all is ready to go for the user to start doing their work.
-        /// </summary>
-        private void DisplayInformation()
-        {
-            dbhandler = new Classes.DatabaseHandler();
-            employeeStorage = new EmployeeMySQL();
-            itemStorage = new ItemMySQL();
-            PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
-            SetupCorrectWeekData();
-        }
 
-        /// <summary>
-        /// Initialises the numericUpDown control on the scheduling page
-        /// </summary>
-        private void InitializeNumericUpDown()
-        {
-            this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
-
-            // I have no clue why this is all here, it should be in a separate function. Please fix.
-            dbhandler = new Classes.DatabaseHandler();
-            PopulateEmployeesTable();
-            PopulateItemsTable();
             HideInactiveEmployees(true);
             HideInactiveItems(true);
 
@@ -74,6 +46,25 @@ namespace MediaBazaar_ManagementSystem
                 tabControl1.TabPages.Remove(tabPage1);
                 tabControl1.TabPages.Remove(tabPage4);
             }
+
+            this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
+        }
+
+        #region Logic
+        #region Preparation
+        /// <summary>
+        /// Function to make sure all data is loaded into the user interface and all is ready to go for the user to start doing their work.
+        /// </summary>
+        private void DisplayInformation()
+        {
+            dbhandler = new Classes.DatabaseHandler();
+            employeeStorage = new EmployeeMySQL();
+            itemStorage = new ItemMySQL();
+
+            PopulateEmployeesTable();
+            PopulateItemsTable();
+            LoadAllDepartments();
+            SetupCorrectWeekData();
         }
 
         /// <summary>
@@ -458,18 +449,6 @@ namespace MediaBazaar_ManagementSystem
         #endregion
 
         /// <summary>
-        /// Function to reload all data from the database
-        /// </summary>
-        private void ReloadData()
-        {
-            PopulateEmployeesTable();
-            PopulateItemsTable();
-            SetupCorrectWeekData();
-            LoadAllDepartments();
-            MessageBox.Show("Database Reloaded");
-        }
-
-        /// <summary>
         /// Function to log the current user out of the application and show a new login window.
         /// </summary>
         private void Logout()
@@ -556,7 +535,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonReloadDatabaseEntries_Click(object sender, EventArgs e)
         {
-            ReloadData();
+            DisplayInformation();
+            MessageBox.Show("Database Reloaded");
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
