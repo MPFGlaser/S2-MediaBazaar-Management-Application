@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ConnectionString.cs" />
-    <Compile Include="Classes\DatabaseHandler.cs" />
     <Compile Include="Classes\Department\Department.cs" />
     <Compile Include="Classes\Department\DepartmentMySQL.cs" />
     <Compile Include="Classes\Department\IDepartmentStorage.cs" />
