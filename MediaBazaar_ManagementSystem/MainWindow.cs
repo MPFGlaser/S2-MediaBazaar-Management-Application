@@ -9,10 +9,10 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
-        DatabaseHandler dbhandler;
         IEmployeeStorage employeeStorage;
         IItemStorage itemStorage;
         IDepartmentStorage departmentStorage;
+        IShiftStorage shiftStorage;
 
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
@@ -51,7 +51,6 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void DisplayInformation()
         {
-            dbhandler = new DatabaseHandler();
             employeeStorage = new EmployeeMySQL();
             itemStorage = new ItemMySQL();
 
@@ -170,6 +169,8 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SetupCorrectWeekData()
         {
+            shiftStorage = new ShiftMySQL();
+
             // Gets the week number from the numericUpDown
             int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
 
@@ -177,7 +178,7 @@ namespace MediaBazaar_ManagementSystem
             weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
 
             // Gets all shifts from the database between the start and end date of the week
-            List<Shift> allWeekShifts = dbhandler.getWeekData(weekDays[0], weekDays[6]);
+            List<Shift> allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
             // Sets the correct data on the CalendarDayControl elements
             calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
