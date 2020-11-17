@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem
 {
     public partial class SchedulingWindow : Form
     {
-        DatabaseHandler dbhandler;
         IEmployeeStorage employeeStorage;
         IDepartmentStorage departmentStorage;
+        IShiftStorage shiftStorage;
 
         private Shift currentShift;
         private DateTime date;
@@ -84,13 +83,14 @@ namespace MediaBazaar_ManagementSystem
         private void LoadDepartments()
         {
             departmentStorage = new DepartmentMySQL();
+            shiftStorage = new ShiftMySQL();
             allDepartments = departmentStorage.GetAll();
 
             foreach (Department d in allDepartments)
             {
                 if (isEditing)
                 {
-                    d.Employees = dbhandler.GetEmployeesPerDepartment(oldId, d.Id);
+                    d.Employees = shiftStorage.GetDepartmentEmployees(oldId, d.Id);
                 }
 
                 comboBoxSelectDepartments.DisplayMember = "Text";
@@ -139,7 +139,7 @@ namespace MediaBazaar_ManagementSystem
         private void Confirm()
         {
             // Makes sure everything is set up correctly.
-            dbhandler = new DatabaseHandler();
+            shiftStorage = new ShiftMySQL();
             workingEmployeeIds = new List<int>();
             int shiftId = 0;
 
@@ -150,11 +150,11 @@ namespace MediaBazaar_ManagementSystem
             if (isEditing)
             {
                 // Removes all information about the shift in the database to prevent duplication of entries
-                dbhandler.ClearShift(oldId);
+                shiftStorage.Clear(oldId);
             }
 
             // Adds each employee id to the database with the correct shift id
-            shiftId = dbhandler.AddShiftToDb(currentShift);
+            shiftId = shiftStorage.Create(currentShift);
 
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {
@@ -164,7 +164,7 @@ namespace MediaBazaar_ManagementSystem
                 foreach (Employee emp in dep.Employees)
                 {
                     //workingEmployeeIds.Add(emp.Id);
-                    dbhandler.AddIdToShift(shiftId, emp.Id, dep.Id);
+                    shiftStorage.Assign(shiftId, emp.Id, dep.Id);
                 }
             }
 
