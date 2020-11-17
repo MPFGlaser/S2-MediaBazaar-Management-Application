@@ -323,6 +323,7 @@ namespace MediaBazaar_ManagementSystem
             if(wd.ShowDialog() == DialogResult.OK)
             {
                 workingDepartments = wd.WorkingDepartmentsString;
+                Console.WriteLine(workingDepartments);
             }
         }
         #endregion

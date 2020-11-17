@@ -22,8 +22,9 @@ namespace MediaBazaar_ManagementSystem
 
         public WorkingDepartments(string input, List<Department> allDepartments)
         {
-            //List<int> selectedDepartments = getSelectedDepartments(input);
-            List<int> selectedDepartments = input.Split(',').Select(int.Parse).ToList();
+            List<int> selectedDepartments = new List<int>();
+            if(input != String.Empty)
+                selectedDepartments = input.Split(',').Select(int.Parse).ToList();
             InitializeComponent();
             InitializeDepartments(allDepartments, selectedDepartments);
         }
@@ -55,7 +56,21 @@ namespace MediaBazaar_ManagementSystem
 
         private void Confirm()
         {
-
+            bool first = true;
+            foreach (dynamic depDynamic in listBoxCurrentWorkingDepartments.Items)
+            {
+                Department dep = (depDynamic).Department;
+                if (first)
+                {
+                    first = false;
+                    workingDepartments += dep.Id.ToString();
+                }
+                else
+                {
+                    workingDepartments += "," + dep.Id.ToString();
+                }
+            }
+            this.DialogResult = DialogResult.OK;
         }
 
         private void AddDepartmentToWorkable()
