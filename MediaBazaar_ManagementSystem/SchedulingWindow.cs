@@ -83,7 +83,7 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        //Loads all of the departmenst from the database
+        // Loads all of the departmenst from the database.
         private void LoadDepartments()
         {
             dbhandler = new DatabaseHandler();
@@ -102,6 +102,7 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        // Updates the items in the select departments combobox so they have the correct data.
         private void UpdateDepartmentsComboBox(List<Department> allDepartments)
         {
             comboBoxSelectDepartments.Items.Clear();
@@ -144,6 +145,7 @@ namespace MediaBazaar_ManagementSystem
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {
                 Department dep = (depDynamic).Department;
+
                 // Makes sure everything is set up correctly.
                 workingEmployeeIds = new List<int>();
 
@@ -176,50 +178,6 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-
-            /*
-             * selectedDepartment.Employees.Clear();
-            foreach (dynamic emp in listBoxCurrentEmployees.Items)
-            {
-                selectedDepartment.Employees.Add((emp).Employee);
-            }
-            foreach (Employee a in selectedDepartment.Employees)
-            {
-                Console.WriteLine(a.FirstName);
-            }
-             * 
-             * 
-             * // Makes sure everything is set up correctly.
-            dbhandler = new DatabaseHandler();
-            workingEmployeeIds = new List<int>();
-
-            // Makes a list of all ids of the employees scheduled for that shift
-            foreach (dynamic emp in listBoxCurrentEmployees.Items)
-            {
-                workingEmployeeIds.Add((emp).Employee.Id);
-            }
-
-            // Creates a new shift object and sets the list of employeeIds to the one we just created.
-            currentShift = new Shift(0, date, shiftTime);
-            currentShift.EmployeeIds = workingEmployeeIds;
-
-            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
-            if (isEditing)
-            {
-                // Removes all information about the shift in the database to prevent duplication of entries
-                dbhandler.ClearShift(oldId);
-
-                // Adds each employee id to the database with the correct shift id
-                foreach (int i in workingEmployeeIds)
-                {
-                    dbhandler.AddIdToShift(oldId, i);
-                }
-            }
-            else
-            {
-                // Adds each employee id to the database with the correct shift id
-                dbhandler.AddShiftToDb(currentShift);
-            }*/
             this.DialogResult = DialogResult.OK;
         }
 
@@ -286,6 +244,9 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        /// <summary>
+        /// Returns all of the departments within the select department combobox.
+        /// </summary>
         private List<Department> GetDepartmentListFromComboBox()
         {
             List<Department> allDepartments = new List<Department>();
