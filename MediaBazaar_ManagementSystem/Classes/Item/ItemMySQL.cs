@@ -17,10 +17,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Creates the specified item.
+        /// Adds the specified item to the database.
         /// </summary>
         /// <param name="item">The item.</param>
-        /// <returns>Whether the query was successful</returns>
+        /// <returns>Whether the query was successful.</returns>
         public bool Create(Item item)
         {
             bool success = false;
@@ -148,7 +148,7 @@ namespace MediaBazaar_ManagementSystem
         /// Updates the specified item.
         /// </summary>
         /// <param name="item">The item.</param>
-        /// <returns></returns>
+        /// <returns>Whether the update was successful.</returns>
         public bool Update(Item item)
         {
             bool success = false;
