@@ -215,8 +215,6 @@
   <ItemGroup>
     <None Include="Resources\reload.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
