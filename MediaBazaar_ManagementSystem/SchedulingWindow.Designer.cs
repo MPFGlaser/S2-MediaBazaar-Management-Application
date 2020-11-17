@@ -39,6 +39,7 @@
             this.textBoxWeekDay = new System.Windows.Forms.TextBox();
             this.buttonScheduleConfirm = new System.Windows.Forms.Button();
             this.buttonScheduleCancel = new System.Windows.Forms.Button();
+            this.comboBoxSelectDepartments = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxCalendarDate
@@ -90,7 +91,7 @@
             // comboBoxSelectEmployees
             // 
             this.comboBoxSelectEmployees.FormattingEnabled = true;
-            this.comboBoxSelectEmployees.Location = new System.Drawing.Point(12, 101);
+            this.comboBoxSelectEmployees.Location = new System.Drawing.Point(12, 131);
             this.comboBoxSelectEmployees.Name = "comboBoxSelectEmployees";
             this.comboBoxSelectEmployees.Size = new System.Drawing.Size(186, 21);
             this.comboBoxSelectEmployees.Sorted = true;
@@ -99,7 +100,7 @@
             // 
             // buttonAddEmployeeToShift
             // 
-            this.buttonAddEmployeeToShift.Location = new System.Drawing.Point(90, 128);
+            this.buttonAddEmployeeToShift.Location = new System.Drawing.Point(90, 158);
             this.buttonAddEmployeeToShift.Name = "buttonAddEmployeeToShift";
             this.buttonAddEmployeeToShift.Size = new System.Drawing.Size(108, 23);
             this.buttonAddEmployeeToShift.TabIndex = 8;
@@ -109,7 +110,7 @@
             // 
             // buttonRemoveEmployeeFromShift
             // 
-            this.buttonRemoveEmployeeFromShift.Location = new System.Drawing.Point(91, 157);
+            this.buttonRemoveEmployeeFromShift.Location = new System.Drawing.Point(91, 187);
             this.buttonRemoveEmployeeFromShift.Name = "buttonRemoveEmployeeFromShift";
             this.buttonRemoveEmployeeFromShift.Size = new System.Drawing.Size(108, 23);
             this.buttonRemoveEmployeeFromShift.TabIndex = 9;
@@ -158,15 +159,27 @@
             this.buttonScheduleCancel.Name = "buttonScheduleCancel";
             this.buttonScheduleCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonScheduleCancel.TabIndex = 38;
-            this.buttonScheduleCancel.Text = "Cancel";
+            this.buttonScheduleCancel.Text = "Close";
             this.buttonScheduleCancel.UseVisualStyleBackColor = true;
             this.buttonScheduleCancel.Click += new System.EventHandler(this.buttonScheduleCancel_Click);
+            // 
+            // comboBoxSelectDepartments
+            // 
+            this.comboBoxSelectDepartments.FormattingEnabled = true;
+            this.comboBoxSelectDepartments.Location = new System.Drawing.Point(12, 104);
+            this.comboBoxSelectDepartments.Name = "comboBoxSelectDepartments";
+            this.comboBoxSelectDepartments.Size = new System.Drawing.Size(186, 21);
+            this.comboBoxSelectDepartments.Sorted = true;
+            this.comboBoxSelectDepartments.TabIndex = 40;
+            this.comboBoxSelectDepartments.Text = "Select a department";
+            this.comboBoxSelectDepartments.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectDepartments_SelectedIndexChanged);
             // 
             // SchedulingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 392);
+            this.Controls.Add(this.comboBoxSelectDepartments);
             this.Controls.Add(this.buttonScheduleConfirm);
             this.Controls.Add(this.buttonScheduleCancel);
             this.Controls.Add(this.textBoxWeekDay);
@@ -200,5 +213,6 @@
         private System.Windows.Forms.TextBox textBoxWeekDay;
         private System.Windows.Forms.Button buttonScheduleConfirm;
         private System.Windows.Forms.Button buttonScheduleCancel;
+        private System.Windows.Forms.ComboBox comboBoxSelectDepartments;
     }
 }

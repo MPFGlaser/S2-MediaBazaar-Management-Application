@@ -21,6 +21,7 @@ namespace MediaBazaar_ManagementSystem
         private DateTime date;
         private ShiftTime shiftTime;
         List<int> workingEmployeeIds = new List<int>();
+        List<Department> allDepartments = new List<Department>();
         private bool isEditing;
         private int oldId;
 
@@ -48,6 +49,7 @@ namespace MediaBazaar_ManagementSystem
             this.oldId = oldShiftId;
 
             AddEmployeeListToShift(working);
+            LoadDepartments();
         }
 
         public List<int> WorkingEmployeeIds
@@ -81,6 +83,37 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        // Loads all of the departmenst from the database.
+        private void LoadDepartments()
+        {
+            dbhandler = new DatabaseHandler();
+            allDepartments = dbhandler.GetAllDepartments();
+
+            foreach (Department d in allDepartments)
+            {
+                if (isEditing)
+                {
+                    d.Employees = dbhandler.GetEmployeesPerDepartment(oldId, d.Id);
+                }
+
+                comboBoxSelectDepartments.DisplayMember = "Text";
+                comboBoxSelectDepartments.ValueMember = "Department";
+                comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
+            }
+        }
+
+        // Updates the items in the select departments combobox so they have the correct data.
+        private void UpdateDepartmentsComboBox(List<Department> allDepartments)
+        {
+            comboBoxSelectDepartments.Items.Clear();
+            foreach (Department d in allDepartments)
+            {
+                comboBoxSelectDepartments.DisplayMember = "Text";
+                comboBoxSelectDepartments.ValueMember = "Department";
+                comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
+            }
+        }
+
         // Pre-fills the combobox for the shift time with all defined shift times. (Morning, afternoon, evening at the time of writing)
         private void InitializeComboBoxShiftTime()
         {
@@ -94,6 +127,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="toAddToShift"></param>
         private void AddEmployeeListToShift(List<Employee> toAddToShift)
         {
+            listBoxCurrentEmployees.Items.Clear();
             foreach (Employee e in toAddToShift)
             {
                 listBoxCurrentEmployees.DisplayMember = "Text";
@@ -109,36 +143,34 @@ namespace MediaBazaar_ManagementSystem
         {
             // Makes sure everything is set up correctly.
             dbhandler = new DatabaseHandler();
-            workingEmployeeIds = null;
             workingEmployeeIds = new List<int>();
-
-            // Makes a list of all ids of the employees scheduled for that shift
-            foreach (dynamic emp in listBoxCurrentEmployees.Items)
-            {
-                workingEmployeeIds.Add((emp).Employee.Id);
-            }
+            int shiftId = 0;
 
             // Creates a new shift object and sets the list of employeeIds to the one we just created.
             currentShift = new Shift(0, date, shiftTime);
-            currentShift.EmployeeIds = workingEmployeeIds;
 
             // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
             if (isEditing)
             {
                 // Removes all information about the shift in the database to prevent duplication of entries
                 dbhandler.ClearShift(oldId);
+            }
 
-                // Adds each employee id to the database with the correct shift id
-                foreach (int i in workingEmployeeIds)
+            // Adds each employee id to the database with the correct shift id
+            shiftId = dbhandler.AddShiftToDb(currentShift);
+
+            foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+            {
+                Department dep = (depDynamic).Department;
+
+                // Makes a list of all ids of the employees scheduled for that shift
+                foreach (Employee emp in dep.Employees)
                 {
-                    dbhandler.AddIdToShift(oldId, i);
+                    //workingEmployeeIds.Add(emp.Id);
+                    dbhandler.AddIdToShift(shiftId, emp.Id, dep.Id);
                 }
             }
-            else
-            {
-                // Adds each employee id to the database with the correct shift id
-                dbhandler.AddShiftToDb(currentShift);
-            }
+
             this.DialogResult = DialogResult.OK;
         }
 
@@ -150,17 +182,27 @@ namespace MediaBazaar_ManagementSystem
             // Checks if there's actually an employee selected to be added
             if (comboBoxSelectEmployees.SelectedIndex != -1)
             {
+                List<Department> allDepartments = GetDepartmentListFromComboBox();
+                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+
                 // Ensures the right employee object is used
-                Employee selected = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+                Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+
+                // Adds the selected employee to the list of employees in the department
+                allDepartments[selectedIndex].Employees.Add(selectedEmployee);
 
                 // Adds the selected employee to the listbox with currently scheduled employees.
                 listBoxCurrentEmployees.DisplayMember = "Text";
                 listBoxCurrentEmployees.ValueMember = "Employee";
-                listBoxCurrentEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+                listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
                 // Removes the employee from the list of available employees and resets the selection index.
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
                 comboBoxSelectEmployees.SelectedIndex = -1;
+
+                // Update the departments combobox and reselect the correct index
+                UpdateDepartmentsComboBox(allDepartments);
+                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
         }
 
@@ -172,18 +214,44 @@ namespace MediaBazaar_ManagementSystem
             // Checks if there's actually an employee selected to be removed
             if (listBoxCurrentEmployees.SelectedIndex != -1)
             {
+                List<Department> allDepartments = GetDepartmentListFromComboBox();
+                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+
                 // Ensures the right employee object is used
-                Employee selected = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+                Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+
+                // Adds the selected employee to the list of employees in the department
+                allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
 
                 // Adds the selected employee to the combobox of available employees.
                 comboBoxSelectEmployees.DisplayMember = "Text";
                 comboBoxSelectEmployees.ValueMember = "Employee";
-                comboBoxSelectEmployees.Items.Add(new { Text = selected.FirstName + " " + selected.SurName, Employee = selected });
+                comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
                 // Removes the employee from the listbox of currently scheduled employee.
                 listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+
+                // Update the departments combobox and reselect the correct index
+                UpdateDepartmentsComboBox(allDepartments);
+                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Returns all of the departments within the select department combobox.
+        /// </summary>
+        private List<Department> GetDepartmentListFromComboBox()
+        {
+            List<Department> allDepartments = new List<Department>();
+
+            foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+            {
+                Department dep = (depDynamic).Department;
+                allDepartments.Add(dep);
+            }
+
+            return allDepartments;
+        }
         #endregion
 
         #region Control event handlers
@@ -221,7 +289,15 @@ namespace MediaBazaar_ManagementSystem
         private void buttonPreviousDay_Click(object sender, EventArgs e)
         {
             date.AddDays(-1);
-        } 
+        }
+
+        private void comboBoxSelectDepartments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
+
+            AddEmployeeListToShift(selectedDepartment.Employees);
+        }
+
         #endregion
     }
 }
