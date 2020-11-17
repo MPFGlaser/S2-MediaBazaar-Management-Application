@@ -105,6 +105,7 @@
     <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
+    <Compile Include="Classes\Item\ItemMySQL.cs" />
     <Compile Include="Classes\Shift.cs" />
     <Compile Include="Classes\StockManager.cs" />
     <Compile Include="Models\ShiftTime.cs" />
