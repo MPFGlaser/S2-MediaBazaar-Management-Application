@@ -1,20 +1,13 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
     public partial class LoginWindow : Form
     {
-        DatabaseHandler dbhandler;
+        ILoginStorage loginStorage;
+        IEmployeeStorage employeeStorage;
+        private int userId = -1;
         private Employee loggedInUser;
 
         public LoginWindow()
@@ -24,12 +17,15 @@ namespace MediaBazaar_ManagementSystem
 
         private void Login()
         {
-            dbhandler = new DatabaseHandler();
+            loginStorage = new LoginMySQL();
+            employeeStorage = new EmployeeMySQL();
 
-            // Asks the database to check if the entered details match those in the database
-            this.loggedInUser = dbhandler.LoginUser(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
-            if (loggedInUser != null)
+            //Asks the loginStorage to check if the entered details match those we have stored.
+            userId = loginStorage.Check(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
+
+            if(userId != -1)
             {
+                this.loggedInUser = employeeStorage.Get(userId);
                 this.DialogResult = DialogResult.OK;
             }
             else

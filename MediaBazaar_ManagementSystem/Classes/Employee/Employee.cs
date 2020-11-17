@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using MediaBazaar_ManagementSystem.Models;
 
 // I don't know what this does, but it gives errors.
 //using MySql.Data.X.XDevAPI.Common;
 
-namespace MediaBazaar_ManagementSystem.classes
+namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// Class for an employee object. Contains all relevant information that's also found in the database's employee table.

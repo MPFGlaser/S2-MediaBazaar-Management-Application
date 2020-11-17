@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaBazaar_ManagementSystem.Classes
+﻿namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// Class for Item objects. Stores all values pertaining to an item as they would appear in the database.
