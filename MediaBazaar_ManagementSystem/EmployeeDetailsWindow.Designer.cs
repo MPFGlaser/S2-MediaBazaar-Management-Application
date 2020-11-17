@@ -65,6 +65,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxFunctions = new System.Windows.Forms.TextBox();
             this.buttonPreferredShifts = new System.Windows.Forms.Button();
+            this.buttonWorkingDepartments = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -368,6 +369,7 @@
             // 
             // employeeSpecificsGroup
             // 
+            this.employeeSpecificsGroup.Controls.Add(this.buttonWorkingDepartments);
             this.employeeSpecificsGroup.Controls.Add(this.checkBoxActive);
             this.employeeSpecificsGroup.Controls.Add(this.label13);
             this.employeeSpecificsGroup.Controls.Add(this.textBoxFunctions);
@@ -387,7 +389,7 @@
             this.checkBoxActive.Location = new System.Drawing.Point(5, 19);
             this.checkBoxActive.Name = "checkBoxActive";
             this.checkBoxActive.Size = new System.Drawing.Size(56, 17);
-            this.checkBoxActive.TabIndex = 43;
+            this.checkBoxActive.TabIndex = 45;
             this.checkBoxActive.Text = "Active";
             this.checkBoxActive.UseVisualStyleBackColor = true;
             // 
@@ -405,17 +407,27 @@
             this.textBoxFunctions.Location = new System.Drawing.Point(6, 55);
             this.textBoxFunctions.Name = "textBoxFunctions";
             this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
-            this.textBoxFunctions.TabIndex = 45;
+            this.textBoxFunctions.TabIndex = 47;
             // 
             // buttonPreferredShifts
             // 
             this.buttonPreferredShifts.Location = new System.Drawing.Point(224, 119);
             this.buttonPreferredShifts.Name = "buttonPreferredShifts";
             this.buttonPreferredShifts.Size = new System.Drawing.Size(127, 23);
-            this.buttonPreferredShifts.TabIndex = 46;
+            this.buttonPreferredShifts.TabIndex = 43;
             this.buttonPreferredShifts.Text = "Preferred Shifts";
             this.buttonPreferredShifts.UseVisualStyleBackColor = true;
             this.buttonPreferredShifts.Click += new System.EventHandler(this.buttonPreferredShifts_Click);
+            // 
+            // buttonWorkingDepartments
+            // 
+            this.buttonWorkingDepartments.Location = new System.Drawing.Point(6, 88);
+            this.buttonWorkingDepartments.Name = "buttonWorkingDepartments";
+            this.buttonWorkingDepartments.Size = new System.Drawing.Size(127, 23);
+            this.buttonWorkingDepartments.TabIndex = 49;
+            this.buttonWorkingDepartments.Text = "Departments";
+            this.buttonWorkingDepartments.UseVisualStyleBackColor = true;
+            this.buttonWorkingDepartments.Click += new System.EventHandler(this.buttonWorkingDepartments_Click);
             // 
             // EmployeeDetailsWindow
             // 
@@ -484,5 +496,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button buttonPreferredShifts;
+        private System.Windows.Forms.Button buttonWorkingDepartments;
     }
 }
