@@ -96,88 +96,89 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ConnectionString.cs" />
-    <Compile Include="Classes\DatabaseHandler.cs" />
-    <Compile Include="Classes\Day.cs" />
-    <Compile Include="Classes\Department.cs" />
+    <Compile Include="Classes\Department\Department.cs" />
+    <Compile Include="Classes\Department\DepartmentMySQL.cs" />
+    <Compile Include="Classes\Department\IDepartmentStorage.cs" />
     <Compile Include="Classes\Employee\Employee.cs" />
     <Compile Include="Classes\Employee\EmployeeMySQL.cs" />
     <Compile Include="Classes\Employee\Encrypt.cs" />
     <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
+    <Compile Include="Classes\ErrorMessages.cs" />
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Item\ItemMySQL.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
-    <Compile Include="Classes\Shift.cs" />
-    <Compile Include="Classes\StockManager.cs" />
+    <Compile Include="Classes\Shift\IShiftStorage.cs" />
+    <Compile Include="Classes\Shift\Shift.cs" />
+    <Compile Include="Classes\Shift\ShiftMySQL.cs" />
     <Compile Include="Models\ShiftTime.cs" />
-    <Compile Include="LoginWindow.cs">
+    <Compile Include="Forms\LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginWindow.Designer.cs">
+    <Compile Include="Forms\LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Function.cs" />
-    <Compile Include="CalendarDayControl.cs">
+    <Compile Include="Controls\CalendarDayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CalendarDayControl.Designer.cs">
+    <Compile Include="Controls\CalendarDayControl.Designer.cs">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeDetailsWindow.cs">
+    <Compile Include="Forms\EmployeeDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmployeeDetailsWindow.Designer.cs">
+    <Compile Include="Forms\EmployeeDetailsWindow.Designer.cs">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="PreferredHours.cs">
+    <Compile Include="Forms\PreferredHours.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PreferredHours.Designer.cs">
+    <Compile Include="Forms\PreferredHours.Designer.cs">
       <DependentUpon>PreferredHours.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductDetailsWindow.cs">
+    <Compile Include="Forms\ProductDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProductDetailsWindow.Designer.cs">
+    <Compile Include="Forms\ProductDetailsWindow.Designer.cs">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchedulingWindow.cs">
+    <Compile Include="Forms\SchedulingWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SchedulingWindow.Designer.cs">
+    <Compile Include="Forms\SchedulingWindow.Designer.cs">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorkingDepartments.cs">
+    <Compile Include="Forms\WorkingDepartments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WorkingDepartments.Designer.cs">
+    <Compile Include="Forms\WorkingDepartments.Designer.cs">
       <DependentUpon>WorkingDepartments.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CalendarDayControl.resx">
+    <EmbeddedResource Include="Controls\CalendarDayControl.resx">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDetailsWindow.resx">
+    <EmbeddedResource Include="Forms\EmployeeDetailsWindow.resx">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginWindow.resx">
+    <EmbeddedResource Include="Forms\LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PreferredHours.resx">
+    <EmbeddedResource Include="Forms\PreferredHours.resx">
       <DependentUpon>PreferredHours.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProductDetailsWindow.resx">
+    <EmbeddedResource Include="Forms\ProductDetailsWindow.resx">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -190,10 +191,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SchedulingWindow.resx">
+    <EmbeddedResource Include="Forms\SchedulingWindow.resx">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorkingDepartments.resx">
+    <EmbeddedResource Include="Forms\WorkingDepartments.resx">
       <DependentUpon>WorkingDepartments.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -213,5 +214,6 @@
   <ItemGroup>
     <None Include="Resources\reload.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

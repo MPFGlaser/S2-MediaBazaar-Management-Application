@@ -1,20 +1,13 @@
-﻿using MediaBazaar_ManagementSystem.Classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// Form in which the details of a product can be edited
-    /// <para>The item can then be added to the database or, if it exists already, be edited.</para>
+    /// <para>The item can then be added to the itemStorage or, if it exists already, be edited.</para>
     /// </summary>
     public partial class ProductDetailsWindow : Form
     {
@@ -36,7 +29,7 @@ namespace MediaBazaar_ManagementSystem
 
         #region Logic
         /// <summary>
-        /// Creates an Item object with the given parameters ready for being added to the database
+        /// Creates an Item object with the given parameters ready for being added to the itemStorage
         /// <para>Due to it being for a new item specifically, the id is 0</para>
         /// </summary>
         /// <param name="name"></param>
@@ -155,12 +148,12 @@ namespace MediaBazaar_ManagementSystem
                 // Checks if the form is in editing mode
                 if (editing)
                 {
-                    // Creates an Item object ready for updating an entry in the database
+                    // Creates an Item object ready for updating an entry in the itemStorage
                     success = UpdateItem(editId, name, brand, code, category, quantity, price, active, description);
                 }
                 else
                 {
-                    // Creates an Item object ready for being added to the database
+                    // Creates an Item object ready for being added to the itemStorage
                     success = CreateItem(name, brand, code, category, quantity, price, active, description);
                 }
 

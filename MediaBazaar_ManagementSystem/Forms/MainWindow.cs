@@ -1,13 +1,5 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
@@ -17,9 +9,11 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
-        DatabaseHandler dbhandler;
         IEmployeeStorage employeeStorage;
         IItemStorage itemStorage;
+        IDepartmentStorage departmentStorage;
+        IShiftStorage shiftStorage;
+
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
@@ -31,7 +25,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             DisplayInformation();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
-            toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Database Entries");
+            toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Data");
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
 
             HideInactiveEmployees(true);
@@ -57,7 +51,6 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void DisplayInformation()
         {
-            dbhandler = new Classes.DatabaseHandler();
             employeeStorage = new EmployeeMySQL();
             itemStorage = new ItemMySQL();
 
@@ -68,13 +61,13 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to load all departments from the database and populate the departments combobox with them.
+        /// Function to load all departments from the departmentStorage and populate the departments combobox with them.
         /// </summary>
         private void LoadAllDepartments()
         {
-            // Initialises the dbhandler and makes a list of all departments it can find
-            dbhandler = new Classes.DatabaseHandler();
-            List<Department> allDepartments = dbhandler.GetAllDepartments();
+            // Initialises the departmentStorage and makes a list of all departments it can find
+            departmentStorage = new DepartmentMySQL();
+            List<Department> allDepartments = departmentStorage.GetAll();
 
             // Iterates through the list of departments and adds each of them to the combobox
             foreach (Department d in allDepartments)
@@ -86,14 +79,14 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to populate the employee table with all employees stored in the database.
+        /// Function to populate the employee table with all employees stored in the employeeStorage.
         /// </summary>
         private void PopulateEmployeesTable()
         {
             // Clears the dataGridView so no orphaned employees remain by accident
             dataGridViewEmployees.Rows.Clear();
 
-            // Gathers all employees from the database and adds them to the dataGridView
+            // Gathers all employees from the employeeStorage and adds them to the dataGridView
             try
             {
                 foreach (Employee e in employeeStorage.GetAll(false))
@@ -128,14 +121,14 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to add all items in the database to the dataGridView
+        /// Function to add all items in the itemStorage to the dataGridView
         /// </summary>
         private void PopulateItemsTable()
         {
             // Clears the dataGridView to prevent orphan items from sticking around
             dataGridViewStock.Rows.Clear();
 
-            // Gets all items from the database and adds them to the dataGridView
+            // Gets all items from the itemStorage and adds them to the dataGridView
             try
             {
                 foreach (Item i in itemStorage.GetAll(false))
@@ -176,14 +169,16 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SetupCorrectWeekData()
         {
+            shiftStorage = new ShiftMySQL();
+
             // Gets the week number from the numericUpDown
             int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
 
             // Gets the first date of the week with the aforementioned week number
             weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
 
-            // Gets all shifts from the database between the start and end date of the week
-            List<Shift> allWeekShifts = dbhandler.getWeekData(weekDays[0], weekDays[6]);
+            // Gets all shifts from the shiftStorage between the start and end date of the week
+            List<Shift> allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
             // Sets the correct data on the CalendarDayControl elements
             calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
@@ -335,7 +330,7 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Adds a department to the combobox and database
+        /// Adds a department to the combobox and departmentStorage
         /// </summary>
         private void EmployeeDepartmentAdd()
         {
@@ -343,14 +338,14 @@ namespace MediaBazaar_ManagementSystem
 
             if (newDepartmentName != string.Empty)
             {
-                dbhandler = new Classes.DatabaseHandler();
-                dbhandler.CreateNewDepartment(newDepartmentName);
+                departmentStorage = new DepartmentMySQL();
+                departmentStorage.Create(newDepartmentName);
                 comboBoxAllDepartments.Items.Add(newDepartmentName);
             }
         }
 
         /// <summary>
-        /// Removes a department from the combobox and database
+        /// Removes a department from the combobox and departmentStorage
         /// </summary>
         private void EmployeeDepartmentRemove()
         {
@@ -359,8 +354,8 @@ namespace MediaBazaar_ManagementSystem
                 Department departmentToRemove = (comboBoxAllDepartments.SelectedItem as dynamic).Department;
                 if (departmentToRemove != null)
                 {
-                    dbhandler = new Classes.DatabaseHandler();
-                    dbhandler.RemoveDepartment(departmentToRemove.Id);
+                    departmentStorage = new DepartmentMySQL();
+                    departmentStorage.Remove(departmentToRemove.Id);
                     comboBoxAllDepartments.Items.Remove(departmentToRemove.Name);
                 }
             }
@@ -538,7 +533,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonReloadDatabaseEntries_Click(object sender, EventArgs e)
         {
             DisplayInformation();
-            MessageBox.Show("Database Reloaded");
+            MessageBox.Show("Data Reloaded");
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)

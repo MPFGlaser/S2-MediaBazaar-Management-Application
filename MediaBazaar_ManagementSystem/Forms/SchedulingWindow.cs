@@ -1,22 +1,17 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MediaBazaar_ManagementSystem.Models;
 
 namespace MediaBazaar_ManagementSystem
 {
     public partial class SchedulingWindow : Form
     {
-        DatabaseHandler dbhandler;
+        IEmployeeStorage employeeStorage;
+        IDepartmentStorage departmentStorage;
+        IShiftStorage shiftStorage;
+
         private Shift currentShift;
         private DateTime date;
         private ShiftTime shiftTime;
@@ -65,8 +60,8 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         private void LoadEmployees(List<Employee> working)
         {
-            dbhandler = new DatabaseHandler();
-            allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
+            employeeStorage = new EmployeeMySQL();
+            allActiveEmployees = employeeStorage.GetAll(true);
 
             foreach (Employee e in working)
             {
@@ -84,17 +79,18 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        // Loads all of the departmenst from the database and sets them into the combobox
+        // Loads all of the department from the departmentStorage and sets them into the combobox
         private void LoadDepartments()
         {
-            dbhandler = new DatabaseHandler();
-            allDepartments = dbhandler.GetAllDepartments();
+            departmentStorage = new DepartmentMySQL();
+            shiftStorage = new ShiftMySQL();
+            allDepartments = departmentStorage.GetAll();
 
             foreach (Department d in allDepartments)
             {
                 if (isEditing)
                 {
-                    d.Employees = dbhandler.GetEmployeesPerDepartment(oldId, d.Id);
+                    d.Employees = shiftStorage.GetDepartmentEmployees(oldId, d.Id);
                 }
 
                 comboBoxSelectDepartments.DisplayMember = "Text";
@@ -138,27 +134,27 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the database.
+        /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the shiftStorage.
         /// </summary>
         private void Confirm()
         {
             // Makes sure everything is set up correctly.
-            dbhandler = new DatabaseHandler();
+            shiftStorage = new ShiftMySQL();
             workingEmployeeIds = new List<int>();
             int shiftId = 0;
 
             // Creates a new shift object and sets the list of employeeIds to the one we just created.
             currentShift = new Shift(0, date, shiftTime);
 
-            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
+            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)
             {
-                // Removes all information about the shift in the database to prevent duplication of entries
-                dbhandler.ClearShift(oldId);
+                // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+                shiftStorage.Clear(oldId);
             }
 
-            // Adds each employee id to the database with the correct shift id
-            shiftId = dbhandler.AddShiftToDb(currentShift);
+            // Adds each employee id to the shiftStorage with the correct shift id
+            shiftId = shiftStorage.Create(currentShift);
 
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {
@@ -168,7 +164,7 @@ namespace MediaBazaar_ManagementSystem
                 foreach (Employee emp in dep.Employees)
                 {
                     //workingEmployeeIds.Add(emp.Id);
-                    dbhandler.AddIdToShift(shiftId, emp.Id, dep.Id);
+                    shiftStorage.Assign(shiftId, emp.Id, dep.Id);
                 }
             }
 

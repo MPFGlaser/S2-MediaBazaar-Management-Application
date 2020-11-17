@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
-using MediaBazaar_ManagementSystem.Models;
-using MediaBazaar_ManagementSystem.Classes;
-using MediaBazaar_ManagementSystem.classes;
 
 namespace MediaBazaar_ManagementSystem
 {
     public partial class CalendarDayControl : UserControl
     {
         SchedulingWindow schedule;
+        IShiftStorage shiftStorage;
         private DateTime date;
-        DatabaseHandler dbhandler;
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>();
 
@@ -85,15 +77,15 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getMorningShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
-            dbhandler = new DatabaseHandler();
-            newShift = dbhandler.GetShift(date, ShiftTime.Morning);
+            shiftStorage = new ShiftMySQL();
+            newShift = shiftStorage.Get(date, ShiftTime.Morning);
 
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {
-                shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -113,15 +105,15 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getAfternoonShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
-            dbhandler = new DatabaseHandler();
-            newShift = dbhandler.GetShift(date, ShiftTime.Afternoon);
+            shiftStorage = new ShiftMySQL();
+            newShift = shiftStorage.Get(date, ShiftTime.Afternoon);
 
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {
-                shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
             else
@@ -141,15 +133,15 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getEveningShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
-            dbhandler = new DatabaseHandler();
-            newShift = dbhandler.GetShift(date, ShiftTime.Evening);
+            shiftStorage = new ShiftMySQL();
+            newShift = shiftStorage.Get(date, ShiftTime.Evening);
 
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {
-                shiftEmployees = dbhandler.GetShiftEmployees(newShift.Id);
+                shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
                 schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
             else
