@@ -12,6 +12,8 @@ namespace MediaBazaar_ManagementSystem
         DatabaseHandler dbhandler;
         IEmployeeStorage employeeStorage;
         IItemStorage itemStorage;
+        IDepartmentStorage departmentStorage;
+
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
@@ -65,8 +67,8 @@ namespace MediaBazaar_ManagementSystem
         private void LoadAllDepartments()
         {
             // Initialises the dbhandler and makes a list of all departments it can find
-            dbhandler = new DatabaseHandler();
-            List<Department> allDepartments = dbhandler.GetAllDepartments();
+            departmentStorage = new DepartmentMySQL();
+            List<Department> allDepartments = departmentStorage.GetAll();
 
             // Iterates through the list of departments and adds each of them to the combobox
             foreach (Department d in allDepartments)
@@ -335,8 +337,8 @@ namespace MediaBazaar_ManagementSystem
 
             if (newDepartmentName != string.Empty)
             {
-                dbhandler = new DatabaseHandler();
-                dbhandler.CreateNewDepartment(newDepartmentName);
+                departmentStorage = new DepartmentMySQL();
+                departmentStorage.Create(newDepartmentName);
                 comboBoxAllDepartments.Items.Add(newDepartmentName);
             }
         }
@@ -351,8 +353,8 @@ namespace MediaBazaar_ManagementSystem
                 Department departmentToRemove = (comboBoxAllDepartments.SelectedItem as dynamic).Department;
                 if (departmentToRemove != null)
                 {
-                    dbhandler = new DatabaseHandler();
-                    dbhandler.RemoveDepartment(departmentToRemove.Id);
+                    departmentStorage = new DepartmentMySQL();
+                    departmentStorage.Remove(departmentToRemove.Id);
                     comboBoxAllDepartments.Items.Remove(departmentToRemove.Name);
                 }
             }
