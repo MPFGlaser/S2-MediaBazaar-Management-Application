@@ -13,8 +13,9 @@ namespace MediaBazaar_ManagementSystem
         private Employee employee;
         private Boolean editing = false;
         private int editId;
-        string preferredHours = "000000000000000000000";
+        string preferredHours = "000000000000000000000", workingDepartments = "";
         PreferredHours ph;
+        WorkingDepartments wd;
 
         public EmployeeDetailsWindow()
         {
@@ -204,7 +205,7 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, "");
+                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
                 }
                 else
                 {
@@ -258,6 +259,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxPostalCode.Text = employee.PostalCode;
             textBoxCity.Text = employee.City;
             preferredHours = employee.PreferredHours;
+            workingDepartments = employee.WorkingDepartments;
         }
 
         /// <summary>
@@ -302,7 +304,17 @@ namespace MediaBazaar_ManagementSystem
             {
                 preferredHours = ph.PreferredHoursString;
             }
-        } 
+        }
+
+        private void buttonWorkingDepartments_Click(object sender, EventArgs e)
+        {
+            //Creates and shows the WorkingDepartments form so the user can select the department on which the employee will be working.
+            wd = new WorkingDepartments();
+            if(wd.ShowDialog() == DialogResult.OK)
+            {
+                workingDepartments = "";
+            }
+        }
         #endregion
     }
 }

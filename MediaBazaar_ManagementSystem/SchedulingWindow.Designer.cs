@@ -159,7 +159,7 @@
             this.buttonScheduleCancel.Name = "buttonScheduleCancel";
             this.buttonScheduleCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonScheduleCancel.TabIndex = 38;
-            this.buttonScheduleCancel.Text = "Close";
+            this.buttonScheduleCancel.Text = "Cancel";
             this.buttonScheduleCancel.UseVisualStyleBackColor = true;
             this.buttonScheduleCancel.Click += new System.EventHandler(this.buttonScheduleCancel_Click);
             // 
