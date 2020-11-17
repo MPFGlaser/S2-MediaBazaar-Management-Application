@@ -14,7 +14,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class WorkingDepartments : Form
     {
-        private string workingDepartments = null;
+        private string workingDepartments = "";
         public WorkingDepartments()
         {
             InitializeComponent();
@@ -22,16 +22,18 @@ namespace MediaBazaar_ManagementSystem
 
         public WorkingDepartments(string input, List<Department> allDepartments)
         {
-            List<int> selectedDepartments = getSelectedDepartments(input);
+            //List<int> selectedDepartments = getSelectedDepartments(input);
+            List<int> selectedDepartments = input.Split(',').Select(int.Parse).ToList();
             InitializeComponent();
             InitializeDepartments(allDepartments, selectedDepartments);
         }
-        #region Logic
-        private List<int> getSelectedDepartments(string input)
+
+        public string WorkingDepartmentsString
         {
-            return new List<int>();
+            get { return workingDepartments; }
         }
 
+        #region Logic
         private void InitializeDepartments(List<Department> allDepartments, List<int> selectedDepartments)
         {
             foreach (Department d in allDepartments)
@@ -49,6 +51,11 @@ namespace MediaBazaar_ManagementSystem
                     comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
                 }
             }
+        }
+
+        private void Confirm()
+        {
+
         }
 
         private void AddDepartmentToWorkable()
@@ -91,6 +98,11 @@ namespace MediaBazaar_ManagementSystem
         #endregion
 
         #region Button handlers
+        private void buttonWorkingDepartmentsConfirm_Click(object sender, EventArgs e)
+        {
+            Confirm();
+        }
+
         private void buttonAddDepartmentToEmployee_Click(object sender, EventArgs e)
         {
             AddDepartmentToWorkable();

@@ -56,6 +56,7 @@ namespace MediaBazaar_ManagementSystem
             this.buttonWorkingDepartmentsConfirm.TabIndex = 51;
             this.buttonWorkingDepartmentsConfirm.Text = "Confirm";
             this.buttonWorkingDepartmentsConfirm.UseVisualStyleBackColor = true;
+            this.buttonWorkingDepartmentsConfirm.Click += new System.EventHandler(this.buttonWorkingDepartmentsConfirm_Click);
             // 
             // buttonWorkingDepartmentsCancel
             // 

@@ -322,7 +322,7 @@ namespace MediaBazaar_ManagementSystem
             wd = new WorkingDepartments(workingDepartments, allDepartments);
             if(wd.ShowDialog() == DialogResult.OK)
             {
-                workingDepartments = "";
+                workingDepartments = wd.WorkingDepartmentsString;
             }
         }
         #endregion
