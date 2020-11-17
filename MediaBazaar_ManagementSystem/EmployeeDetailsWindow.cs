@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -14,12 +15,14 @@ namespace MediaBazaar_ManagementSystem
         private Boolean editing = false;
         private int editId;
         string preferredHours = "000000000000000000000", workingDepartments = "";
+        List<Department> allDepartments = new List<Department>();
         PreferredHours ph;
         WorkingDepartments wd;
 
         public EmployeeDetailsWindow()
         {
             InitializeComponent();
+            LoadDepartments();
         }
 
         public Employee Employee
@@ -281,7 +284,14 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.BackColor = Color.FromName("Window");
             textBoxPostalCode.BackColor = Color.FromName("Window");
             textBoxCity.BackColor = Color.FromName("Window");
-        } 
+        }
+
+        // Loads all of the departmenst from the database and sets them into the combobox
+        private void LoadDepartments()
+        {
+            dbhandler = new DatabaseHandler();
+            allDepartments = dbhandler.GetAllDepartments();
+        }
         #endregion
 
         #region Button handlers
@@ -309,7 +319,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonWorkingDepartments_Click(object sender, EventArgs e)
         {
             //Creates and shows the WorkingDepartments form so the user can select the department on which the employee will be working.
-            wd = new WorkingDepartments();
+            wd = new WorkingDepartments(workingDepartments, allDepartments);
             if(wd.ShowDialog() == DialogResult.OK)
             {
                 workingDepartments = "";

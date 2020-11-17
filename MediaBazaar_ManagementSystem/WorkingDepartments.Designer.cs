@@ -33,8 +33,8 @@ namespace MediaBazaar_ManagementSystem
             this.buttonWorkingDepartmentsConfirm = new System.Windows.Forms.Button();
             this.buttonWorkingDepartmentsCancel = new System.Windows.Forms.Button();
             this.listBoxCurrentWorkingDepartments = new System.Windows.Forms.ListBox();
-            this.buttonRemoveDepartmentFromWorkable = new System.Windows.Forms.Button();
-            this.buttonAddEmployeeToShift = new System.Windows.Forms.Button();
+            this.buttonRemoveDepartmentFromEmployee = new System.Windows.Forms.Button();
+            this.buttonAddDepartmentToEmployee = new System.Windows.Forms.Button();
             this.comboBoxShiftTime = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -76,23 +76,25 @@ namespace MediaBazaar_ManagementSystem
             this.listBoxCurrentWorkingDepartments.Sorted = true;
             this.listBoxCurrentWorkingDepartments.TabIndex = 47;
             // 
-            // buttonRemoveDepartmentFromWorkable
+            // buttonRemoveDepartmentFromEmployee
             // 
-            this.buttonRemoveDepartmentFromWorkable.Location = new System.Drawing.Point(92, 77);
-            this.buttonRemoveDepartmentFromWorkable.Name = "buttonRemoveDepartmentFromWorkable";
-            this.buttonRemoveDepartmentFromWorkable.Size = new System.Drawing.Size(117, 23);
-            this.buttonRemoveDepartmentFromWorkable.TabIndex = 46;
-            this.buttonRemoveDepartmentFromWorkable.Text = "Remove Department";
-            this.buttonRemoveDepartmentFromWorkable.UseVisualStyleBackColor = true;
+            this.buttonRemoveDepartmentFromEmployee.Location = new System.Drawing.Point(92, 77);
+            this.buttonRemoveDepartmentFromEmployee.Name = "buttonRemoveDepartmentFromEmployee";
+            this.buttonRemoveDepartmentFromEmployee.Size = new System.Drawing.Size(117, 23);
+            this.buttonRemoveDepartmentFromEmployee.TabIndex = 46;
+            this.buttonRemoveDepartmentFromEmployee.Text = "Remove Department";
+            this.buttonRemoveDepartmentFromEmployee.UseVisualStyleBackColor = true;
+            this.buttonRemoveDepartmentFromEmployee.Click += new System.EventHandler(this.buttonRemoveDepartmentFromEmployee_Click);
             // 
-            // buttonAddEmployeeToShift
+            // buttonAddDepartmentToEmployee
             // 
-            this.buttonAddEmployeeToShift.Location = new System.Drawing.Point(92, 48);
-            this.buttonAddEmployeeToShift.Name = "buttonAddEmployeeToShift";
-            this.buttonAddEmployeeToShift.Size = new System.Drawing.Size(117, 23);
-            this.buttonAddEmployeeToShift.TabIndex = 45;
-            this.buttonAddEmployeeToShift.Text = "Add Department";
-            this.buttonAddEmployeeToShift.UseVisualStyleBackColor = true;
+            this.buttonAddDepartmentToEmployee.Location = new System.Drawing.Point(92, 48);
+            this.buttonAddDepartmentToEmployee.Name = "buttonAddDepartmentToEmployee";
+            this.buttonAddDepartmentToEmployee.Size = new System.Drawing.Size(117, 23);
+            this.buttonAddDepartmentToEmployee.TabIndex = 45;
+            this.buttonAddDepartmentToEmployee.Text = "Add Department";
+            this.buttonAddDepartmentToEmployee.UseVisualStyleBackColor = true;
+            this.buttonAddDepartmentToEmployee.Click += new System.EventHandler(this.buttonAddDepartmentToEmployee_Click);
             // 
             // comboBoxShiftTime
             // 
@@ -112,8 +114,8 @@ namespace MediaBazaar_ManagementSystem
             this.Controls.Add(this.buttonWorkingDepartmentsConfirm);
             this.Controls.Add(this.buttonWorkingDepartmentsCancel);
             this.Controls.Add(this.listBoxCurrentWorkingDepartments);
-            this.Controls.Add(this.buttonRemoveDepartmentFromWorkable);
-            this.Controls.Add(this.buttonAddEmployeeToShift);
+            this.Controls.Add(this.buttonRemoveDepartmentFromEmployee);
+            this.Controls.Add(this.buttonAddDepartmentToEmployee);
             this.Controls.Add(this.comboBoxShiftTime);
             this.Name = "WorkingDepartments";
             this.Text = "WorkingDepartments";
@@ -127,8 +129,8 @@ namespace MediaBazaar_ManagementSystem
         private System.Windows.Forms.Button buttonWorkingDepartmentsConfirm;
         private System.Windows.Forms.Button buttonWorkingDepartmentsCancel;
         private System.Windows.Forms.ListBox listBoxCurrentWorkingDepartments;
-        private System.Windows.Forms.Button buttonRemoveDepartmentFromWorkable;
-        private System.Windows.Forms.Button buttonAddEmployeeToShift;
+        private System.Windows.Forms.Button buttonRemoveDepartmentFromEmployee;
+        private System.Windows.Forms.Button buttonAddDepartmentToEmployee;
         private System.Windows.Forms.ComboBox comboBoxShiftTime;
     }
 }

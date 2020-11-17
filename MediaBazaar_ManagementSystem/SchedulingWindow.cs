@@ -83,7 +83,7 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        // Loads all of the departmenst from the database.
+        // Loads all of the departmenst from the database and sets them into the combobox
         private void LoadDepartments()
         {
             dbhandler = new DatabaseHandler();
