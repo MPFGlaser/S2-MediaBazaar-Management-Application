@@ -97,7 +97,6 @@
   <ItemGroup>
     <Compile Include="Classes\ConnectionString.cs" />
     <Compile Include="Classes\DatabaseHandler.cs" />
-    <Compile Include="Classes\Day.cs" />
     <Compile Include="Classes\Department\Department.cs" />
     <Compile Include="Classes\Department\DepartmentMySQL.cs" />
     <Compile Include="Classes\Department\IDepartmentStorage.cs" />
@@ -110,8 +109,9 @@
     <Compile Include="Classes\Item\ItemMySQL.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
-    <Compile Include="Classes\Shift.cs" />
-    <Compile Include="Classes\StockManager.cs" />
+    <Compile Include="Classes\Shift\IShiftStorage.cs" />
+    <Compile Include="Classes\Shift\Shift.cs" />
+    <Compile Include="Classes\Shift\ShiftMySQL.cs" />
     <Compile Include="Models\ShiftTime.cs" />
     <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
@@ -214,6 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

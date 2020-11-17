@@ -5,7 +5,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public interface IShiftStorage
     {
-        bool Create(Shift input);
+        int Create(Shift input);
 
         bool Clear(int shiftId);
 
