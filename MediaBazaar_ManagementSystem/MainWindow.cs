@@ -1,13 +1,5 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
@@ -57,7 +49,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void DisplayInformation()
         {
-            dbhandler = new Classes.DatabaseHandler();
+            dbhandler = new DatabaseHandler();
             employeeStorage = new EmployeeMySQL();
             itemStorage = new ItemMySQL();
 
@@ -73,7 +65,7 @@ namespace MediaBazaar_ManagementSystem
         private void LoadAllDepartments()
         {
             // Initialises the dbhandler and makes a list of all departments it can find
-            dbhandler = new Classes.DatabaseHandler();
+            dbhandler = new DatabaseHandler();
             List<Department> allDepartments = dbhandler.GetAllDepartments();
 
             // Iterates through the list of departments and adds each of them to the combobox
@@ -343,7 +335,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (newDepartmentName != string.Empty)
             {
-                dbhandler = new Classes.DatabaseHandler();
+                dbhandler = new DatabaseHandler();
                 dbhandler.CreateNewDepartment(newDepartmentName);
                 comboBoxAllDepartments.Items.Add(newDepartmentName);
             }
@@ -359,7 +351,7 @@ namespace MediaBazaar_ManagementSystem
                 Department departmentToRemove = (comboBoxAllDepartments.SelectedItem as dynamic).Department;
                 if (departmentToRemove != null)
                 {
-                    dbhandler = new Classes.DatabaseHandler();
+                    dbhandler = new DatabaseHandler();
                     dbhandler.RemoveDepartment(departmentToRemove.Id);
                     comboBoxAllDepartments.Items.Remove(departmentToRemove.Name);
                 }

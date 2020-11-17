@@ -1,8 +1,5 @@
 ﻿using System;
 
-// I don't know what this does, but it gives errors.
-//using MySql.Data.X.XDevAPI.Common;
-
 namespace MediaBazaar_ManagementSystem
 {
     /// <summary>

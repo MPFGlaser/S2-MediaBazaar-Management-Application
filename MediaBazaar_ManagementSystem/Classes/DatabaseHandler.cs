@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 
 
-namespace MediaBazaar_ManagementSystem.Classes
+namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// Class to handle everything database-related
@@ -109,7 +109,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Open();
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
-                if(correctLogin > 0)
+                if (correctLogin > 0)
                 {
                     String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift, workingDepartments FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);

@@ -1,6 +1,4 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Classes;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Drawing;

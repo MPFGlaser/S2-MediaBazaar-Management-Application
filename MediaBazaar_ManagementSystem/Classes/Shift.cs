@@ -1,12 +1,8 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Models;
+﻿using MediaBazaar_ManagementSystem.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MediaBazaar_ManagementSystem.Classes
+namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// Class for everything related to aa shift, as it appears in the database.
