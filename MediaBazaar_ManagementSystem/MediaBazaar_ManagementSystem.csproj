@@ -103,7 +103,7 @@
     <Compile Include="Classes\Employee\EmployeeMySQL.cs" />
     <Compile Include="Classes\Employee\Encrypt.cs" />
     <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
-    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Shift.cs" />
     <Compile Include="Classes\StockManager.cs" />
     <Compile Include="Models\ShiftTime.cs" />
