@@ -18,6 +18,7 @@ namespace MediaBazaar_ManagementSystem
     /// </summary>
     public partial class ProductDetailsWindow : Form
     {
+        IItemStorage itemStorage;
         private Item item;
         private bool editing = false;
         private int editId;
@@ -25,6 +26,7 @@ namespace MediaBazaar_ManagementSystem
         public ProductDetailsWindow()
         {
             InitializeComponent();
+            itemStorage = new ItemMySQL();
         }
 
         public Item Item
@@ -45,9 +47,10 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="price"></param>
         /// <param name="active"></param>
         /// <param name="description"></param>
-        private void CreateItem(string name, string brand, int code, string category, int quantity, double price, bool active, string description)
+        private bool CreateItem(string name, string brand, int code, string category, int quantity, double price, bool active, string description)
         {
             item = new Item(0, name, brand, code, category, quantity, price, active, description);
+            return itemStorage.Create(item);
         }
 
         /// <summary>
@@ -63,9 +66,10 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="price"></param>
         /// <param name="active"></param>
         /// <param name="description"></param>
-        private void UpdateItem(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description)
+        private bool UpdateItem(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description)
         {
             item = new Item(id, name, brand, code, category, quantity, price, active, description);
+            return itemStorage.Update(item);
         }
 
         /// <summary>
@@ -143,6 +147,8 @@ namespace MediaBazaar_ManagementSystem
             // If all regex expressions pass, this is run
             if (allCorrect)
             {
+                bool success;
+
                 // Converts the input in the code textbox from a string to an integer. Looks shabby, but since it has been checked with regex it cannot cause any problems (theoretically.)
                 int code = Convert.ToInt32(textBoxCode.Text);
 
@@ -150,14 +156,18 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     // Creates an Item object ready for updating an entry in the database
-                    UpdateItem(editId, name, brand, code, category, quantity, price, active, description);
+                    success = UpdateItem(editId, name, brand, code, category, quantity, price, active, description);
                 }
                 else
                 {
                     // Creates an Item object ready for being added to the database
-                    CreateItem(name, brand, code, category, quantity, price, active, description);
+                    success = CreateItem(name, brand, code, category, quantity, price, active, description);
                 }
-                this.DialogResult = DialogResult.OK;
+
+                if (success)
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
         }
 
@@ -172,7 +182,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxCategory.BackColor = Color.FromName("Window");
             numericUpDownPrice.BackColor = Color.FromName("Window");
             numericUpDownQuantity.BackColor = Color.FromName("Window");
-        } 
+        }
         #endregion
 
         #region User control event handlers
@@ -184,7 +194,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonPDWCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        } 
+        }
         #endregion
     }
 }

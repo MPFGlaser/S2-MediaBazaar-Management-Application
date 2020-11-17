@@ -18,6 +18,8 @@ namespace MediaBazaar_ManagementSystem
     public partial class MainWindow : Form
     {
         DatabaseHandler dbhandler;
+        IEmployeeStorage employeeStorage;
+        IItemStorage itemStorage;
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         ProductDetailsWindow pdw;
@@ -41,6 +43,8 @@ namespace MediaBazaar_ManagementSystem
         private void DisplayInformation()
         {
             dbhandler = new Classes.DatabaseHandler();
+            employeeStorage = new EmployeeMySQL();
+            itemStorage = new ItemMySQL();
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             SetupCorrectWeekData();
@@ -99,7 +103,7 @@ namespace MediaBazaar_ManagementSystem
             // Gathers all employees from the database and adds them to the dataGridView
             try
             {
-                foreach (Employee e in dbhandler.GetEmployeesFromDB())
+                foreach (Employee e in employeeStorage.GetAll(false))
                 {
                     int rowId = dataGridViewEmployees.Rows.Add();
 
@@ -141,7 +145,7 @@ namespace MediaBazaar_ManagementSystem
             // Gets all items from the database and adds them to the dataGridView
             try
             {
-                foreach (Item i in dbhandler.GetItemsFromDB())
+                foreach (Item i in itemStorage.GetAll(false))
                 {
                     int rowId = dataGridViewStock.Rows.Add();
 
@@ -327,7 +331,7 @@ namespace MediaBazaar_ManagementSystem
         private void EmployeeModify()
         {
             int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
-            Employee toEdit = dbhandler.GetEmployee(id);
+            Employee toEdit = employeeStorage.Get(id);
             edw = new EmployeeDetailsWindow();
             edw.AddEmployeeData(toEdit);
             if (edw.ShowDialog() == DialogResult.OK)
@@ -379,7 +383,6 @@ namespace MediaBazaar_ManagementSystem
             pdw = new ProductDetailsWindow();
             if (pdw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.CreateItem(pdw.Item);
                 PopulateItemsTable();
             }
         }
@@ -390,12 +393,11 @@ namespace MediaBazaar_ManagementSystem
         private void StockModify()
         {
             int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
-            Item toEdit = dbhandler.GetItem(id);
+            Item toEdit = itemStorage.Get(id);
             pdw = new ProductDetailsWindow();
             pdw.AddItemData(toEdit);
             if (pdw.ShowDialog() == DialogResult.OK)
             {
-                dbhandler.UpdateItem(pdw.Item);
                 PopulateItemsTable();
                 HideInactiveItems(!checkBoxShowInactiveItems.Checked);
             }
