@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -13,13 +14,16 @@ namespace MediaBazaar_ManagementSystem
         private Employee employee;
         private Boolean editing = false;
         private int editId;
-        string preferredHours = "000000000000000000000";
+        string preferredHours = "000000000000000000000", workingDepartments = "";
+        List<Department> allDepartments = new List<Department>();
         PreferredHours ph;
+        WorkingDepartments wd;
 
         public EmployeeDetailsWindow()
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
+            LoadDepartments();
         }
 
         public Employee Employee
@@ -47,10 +51,13 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="city"></param>
         /// <param name="preferredHours"></param>
         /// <returns></returns>
-        private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours)
+        private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours, string workingDepartments)
         {
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
-            return employeeStorage.Create(employee);
+            //employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
+            //return employeeStorage.Create(employee);
+            dbhandler = new Classes.DatabaseHandler();
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours, workingDepartments);
+            return dbhandler.CreateEmployee(employee);
         }
 
         /// <summary>
@@ -73,10 +80,13 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="city"></param>
         /// <param name="preferredHours"></param>
         /// <returns></returns>
-        private bool UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours)
+        private bool UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments)
         {
-            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
-            return employeeStorage.Update(employee);
+            //employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
+            //return employeeStorage.Update(employee);
+            dbhandler = new Classes.DatabaseHandler();
+            employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
+            return dbhandler.UpdateEmployee(employee);
         }
 
         /// <summary>
@@ -203,11 +213,13 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
+                    // Update to use new stuff
+                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
                 }
                 else
                 {
-                    success = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours);
+                    // Update to use new stuff
+                    succesfulExecution = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
                 }
 
                 // If the database query was executed successfully, the form closes.
@@ -257,6 +269,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxPostalCode.Text = employee.PostalCode;
             textBoxCity.Text = employee.City;
             preferredHours = employee.PreferredHours;
+            workingDepartments = employee.WorkingDepartments;
         }
 
         /// <summary>
@@ -278,7 +291,14 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.BackColor = Color.FromName("Window");
             textBoxPostalCode.BackColor = Color.FromName("Window");
             textBoxCity.BackColor = Color.FromName("Window");
-        } 
+        }
+
+        // Loads all of the departmenst from the database and sets them into the combobox
+        private void LoadDepartments()
+        {
+            dbhandler = new DatabaseHandler();
+            allDepartments = dbhandler.GetAllDepartments();
+        }
         #endregion
 
         #region Button handlers
@@ -301,7 +321,18 @@ namespace MediaBazaar_ManagementSystem
             {
                 preferredHours = ph.PreferredHoursString;
             }
-        } 
+        }
+
+        private void buttonWorkingDepartments_Click(object sender, EventArgs e)
+        {
+            //Creates and shows the WorkingDepartments form so the user can select the department on which the employee will be working.
+            wd = new WorkingDepartments(workingDepartments, allDepartments);
+            if(wd.ShowDialog() == DialogResult.OK)
+            {
+                workingDepartments = wd.WorkingDepartmentsString;
+                Console.WriteLine(workingDepartments);
+            }
+        }
         #endregion
     }
 }

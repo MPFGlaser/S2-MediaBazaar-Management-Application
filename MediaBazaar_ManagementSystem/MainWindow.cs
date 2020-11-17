@@ -74,12 +74,14 @@ namespace MediaBazaar_ManagementSystem
         {
             // Initialises the dbhandler and makes a list of all departments it can find
             dbhandler = new Classes.DatabaseHandler();
-            List<string> allDepartments = dbhandler.GetAllDepartments();
+            List<Department> allDepartments = dbhandler.GetAllDepartments();
 
             // Iterates through the list of departments and adds each of them to the combobox
-            foreach (string departmentName in allDepartments)
+            foreach (Department d in allDepartments)
             {
-                comboBoxAllDepartments.Items.Add(departmentName);
+                comboBoxAllDepartments.DisplayMember = "Text";
+                comboBoxAllDepartments.ValueMember = "Department";
+                comboBoxAllDepartments.Items.Add(new { Text = d.Name, Department = d });
             }
         }
 
@@ -354,12 +356,12 @@ namespace MediaBazaar_ManagementSystem
         {
             if (comboBoxAllDepartments.SelectedIndex != -1)
             {
-                string departmentToRemove = comboBoxAllDepartments.SelectedItem.ToString();
-                if (departmentToRemove != string.Empty)
+                Department departmentToRemove = (comboBoxAllDepartments.SelectedItem as dynamic).Department;
+                if (departmentToRemove != null)
                 {
                     dbhandler = new Classes.DatabaseHandler();
-                    dbhandler.RemoveDepartment(departmentToRemove);
-                    comboBoxAllDepartments.Items.Remove(departmentToRemove);
+                    dbhandler.RemoveDepartment(departmentToRemove.Id);
+                    comboBoxAllDepartments.Items.Remove(departmentToRemove.Name);
                 }
             }
         }

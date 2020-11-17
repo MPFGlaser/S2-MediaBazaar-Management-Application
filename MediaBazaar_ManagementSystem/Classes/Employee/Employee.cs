@@ -11,11 +11,11 @@ namespace MediaBazaar_ManagementSystem
     public class Employee
     {
         private int id, bsn, function;
-        private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone, postalCode, city, preferredHours;
+        private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone, postalCode, city, preferredHours, workingDepartments;
         private bool active;
         private DateTime dateOfBirth;
 
-        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours)
+        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments)
         {
             this.id = id;
             this.active = active;
@@ -34,6 +34,7 @@ namespace MediaBazaar_ManagementSystem
             this.postalCode = postalCode;
             this.city = city;
             this.preferredHours = preferredHours;
+            this.workingDepartments = workingDepartments;
         }
 
         #region Properties
@@ -135,6 +136,12 @@ namespace MediaBazaar_ManagementSystem
         {
             get { return preferredHours; }
             set { preferredHours = value; }
+        }
+
+        public string WorkingDepartments
+        {
+            get { return workingDepartments; }
+            set { workingDepartments = value; }
         }
 
         //public enum Function

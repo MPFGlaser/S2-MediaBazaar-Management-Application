@@ -111,7 +111,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 int correctLogin = Convert.ToInt32(command.ExecuteScalar());
                 if(correctLogin > 0)
                 {
-                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift FROM employees WHERE username = @username AND password = @password";
+                    String sql2 = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift, workingDepartments FROM employees WHERE username = @username AND password = @password";
                     MySqlCommand command2 = new MySqlCommand(sql2, conn);
                     command2.Parameters.AddWithValue("@username", username);
                     command2.Parameters.AddWithValue("@password", SHA512(password));
@@ -121,7 +121,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                         MySqlDataReader reader = command2.ExecuteReader();
                         while (reader.Read())
                         {
-                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString());
+                            toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString(), reader[16].ToString());
                         }
                     }
                     catch (Exception ex)
@@ -153,7 +153,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             bool succesfulExecution = false;
             int rowsAffected = 0;
-            String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift)";
+            String sql = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift, @workingDepartments)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
@@ -173,6 +173,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@bsn", employee.Bsn);
             command.Parameters.AddWithValue("@functions", 1337);
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
+            command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
 
             try
             {
@@ -208,7 +209,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             bool succesfulExecution = false;
             int rowsAffected = 0;
-            String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift WHERE id = @id";
+            String sql = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift, workingDepartments = @workingDepartments WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@id", employee.Id);
@@ -227,6 +228,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             command.Parameters.AddWithValue("@bsn", employee.Bsn);
             command.Parameters.AddWithValue("@function", employee.Function);
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
+            command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
 
             try
             {
@@ -262,7 +264,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         {
             Employee toReturn = null;
 
-            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift FROM employees WHERE id = @employeeId";
+            String sql = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift, workingDepartments FROM employees WHERE id = @employeeId";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@employeeId", id);
 
@@ -272,7 +274,7 @@ namespace MediaBazaar_ManagementSystem.Classes
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString());
+                    toReturn = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString(), reader[16].ToString());
                 }
             }
             catch (Exception ex)
@@ -304,7 +306,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 int id, bsn, function;
                 bool active;
-                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city, preferredShift;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city, preferredShift, workingDepartments;
                 DateTime dateOfBirth;
 
                 while (reader.Read())
@@ -326,8 +328,9 @@ namespace MediaBazaar_ManagementSystem.Classes
                     postalCode = Convert.ToString(reader["postalcode"]);
                     city = Convert.ToString(reader["city"]);
                     preferredShift = Convert.ToString(reader["preferredShift"]);
+                    workingDepartments = Convert.ToString(reader["workingDepartments"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift, workingDepartments);
                     e.Add(emp);
                 }
             }
@@ -360,7 +363,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 int id, bsn, function;
                 bool active;
-                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city, preferredShift;
+                string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city, preferredShift, workingDepartments;
                 DateTime dateOfBirth;
 
                 while (reader.Read())
@@ -382,8 +385,9 @@ namespace MediaBazaar_ManagementSystem.Classes
                     postalCode = Convert.ToString(reader["postalcode"]);
                     city = Convert.ToString(reader["city"]);
                     preferredShift = Convert.ToString(reader["preferredShift"]);
+                    workingDepartments = Convert.ToString(reader["workingDepartments"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift, workingDepartments);
                     e.Add(emp);
                 }
             }
@@ -553,7 +557,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to add a shift to the database
         /// </summary>
         /// <param name="shift"></param>
-        public void AddShiftToDb(Shift shift)
+        public int AddShiftToDb(Shift shift)
         {
             int shiftId = 0;
             String sql = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
@@ -574,14 +578,9 @@ namespace MediaBazaar_ManagementSystem.Classes
             finally
             {
                 conn.Close();
-
-                //ClearShift(shiftId);
-
-                foreach (int employeeId in shift.EmployeeIds)
-                {
-                    AddIdToShift(shiftId, employeeId);
-                }
             }
+
+            return shiftId;
         }
 
         /// <summary>
@@ -614,17 +613,19 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// </summary>
         /// <param name="shiftId"></param>
         /// <param name="employeeId"></param>
-        public void AddIdToShift(int shiftId, int employeeId)
+        public void AddIdToShift(int shiftId, int employeeId, int departmentId)
         {
-            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId)";
+            String sql = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId, @departmentId)";
             MySqlCommand command = new MySqlCommand(sql, conn);
             command.Parameters.AddWithValue("@shiftId", shiftId);
             command.Parameters.AddWithValue("@employeeId", employeeId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
 
             try
             {
                 conn.Open();
                 command.ExecuteNonQuery();
+                Console.WriteLine("Added ShiftId: " + shiftId + " EmployeeId: " + employeeId + " DepartmentId: " + departmentId + " to database");
             }
             catch (Exception ex)
             {
@@ -849,6 +850,42 @@ namespace MediaBazaar_ManagementSystem.Classes
             }
             return shiftId;
         }
+
+        public List<Employee> GetEmployeesPerDepartment(int shiftId, int departmentId)
+        {
+            List<int> employeeIds = new List<int>();
+            List<Employee> employeesPerDepartment = new List<Employee>();
+            String sql = "SELECT employeeId FROM working_employees WHERE departmentId = @departmentId AND shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    employeeIds.Add(Convert.ToInt32(reader[0]));
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading employee id's from database.\n" + ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+
+                foreach (int id in employeeIds)
+                {
+                    employeesPerDepartment.Add(GetEmployee(id));
+                }
+            }
+
+            return employeesPerDepartment;
+        }
         #endregion
 
         #region Departments
@@ -881,11 +918,11 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to remove a department from the database
         /// </summary>
         /// <param name="departmentName"></param>
-        public void RemoveDepartment(string departmentName)
+        public void RemoveDepartment(int id)
         {
-            String sql = "DELETE FROM departments WHERE departmentName = @departmentName";
+            String sql = "DELETE FROM departments WHERE id = @id";
             MySqlCommand command = new MySqlCommand(sql, conn);
-            command.Parameters.AddWithValue("@departmentName", departmentName);
+            command.Parameters.AddWithValue("@id", id);
 
             try
             {
@@ -906,10 +943,10 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to get a list of all departments found in the database
         /// </summary>
         /// <returns>A list of Department objects matching those found in the database</returns>
-        public List<string> GetAllDepartments()
+        public List<Department> GetAllDepartments()
         {
-            List<string> allDepartments = new List<string>();
-            String sql = "SELECT departmentName FROM departments";
+            List<Department> allDepartments = new List<Department>();
+            String sql = "SELECT * FROM departments";
             MySqlCommand command = new MySqlCommand(sql, conn);
 
             try
@@ -919,7 +956,7 @@ namespace MediaBazaar_ManagementSystem.Classes
 
                 while (reader.Read())
                 {
-                    allDepartments.Add(reader[0].ToString());
+                    allDepartments.Add(new Department(Convert.ToInt32(reader[0]), reader[1].ToString()));
                 }
             }
             catch (Exception ex)

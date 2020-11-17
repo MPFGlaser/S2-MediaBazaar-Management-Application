@@ -117,7 +117,6 @@
     <Compile Include="LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="CalendarDayControl.cs">
       <SubType>UserControl</SubType>
@@ -157,6 +156,12 @@
     <Compile Include="SchedulingWindow.Designer.cs">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorkingDepartments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorkingDepartments.Designer.cs">
+      <DependentUpon>WorkingDepartments.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CalendarDayControl.resx">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +192,9 @@
     </Compile>
     <EmbeddedResource Include="SchedulingWindow.resx">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkingDepartments.resx">
+      <DependentUpon>WorkingDepartments.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

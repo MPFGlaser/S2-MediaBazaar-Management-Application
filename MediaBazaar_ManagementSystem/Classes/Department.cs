@@ -14,8 +14,8 @@ namespace MediaBazaar_ManagementSystem.Classes
     {
         private int id;
         private string name;
-        private List<Employee> employees;
-        private List<Item> items;
+        private List<Employee> employees = new List<Employee>();
+        private List<Item> items = new List<Item>();
 
         public Department(int id, string name)
         {
