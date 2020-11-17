@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Globalization;
 using MediaBazaar_ManagementSystem.Models;
 using MediaBazaar_ManagementSystem.Classes;
+using MediaBazaar_ManagementSystem.classes;
 
 namespace MediaBazaar_ManagementSystem
 {

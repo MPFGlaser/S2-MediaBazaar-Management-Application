@@ -103,7 +103,6 @@
     <Compile Include="Classes\Employee\EmployeeMySQL.cs" />
     <Compile Include="Classes\Employee\Encrypt.cs" />
     <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
-    <Compile Include="Classes\ErrorMessages.cs" />
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Item\ItemMySQL.cs" />

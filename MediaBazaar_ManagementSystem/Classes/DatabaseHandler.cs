@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 
 
-namespace MediaBazaar_ManagementSystem
+namespace MediaBazaar_ManagementSystem.Classes
 {
     /// <summary>
     /// Class to handle everything database-related
@@ -46,7 +46,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (IOException)
             {
-                MessageBox.Show(ErrorMessages.readError);
+                MessageBox.Show("Error reading file");
             }
             finally
             {
@@ -74,7 +74,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (IOException)
             {
-                MessageBox.Show(ErrorMessages.createError);
+                MessageBox.Show("Error creating file");
             }
             finally
             {
@@ -126,13 +126,13 @@ namespace MediaBazaar_ManagementSystem
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                        MessageBox.Show("Something went wrong.\n" + ex.ToString());
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -190,7 +190,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
                 succesfulExecution = false;
             }
             finally
@@ -245,7 +245,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
                 succesfulExecution = false;
             }
             finally
@@ -279,7 +279,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -430,7 +430,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -463,7 +463,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -493,7 +493,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -573,7 +573,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -600,7 +600,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -629,7 +629,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -811,7 +811,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -842,7 +842,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -906,7 +906,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -931,7 +931,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {
@@ -961,7 +961,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ErrorMessages.fileNotFound + ex.ToString());
+                MessageBox.Show("Something went wrong.\n" + ex.ToString());
             }
             finally
             {

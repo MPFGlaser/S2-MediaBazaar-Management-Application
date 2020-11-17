@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MediaBazaar_ManagementSystem.classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaBazaar_ManagementSystem
+namespace MediaBazaar_ManagementSystem.Classes
 {
     /// <summary>
     /// Class for department objects

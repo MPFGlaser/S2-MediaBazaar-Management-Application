@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MediaBazaar_ManagementSystem.classes;
+using MediaBazaar_ManagementSystem.Classes;
+using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Drawing;
@@ -53,7 +55,7 @@ namespace MediaBazaar_ManagementSystem
         {
             //employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
             //return employeeStorage.Create(employee);
-            dbhandler = new DatabaseHandler();
+            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours, workingDepartments);
             return dbhandler.CreateEmployee(employee);
         }
@@ -82,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
         {
             //employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
             //return employeeStorage.Update(employee);
-            dbhandler = new DatabaseHandler();
+            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
             return dbhandler.UpdateEmployee(employee);
         }
@@ -211,11 +213,13 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
+                    // Update to use new stuff
+                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
                 }
                 else
                 {
-                    success = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
+                    // Update to use new stuff
+                    succesfulExecution = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
                 }
 
                 // If the database query was executed successfully, the form closes.
