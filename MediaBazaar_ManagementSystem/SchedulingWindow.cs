@@ -10,6 +10,9 @@ namespace MediaBazaar_ManagementSystem
     public partial class SchedulingWindow : Form
     {
         DatabaseHandler dbhandler;
+        IEmployeeStorage employeeStorage;
+        IDepartmentStorage departmentStorage;
+
         private Shift currentShift;
         private DateTime date;
         private ShiftTime shiftTime;
@@ -58,8 +61,8 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         private void LoadEmployees(List<Employee> working)
         {
-            dbhandler = new DatabaseHandler();
-            allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
+            employeeStorage = new EmployeeMySQL();
+            allActiveEmployees = employeeStorage.GetAll(true);
 
             foreach (Employee e in working)
             {
@@ -80,8 +83,8 @@ namespace MediaBazaar_ManagementSystem
         // Loads all of the departmenst from the database and sets them into the combobox
         private void LoadDepartments()
         {
-            dbhandler = new DatabaseHandler();
-            allDepartments = dbhandler.GetAllDepartments();
+            departmentStorage = new DepartmentMySQL();
+            allDepartments = departmentStorage.GetAll();
 
             foreach (Department d in allDepartments)
             {
