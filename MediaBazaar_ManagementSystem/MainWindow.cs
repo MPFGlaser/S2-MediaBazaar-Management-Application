@@ -33,6 +33,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeNumericUpDown();
             LoadAllDepartments();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
+            toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Database Entries");
         }
 
         #region Logic
@@ -48,7 +49,6 @@ namespace MediaBazaar_ManagementSystem
             PopulateEmployeesTable();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             SetupCorrectWeekData();
-            toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Database Entries");
         }
 
         /// <summary>
