@@ -22,7 +22,7 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         public bool Create(Employee employee)
         {
-            bool succesfulExecution = false;
+            bool success = false;
             int rowsAffected = 0;
             String query = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -51,23 +51,23 @@ namespace MediaBazaar_ManagementSystem
                 rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    succesfulExecution = true;
+                    success = true;
                 }
                 else
                 {
-                    succesfulExecution = false;
+                    success = false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong.\n" + ex.ToString());
-                succesfulExecution = false;
+                success = false;
             }
             finally
             {
                 connection.Close();
             }
-            return succesfulExecution;
+            return success;
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         public bool Update(Employee employee)
         {
-            bool succesfulExecution = false;
+            bool success = false;
             int rowsAffected = 0;
             String query = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -200,23 +200,23 @@ namespace MediaBazaar_ManagementSystem
                 rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
-                    succesfulExecution = true;
+                    success = true;
                 }
                 else
                 {
-                    succesfulExecution = false;
+                    success = false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong.\n" + ex.ToString());
-                succesfulExecution = false;
+                success = false;
             }
             finally
             {
                 connection.Close();
             }
-            return succesfulExecution;
+            return success;
         }
     }
 }
