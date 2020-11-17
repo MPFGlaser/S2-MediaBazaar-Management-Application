@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
@@ -47,7 +44,7 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Gets a list of all departments from the database.
         /// </summary>
-        /// <returns>A list of all departments</returns>
+        /// <returns>A list of all departments.</returns>
         public List<Department> GetAll()
         {
             List<Department> allDepartments = new List<Department>();
