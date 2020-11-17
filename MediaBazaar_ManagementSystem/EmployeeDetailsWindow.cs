@@ -194,7 +194,7 @@ namespace MediaBazaar_ManagementSystem
             // If all regex expressions have successfully passed, this runs
             if (allCorrect)
             {
-                bool succesfulExecution;
+                bool success;
                 
                 // This conversion seems sketchy, but because it was checked by the regex before, it should not pose a problem.
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
@@ -203,16 +203,16 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
-                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
+                    success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
                 }
                 else
                 {
-                    succesfulExecution = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours);
+                    success = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours);
                 }
 
                 // If the database query was executed successfully, the form closes.
                 // This is so that the user doesn't have to re-enter all the data in case something (temporarily) went wrong with the database.
-                if (succesfulExecution)
+                if (success)
                 {
                     this.DialogResult = DialogResult.OK;
                 }
