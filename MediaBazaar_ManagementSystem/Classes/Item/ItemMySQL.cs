@@ -13,6 +13,7 @@ namespace MediaBazaar_ManagementSystem
         public ItemMySQL()
         {
             connectionString = ConnectionString.Read();
+            connection = new MySqlConnection(connectionString);
         }
 
         /// <summary>
