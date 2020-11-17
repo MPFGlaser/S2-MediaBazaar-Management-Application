@@ -9,7 +9,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class EmployeeDetailsWindow : Form
     {
-        DatabaseHandler dbhandler;
+        IEmployeeStorage employeeStorage;
         private Employee employee;
         private Boolean editing = false;
         private int editId;
@@ -19,6 +19,7 @@ namespace MediaBazaar_ManagementSystem
         public EmployeeDetailsWindow()
         {
             InitializeComponent();
+            employeeStorage = new EmployeeMySQL();
         }
 
         public Employee Employee
@@ -48,9 +49,8 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours)
         {
-            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
-            return dbhandler.CreateEmployee(employee);
+            return employeeStorage.Create(employee);
         }
 
         /// <summary>
@@ -75,9 +75,8 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours)
         {
-            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
-            return dbhandler.UpdateEmployee(employee);
+            return employeeStorage.Update(employee);
         }
 
         /// <summary>
