@@ -1,5 +1,4 @@
-﻿using MediaBazaar_ManagementSystem.classes;
-using MediaBazaar_ManagementSystem.Models;
+﻿using MediaBazaar_ManagementSystem.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
