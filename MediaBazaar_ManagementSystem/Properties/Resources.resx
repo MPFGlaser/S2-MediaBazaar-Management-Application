@@ -117,35 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="createError" xml:space="preserve">
-    <value>Error creating file.\n</value>
-  </data>
-  <data name="fileNotFound" xml:space="preserve">
-    <value>No connection file found.\n</value>
-  </data>
-  <data name="genericError" xml:space="preserve">
-    <value>Something went wrong.\n</value>
-  </data>
-  <data name="getEmployeeError" xml:space="preserve">
-    <value>Error getting employee info.\n</value>
-  </data>
-  <data name="loadEmployeeError" xml:space="preserve">
-    <value>Error loading employee id's from database.\n</value>
-  </data>
-  <data name="loadShiftError" xml:space="preserve">
-    <value>Error loading shifts from database.\n</value>
-  </data>
-  <data name="readError" xml:space="preserve">
-    <value>Error reading file.\n</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="reload1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reload.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="retrieveEmployeeError" xml:space="preserve">
-    <value>Error retrieving employees.\n</value>
-  </data>
-  <data name="retrieveItemError" xml:space="preserve">
-    <value>Error retrieving items.\n</value>
   </data>
 </root>

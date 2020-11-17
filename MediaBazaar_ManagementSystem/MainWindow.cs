@@ -540,6 +540,6 @@ namespace MediaBazaar_ManagementSystem
         {
             Logout();
         }
-    }
+    } 
     #endregion
 }
