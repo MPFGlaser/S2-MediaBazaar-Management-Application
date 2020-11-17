@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
@@ -21,6 +18,13 @@ namespace MediaBazaar_ManagementSystem
             employeeStorage = new EmployeeMySQL();
         }
 
+        /// <summary>
+        /// Assigns an employeeId to a shiftId with a departmentId.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <param name="employeeId">The employee identifier.</param>
+        /// <param name="departmentId">The department identifier.</param>
+        /// <returns>Whether or not the shift assignation was successful.</returns>
         public bool Assign(int shiftId, int employeeId, int departmentId)
         {
             bool success = false;
@@ -57,6 +61,11 @@ namespace MediaBazaar_ManagementSystem
             return success;
         }
 
+        /// <summary>
+        /// Clears the specified shift identifier from the database to prevent duplicate shifts.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <returns>Whether or not the clear action was successfully carried out.</returns>
         public bool Clear(int shiftId)
         {
             bool success = false;
@@ -92,6 +101,11 @@ namespace MediaBazaar_ManagementSystem
             return success;
         }
 
+        /// <summary>
+        /// Creates a shift in the database.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>The shiftId.</returns>
         public int Create(Shift input)
         {
             int output = 0;
@@ -118,6 +132,12 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Checks if a shift exists with the specified date and time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="time">The time.</param>
+        /// <returns>The shiftId, if one is found.</returns>
         public int Exists(DateTime date, ShiftTime time)
         {
             int output = 0;
@@ -142,6 +162,12 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Gets information of a shift based on the specified date and time.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <param name="time">The time.</param>
+        /// <returns>The shift found.</returns>
         public Shift Get(DateTime date, ShiftTime time)
         {
             Shift output = null;
@@ -180,6 +206,12 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Gets a list of employees within a specified department working the specified shift.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <param name="departmentId">The department identifier.</param>
+        /// <returns>A list of employees within one department that works the specified shift.</returns>
         public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
         {
             List<int> employeeIds = new List<int>();
@@ -217,6 +249,11 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Gets the employees working on a shift.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <returns>A list of employees working the specified shift.</returns>
         public List<Employee> GetEmployees(int shiftId)
         {
             List<Employee> output = new List<Employee>();
@@ -258,6 +295,11 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Gets the occupation of a specified shift.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <returns>The occupation of a shift as an integer.</returns>
         public int GetOccupation(int shiftId)
         {
             int output = 0;
@@ -283,6 +325,12 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        /// <summary>
+        /// Gets a list of shifts occurring between the two specified dates.
+        /// </summary>
+        /// <param name="monday">The monday.</param>
+        /// <param name="sunday">The sunday.</param>
+        /// <returns>A list of shifts</returns>
         public List<Shift> GetWeek(DateTime monday, DateTime sunday)
         {
             List<Shift> weekShifts = new List<Shift>();
