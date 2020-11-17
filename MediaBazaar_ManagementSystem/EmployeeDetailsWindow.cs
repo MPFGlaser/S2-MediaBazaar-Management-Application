@@ -51,11 +51,8 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours, string workingDepartments)
         {
-            //employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours);
-            //return employeeStorage.Create(employee);
-            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours, workingDepartments);
-            return dbhandler.CreateEmployee(employee);
+            return employeeStorage.Create(employee);
         }
 
         /// <summary>
@@ -80,11 +77,8 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool UpdateEmployee(int id, bool active, string firstName, string surName, string userName, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments)
         {
-            //employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours);
-            //return employeeStorage.Update(employee);
-            dbhandler = new Classes.DatabaseHandler();
             employee = new Employee(id, active, firstName, surName, userName, "", email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
-            return dbhandler.UpdateEmployee(employee);
+            return employeeStorage.Update(employee);
         }
 
         /// <summary>
@@ -212,12 +206,12 @@ namespace MediaBazaar_ManagementSystem
                 {
                     int function = Convert.ToInt32(textBoxFunctions.Text);
                     // Update to use new stuff
-                    succesfulExecution = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
+                    success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments);
                 }
                 else
                 {
                     // Update to use new stuff
-                    succesfulExecution = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
+                    success = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
                 }
 
                 // If the database query was executed successfully, the form closes.
