@@ -20,7 +20,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public bool CreateEmployee(Employee employee)
+        public bool Create(Employee employee)
         {
             bool succesfulExecution = false;
             int rowsAffected = 0;
@@ -75,7 +75,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An instance of Employee with all data found in the database relating to the employee with the entered id</returns>
-        public Employee GetEmployee(int id)
+        public Employee Get(int id)
         {
             Employee output = null;
 
@@ -108,7 +108,7 @@ namespace MediaBazaar_ManagementSystem
         /// A function to get a list of employees from the database
         /// </summary>
         /// <returns>A list of Employee objects containing all employees found in the database</returns>
-        public List<Employee> GetEmployees(bool activeOnly)
+        public List<Employee> GetAll(bool activeOnly)
         {
             List<Employee> output = new List<Employee>();
             String query = "SELECT * FROM employees";
@@ -170,7 +170,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public bool UpdateEmployee(Employee employee)
+        public bool Update(Employee employee)
         {
             bool succesfulExecution = false;
             int rowsAffected = 0;

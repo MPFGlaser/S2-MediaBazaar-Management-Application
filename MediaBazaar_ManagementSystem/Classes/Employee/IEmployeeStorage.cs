@@ -8,12 +8,12 @@ namespace MediaBazaar_ManagementSystem
 {
     public interface IEmployeeStorage
     {
-        bool CreateEmployee(Employee employee);
+        bool Create(Employee employee);
 
-        bool UpdateEmployee(Employee employee);
+        bool Update(Employee employee);
 
-        Employee GetEmployee(int id);
+        Employee Get(int id);
 
-        List<Employee> GetEmployees(bool activeOnly);
+        List<Employee> GetAll(bool activeOnly);
     }
 }
