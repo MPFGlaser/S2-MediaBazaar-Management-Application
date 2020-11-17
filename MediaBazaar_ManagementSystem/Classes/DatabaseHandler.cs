@@ -16,7 +16,7 @@ namespace MediaBazaar_ManagementSystem.Classes
     {
         MySqlConnection conn;
         string connectionString;
-        string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstringHome.cfg";
+        string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstring.cfg";
 
         public DatabaseHandler()
         {
