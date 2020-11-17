@@ -554,7 +554,7 @@ namespace MediaBazaar_ManagementSystem.Classes
         /// A function to add a shift to the database
         /// </summary>
         /// <param name="shift"></param>
-        public void AddShiftToDb(Shift shift, int departmentId)
+        public int AddShiftToDb(Shift shift)
         {
             int shiftId = 0;
             String sql = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
@@ -575,14 +575,9 @@ namespace MediaBazaar_ManagementSystem.Classes
             finally
             {
                 conn.Close();
-
-                //ClearShift(shiftId);
-
-                foreach (int employeeId in shift.EmployeeIds)
-                {
-                    AddIdToShift(shiftId, employeeId, departmentId);
-                }
             }
+
+            return shiftId;
         }
 
         /// <summary>
@@ -627,6 +622,7 @@ namespace MediaBazaar_ManagementSystem.Classes
             {
                 conn.Open();
                 command.ExecuteNonQuery();
+                Console.WriteLine("Added ShiftId: " + shiftId + " EmployeeId: " + employeeId + " DepartmentId: " + departmentId + " to database");
             }
             catch (Exception ex)
             {

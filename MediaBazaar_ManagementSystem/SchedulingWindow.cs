@@ -141,40 +141,33 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void Confirm()
         {
+            // Makes sure everything is set up correctly.
             dbhandler = new DatabaseHandler();
+            workingEmployeeIds = new List<int>();
+            int shiftId = 0;
+
+            // Creates a new shift object and sets the list of employeeIds to the one we just created.
+            currentShift = new Shift(0, date, shiftTime);
+
+            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
+            if (isEditing)
+            {
+                // Removes all information about the shift in the database to prevent duplication of entries
+                dbhandler.ClearShift(oldId);
+            }
+
+            // Adds each employee id to the database with the correct shift id
+            shiftId = dbhandler.AddShiftToDb(currentShift);
+
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {
                 Department dep = (depDynamic).Department;
 
-                // Makes sure everything is set up correctly.
-                workingEmployeeIds = new List<int>();
-
                 // Makes a list of all ids of the employees scheduled for that shift
                 foreach (Employee emp in dep.Employees)
                 {
-                    workingEmployeeIds.Add(emp.Id);
-                }
-
-                // Creates a new shift object and sets the list of employeeIds to the one we just created.
-                currentShift = new Shift(0, date, shiftTime);
-                currentShift.EmployeeIds = workingEmployeeIds;
-
-                // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
-                if (isEditing)
-                {
-                    // Removes all information about the shift in the database to prevent duplication of entries
-                    dbhandler.ClearShift(oldId);
-
-                    // Adds each employee id to the database with the correct shift id
-                    foreach (int i in workingEmployeeIds)
-                    {
-                        dbhandler.AddIdToShift(oldId, i, dep.Id);
-                    }
-                }
-                else
-                {
-                    // Adds each employee id to the database with the correct shift id
-                    dbhandler.AddShiftToDb(currentShift, dep.Id);
+                    //workingEmployeeIds.Add(emp.Id);
+                    dbhandler.AddIdToShift(shiftId, emp.Id, dep.Id);
                 }
             }
 
