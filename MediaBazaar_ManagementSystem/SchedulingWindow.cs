@@ -22,6 +22,7 @@ namespace MediaBazaar_ManagementSystem
         private ShiftTime shiftTime;
         List<int> workingEmployeeIds = new List<int>();
         List<Department> allDepartments = new List<Department>();
+        List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
         private int oldId;
 
@@ -65,7 +66,7 @@ namespace MediaBazaar_ManagementSystem
         private void LoadEmployees(List<Employee> working)
         {
             dbhandler = new DatabaseHandler();
-            List<Employee> allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
+            allActiveEmployees = dbhandler.GetActiveEmployeesFromDB();
 
             foreach (Employee e in working)
             {
@@ -252,6 +253,32 @@ namespace MediaBazaar_ManagementSystem
 
             return allDepartments;
         }
+
+        /// <summary>
+        /// Updates the combobox to only show employees who can work in a certain department.
+        /// </summary>
+        private void ShowValidEmployees(int id)
+        {
+            comboBoxSelectEmployees.Items.Clear();
+
+            foreach (Employee e in allActiveEmployees)
+            {
+                List<int> allowedDepartments = new List<int>();
+                if(e.WorkingDepartments != string.Empty)
+                {
+                    allowedDepartments = e.WorkingDepartments.Split(',').Select(int.Parse).ToList();
+                }
+
+                if (allowedDepartments.Contains(id))
+                {
+                    comboBoxSelectEmployees.DisplayMember = "Text";
+                    comboBoxSelectEmployees.ValueMember = "Employee";
+                    comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                }
+            }
+
+            comboBoxSelectEmployees.SelectedIndex = 0;
+        }
         #endregion
 
         #region Control event handlers
@@ -294,7 +321,7 @@ namespace MediaBazaar_ManagementSystem
         private void comboBoxSelectDepartments_SelectedIndexChanged(object sender, EventArgs e)
         {
             Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
-
+            ShowValidEmployees(selectedDepartment.Id);
             AddEmployeeListToShift(selectedDepartment.Employees);
         }
 

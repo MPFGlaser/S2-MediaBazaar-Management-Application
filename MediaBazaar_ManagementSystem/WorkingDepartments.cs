@@ -35,6 +35,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         #region Logic
+        /// <summary>
+        /// Loads all of the departments into the correct boxes, if it is already selected it is added to the
+        /// working departments, if it is not it is added to the selection box.
+        /// </summary>
         private void InitializeDepartments(List<Department> allDepartments, List<int> selectedDepartments)
         {
             foreach (Department d in allDepartments)
@@ -54,6 +58,9 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        /// <summary>
+        /// Saves the departments at which the employee can work in a string seperated by commas's.
+        /// </summary>
         private void Confirm()
         {
             bool first = true;
@@ -73,6 +80,9 @@ namespace MediaBazaar_ManagementSystem
             this.DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// Adds the department to the list in which the employee can work.
+        /// </summary>
         private void AddDepartmentToWorkable()
         {
             // Checks if there's actually a department selected to be added
@@ -92,6 +102,9 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        /// <summary>
+        /// Removes the department from the list in which the employee can work.
+        /// </summary>
         private void RemoveDepartmentFromWorkable()
         {
             // Checks if there's actually an employee selected to be removed
