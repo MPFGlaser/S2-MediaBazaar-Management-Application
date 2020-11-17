@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
-    /// Class for everything related to aa shift, as it appears in the database.
+    /// Class for everything related to aa shift, as it appears in the shiftStorage.
     /// </summary>
     public class Shift
     {

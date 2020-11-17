@@ -1,7 +1,7 @@
 ﻿namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
-    /// Class for Item objects. Stores all values pertaining to an item as they would appear in the database.
+    /// Class for Item objects. Stores all values pertaining to an item as they would appear in the itemStorage.
     /// </summary>
     public class Item
     {

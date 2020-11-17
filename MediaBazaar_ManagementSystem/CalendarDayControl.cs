@@ -77,7 +77,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getMorningShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
             shiftStorage = new ShiftMySQL();
             newShift = shiftStorage.Get(date, ShiftTime.Morning);
@@ -105,7 +105,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getAfternoonShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
             shiftStorage = new ShiftMySQL();
             newShift = shiftStorage.Get(date, ShiftTime.Afternoon);
@@ -133,7 +133,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void getEveningShift()
         {
-            // Refreshes the shift data from the database
+            // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
             shiftStorage = new ShiftMySQL();
             newShift = shiftStorage.Get(date, ShiftTime.Evening);

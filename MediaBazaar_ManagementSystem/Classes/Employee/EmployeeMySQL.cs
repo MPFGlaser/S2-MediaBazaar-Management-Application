@@ -17,7 +17,7 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Function to update an employee in the database.
+        /// Function to update an employee in the databse.
         /// </summary>
         /// <param name="employee"></param>
         /// <returns>Whether the creation was successful.</returns>

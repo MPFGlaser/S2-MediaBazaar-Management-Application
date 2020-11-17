@@ -3,7 +3,7 @@
 namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
-    /// Class for an employee object. Contains all relevant information that's also found in the database's employee table.
+    /// Class for an employee object. Contains all relevant information that's also found in the employeeStorages' employee.
     /// </summary>
     public class Employee
     {

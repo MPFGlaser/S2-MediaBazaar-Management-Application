@@ -79,7 +79,7 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        // Loads all of the departmenst from the database and sets them into the combobox
+        // Loads all of the department from the departmentStorage and sets them into the combobox
         private void LoadDepartments()
         {
             departmentStorage = new DepartmentMySQL();
@@ -134,7 +134,7 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the database.
+        /// Logic for the confirm button. Adds each employee in the scheduled listbox to the shift in the shiftStorage.
         /// </summary>
         private void Confirm()
         {
@@ -146,14 +146,14 @@ namespace MediaBazaar_ManagementSystem
             // Creates a new shift object and sets the list of employeeIds to the one we just created.
             currentShift = new Shift(0, date, shiftTime);
 
-            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the database
+            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)
             {
-                // Removes all information about the shift in the database to prevent duplication of entries
+                // Removes all information about the shift in the shiftStorage to prevent duplication of entries
                 shiftStorage.Clear(oldId);
             }
 
-            // Adds each employee id to the database with the correct shift id
+            // Adds each employee id to the shiftStorage with the correct shift id
             shiftId = shiftStorage.Create(currentShift);
 
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)

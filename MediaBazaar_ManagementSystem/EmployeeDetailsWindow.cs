@@ -34,7 +34,7 @@ namespace MediaBazaar_ManagementSystem
 
         #region Logic
         /// <summary>
-        /// Asks the dbHandler to create a new employee based on the parameters the user entered in the form.
+        /// Asks the employeeStorage to create a new employee based on the parameters the user entered in the form.
         /// </summary>
         /// <param name="active"></param>
         /// <param name="firstName"></param>
@@ -59,7 +59,7 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
-        /// Asks the dbHandler to update the employee with the supplied id. The updated details will be those entered by the user in the form.
+        /// Asks the employeeStorage to update the employee with the supplied id. The updated details will be those entered by the user in the form.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="active"></param>
@@ -123,7 +123,7 @@ namespace MediaBazaar_ManagementSystem
             Boolean allCorrect = true;
 
             // This wall of if statements checks each input against its regex expression (where applicable)
-            //If something's wrong, makes sure to highlight the input & prevents the incorrect data from being passed to the database.
+            //If something's wrong, makes sure to highlight the input & prevents the incorrect data from being passed to the employeeStorage.
             if (!checkName.IsMatch(firstName))
             {
                 allCorrect = false;
@@ -217,8 +217,8 @@ namespace MediaBazaar_ManagementSystem
                     success = CreateEmployee(active, firstName, lastName, username, password, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, postalCode, city, preferredHours, "");
                 }
 
-                // If the database query was executed successfully, the form closes.
-                // This is so that the user doesn't have to re-enter all the data in case something (temporarily) went wrong with the database.
+                // If the CreateEmployee command was executed successfully, the form closes.
+                // This is so that the user doesn't have to re-enter all the data in case something (temporarily) went wrong with the CreateEmployee command.
                 if (success)
                 {
                     this.DialogResult = DialogResult.OK;
@@ -235,7 +235,7 @@ namespace MediaBazaar_ManagementSystem
             // Changes the form title to reflect which employee is being edited.
             this.Text = "Viewing/editing " + employee.FirstName + "'s details";
 
-            // Sets some editing-specific variables to their correct values. This aides with sending the database the right details later on.
+            // Sets some editing-specific variables to their correct values. This aides with sending the employeeStorage the right details later on.
             editing = true;
             editId = employee.Id;
 
@@ -288,7 +288,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxCity.BackColor = Color.FromName("Window");
         }
 
-        // Loads all of the departmenst from the database and sets them into the combobox
+        // Loads all of the departmenst from the departmentStorage and sets them into the combobox
         private void LoadDepartments()
         {
             allDepartments = departmentStorage.GetAll();
