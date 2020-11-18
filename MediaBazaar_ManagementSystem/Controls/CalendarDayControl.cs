@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Drawing;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -61,14 +62,38 @@ namespace MediaBazaar_ManagementSystem
             {
                 case ShiftTime.Morning:
                     labelCapacityMorning.Text = $"{numberScheduled}/{capacity}";
+                    if(numberScheduled < capacity)
+                    {
+                        labelCapacityMorning.BackColor = Color.LightCoral;
+                    }
+                    else
+                    {
+                        labelCapacityMorning.BackColor = Color.Transparent;
+                    }
                     break;
 
                 case ShiftTime.Afternoon:
                     labelCapacityAfternoon.Text = $"{numberScheduled}/{capacity}";
+                    if (numberScheduled < capacity)
+                    {
+                        labelCapacityAfternoon.BackColor = Color.LightCoral;
+                    }
+                    else
+                    {
+                        labelCapacityAfternoon.BackColor = Color.Transparent;
+                    }
                     break;
 
                 case ShiftTime.Evening:
                     labelCapacityEvening.Text = $"{numberScheduled}/{capacity}";
+                    if (numberScheduled < capacity)
+                    {
+                        labelCapacityEvening.BackColor = Color.LightCoral;
+                    }
+                    else
+                    {
+                        labelCapacityEvening.BackColor = Color.Transparent;
+                    }
                     break;
 
                 default:
@@ -101,7 +126,15 @@ namespace MediaBazaar_ManagementSystem
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
+                if(newShift != null)
+                {
+                    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
+                    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
+                }
+                else
+                {
+                    SetShiftOccupation(time, 0, 0);
+                }
             }
         }
         #endregion
