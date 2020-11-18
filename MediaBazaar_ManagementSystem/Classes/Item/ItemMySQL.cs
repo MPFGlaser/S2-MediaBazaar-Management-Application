@@ -26,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
+            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -37,11 +37,12 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
+            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
@@ -70,7 +71,7 @@ namespace MediaBazaar_ManagementSystem
         public Item Get(int id)
         {
             Item output = null;
-            String query = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
+            String query = "SELECT id, name, brand, code, category, quantity, price, active, description, departmentId FROM items WHERE id = @itemId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@itemId", id);
             try
@@ -79,7 +80,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
+                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]), Convert.ToInt32(reader[9]));
                 }
             }
             catch (Exception ex)
@@ -111,7 +112,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, code, quantity;
+                int id, code, quantity, departmendId;
                 string name, brand, category, description;
                 double price;
                 bool active;
@@ -127,8 +128,8 @@ namespace MediaBazaar_ManagementSystem
                     description = Convert.ToString(reader["description"]);
                     price = Convert.ToDouble(reader["price"]);
                     active = Convert.ToBoolean(reader["active"]);
-
-                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
+                    departmendId = Convert.ToInt32(reader["departmentId"]);
+                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description, departmendId);
                     output.Add(i);
                 }
             }
@@ -154,7 +155,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description  WHERE id = @id";
+            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description, departmentId = @departmentId  WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -165,11 +166,12 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
+            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
