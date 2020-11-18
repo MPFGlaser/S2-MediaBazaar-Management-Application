@@ -33,8 +33,8 @@ namespace MediaBazaar_ManagementSystem
         public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
         {
             this.date = date;
-            textBoxCalendarDay.Text = weekday;
-            textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
+            labelCalendarDay.Text = weekday;
+            labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
             foreach (Shift s in allWeekShifts)
             {
                 if (s.Date == date)
@@ -54,15 +54,15 @@ namespace MediaBazaar_ManagementSystem
             switch (shiftTime)
             {
                 case ShiftTime.Morning:
-                    textBoxCapacityMorning.Text = employeeIds.Count().ToString();
+                    labelCapacityMorning.Text = employeeIds.Count().ToString();
                     break;
 
                 case ShiftTime.Afternoon:
-                    textBoxCapacityAfternoon.Text = employeeIds.Count().ToString();
+                    labelCapacityAfternoon.Text = employeeIds.Count().ToString();
                     break;
 
                 case ShiftTime.Evening:
-                    textBoxCapacityEvening.Text = employeeIds.Count().ToString();
+                    labelCapacityEvening.Text = employeeIds.Count().ToString();
                     break;
 
                 default:
@@ -86,11 +86,11 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
             }
 
             // Show a dialog for the shift
@@ -114,11 +114,11 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
             }
 
             // Show a dialog for the shift
@@ -142,11 +142,11 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
-                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, false, 0);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, false, 0);
             }
 
             // Show a dialog for the shift
