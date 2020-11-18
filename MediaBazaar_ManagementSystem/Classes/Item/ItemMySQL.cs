@@ -53,7 +53,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -84,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -134,7 +134,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error retrieving items.\n" + ex.ToString());
+                ErrorMessages.RetrieveItem(ex);
             }
             finally
             {
@@ -181,7 +181,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {

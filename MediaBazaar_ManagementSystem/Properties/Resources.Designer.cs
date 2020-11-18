@@ -88,24 +88,6 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error getting employee info.\n.
-        /// </summary>
-        internal static string getEmployeeError {
-            get {
-                return ResourceManager.GetString("getEmployeeError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error loading employee id&apos;s from database.\n.
-        /// </summary>
-        internal static string loadEmployeeError {
-            get {
-                return ResourceManager.GetString("loadEmployeeError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error loading shifts from database.\n.
         /// </summary>
         internal static string loadShiftError {

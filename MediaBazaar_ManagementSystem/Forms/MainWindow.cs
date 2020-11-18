@@ -116,7 +116,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error getting employee info.\n" + ex.ToString());
+                ErrorMessages.RetrieveEmployee(ex);
             }
         }
 
@@ -160,7 +160,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error getting employee info.\n" + ex.ToString());
+                ErrorMessages.RetrieveEmployee(ex);
             }
         }
 
