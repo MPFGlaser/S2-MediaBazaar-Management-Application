@@ -249,6 +249,8 @@ namespace MediaBazaar_ManagementSystem
         {
             comboBoxSelectEmployees.Items.Clear();
 
+            Console.WriteLine("ID: " + id);
+
             List<Department> allDepartmentInfo = GetDepartmentListFromComboBox();
 
             foreach (Employee e in allActiveEmployees)
@@ -264,17 +266,13 @@ namespace MediaBazaar_ManagementSystem
                     bool allowed = true;
                     foreach(Department d in allDepartmentInfo)
                     {
-                        if(d.Id != id)
-                        {
-                            List<Employee> employeesInDepartment = d.Employees;
+                        List<Employee> employeesInDepartment = d.Employees;
 
-                            foreach (Employee emp in d.Employees)
+                        foreach (Employee emp in d.Employees)
+                        {
+                            if (e.Id == emp.Id)
                             {
-                                if (e.Id == emp.Id)
-                                {
-                                    Console.WriteLine("False -> " + e.FirstName);
-                                    allowed = false;
-                                }
+                                allowed = false;
                             }
                         }
                     }
