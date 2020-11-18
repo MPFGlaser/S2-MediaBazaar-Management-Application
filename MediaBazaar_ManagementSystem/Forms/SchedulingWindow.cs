@@ -194,14 +194,8 @@ namespace MediaBazaar_ManagementSystem
                 listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
                 // Removes the employee from the list of available employees and resets the selection index.
-                Console.WriteLine("Before: " + comboBoxSelectEmployees.Items.Count);
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                Console.WriteLine("Before: " + comboBoxSelectEmployees.Items.Count);
-                //comboBoxSelectEmployees.SelectedIndex = -1;
-
-                // Update the departments combobox and reselect the correct index
-                //UpdateDepartmentsComboBox(allDepartments);
-                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
+                comboBoxSelectEmployees.SelectedIndex = -1;
             }
         }
 
@@ -229,10 +223,6 @@ namespace MediaBazaar_ManagementSystem
 
                 // Removes the employee from the listbox of currently scheduled employee.
                 listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
-
-                // Update the departments combobox and reselect the correct index
-                UpdateDepartmentsComboBox(allDepartments);
-                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
         }
 
@@ -259,6 +249,8 @@ namespace MediaBazaar_ManagementSystem
         {
             comboBoxSelectEmployees.Items.Clear();
 
+            List<Department> allDepartmentInfo = GetDepartmentListFromComboBox();
+
             foreach (Employee e in allActiveEmployees)
             {
                 List<int> allowedDepartments = new List<int>();
@@ -269,9 +261,17 @@ namespace MediaBazaar_ManagementSystem
 
                 if (allowedDepartments.Contains(id))
                 {
-                    comboBoxSelectEmployees.DisplayMember = "Text";
-                    comboBoxSelectEmployees.ValueMember = "Employee";
-                    comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                    bool added = false;
+                    foreach(Department d in allDepartmentInfo)
+                    {
+                        if (!d.Employees.Contains(e) && !added)
+                        {
+                            added = true;
+                            comboBoxSelectEmployees.DisplayMember = "Text";
+                            comboBoxSelectEmployees.ValueMember = "Employee";
+                            comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                        }
+                    }
                 }
             }
 
