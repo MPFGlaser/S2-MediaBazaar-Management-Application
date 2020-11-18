@@ -261,16 +261,28 @@ namespace MediaBazaar_ManagementSystem
 
                 if (allowedDepartments.Contains(id))
                 {
-                    bool added = false;
+                    bool allowed = true;
                     foreach(Department d in allDepartmentInfo)
                     {
-                        if (!d.Employees.Contains(e) && !added)
+                        if(d.Id != id)
                         {
-                            added = true;
-                            comboBoxSelectEmployees.DisplayMember = "Text";
-                            comboBoxSelectEmployees.ValueMember = "Employee";
-                            comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                            List<Employee> employeesInDepartment = d.Employees;
+
+                            foreach (Employee emp in d.Employees)
+                            {
+                                if (e.Id == emp.Id)
+                                {
+                                    Console.WriteLine("False -> " + e.FirstName);
+                                    allowed = false;
+                                }
+                            }
                         }
+                    }
+                    if (allowed)
+                    {
+                        comboBoxSelectEmployees.DisplayMember = "Text";
+                        comboBoxSelectEmployees.ValueMember = "Employee";
+                        comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
                     }
                 }
             }
