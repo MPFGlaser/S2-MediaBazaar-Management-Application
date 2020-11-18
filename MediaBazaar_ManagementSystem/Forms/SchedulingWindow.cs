@@ -248,9 +248,6 @@ namespace MediaBazaar_ManagementSystem
         private void ShowValidEmployees(int id)
         {
             comboBoxSelectEmployees.Items.Clear();
-
-            Console.WriteLine("ID: " + id);
-
             List<Department> allDepartmentInfo = GetDepartmentListFromComboBox();
 
             foreach (Employee e in allActiveEmployees)
