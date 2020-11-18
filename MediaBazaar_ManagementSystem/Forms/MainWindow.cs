@@ -23,10 +23,10 @@ namespace MediaBazaar_ManagementSystem
         {
             this.loggedInUser = loggedInUser;
             InitializeComponent();
+            numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             DisplayInformation();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
             toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Data");
-            numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
 
             HideInactiveEmployees(true);
             HideInactiveItems(true);

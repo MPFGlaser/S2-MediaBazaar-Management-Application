@@ -19,7 +19,7 @@ namespace MediaBazaar_ManagementSystem
         List<Department> allDepartments = new List<Department>();
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
-        private int oldId;
+        private int oldId, capacity;
 
         /// <summary>
         /// A form in which the user can schedule and unschedule employees for a certain shift.
@@ -31,7 +31,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -43,7 +43,9 @@ namespace MediaBazaar_ManagementSystem
             textBoxCalendarDate.Text = dateAndMonth;
             this.isEditing = editing;
             this.oldId = oldShiftId;
+            this.capacity = capacity;
 
+            numericUpDownCapacity.Value = capacity;
             AddEmployeeListToShift(working);
             LoadDepartments();
         }
@@ -141,20 +143,32 @@ namespace MediaBazaar_ManagementSystem
             // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
             workingEmployeeIds = new List<int>();
+            int capacityNew = Convert.ToInt32(numericUpDownCapacity.Value);
             int shiftId = 0;
 
-            // Creates a new shift object and sets the list of employeeIds to the one we just created.
-            currentShift = new Shift(0, date, shiftTime);
+
 
             // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)
             {
+                // Creates a new shift object and sets the list of employeeIds to the one we just created.
+                currentShift = new Shift(oldId, date, shiftTime, capacityNew);
                 // Removes all information about the shift in the shiftStorage to prevent duplication of entries
                 shiftStorage.Clear(oldId);
+                shiftId = oldId;
+
+                if(capacityNew != capacity)
+                {
+                    shiftStorage.Update(currentShift);
+                }
+            }
+            else
+            {
+                // Creates a new shift object and sets the list of employeeIds to the one we just created.
+                currentShift = new Shift(0, date, shiftTime, capacityNew);
+                shiftId = shiftStorage.Create(currentShift);
             }
 
-            // Adds each employee id to the shiftStorage with the correct shift id
-            shiftId = shiftStorage.Create(currentShift);
 
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {

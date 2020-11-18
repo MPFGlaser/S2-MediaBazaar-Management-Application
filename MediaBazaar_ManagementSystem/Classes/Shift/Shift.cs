@@ -8,16 +8,17 @@ namespace MediaBazaar_ManagementSystem
     /// </summary>
     public class Shift
     {
-        private int id;
+        private int id, capacity;
         private List<int> employeeIds;
         private DateTime date;
         private ShiftTime shiftTime;
 
-        public Shift(int id, DateTime date, ShiftTime shiftTime)
+        public Shift(int id, DateTime date, ShiftTime shiftTime, int capacity)
         {
             this.id = id;
             this.date = date;
             this.shiftTime = shiftTime;
+            this.capacity = capacity;
         }
 
         public int Id
@@ -41,6 +42,12 @@ namespace MediaBazaar_ManagementSystem
         {
             get { return shiftTime; }
             set { shiftTime = value; }
+        }
+
+        public int Capacity
+        {
+            get { return capacity; }
+            set { capacity = value; }
         }
     }
 }
