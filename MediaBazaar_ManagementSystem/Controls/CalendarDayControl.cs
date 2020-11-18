@@ -35,6 +35,11 @@ namespace MediaBazaar_ManagementSystem
             this.date = date;
             labelCalendarDay.Text = weekday;
             labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
+
+            labelCapacityMorning.Text = "N/A";
+            labelCapacityAfternoon.Text = "N/A";
+            labelCapacityEvening.Text = "N/A";
+
             foreach (Shift s in allWeekShifts)
             {
                 if (s.Date == date)
