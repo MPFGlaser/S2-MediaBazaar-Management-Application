@@ -48,6 +48,8 @@
             this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
+            this.comboBoxSelectDepartment = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             this.SuspendLayout();
@@ -185,7 +187,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 202);
+            this.label9.Location = new System.Drawing.Point(11, 243);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(60, 13);
             this.label9.TabIndex = 17;
@@ -229,11 +231,28 @@
             // 
             // richTextBoxDescription
             // 
-            this.richTextBoxDescription.Location = new System.Drawing.Point(11, 219);
+            this.richTextBoxDescription.Location = new System.Drawing.Point(11, 259);
             this.richTextBoxDescription.Name = "richTextBoxDescription";
-            this.richTextBoxDescription.Size = new System.Drawing.Size(411, 251);
+            this.richTextBoxDescription.Size = new System.Drawing.Size(411, 211);
             this.richTextBoxDescription.TabIndex = 8;
             this.richTextBoxDescription.Text = "";
+            // 
+            // comboBoxSelectDepartment
+            // 
+            this.comboBoxSelectDepartment.FormattingEnabled = true;
+            this.comboBoxSelectDepartment.Location = new System.Drawing.Point(11, 219);
+            this.comboBoxSelectDepartment.Name = "comboBoxSelectDepartment";
+            this.comboBoxSelectDepartment.Size = new System.Drawing.Size(411, 21);
+            this.comboBoxSelectDepartment.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 203);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(62, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Department";
             // 
             // ProductDetailsWindow
             // 
@@ -242,6 +261,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonPDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 511);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.comboBoxSelectDepartment);
             this.Controls.Add(this.richTextBoxDescription);
             this.Controls.Add(this.checkBoxActive);
             this.Controls.Add(this.numericUpDownQuantity);
@@ -293,5 +314,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
         private System.Windows.Forms.CheckBox checkBoxActive;
         private System.Windows.Forms.RichTextBox richTextBoxDescription;
+        private System.Windows.Forms.ComboBox comboBoxSelectDepartment;
+        private System.Windows.Forms.Label label10;
     }
 }
