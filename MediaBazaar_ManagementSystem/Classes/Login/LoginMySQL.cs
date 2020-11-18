@@ -25,7 +25,7 @@ namespace MediaBazaar_ManagementSystem
         {
             int output = -1;
 
-            String query = "SELECT id FROM employees WHERE username = @username AND password = @password";
+            String query = "SELECT id, active FROM employees WHERE username = @username AND password = @password";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", Encrypt.Run(password));
@@ -36,7 +36,14 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    output = Convert.ToInt32(reader[0]);
+                    if (Convert.ToBoolean(reader[1]))
+                    {
+                        output = Convert.ToInt32(reader[0]);
+                    }
+                    else
+                    {
+                        output = 0;
+                    }
                 }
             }
             catch (Exception ex)
