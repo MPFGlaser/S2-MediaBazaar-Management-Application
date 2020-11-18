@@ -194,11 +194,13 @@ namespace MediaBazaar_ManagementSystem
                 listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
                 // Removes the employee from the list of available employees and resets the selection index.
+                Console.WriteLine("Before: " + comboBoxSelectEmployees.Items.Count);
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
-                comboBoxSelectEmployees.SelectedIndex = -1;
+                Console.WriteLine("Before: " + comboBoxSelectEmployees.Items.Count);
+                //comboBoxSelectEmployees.SelectedIndex = -1;
 
                 // Update the departments combobox and reselect the correct index
-                UpdateDepartmentsComboBox(allDepartments);
+                //UpdateDepartmentsComboBox(allDepartments);
                 comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
         }
