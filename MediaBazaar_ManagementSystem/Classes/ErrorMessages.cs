@@ -1,55 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
     public static class ErrorMessages
     {
-        private static string fileNotFound = MediaBazaar_ManagementSystem.Properties.Resources.fileNotFound;
-        private static string readError = MediaBazaar_ManagementSystem.Properties.Resources.readError;
-        private static string createError = MediaBazaar_ManagementSystem.Properties.Resources.createError;
-        private static string genericError = MediaBazaar_ManagementSystem.Properties.Resources.genericError;
-        private static string retrieveEmployeeError = MediaBazaar_ManagementSystem.Properties.Resources.retrieveEmployeeError;
-        private static string retrieveItemError = MediaBazaar_ManagementSystem.Properties.Resources.retrieveItemError;
-        private static string loadShiftError = MediaBazaar_ManagementSystem.Properties.Resources.loadShiftError;
+        private static string fileNotFound = Properties.Resources.fileNotFound;
+        private static string readError = Properties.Resources.readError;
+        private static string createError = Properties.Resources.createError;
+        private static string genericError = Properties.Resources.genericError;
+        private static string retrieveEmployeeError = Properties.Resources.retrieveEmployeeError;
+        private static string retrieveItemError = Properties.Resources.retrieveItemError;
+        private static string loadShiftError = Properties.Resources.loadShiftError;
+
+        private static void Show(string errorMessage)
+        {
+            MessageBox.Show(errorMessage);
+        }
+
+        private static void Show(string errorMessage, Exception e)
+        {
+            MessageBox.Show(errorMessage + e.ToString());
+        }
 
         public static void FNF()
         {
-            MessageBox.Show(fileNotFound);
+            Show(fileNotFound);
         }
 
         public static void Read()
         {
-            MessageBox.Show(readError);
+            Show(readError);
         }
 
         public static void Create()
         {
-            MessageBox.Show(createError);
+            Show(createError);
         }
 
         public static void Generic(Exception e)
         {
-            MessageBox.Show(genericError + e.ToString());
+            Show(genericError, e);
         }
 
         public static void RetrieveEmployee(Exception e)
         {
-            MessageBox.Show(retrieveEmployeeError + e.ToString());
+            Show(retrieveEmployeeError, e);
         }
 
         public static void RetrieveItem(Exception e)
         {
-            MessageBox.Show(retrieveItemError + e.ToString());
+            Show(retrieveItemError, e);
         }
         
         public static void Shift(Exception e)
         {
-            MessageBox.Show(loadShiftError + e.ToString());
+            Show(loadShiftError, e);
         }
     }
 }

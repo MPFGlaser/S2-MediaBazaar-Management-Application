@@ -196,10 +196,6 @@ namespace MediaBazaar_ManagementSystem
                 // Removes the employee from the list of available employees and resets the selection index.
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
                 comboBoxSelectEmployees.SelectedIndex = -1;
-
-                // Update the departments combobox and reselect the correct index
-                UpdateDepartmentsComboBox(allDepartments);
-                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
         }
 
@@ -227,10 +223,6 @@ namespace MediaBazaar_ManagementSystem
 
                 // Removes the employee from the listbox of currently scheduled employee.
                 listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
-
-                // Update the departments combobox and reselect the correct index
-                UpdateDepartmentsComboBox(allDepartments);
-                comboBoxSelectDepartments.SelectedIndex = selectedIndex;
             }
         }
 
@@ -257,6 +249,10 @@ namespace MediaBazaar_ManagementSystem
         {
             comboBoxSelectEmployees.Items.Clear();
 
+            Console.WriteLine("ID: " + id);
+
+            List<Department> allDepartmentInfo = GetDepartmentListFromComboBox();
+
             foreach (Employee e in allActiveEmployees)
             {
                 List<int> allowedDepartments = new List<int>();
@@ -267,9 +263,25 @@ namespace MediaBazaar_ManagementSystem
 
                 if (allowedDepartments.Contains(id))
                 {
-                    comboBoxSelectEmployees.DisplayMember = "Text";
-                    comboBoxSelectEmployees.ValueMember = "Employee";
-                    comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                    bool allowed = true;
+                    foreach(Department d in allDepartmentInfo)
+                    {
+                        List<Employee> employeesInDepartment = d.Employees;
+
+                        foreach (Employee emp in d.Employees)
+                        {
+                            if (e.Id == emp.Id)
+                            {
+                                allowed = false;
+                            }
+                        }
+                    }
+                    if (allowed)
+                    {
+                        comboBoxSelectEmployees.DisplayMember = "Text";
+                        comboBoxSelectEmployees.ValueMember = "Employee";
+                        comboBoxSelectEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                    }
                 }
             }
 
