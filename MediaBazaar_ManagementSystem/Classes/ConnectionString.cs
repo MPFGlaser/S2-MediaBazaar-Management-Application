@@ -26,11 +26,11 @@ namespace MediaBazaar_ManagementSystem
             catch (FileNotFoundException)
             {
                 Create();
-                MessageBox.Show("No connection file found. Empty file has been created in application root directory.");
+                ErrorMessages.FNF();
             }
             catch (IOException)
             {
-                MessageBox.Show("Error reading file");
+                ErrorMessages.Read();
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (IOException)
             {
-                MessageBox.Show("Error creating file");
+                ErrorMessages.Create();
             }
             finally
             {

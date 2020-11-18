@@ -126,12 +126,6 @@
   <data name="genericError" xml:space="preserve">
     <value>Something went wrong.\n</value>
   </data>
-  <data name="getEmployeeError" xml:space="preserve">
-    <value>Error getting employee info.\n</value>
-  </data>
-  <data name="loadEmployeeError" xml:space="preserve">
-    <value>Error loading employee id's from database.\n</value>
-  </data>
   <data name="loadShiftError" xml:space="preserve">
     <value>Error loading shifts from database.\n</value>
   </data>

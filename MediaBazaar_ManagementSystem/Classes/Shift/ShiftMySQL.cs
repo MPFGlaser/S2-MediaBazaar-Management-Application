@@ -52,7 +52,7 @@ namespace MediaBazaar_ManagementSystem
             catch (Exception ex)
             {
                 success = false;
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -91,7 +91,7 @@ namespace MediaBazaar_ManagementSystem
             catch (Exception ex)
             {
                 success = false;
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -122,7 +122,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -153,7 +153,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -196,7 +196,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+                ErrorMessages.Shift(ex);
             }
             finally
             {
@@ -234,7 +234,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading employee id's from database.\n" + ex.ToString());
+                ErrorMessages.RetrieveEmployee(ex);
             }
             finally
             {
@@ -280,7 +280,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+                ErrorMessages.Shift(ex);
             }
             finally
             {
@@ -315,7 +315,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong.\n" + ex.ToString());
+                ErrorMessages.Generic(ex);
             }
             finally
             {
@@ -379,7 +379,7 @@ namespace MediaBazaar_ManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading shifts from database.\n" + ex.ToString());
+                ErrorMessages.Shift(ex);
             }
             finally
             {
