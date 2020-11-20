@@ -41,7 +41,6 @@
             this.textBoxLoginUsername.Name = "textBoxLoginUsername";
             this.textBoxLoginUsername.Size = new System.Drawing.Size(196, 20);
             this.textBoxLoginUsername.TabIndex = 0;
-            this.textBoxLoginUsername.Text = "Mycornia";
             // 
             // textBoxLoginPassword
             // 
@@ -49,7 +48,6 @@
             this.textBoxLoginPassword.Name = "textBoxLoginPassword";
             this.textBoxLoginPassword.Size = new System.Drawing.Size(196, 20);
             this.textBoxLoginPassword.TabIndex = 1;
-            this.textBoxLoginPassword.Text = "Password1!";
             this.textBoxLoginPassword.UseSystemPasswordChar = true;
             // 
             // buttonLogin
