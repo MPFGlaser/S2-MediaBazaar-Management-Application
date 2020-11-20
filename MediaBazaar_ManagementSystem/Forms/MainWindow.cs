@@ -327,14 +327,17 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeModify()
         {
-            int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
-            Employee toEdit = employeeStorage.Get(id);
-            edw = new EmployeeDetailsWindow();
-            edw.AddEmployeeData(toEdit);
-            if (edw.ShowDialog() == DialogResult.OK)
+            if (dataGridViewEmployees.SelectedRows.Count > 0)
             {
-                PopulateEmployeesTable();
-                HideInactiveEmployees(!checkBoxShowInactive.Checked);
+                int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+                Employee toEdit = employeeStorage.Get(id);
+                edw = new EmployeeDetailsWindow();
+                edw.AddEmployeeData(toEdit);
+                if (edw.ShowDialog() == DialogResult.OK)
+                {
+                    PopulateEmployeesTable();
+                    HideInactiveEmployees(!checkBoxShowInactive.Checked);
+                }
             }
         }
 
@@ -389,14 +392,17 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void StockModify()
         {
-            int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
-            Item toEdit = itemStorage.Get(id);
-            pdw = new ProductDetailsWindow();
-            pdw.AddItemData(toEdit);
-            if (pdw.ShowDialog() == DialogResult.OK)
+            if (dataGridViewStock.SelectedRows.Count > 0)
             {
-                PopulateItemsTable();
-                HideInactiveItems(!checkBoxShowInactiveItems.Checked);
+                int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+                Item toEdit = itemStorage.Get(id);
+                pdw = new ProductDetailsWindow();
+                pdw.AddItemData(toEdit);
+                if (pdw.ShowDialog() == DialogResult.OK)
+                {
+                    PopulateItemsTable();
+                    HideInactiveItems(!checkBoxShowInactiveItems.Checked);
+                }
             }
         }
         #endregion
