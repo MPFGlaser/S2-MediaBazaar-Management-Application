@@ -157,7 +157,7 @@
             // 
             // labelCapacityEvening
             // 
-            this.labelCapacityEvening.BackColor = System.Drawing.Color.LightCoral;
+            this.labelCapacityEvening.BackColor = System.Drawing.Color.Red;
             this.labelCapacityEvening.Location = new System.Drawing.Point(3, 98);
             this.labelCapacityEvening.Name = "labelCapacityEvening";
             this.labelCapacityEvening.Size = new System.Drawing.Size(44, 24);
@@ -167,7 +167,7 @@
             // 
             // labelCapacityAfternoon
             // 
-            this.labelCapacityAfternoon.BackColor = System.Drawing.Color.LightCoral;
+            this.labelCapacityAfternoon.BackColor = System.Drawing.Color.Red;
             this.labelCapacityAfternoon.Location = new System.Drawing.Point(3, 55);
             this.labelCapacityAfternoon.Name = "labelCapacityAfternoon";
             this.labelCapacityAfternoon.Size = new System.Drawing.Size(44, 24);
@@ -177,7 +177,7 @@
             // 
             // labelCapacityMorning
             // 
-            this.labelCapacityMorning.BackColor = System.Drawing.Color.LightCoral;
+            this.labelCapacityMorning.BackColor = System.Drawing.Color.Red;
             this.labelCapacityMorning.Location = new System.Drawing.Point(3, 12);
             this.labelCapacityMorning.Name = "labelCapacityMorning";
             this.labelCapacityMorning.Size = new System.Drawing.Size(44, 24);

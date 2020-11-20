@@ -15,6 +15,9 @@ namespace MediaBazaar_ManagementSystem
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>();
 
+        public delegate void ReloadCalendarDayHelper();
+        public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
+
         /// <summary>
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
         /// <para>Has counters to indicate the occupancy of the shift.</para>
@@ -41,6 +44,11 @@ namespace MediaBazaar_ManagementSystem
             labelCapacityAfternoon.Text = "N/A";
             labelCapacityEvening.Text = "N/A";
 
+            labelCapacityMorning.BackColor = Color.Red;
+            labelCapacityAfternoon.BackColor = Color.Red;
+            labelCapacityEvening.BackColor = Color.Red;
+
+
             foreach (Shift s in allWeekShifts)
             {
                 if (s.Date == date)
@@ -62,43 +70,44 @@ namespace MediaBazaar_ManagementSystem
             {
                 case ShiftTime.Morning:
                     labelCapacityMorning.Text = $"{numberScheduled}/{capacity}";
-                    if(numberScheduled < capacity)
-                    {
-                        labelCapacityMorning.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityMorning.BackColor = Color.Transparent;
-                    }
+                    labelCapacityMorning.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 case ShiftTime.Afternoon:
                     labelCapacityAfternoon.Text = $"{numberScheduled}/{capacity}";
-                    if (numberScheduled < capacity)
-                    {
-                        labelCapacityAfternoon.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityAfternoon.BackColor = Color.Transparent;
-                    }
+                    labelCapacityAfternoon.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 case ShiftTime.Evening:
                     labelCapacityEvening.Text = $"{numberScheduled}/{capacity}";
-                    if (numberScheduled < capacity)
-                    {
-                        labelCapacityEvening.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityEvening.BackColor = Color.Transparent;
-                    }
+                    labelCapacityEvening.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 default:
                     break;
             }
+        }
+
+        private Color IndicatorColor(int numberScheduled, int capacity)
+        {
+            Color output = Color.Transparent;
+
+            if(numberScheduled < capacity)
+            {
+                output = Color.Red;
+            }
+
+            if(numberScheduled == capacity)
+            {
+                output = Color.Lime;
+            }
+
+            if(numberScheduled > capacity)
+            {
+                output = Color.DarkOrange;
+            }
+
+            return output;
         }
 
         /// <summary>
@@ -126,15 +135,16 @@ namespace MediaBazaar_ManagementSystem
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                if(newShift != null)
-                {
-                    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
-                }
-                else
-                {
-                    SetShiftOccupation(time, 0, 0);
-                }
+                //if(newShift != null)
+                //{
+                //    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
+                //    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
+                //}
+                //else
+                //{
+                //    SetShiftOccupation(time, 0, 0);
+                //}
+                ReloadCalendarDayEvent?.Invoke();
             }
         }
         #endregion
