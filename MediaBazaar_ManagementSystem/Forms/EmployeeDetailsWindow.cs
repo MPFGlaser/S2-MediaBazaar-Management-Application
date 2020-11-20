@@ -13,17 +13,18 @@ namespace MediaBazaar_ManagementSystem
 
         private Employee employee;
         private Boolean editing = false;
-        private int editId;
+        private int editId, currentUser;
         string preferredHours = "000000000000000000000", workingDepartments = "";
         List<Department> allDepartments = new List<Department>();
         PreferredHours ph;
         WorkingDepartments wd;
 
-        public EmployeeDetailsWindow()
+        public EmployeeDetailsWindow(int currentUser)
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
             departmentStorage = new DepartmentMySQL();
+            this.currentUser = currentUser;
             LoadDepartments();
         }
 
@@ -289,6 +290,8 @@ namespace MediaBazaar_ManagementSystem
                 }
                 index++;
             }
+
+            PreventUserLockout();
         }
 
         /// <summary>
@@ -317,6 +320,15 @@ namespace MediaBazaar_ManagementSystem
         private void LoadDepartments()
         {
             allDepartments = departmentStorage.GetAll();
+        }
+
+        private void PreventUserLockout()
+        {
+            if (currentUser == editId)
+            {
+                checkBoxActive.Checked = true;
+                checkBoxActive.Enabled = false;
+            }
         }
         #endregion
 
