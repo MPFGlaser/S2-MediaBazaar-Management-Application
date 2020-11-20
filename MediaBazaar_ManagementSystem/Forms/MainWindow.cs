@@ -197,6 +197,8 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
             calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
             calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
+
+            List<Employee> allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
         }
 
         /// <summary>

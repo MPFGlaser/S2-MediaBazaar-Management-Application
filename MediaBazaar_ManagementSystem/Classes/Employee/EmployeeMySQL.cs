@@ -229,10 +229,9 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Returns the amount of hours an employee is scheduled within a certain week.
         /// </summary>
-        public int GetHoursWorked(Employee selectedEmployee, DateTime monday, DateTime sunday)
+        public List<Employee> GetHoursWorked(List<Employee> allEmployees, DateTime monday, DateTime sunday)
         {
             List<int> weekShiftIds = new List<int>();
-            int employeeHours = 0;
             string mondaySql = monday.ToString("yyyy-MM-dd");
             string sundaySql = sunday.ToString("yyyy-MM-dd");
 
@@ -252,21 +251,24 @@ namespace MediaBazaar_ManagementSystem
 
                 reader.Close();
 
-                foreach (int shiftId in weekShiftIds)
+                foreach(Employee e in allEmployees)
                 {
-                    String employeeIds = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
-                    MySqlCommand employeeIdsCommand = new MySqlCommand(employeeIds, connection);
-                    employeeIdsCommand.Parameters.AddWithValue("@shiftId", shiftId);
-
-                    MySqlDataReader employeeIdsReader = employeeIdsCommand.ExecuteReader();
-                    while (employeeIdsReader.Read())
+                    foreach (int shiftId in weekShiftIds)
                     {
-                        if(Convert.ToInt32(employeeIdsReader[0]) == selectedEmployee.Id)
+                        String employeeIds = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
+                        MySqlCommand employeeIdsCommand = new MySqlCommand(employeeIds, connection);
+                        employeeIdsCommand.Parameters.AddWithValue("@shiftId", shiftId);
+
+                        MySqlDataReader employeeIdsReader = employeeIdsCommand.ExecuteReader();
+                        while (employeeIdsReader.Read())
                         {
-                            employeeHours += 4;
+                            if (Convert.ToInt32(employeeIdsReader[0]) == e.Id)
+                            {
+                                e.WorkingHours += 4.5f;
+                            }
                         }
+                        employeeIdsReader.Close();
                     }
-                    employeeIdsReader.Close();
                 }
             }
             catch (Exception ex)
@@ -278,7 +280,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
 
-            return employeeHours;
+            return allEmployees;
         }
     }
 }
