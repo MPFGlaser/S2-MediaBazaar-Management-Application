@@ -105,6 +105,8 @@ namespace MediaBazaar_ManagementSystem
             // Sets some editing-specific variables to the right values
             editing = true;
             editId = item.Id;
+            labelID.Visible = true;
+            labelIDTitle.Visible = true;
 
             // Fills all the controls with the right values
             labelID.Text = item.Id.ToString();

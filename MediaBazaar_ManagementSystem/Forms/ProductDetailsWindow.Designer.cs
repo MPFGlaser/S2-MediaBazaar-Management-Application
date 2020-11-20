@@ -40,7 +40,7 @@
             this.textBoxCategory = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelIDTitle = new System.Windows.Forms.Label();
             this.labelID = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -157,14 +157,15 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Status";
             // 
-            // label7
+            // labelIDTitle
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(367, 7);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(18, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "ID";
+            this.labelIDTitle.AutoSize = true;
+            this.labelIDTitle.Location = new System.Drawing.Point(367, 7);
+            this.labelIDTitle.Name = "labelIDTitle";
+            this.labelIDTitle.Size = new System.Drawing.Size(18, 13);
+            this.labelIDTitle.TabIndex = 14;
+            this.labelIDTitle.Text = "ID";
+            this.labelIDTitle.Visible = false;
             // 
             // labelID
             // 
@@ -174,6 +175,7 @@
             this.labelID.Size = new System.Drawing.Size(29, 13);
             this.labelID.TabIndex = 15;
             this.labelID.Text = "TBD";
+            this.labelID.Visible = false;
             // 
             // label8
             // 
@@ -270,7 +272,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.labelID);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.labelIDTitle);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -306,7 +308,7 @@
         private System.Windows.Forms.TextBox textBoxCategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelIDTitle;
         private System.Windows.Forms.Label labelID;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
