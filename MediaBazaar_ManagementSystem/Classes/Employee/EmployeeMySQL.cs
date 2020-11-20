@@ -25,7 +25,7 @@ namespace MediaBazaar_ManagementSystem
         {
             bool success = false;
             int rowsAffected = 0;
-            String query = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift, @workingDepartments)";
+            String query = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift, @workingDepartments, @contractHours)";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
@@ -46,6 +46,7 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@functions", 1337);
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
             command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
+            command.Parameters.AddWithValue("@contractHours", employee.ContractHours);
 
             try
             {
@@ -81,7 +82,7 @@ namespace MediaBazaar_ManagementSystem
         {
             Employee output = null;
 
-            String query = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift, workingDepartments FROM employees WHERE id = @employeeId";
+            String query = "SELECT id, active, firstName, surName, username, emailAddress, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhoneNumber, functions, postalcode, city, preferredShift, workingDepartments, contractHours FROM employees WHERE id = @employeeId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@employeeId", id);
 
@@ -91,7 +92,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    output = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString(), reader[16].ToString());
+                    output = new Employee(Convert.ToInt32(reader[0]), (bool)reader[1], reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), "", reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), Convert.ToDateTime(reader[8]), Convert.ToInt32(reader[9]), reader[10].ToString(), reader[11].ToString(), Convert.ToInt32(reader[12]), reader[13].ToString(), reader[14].ToString(), reader[15].ToString(), reader[16].ToString(), Convert.ToInt32(reader[17]));
                 }
             }
             catch (Exception ex)
@@ -126,7 +127,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, bsn, function;
+                int id, bsn, function, contractHours;
                 bool active;
                 string firstName, surName, userName, password, email, phoneNumber, address, spouseName, spousePhone, postalCode, city, preferredShift, workingDepartments;
                 DateTime dateOfBirth;
@@ -151,8 +152,9 @@ namespace MediaBazaar_ManagementSystem
                     city = Convert.ToString(reader["city"]);
                     preferredShift = Convert.ToString(reader["preferredShift"]);
                     workingDepartments = Convert.ToString(reader["workingDepartments"]);
+                    contractHours = Convert.ToInt32(reader["contractHours"]);
 
-                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift, workingDepartments);
+                    Employee emp = new Employee(id, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredShift, workingDepartments, contractHours);
                     output.Add(emp);
                 }
             }
@@ -177,7 +179,7 @@ namespace MediaBazaar_ManagementSystem
         {
             bool success = false;
             int rowsAffected = 0;
-            String query = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift, workingDepartments = @workingDepartments WHERE id = @id";
+            String query = "UPDATE employees SET active = @active, firstName = @firstName, surName = @surName, username = @username, picture = @picture, phoneNumber = @phoneNumber, address = @address, city = @city, postalcode = @postalcode, emailAddress = @emailAddress, dateOfBirth = @dateOfBirth, spouseName = @spouseName, spousePhoneNumber = @spousePhoneNumber, bsn = @bsn, functions = @function, preferredShift = @preferredShift, workingDepartments = @workingDepartments, contractHours = @contractHours WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@id", employee.Id);
@@ -197,6 +199,7 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@function", employee.Function);
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
             command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
+            command.Parameters.AddWithValue("@contractHours", employee.ContractHours);
 
             try
             {

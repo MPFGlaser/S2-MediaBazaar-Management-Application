@@ -219,25 +219,54 @@ namespace MediaBazaar_ManagementSystem
         private void RemoveEmployeeFromShift()
         {
             // Checks if there's actually an employee selected to be removed
-            if (listBoxCurrentEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
+            if (listBoxCurrentEmployees.SelectedIndex != -1)
             {
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
-                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
 
-                // Adds the selected employee to the list of employees in the department
-                allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
+                if (comboBoxSelectDepartments.SelectedIndex != -1)
+                {
+                    // Selects the correct index from the combobox
+                    int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
-                // Adds the selected employee to the combobox of available employees.
-                comboBoxSelectEmployees.DisplayMember = "Text";
-                comboBoxSelectEmployees.ValueMember = "Employee";
-                comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
+                    RemoveSelectedEmployee(selectedEmployee, selectedIndex);
+                }
+                else
+                {
+                    int selectedIndex = 0;
+                    foreach (Department d in allDepartments)
+                    {
+                        List<Employee> employeesInDepartment = d.Employees;
+                        foreach(Employee e in employeesInDepartment)
+                        {
+                            if (e.Id == selectedEmployee.Id)
+                            {
+                                RemoveSelectedEmployee(selectedEmployee, selectedIndex);
+                            }
+                        }
 
-                // Removes the employee from the listbox of currently scheduled employee.
-                listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+                        selectedIndex++;
+                    }
+                }
             }
+        }
+
+        /// <summary>
+        /// Removes the selected employee at the department at which it is working.
+        /// </summary>
+        private void RemoveSelectedEmployee(Employee selectedEmployee, int selectedIndex)
+        {
+            allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
+
+            // Adds the selected employee to the combobox of available employees.
+            comboBoxSelectEmployees.DisplayMember = "Text";
+            comboBoxSelectEmployees.ValueMember = "Employee";
+            comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
+
+            // Removes the employee from the listbox of currently scheduled employee.
+            listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
         }
 
         /// <summary>
