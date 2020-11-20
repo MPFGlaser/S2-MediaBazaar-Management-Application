@@ -231,6 +231,51 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         public List<Employee> GetHoursWorked(List<Employee> allEmployees, DateTime monday, DateTime sunday)
         {
+            List<int> weekShiftIds = GetShiftIdsInWeek(monday, sunday);
+
+            String working_employees = "SELECT * FROM working_employees";
+            MySqlCommand working_employeesCommand = new MySqlCommand(working_employees, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader working_employeesReader = working_employeesCommand.ExecuteReader();
+
+                while (working_employeesReader.Read())
+                {
+                    if (weekShiftIds.Contains(Convert.ToInt32(working_employeesReader[0])))
+                    {
+                        foreach (Employee e in allEmployees)
+                        {
+                            while (working_employeesReader.Read())
+                            {
+                                if (Convert.ToInt32(working_employeesReader[1]) == e.Id)
+                                {
+                                    e.WorkingHours += 4.5f;
+                                    Console.WriteLine("e.WorkingHours: " + e.WorkingHours);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                working_employeesReader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return allEmployees;
+        }
+
+        public List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday)
+        {
             List<int> weekShiftIds = new List<int>();
             string mondaySql = monday.ToString("yyyy-MM-dd");
             string sundaySql = sunday.ToString("yyyy-MM-dd");
@@ -250,8 +295,22 @@ namespace MediaBazaar_ManagementSystem
                 }
 
                 reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
 
-                foreach(Employee e in allEmployees)
+            return weekShiftIds;
+        }
+    }
+}
+
+/*foreach(Employee e in allEmployees)
                 {
                     foreach (int shiftId in weekShiftIds)
                     {
@@ -269,18 +328,4 @@ namespace MediaBazaar_ManagementSystem
                         }
                         employeeIdsReader.Close();
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Shift(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-
-            return allEmployees;
-        }
-    }
-}
+                }*/
