@@ -15,6 +15,9 @@ namespace MediaBazaar_ManagementSystem
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>();
 
+        public delegate void ReloadCalendarDayHelper();
+        public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
+
         /// <summary>
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
         /// <para>Has counters to indicate the occupancy of the shift.</para>
@@ -40,6 +43,11 @@ namespace MediaBazaar_ManagementSystem
             labelCapacityMorning.Text = "N/A";
             labelCapacityAfternoon.Text = "N/A";
             labelCapacityEvening.Text = "N/A";
+
+            labelCapacityMorning.BackColor = Color.LightCoral;
+            labelCapacityAfternoon.BackColor = Color.LightCoral;
+            labelCapacityEvening.BackColor = Color.LightCoral;
+
 
             foreach (Shift s in allWeekShifts)
             {
@@ -126,15 +134,16 @@ namespace MediaBazaar_ManagementSystem
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                if(newShift != null)
-                {
-                    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
-                }
-                else
-                {
-                    SetShiftOccupation(time, 0, 0);
-                }
+                //if(newShift != null)
+                //{
+                //    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
+                //    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
+                //}
+                //else
+                //{
+                //    SetShiftOccupation(time, 0, 0);
+                //}
+                ReloadCalendarDayEvent?.Invoke();
             }
         }
         #endregion
