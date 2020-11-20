@@ -44,9 +44,9 @@ namespace MediaBazaar_ManagementSystem
             labelCapacityAfternoon.Text = "N/A";
             labelCapacityEvening.Text = "N/A";
 
-            labelCapacityMorning.BackColor = Color.LightCoral;
-            labelCapacityAfternoon.BackColor = Color.LightCoral;
-            labelCapacityEvening.BackColor = Color.LightCoral;
+            labelCapacityMorning.BackColor = Color.Red;
+            labelCapacityAfternoon.BackColor = Color.Red;
+            labelCapacityEvening.BackColor = Color.Red;
 
 
             foreach (Shift s in allWeekShifts)
@@ -70,43 +70,44 @@ namespace MediaBazaar_ManagementSystem
             {
                 case ShiftTime.Morning:
                     labelCapacityMorning.Text = $"{numberScheduled}/{capacity}";
-                    if(numberScheduled < capacity)
-                    {
-                        labelCapacityMorning.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityMorning.BackColor = Color.Transparent;
-                    }
+                    labelCapacityMorning.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 case ShiftTime.Afternoon:
                     labelCapacityAfternoon.Text = $"{numberScheduled}/{capacity}";
-                    if (numberScheduled < capacity)
-                    {
-                        labelCapacityAfternoon.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityAfternoon.BackColor = Color.Transparent;
-                    }
+                    labelCapacityAfternoon.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 case ShiftTime.Evening:
                     labelCapacityEvening.Text = $"{numberScheduled}/{capacity}";
-                    if (numberScheduled < capacity)
-                    {
-                        labelCapacityEvening.BackColor = Color.LightCoral;
-                    }
-                    else
-                    {
-                        labelCapacityEvening.BackColor = Color.Transparent;
-                    }
+                    labelCapacityEvening.BackColor = IndicatorColor(numberScheduled, capacity);
                     break;
 
                 default:
                     break;
             }
+        }
+
+        private Color IndicatorColor(int numberScheduled, int capacity)
+        {
+            Color output = Color.Transparent;
+
+            if(numberScheduled < capacity)
+            {
+                output = Color.Red;
+            }
+
+            if(numberScheduled == capacity)
+            {
+                output = Color.Lime;
+            }
+
+            if(numberScheduled > capacity)
+            {
+                output = Color.DarkOrange;
+            }
+
+            return output;
         }
 
         /// <summary>
