@@ -61,7 +61,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error creating file.\n.
+        ///   Looks up a localized string similar to Error creating file..
         /// </summary>
         internal static string createError {
             get {
@@ -70,7 +70,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No connection file found.\n.
+        ///   Looks up a localized string similar to No connection file found..
         /// </summary>
         internal static string fileNotFound {
             get {
@@ -79,7 +79,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something went wrong.\n.
+        ///   Looks up a localized string similar to Something went wrong..
         /// </summary>
         internal static string genericError {
             get {
@@ -88,7 +88,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error loading shifts from database.\n.
+        ///   Looks up a localized string similar to Error loading shifts from database..
         /// </summary>
         internal static string loadShiftError {
             get {
@@ -97,7 +97,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error reading file.\n.
+        ///   Looks up a localized string similar to Error reading file..
         /// </summary>
         internal static string readError {
             get {
@@ -116,7 +116,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error retrieving employees.\n.
+        ///   Looks up a localized string similar to Error retrieving employees..
         /// </summary>
         internal static string retrieveEmployeeError {
             get {
@@ -125,7 +125,7 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error retrieving items.\n.
+        ///   Looks up a localized string similar to Error retrieving items..
         /// </summary>
         internal static string retrieveItemError {
             get {
