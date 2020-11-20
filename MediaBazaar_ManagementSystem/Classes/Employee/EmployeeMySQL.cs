@@ -232,8 +232,10 @@ namespace MediaBazaar_ManagementSystem
         public List<Employee> GetHoursWorked(List<Employee> allEmployees, DateTime monday, DateTime sunday)
         {
             List<int> weekShiftIds = GetShiftIdsInWeek(monday, sunday);
+            List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+            int index = 0;
 
-            String working_employees = "SELECT * FROM working_employees";
+            String working_employees = "SELECT shiftId, employeeId FROM working_employees";
             MySqlCommand working_employeesCommand = new MySqlCommand(working_employees, connection);
 
             try
@@ -243,22 +245,9 @@ namespace MediaBazaar_ManagementSystem
 
                 while (working_employeesReader.Read())
                 {
-                    if (weekShiftIds.Contains(Convert.ToInt32(working_employeesReader[0])))
-                    {
-                        foreach (Employee e in allEmployees)
-                        {
-                            while (working_employeesReader.Read())
-                            {
-                                if (Convert.ToInt32(working_employeesReader[1]) == e.Id)
-                                {
-                                    e.WorkingHours += 4.5f;
-                                    Console.WriteLine("e.WorkingHours: " + e.WorkingHours);
-                                }
-                            }
-                        }
-                    }
+                    employeeShifts.Add(new EmployeeShift(Convert.ToInt32(working_employeesReader[0]), Convert.ToInt32(working_employeesReader[1])));
                 }
-                
+
                 working_employeesReader.Close();
             }
             catch (Exception ex)
@@ -270,6 +259,19 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
 
+            foreach(EmployeeShift es in employeeShifts)
+            {
+                if (weekShiftIds.Contains(es.ShiftId))
+                {
+                    foreach (Employee e in allEmployees)
+                    {
+                        if (es.EmployeeId == e.Id)
+                        {
+                            e.WorkingHours += 4.5f;
+                        }
+                    }
+                }
+            }
 
             return allEmployees;
         }
@@ -309,23 +311,3 @@ namespace MediaBazaar_ManagementSystem
         }
     }
 }
-
-/*foreach(Employee e in allEmployees)
-                {
-                    foreach (int shiftId in weekShiftIds)
-                    {
-                        String employeeIds = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
-                        MySqlCommand employeeIdsCommand = new MySqlCommand(employeeIds, connection);
-                        employeeIdsCommand.Parameters.AddWithValue("@shiftId", shiftId);
-
-                        MySqlDataReader employeeIdsReader = employeeIdsCommand.ExecuteReader();
-                        while (employeeIdsReader.Read())
-                        {
-                            if (Convert.ToInt32(employeeIdsReader[0]) == e.Id)
-                            {
-                                e.WorkingHours += 4.5f;
-                            }
-                        }
-                        employeeIdsReader.Close();
-                    }
-                }*/

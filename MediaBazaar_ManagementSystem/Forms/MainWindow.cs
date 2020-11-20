@@ -199,11 +199,6 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
 
             List<Employee> allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
-
-            foreach(Employee e in allEmployees)
-            {
-                Console.WriteLine("Name: " + e.FirstName + " Hours: " + e.WorkingHours);
-            }
         }
 
         /// <summary>
