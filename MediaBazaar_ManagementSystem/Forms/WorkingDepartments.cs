@@ -80,7 +80,7 @@ namespace MediaBazaar_ManagementSystem
         private void AddDepartmentToWorkable()
         {
             // Checks if there's actually a department selected to be added
-            if (comboBoxSelectDepartments.SelectedIndex != -1)
+            if (comboBoxSelectDepartments.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
                 // Ensures the right department object is used
                 Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
@@ -102,7 +102,7 @@ namespace MediaBazaar_ManagementSystem
         private void RemoveDepartmentFromWorkable()
         {
             // Checks if there's actually an employee selected to be removed
-            if (listBoxCurrentWorkingDepartments.SelectedIndex != -1)
+            if (listBoxCurrentWorkingDepartments.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
                 // Ensures the right department object is used
                 Department selectedDepartment = (listBoxCurrentWorkingDepartments.SelectedItem as dynamic).Department;

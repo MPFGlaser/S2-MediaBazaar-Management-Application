@@ -191,7 +191,7 @@ namespace MediaBazaar_ManagementSystem
         private void AddEmployeeToShift()
         {
             // Checks if there's actually an employee selected to be added
-            if (comboBoxSelectEmployees.SelectedIndex != -1)
+            if (comboBoxSelectEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
                 int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
@@ -219,7 +219,7 @@ namespace MediaBazaar_ManagementSystem
         private void RemoveEmployeeFromShift()
         {
             // Checks if there's actually an employee selected to be removed
-            if (listBoxCurrentEmployees.SelectedIndex != -1)
+            if (listBoxCurrentEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
                 int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
