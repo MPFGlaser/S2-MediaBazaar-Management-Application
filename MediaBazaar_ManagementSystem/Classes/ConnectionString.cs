@@ -5,7 +5,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public static class ConnectionString
     {
-        static string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstring.cfg";
+        static string path = Path.GetDirectoryName(Application.ExecutablePath) + "\\connectionstringHome.cfg";
 
         /// <summary>
         /// Function to get the connection string from a config file

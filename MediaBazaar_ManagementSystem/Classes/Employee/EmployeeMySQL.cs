@@ -225,5 +225,60 @@ namespace MediaBazaar_ManagementSystem
             }
             return success;
         }
+
+        /// <summary>
+        /// Returns the amount of hours an employee is scheduled within a certain week.
+        /// </summary>
+        public int GetHoursWorked(Employee selectedEmployee, DateTime monday, DateTime sunday)
+        {
+            List<int> weekShiftIds = new List<int>();
+            int employeeHours = 0;
+            string mondaySql = monday.ToString("yyyy-MM-dd");
+            string sundaySql = sunday.ToString("yyyy-MM-dd");
+
+            String query = "SELECT id FROM shifts WHERE date >= @dateMonday AND date <= @dateSunday";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@dateMonday", mondaySql);
+            command.Parameters.AddWithValue("@dateSunday", sundaySql);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    weekShiftIds.Add(Convert.ToInt32(reader[0]));
+                }
+
+                reader.Close();
+
+                foreach (int shiftId in weekShiftIds)
+                {
+                    String employeeIds = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId";
+                    MySqlCommand employeeIdsCommand = new MySqlCommand(employeeIds, connection);
+                    employeeIdsCommand.Parameters.AddWithValue("@shiftId", shiftId);
+
+                    MySqlDataReader employeeIdsReader = employeeIdsCommand.ExecuteReader();
+                    while (employeeIdsReader.Read())
+                    {
+                        if(Convert.ToInt32(employeeIdsReader[0]) == selectedEmployee.Id)
+                        {
+                            employeeHours += 4;
+                        }
+                    }
+                    employeeIdsReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return employeeHours;
+        }
     }
 }
