@@ -282,7 +282,6 @@ namespace MediaBazaar_ManagementSystem
             foreach(string value in comboBoxEmployeeHours.Items)
             {
                 int hours = Convert.ToInt32(value);
-                Console.WriteLine("Hours: " + hours + " -- Contract Hours: " + employee.ContractHours);
 
                 if(employee.ContractHours == hours || (hours == 0 && employee.ContractHours == 200))
                 {
@@ -361,7 +360,6 @@ namespace MediaBazaar_ManagementSystem
             if(wd.ShowDialog() == DialogResult.OK)
             {
                 workingDepartments = wd.WorkingDepartmentsString;
-                Console.WriteLine(workingDepartments);
             }
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -11,5 +12,9 @@ namespace MediaBazaar_ManagementSystem
         Employee Get(int id);
 
         List<Employee> GetAll(bool activeOnly);
+
+        List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
+
+        List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday);
     }
 }

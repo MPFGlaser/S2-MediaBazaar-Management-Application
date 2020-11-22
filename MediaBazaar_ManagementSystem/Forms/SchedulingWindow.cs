@@ -31,11 +31,11 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
-            LoadEmployees(working);
+            LoadEmployees(working, allEmployees);
             this.date = date;
             this.shiftTime = shiftTime;
             this.comboBoxShiftTime.SelectedItem = shiftTime;
@@ -60,10 +60,11 @@ namespace MediaBazaar_ManagementSystem
         /// Loads the employees which are working that shift
         /// </summary>
         /// <param name="working"></param>
-        private void LoadEmployees(List<Employee> working)
+        private void LoadEmployees(List<Employee> working, List<Employee> allEmployees)
         {
-            employeeStorage = new EmployeeMySQL();
-            allActiveEmployees = employeeStorage.GetAll(true);
+            //employeeStorage = new EmployeeMySQL();
+            //allActiveEmployees = employeeStorage.GetAll(true);
+            allActiveEmployees = allEmployees;
 
             foreach (Employee e in working)
             {
@@ -193,11 +194,20 @@ namespace MediaBazaar_ManagementSystem
             // Checks if there's actually an employee selected to be added
             if (comboBoxSelectEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
+                // Ensures the right employee object is used
+                Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+
+                // Displays a message when the amount of hours an employee has in their contract is gone over
+                if(selectedEmployee.WorkingHours + 4.5f > selectedEmployee.ContractHours)
+                {
+                    MessageBox.Show("This employee has too many hours for their contract");
+                }
+
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
                 int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
-                // Ensures the right employee object is used
-                Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+                // Adds 4.5 hours to the selected employees current hours
+                selectedEmployee.WorkingHours += 4.5f;
 
                 // Adds the selected employee to the list of employees in the department
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
@@ -225,6 +235,9 @@ namespace MediaBazaar_ManagementSystem
 
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+
+                // Removes 4.5 hours from the selected employees hours
+                selectedEmployee.WorkingHours -= 4.5f;
 
                 if (comboBoxSelectDepartments.SelectedIndex != -1)
                 {
@@ -374,5 +387,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         #endregion
+
+        public List<Employee> AllActiveEmployees
+        {
+            get { return allActiveEmployees; }
+        }
     }
 }

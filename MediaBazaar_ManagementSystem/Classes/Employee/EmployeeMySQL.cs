@@ -225,5 +225,89 @@ namespace MediaBazaar_ManagementSystem
             }
             return success;
         }
+
+        /// <summary>
+        /// Returns the amount of hours an employee is scheduled within a certain week.
+        /// </summary>
+        public List<Employee> GetHoursWorked(List<Employee> allEmployees, DateTime monday, DateTime sunday)
+        {
+            List<int> weekShiftIds = GetShiftIdsInWeek(monday, sunday);
+            List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+            int index = 0;
+
+            String working_employees = "SELECT shiftId, employeeId FROM working_employees";
+            MySqlCommand working_employeesCommand = new MySqlCommand(working_employees, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader working_employeesReader = working_employeesCommand.ExecuteReader();
+
+                while (working_employeesReader.Read())
+                {
+                    employeeShifts.Add(new EmployeeShift(Convert.ToInt32(working_employeesReader[0]), Convert.ToInt32(working_employeesReader[1])));
+                }
+
+                working_employeesReader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            foreach(EmployeeShift es in employeeShifts)
+            {
+                if (weekShiftIds.Contains(es.ShiftId))
+                {
+                    foreach (Employee e in allEmployees)
+                    {
+                        if (es.EmployeeId == e.Id)
+                        {
+                            e.WorkingHours += 4.5f;
+                        }
+                    }
+                }
+            }
+
+            return allEmployees;
+        }
+
+        public List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday)
+        {
+            List<int> weekShiftIds = new List<int>();
+            string mondaySql = monday.ToString("yyyy-MM-dd");
+            string sundaySql = sunday.ToString("yyyy-MM-dd");
+
+            String query = "SELECT id FROM shifts WHERE date >= @dateMonday AND date <= @dateSunday";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@dateMonday", mondaySql);
+            command.Parameters.AddWithValue("@dateSunday", sundaySql);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    weekShiftIds.Add(Convert.ToInt32(reader[0]));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return weekShiftIds;
+        }
     }
 }

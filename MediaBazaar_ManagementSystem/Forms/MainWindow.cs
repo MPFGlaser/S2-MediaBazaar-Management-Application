@@ -16,6 +16,7 @@ namespace MediaBazaar_ManagementSystem
 
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
+        List<Employee> allEmployees = new List<Employee>();
         ProductDetailsWindow pdw;
         Employee loggedInUser;
 
@@ -189,6 +190,9 @@ namespace MediaBazaar_ManagementSystem
             // Gets all shifts from the shiftStorage between the start and end date of the week
             List<Shift> allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
+            // Gets the hours all employees work this specific week
+            allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
+
             // Sets the correct data on the CalendarDayControl elements
             calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
             calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
@@ -197,6 +201,19 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
             calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
             calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
+
+            SetupCorrectEmployees();
+        }
+
+        private void SetupCorrectEmployees()
+        {
+            calendarDayControlMonday.SetupEmployees(allEmployees);
+            calendarDayControlTuesday.SetupEmployees(allEmployees);
+            calendarDayControlWednesday.SetupEmployees(allEmployees);
+            calendarDayControlThursday.SetupEmployees(allEmployees);
+            calendarDayControlFriday.SetupEmployees(allEmployees);
+            calendarDayControlSaturday.SetupEmployees(allEmployees);
+            calendarDayControlSunday.SetupEmployees(allEmployees);
         }
 
         /// <summary>

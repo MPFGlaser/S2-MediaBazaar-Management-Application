@@ -109,6 +109,7 @@
     <Compile Include="Classes\Item\ItemMySQL.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
+    <Compile Include="Classes\Shift\EmployeeShift.cs" />
     <Compile Include="Classes\Shift\IShiftStorage.cs" />
     <Compile Include="Classes\Shift\Shift.cs" />
     <Compile Include="Classes\Shift\ShiftMySQL.cs" />

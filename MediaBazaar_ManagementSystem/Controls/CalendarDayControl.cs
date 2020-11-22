@@ -13,10 +13,13 @@ namespace MediaBazaar_ManagementSystem
         IShiftStorage shiftStorage;
         private DateTime date;
         Shift newShift;
-        List<Employee> shiftEmployees = new List<Employee>();
+        List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
 
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
+
+        public delegate void ReloadEmployeeHoursHelper();
+        public event ReloadEmployeeHoursHelper ReloadEmployeeHoursEvent;
 
         /// <summary>
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
@@ -37,6 +40,7 @@ namespace MediaBazaar_ManagementSystem
         public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
         {
             this.date = date;
+
             labelCalendarDay.Text = weekday;
             labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
 
@@ -57,6 +61,11 @@ namespace MediaBazaar_ManagementSystem
                     SetShiftOccupation(s.ShiftTime, numberScheduled, s.Capacity);
                 }
             }
+        }
+
+        public void SetupEmployees(List<Employee> allEmployees)
+        {
+            this.allEmployees = allEmployees;
         }
 
         /// <summary>
@@ -125,11 +134,11 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees);
             }
 
             // Show a dialog for the shift
@@ -145,6 +154,7 @@ namespace MediaBazaar_ManagementSystem
                 //    SetShiftOccupation(time, 0, 0);
                 //}
                 ReloadCalendarDayEvent?.Invoke();
+                ReloadEmployeeHoursEvent?.Invoke();
             }
         }
         #endregion
