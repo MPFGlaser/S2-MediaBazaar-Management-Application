@@ -18,6 +18,9 @@ namespace MediaBazaar_ManagementSystem
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
 
+        public delegate void ReloadEmployeeHoursHelper();
+        public event ReloadEmployeeHoursHelper ReloadEmployeeHoursEvent;
+
         /// <summary>
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
         /// <para>Has counters to indicate the occupancy of the shift.</para>
@@ -34,10 +37,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="date"></param>
         /// <param name="weekday"></param>
         /// <param name="allWeekShifts"></param>
-        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts, List<Employee> allEmployees)
+        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
         {
             this.date = date;
-            this.allEmployees = allEmployees;
 
             labelCalendarDay.Text = weekday;
             labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
@@ -59,6 +61,11 @@ namespace MediaBazaar_ManagementSystem
                     SetShiftOccupation(s.ShiftTime, numberScheduled, s.Capacity);
                 }
             }
+        }
+
+        public void SetupEmployees(List<Employee> allEmployees)
+        {
+            this.allEmployees = allEmployees;
         }
 
         /// <summary>
@@ -147,6 +154,7 @@ namespace MediaBazaar_ManagementSystem
                 //    SetShiftOccupation(time, 0, 0);
                 //}
                 ReloadCalendarDayEvent?.Invoke();
+                ReloadEmployeeHoursEvent?.Invoke();
             }
         }
         #endregion

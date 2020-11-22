@@ -194,11 +194,17 @@ namespace MediaBazaar_ManagementSystem
             // Checks if there's actually an employee selected to be added
             if (comboBoxSelectEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
             {
-                List<Department> allDepartments = GetDepartmentListFromComboBox();
-                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
-
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
+
+                // Displays a message when the amount of hours an employee has in their contract is gone over
+                if(selectedEmployee.WorkingHours + 4.5f > selectedEmployee.ContractHours)
+                {
+                    MessageBox.Show("This employee has too many hours for their contract");
+                }
+
+                List<Department> allDepartments = GetDepartmentListFromComboBox();
+                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
                 // Adds 4.5 hours to the selected employees current hours
                 selectedEmployee.WorkingHours += 4.5f;
@@ -381,5 +387,10 @@ namespace MediaBazaar_ManagementSystem
         }
 
         #endregion
+
+        public List<Employee> AllActiveEmployees
+        {
+            get { return allActiveEmployees; }
+        }
     }
 }
