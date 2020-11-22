@@ -200,6 +200,9 @@ namespace MediaBazaar_ManagementSystem
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
 
+                // Adds 4.5 hours to the selected employees current hours
+                selectedEmployee.WorkingHours += 4.5f;
+
                 // Adds the selected employee to the list of employees in the department
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
 
@@ -226,6 +229,9 @@ namespace MediaBazaar_ManagementSystem
 
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+
+                // Removes 4.5 hours from the selected employees hours
+                selectedEmployee.WorkingHours -= 4.5f;
 
                 if (comboBoxSelectDepartments.SelectedIndex != -1)
                 {
