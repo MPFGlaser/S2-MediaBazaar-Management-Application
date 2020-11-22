@@ -13,7 +13,7 @@ namespace MediaBazaar_ManagementSystem
         IShiftStorage shiftStorage;
         private DateTime date;
         Shift newShift;
-        List<Employee> shiftEmployees = new List<Employee>();
+        List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
 
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
@@ -34,9 +34,11 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="date"></param>
         /// <param name="weekday"></param>
         /// <param name="allWeekShifts"></param>
-        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
+        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts, List<Employee> allEmployees)
         {
             this.date = date;
+            this.allEmployees = allEmployees;
+
             labelCalendarDay.Text = weekday;
             labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
 
@@ -125,11 +127,11 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees);
             }
 
             // Show a dialog for the shift

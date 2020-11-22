@@ -31,11 +31,11 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
-            LoadEmployees(working);
+            LoadEmployees(working, allEmployees);
             this.date = date;
             this.shiftTime = shiftTime;
             this.comboBoxShiftTime.SelectedItem = shiftTime;
@@ -60,10 +60,11 @@ namespace MediaBazaar_ManagementSystem
         /// Loads the employees which are working that shift
         /// </summary>
         /// <param name="working"></param>
-        private void LoadEmployees(List<Employee> working)
+        private void LoadEmployees(List<Employee> working, List<Employee> allEmployees)
         {
-            employeeStorage = new EmployeeMySQL();
-            allActiveEmployees = employeeStorage.GetAll(true);
+            //employeeStorage = new EmployeeMySQL();
+            //allActiveEmployees = employeeStorage.GetAll(true);
+            allActiveEmployees = allEmployees;
 
             foreach (Employee e in working)
             {
