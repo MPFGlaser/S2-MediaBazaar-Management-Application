@@ -5,12 +5,12 @@
     /// </summary>
     public class Item
     {
-        private int id, code, quantity, departmentId;
+        private int id, code, quantity;
         private string name, brand, category, description;
         private bool active;
         private double price;
 
-        public Item(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description, int departmentId)
+        public Item(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description)
         {
             this.id = id;
             this.name = name;
@@ -21,7 +21,6 @@
             this.price = price;
             this.active = active;
             this.description = description;
-            this.departmentId = departmentId;
         }
 
         public int Id
@@ -74,12 +73,6 @@
         {
             get { return price; }
             set { price = value; }
-        }
-
-        public int DepartmentId
-        {
-            get { return departmentId; }
-            set { departmentId = value; }
         }
     }
 }

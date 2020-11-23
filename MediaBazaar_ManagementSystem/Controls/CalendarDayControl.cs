@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Globalization;
-using System.Drawing;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -13,13 +12,7 @@ namespace MediaBazaar_ManagementSystem
         IShiftStorage shiftStorage;
         private DateTime date;
         Shift newShift;
-        List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
-
-        public delegate void ReloadCalendarDayHelper();
-        public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
-
-        public delegate void ReloadEmployeeHoursHelper();
-        public event ReloadEmployeeHoursHelper ReloadEmployeeHoursEvent;
+        List<Employee> shiftEmployees = new List<Employee>();
 
         /// <summary>
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
@@ -40,32 +33,15 @@ namespace MediaBazaar_ManagementSystem
         public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
         {
             this.date = date;
-
-            labelCalendarDay.Text = weekday;
-            labelCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
-
-            labelCapacityMorning.Text = "N/A";
-            labelCapacityAfternoon.Text = "N/A";
-            labelCapacityEvening.Text = "N/A";
-
-            labelCapacityMorning.BackColor = Color.Red;
-            labelCapacityAfternoon.BackColor = Color.Red;
-            labelCapacityEvening.BackColor = Color.Red;
-
-
+            textBoxCalendarDay.Text = weekday;
+            textBoxCalendarDate.Text = date.ToString("MMMM", CultureInfo.CreateSpecificCulture("en-US")) + " " + date.Day;
             foreach (Shift s in allWeekShifts)
             {
                 if (s.Date == date)
                 {
-                    int numberScheduled = s.EmployeeIds.Count();
-                    SetShiftOccupation(s.ShiftTime, numberScheduled, s.Capacity);
+                    SetShiftOccupation(s.ShiftTime, s.EmployeeIds);
                 }
             }
-        }
-
-        public void SetupEmployees(List<Employee> allEmployees)
-        {
-            this.allEmployees = allEmployees;
         }
 
         /// <summary>
@@ -73,23 +49,20 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         /// <param name="shiftTime"></param>
         /// <param name="employeeIds"></param>
-        private void SetShiftOccupation(ShiftTime shiftTime, int numberScheduled, int capacity)
+        private void SetShiftOccupation(ShiftTime shiftTime, List<int> employeeIds)
         {
             switch (shiftTime)
             {
                 case ShiftTime.Morning:
-                    labelCapacityMorning.Text = $"{numberScheduled}/{capacity}";
-                    labelCapacityMorning.BackColor = IndicatorColor(numberScheduled, capacity);
+                    textBoxCapacityMorning.Text = employeeIds.Count().ToString();
                     break;
 
                 case ShiftTime.Afternoon:
-                    labelCapacityAfternoon.Text = $"{numberScheduled}/{capacity}";
-                    labelCapacityAfternoon.BackColor = IndicatorColor(numberScheduled, capacity);
+                    textBoxCapacityAfternoon.Text = employeeIds.Count().ToString();
                     break;
 
                 case ShiftTime.Evening:
-                    labelCapacityEvening.Text = $"{numberScheduled}/{capacity}";
-                    labelCapacityEvening.BackColor = IndicatorColor(numberScheduled, capacity);
+                    textBoxCapacityEvening.Text = employeeIds.Count().ToString();
                     break;
 
                 default:
@@ -97,64 +70,89 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private Color IndicatorColor(int numberScheduled, int capacity)
-        {
-            Color output = Color.Transparent;
-
-            if(numberScheduled < capacity)
-            {
-                output = Color.Red;
-            }
-
-            if(numberScheduled == capacity)
-            {
-                output = Color.Lime;
-            }
-
-            if(numberScheduled > capacity)
-            {
-                output = Color.DarkOrange;
-            }
-
-            return output;
-        }
+        // The code below needs to be refactored into something not as messy as this, as well as into something following proper programming standards.
 
         /// <summary>
-        /// Shows the correct shift upon execution.
+        /// Gets the data for the morning shift of the given day.
         /// </summary>
-        /// <param name="time"></param>
-        private void ShowShift(ShiftTime time)
+        private void getMorningShift()
         {
             // Refreshes the shift data from the shiftStorage
             shiftEmployees.Clear();
             shiftStorage = new ShiftMySQL();
-            newShift = shiftStorage.Get(date, time);
+            newShift = shiftStorage.Get(date, ShiftTime.Morning);
 
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, true, newShift.Id);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Morning, date, shiftEmployees, false, 0);
             }
 
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                //if(newShift != null)
-                //{
-                //    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                //    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
-                //}
-                //else
-                //{
-                //    SetShiftOccupation(time, 0, 0);
-                //}
-                ReloadCalendarDayEvent?.Invoke();
-                ReloadEmployeeHoursEvent?.Invoke();
+                SetShiftOccupation(ShiftTime.Morning, schedule.WorkingEmployeeIds);
+            }
+        }
+
+        /// <summary>
+        /// Gets the data for the afternoon shift of the given day.
+        /// </summary>
+        private void getAfternoonShift()
+        {
+            // Refreshes the shift data from the shiftStorage
+            shiftEmployees.Clear();
+            shiftStorage = new ShiftMySQL();
+            newShift = shiftStorage.Get(date, ShiftTime.Afternoon);
+
+            // If a shift exists, show it. Else create a new one
+            if (newShift != null)
+            {
+                shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, true, newShift.Id);
+            }
+            else
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Afternoon, date, shiftEmployees, false, 0);
+            }
+
+            // Show a dialog for the shift
+            if (schedule.ShowDialog() == DialogResult.OK)
+            {
+                SetShiftOccupation(ShiftTime.Afternoon, schedule.WorkingEmployeeIds);
+            }
+        }
+
+        /// <summary>
+        /// Gets the data for the evening shift of the given day.
+        /// </summary>
+        private void getEveningShift()
+        {
+            // Refreshes the shift data from the shiftStorage
+            shiftEmployees.Clear();
+            shiftStorage = new ShiftMySQL();
+            newShift = shiftStorage.Get(date, ShiftTime.Evening);
+
+            // If a shift exists, show it. Else create a new one
+            if (newShift != null)
+            {
+                shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, true, newShift.Id);
+            }
+            else
+            {
+                schedule = new SchedulingWindow(textBoxCalendarDate.Text, textBoxCalendarDay.Text, ShiftTime.Evening, date, shiftEmployees, false, 0);
+            }
+
+            // Show a dialog for the shift
+            if (schedule.ShowDialog() == DialogResult.OK)
+            {
+                SetShiftOccupation(ShiftTime.Evening, schedule.WorkingEmployeeIds);
             }
         }
         #endregion
@@ -162,17 +160,17 @@ namespace MediaBazaar_ManagementSystem
         #region Button-related functions
         private void buttonMorning_Click(object sender, EventArgs e)
         {
-            ShowShift(ShiftTime.Morning);
+            getMorningShift();
         }
 
         private void buttonAfternoon_Click(object sender, EventArgs e)
         {
-            ShowShift(ShiftTime.Afternoon);
+            getAfternoonShift();
         }
 
         private void buttonEvening_Click(object sender, EventArgs e)
         {
-            ShowShift(ShiftTime.Evening);
+            getEveningShift();
         }
         #endregion
     }

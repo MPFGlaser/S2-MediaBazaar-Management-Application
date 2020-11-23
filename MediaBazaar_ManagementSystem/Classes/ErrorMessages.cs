@@ -20,7 +20,7 @@ namespace MediaBazaar_ManagementSystem
 
         private static void Show(string errorMessage, Exception e)
         {
-            MessageBox.Show(errorMessage + System.Environment.NewLine + e.ToString());
+            MessageBox.Show(errorMessage + e.ToString());
         }
 
         public static void FNF()

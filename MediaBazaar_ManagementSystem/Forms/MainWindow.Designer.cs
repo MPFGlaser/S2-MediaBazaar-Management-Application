@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -68,6 +68,7 @@
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock_request = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +77,7 @@
             this.buttonStockCategoryRemove = new System.Windows.Forms.Button();
             this.buttonStockCategoryAdd = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnSendRestockRequest = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
@@ -100,6 +102,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
+            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlSalesRepresentative = new System.Windows.Forms.Panel();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -107,12 +116,6 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
-            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -148,6 +151,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.pnlSalesRepresentative.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -437,6 +441,7 @@
             this.code,
             this.category,
             this.quantity,
+            this.Stock_request,
             this.price,
             this.productActive,
             this.description});
@@ -455,25 +460,28 @@
             this.productId.HeaderText = "ID";
             this.productId.Name = "productId";
             this.productId.ReadOnly = true;
-            this.productId.Width = 50;
+            this.productId.Width = 30;
             // 
             // name
             // 
             this.name.HeaderText = "Product Name";
             this.name.Name = "name";
             this.name.ReadOnly = true;
+            this.name.Width = 120;
             // 
             // brand
             // 
             this.brand.HeaderText = "Brand";
             this.brand.Name = "brand";
             this.brand.ReadOnly = true;
+            this.brand.Width = 120;
             // 
             // code
             // 
             this.code.HeaderText = "Code";
             this.code.Name = "code";
             this.code.ReadOnly = true;
+            this.code.Width = 60;
             // 
             // category
             // 
@@ -486,19 +494,28 @@
             this.quantity.HeaderText = "Quantity";
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
+            this.quantity.Width = 50;
+            // 
+            // Stock_request
+            // 
+            this.Stock_request.HeaderText = "Stock Request";
+            this.Stock_request.Name = "Stock_request";
+            this.Stock_request.ReadOnly = true;
+            this.Stock_request.Width = 50;
             // 
             // price
             // 
             this.price.HeaderText = "Price";
             this.price.Name = "price";
             this.price.ReadOnly = true;
+            this.price.Width = 40;
             // 
             // productActive
             // 
             this.productActive.HeaderText = "Active";
             this.productActive.Name = "productActive";
             this.productActive.ReadOnly = true;
-            this.productActive.Width = 50;
+            this.productActive.Width = 40;
             // 
             // description
             // 
@@ -528,6 +545,7 @@
             // splitContainerStockSecondary.Panel2
             // 
             this.splitContainerStockSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.pnlSalesRepresentative);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.label5);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.checkBoxShowInactiveItems);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockEditProduct);
@@ -578,6 +596,16 @@
             this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Category name";
+            // 
+            // btnSendRestockRequest
+            // 
+            this.btnSendRestockRequest.Location = new System.Drawing.Point(3, 7);
+            this.btnSendRestockRequest.Name = "btnSendRestockRequest";
+            this.btnSendRestockRequest.Size = new System.Drawing.Size(140, 24);
+            this.btnSendRestockRequest.TabIndex = 0;
+            this.btnSendRestockRequest.Text = "File restock request";
+            this.btnSendRestockRequest.UseVisualStyleBackColor = true;
+            this.btnSendRestockRequest.Click += new System.EventHandler(this.btnSendRestockRequest_Click);
             // 
             // label5
             // 
@@ -659,23 +687,23 @@
             // 
             // StatisticChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "TestData";
-            series2.Points.Add(dataPoint7);
-            series2.Points.Add(dataPoint8);
-            series2.Points.Add(dataPoint9);
-            series2.Points.Add(dataPoint10);
-            series2.Points.Add(dataPoint11);
-            series2.Points.Add(dataPoint12);
-            this.StatisticChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -904,6 +932,49 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonReloadDatabaseEntries
+            // 
+            this.buttonReloadDatabaseEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
+            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
+            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
+            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
+            this.buttonReloadDatabaseEntries.TabIndex = 5;
+            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
+            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
+            // 
+            // pnlSalesRepresentative
+            // 
+            this.pnlSalesRepresentative.Controls.Add(this.btnSendRestockRequest);
+            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 95);
+            this.pnlSalesRepresentative.Name = "pnlSalesRepresentative";
+            this.pnlSalesRepresentative.Size = new System.Drawing.Size(152, 44);
+            this.pnlSalesRepresentative.TabIndex = 7;
+            this.pnlSalesRepresentative.Visible = false;
+            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -974,40 +1045,6 @@
             this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
             // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
-            // 
-            // labelWelcomeText
-            // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // buttonReloadDatabaseEntries
-            // 
-            this.buttonReloadDatabaseEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
-            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
-            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
-            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
-            this.buttonReloadDatabaseEntries.TabIndex = 5;
-            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
-            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1062,6 +1099,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.pnlSalesRepresentative.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1128,15 +1166,6 @@
         private System.ServiceProcess.ServiceController serviceController1;
         private System.Windows.Forms.CheckBox checkBoxShowInactive;
         private System.Windows.Forms.CheckBox checkBoxShowInactiveItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
         private System.Windows.Forms.ComboBox comboBoxAllDepartments;
@@ -1147,6 +1176,18 @@
         private System.Windows.Forms.Button buttonStockCategoryRemove;
         private System.Windows.Forms.Button buttonStockCategoryAdd;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSendRestockRequest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stock_request;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.Panel pnlSalesRepresentative;
     }
 }
 

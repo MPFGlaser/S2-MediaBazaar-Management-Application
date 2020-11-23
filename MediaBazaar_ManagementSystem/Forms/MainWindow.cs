@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
 using Microsoft.VisualBasic;
+using MediaBazaar_ManagementSystem.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -16,18 +17,18 @@ namespace MediaBazaar_ManagementSystem
 
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
-        List<Employee> allEmployees = new List<Employee>();
         ProductDetailsWindow pdw;
         Employee loggedInUser;
+        ProductRestockDetailsWindow prdw;
 
         public MainWindow(Employee loggedInUser)
         {
             this.loggedInUser = loggedInUser;
             InitializeComponent();
-            numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
             DisplayInformation();
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
             toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Data");
+            numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
 
             HideInactiveEmployees(true);
             HideInactiveItems(true);
@@ -43,15 +44,13 @@ namespace MediaBazaar_ManagementSystem
             }
 
             this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
-
-            calendarDayControlMonday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlTuesday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlWednesday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlThursday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlFriday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-            calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
-
+            if (loggedInUser.Function == 2)
+            {
+                btnSendRestockRequest.Visible = true;
+                pnlSalesRepresentative.Visible = true;
+                pnlSalesRepresentative.Enabled = true;
+            }
+            else pnlSalesRepresentative.Visible = false;
         }
 
         #region Logic
@@ -144,6 +143,7 @@ namespace MediaBazaar_ManagementSystem
                 foreach (Item i in itemStorage.GetAll(false))
                 {
                     int rowId = dataGridViewStock.Rows.Add();
+                    int stockrequest = itemStorage.ReadRequest(i.Id);
 
                     DataGridViewRow row = dataGridViewStock.Rows[rowId];
 
@@ -153,6 +153,7 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["code"].Value = i.Code;
                     row.Cells["category"].Value = i.Category;
                     row.Cells["quantity"].Value = i.Quantity;
+                    row.Cells["Stock_request"].Value = stockrequest;
                     row.Cells["price"].Value = i.Price;
                     row.Cells["productActive"].Value = i.Active;
                     row.Cells["description"].Value = i.Description;
@@ -190,9 +191,6 @@ namespace MediaBazaar_ManagementSystem
             // Gets all shifts from the shiftStorage between the start and end date of the week
             List<Shift> allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
-            // Gets the hours all employees work this specific week
-            allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
-
             // Sets the correct data on the CalendarDayControl elements
             calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
             calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
@@ -201,19 +199,6 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
             calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
             calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
-
-            SetupCorrectEmployees();
-        }
-
-        private void SetupCorrectEmployees()
-        {
-            calendarDayControlMonday.SetupEmployees(allEmployees);
-            calendarDayControlTuesday.SetupEmployees(allEmployees);
-            calendarDayControlWednesday.SetupEmployees(allEmployees);
-            calendarDayControlThursday.SetupEmployees(allEmployees);
-            calendarDayControlFriday.SetupEmployees(allEmployees);
-            calendarDayControlSaturday.SetupEmployees(allEmployees);
-            calendarDayControlSunday.SetupEmployees(allEmployees);
         }
 
         /// <summary>
@@ -332,7 +317,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeAdd()
         {
-            edw = new EmployeeDetailsWindow(loggedInUser.Id);
+            edw = new EmployeeDetailsWindow();
             if (edw.ShowDialog() == DialogResult.OK)
             {
                 PopulateEmployeesTable();
@@ -344,17 +329,14 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeModify()
         {
-            if (dataGridViewEmployees.SelectedRows.Count > 0)
+            int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+            Employee toEdit = employeeStorage.Get(id);
+            edw = new EmployeeDetailsWindow();
+            edw.AddEmployeeData(toEdit);
+            if (edw.ShowDialog() == DialogResult.OK)
             {
-                int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
-                Employee toEdit = employeeStorage.Get(id);
-                edw = new EmployeeDetailsWindow(loggedInUser.Id);
-                edw.AddEmployeeData(toEdit);
-                if (edw.ShowDialog() == DialogResult.OK)
-                {
-                    PopulateEmployeesTable();
-                    HideInactiveEmployees(!checkBoxShowInactive.Checked);
-                }
+                PopulateEmployeesTable();
+                HideInactiveEmployees(!checkBoxShowInactive.Checked);
             }
         }
 
@@ -409,17 +391,29 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void StockModify()
         {
-            if (dataGridViewStock.SelectedRows.Count > 0)
+            int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+            Item toEdit = itemStorage.Get(id);
+            pdw = new ProductDetailsWindow();
+            pdw.AddItemData(toEdit);
+            if (pdw.ShowDialog() == DialogResult.OK)
             {
-                int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
-                Item toEdit = itemStorage.Get(id);
-                pdw = new ProductDetailsWindow();
-                pdw.AddItemData(toEdit);
-                if (pdw.ShowDialog() == DialogResult.OK)
-                {
-                    PopulateItemsTable();
-                    HideInactiveItems(!checkBoxShowInactiveItems.Checked);
-                }
+                PopulateItemsTable();
+                HideInactiveItems(!checkBoxShowInactiveItems.Checked);
+            }
+        }
+
+        /// <summary>
+        /// Opens a new ProductRestockDetailsWindow so the user can modify the quantity for the restock of product they have selected
+        /// </summary>
+        private void ReStockProduct()
+        {
+            int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+            Item toEdit = itemStorage.Get(id);
+            prdw = new ProductRestockDetailsWindow();
+            prdw.AddItemData(toEdit, loggedInUser.Id);
+            if (prdw.ShowDialog() == DialogResult.OK)
+            {
+                PopulateItemsTable();
             }
         }
         #endregion
@@ -571,6 +565,11 @@ namespace MediaBazaar_ManagementSystem
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Logout();
+        }
+
+        private void btnSendRestockRequest_Click(object sender, EventArgs e)
+        {
+            ReStockProduct();
         }
     } 
     #endregion

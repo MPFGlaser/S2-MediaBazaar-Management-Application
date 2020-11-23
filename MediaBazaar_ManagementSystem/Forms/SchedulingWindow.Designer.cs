@@ -40,9 +40,6 @@
             this.buttonScheduleConfirm = new System.Windows.Forms.Button();
             this.buttonScheduleCancel = new System.Windows.Forms.Button();
             this.comboBoxSelectDepartments = new System.Windows.Forms.ComboBox();
-            this.numericUpDownCapacity = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxCalendarDate
@@ -90,12 +87,11 @@
             this.comboBoxShiftTime.Name = "comboBoxShiftTime";
             this.comboBoxShiftTime.Size = new System.Drawing.Size(108, 21);
             this.comboBoxShiftTime.TabIndex = 6;
-            this.comboBoxShiftTime.Visible = false;
             // 
             // comboBoxSelectEmployees
             // 
             this.comboBoxSelectEmployees.FormattingEnabled = true;
-            this.comboBoxSelectEmployees.Location = new System.Drawing.Point(12, 147);
+            this.comboBoxSelectEmployees.Location = new System.Drawing.Point(12, 131);
             this.comboBoxSelectEmployees.Name = "comboBoxSelectEmployees";
             this.comboBoxSelectEmployees.Size = new System.Drawing.Size(186, 21);
             this.comboBoxSelectEmployees.Sorted = true;
@@ -104,7 +100,7 @@
             // 
             // buttonAddEmployeeToShift
             // 
-            this.buttonAddEmployeeToShift.Location = new System.Drawing.Point(90, 174);
+            this.buttonAddEmployeeToShift.Location = new System.Drawing.Point(90, 158);
             this.buttonAddEmployeeToShift.Name = "buttonAddEmployeeToShift";
             this.buttonAddEmployeeToShift.Size = new System.Drawing.Size(108, 23);
             this.buttonAddEmployeeToShift.TabIndex = 8;
@@ -114,7 +110,7 @@
             // 
             // buttonRemoveEmployeeFromShift
             // 
-            this.buttonRemoveEmployeeFromShift.Location = new System.Drawing.Point(91, 203);
+            this.buttonRemoveEmployeeFromShift.Location = new System.Drawing.Point(91, 187);
             this.buttonRemoveEmployeeFromShift.Name = "buttonRemoveEmployeeFromShift";
             this.buttonRemoveEmployeeFromShift.Size = new System.Drawing.Size(108, 23);
             this.buttonRemoveEmployeeFromShift.TabIndex = 9;
@@ -170,7 +166,7 @@
             // comboBoxSelectDepartments
             // 
             this.comboBoxSelectDepartments.FormattingEnabled = true;
-            this.comboBoxSelectDepartments.Location = new System.Drawing.Point(12, 120);
+            this.comboBoxSelectDepartments.Location = new System.Drawing.Point(12, 104);
             this.comboBoxSelectDepartments.Name = "comboBoxSelectDepartments";
             this.comboBoxSelectDepartments.Size = new System.Drawing.Size(186, 21);
             this.comboBoxSelectDepartments.Sorted = true;
@@ -178,29 +174,11 @@
             this.comboBoxSelectDepartments.Text = "Select a department";
             this.comboBoxSelectDepartments.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectDepartments_SelectedIndexChanged);
             // 
-            // numericUpDownCapacity
-            // 
-            this.numericUpDownCapacity.Location = new System.Drawing.Point(147, 94);
-            this.numericUpDownCapacity.Name = "numericUpDownCapacity";
-            this.numericUpDownCapacity.Size = new System.Drawing.Size(51, 20);
-            this.numericUpDownCapacity.TabIndex = 41;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 96);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 13);
-            this.label1.TabIndex = 42;
-            this.label1.Text = "Desired # of employees:";
-            // 
             // SchedulingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 392);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDownCapacity);
             this.Controls.Add(this.comboBoxSelectDepartments);
             this.Controls.Add(this.buttonScheduleConfirm);
             this.Controls.Add(this.buttonScheduleCancel);
@@ -217,7 +195,6 @@
             this.MinimumSize = new System.Drawing.Size(523, 431);
             this.Name = "SchedulingWindow";
             this.Text = "Schedule a shift";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,7 +214,5 @@
         private System.Windows.Forms.Button buttonScheduleConfirm;
         private System.Windows.Forms.Button buttonScheduleCancel;
         private System.Windows.Forms.ComboBox comboBoxSelectDepartments;
-        private System.Windows.Forms.NumericUpDown numericUpDownCapacity;
-        private System.Windows.Forms.Label label1;
     }
 }

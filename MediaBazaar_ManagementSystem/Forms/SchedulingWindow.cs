@@ -19,7 +19,7 @@ namespace MediaBazaar_ManagementSystem
         List<Department> allDepartments = new List<Department>();
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
-        private int oldId, capacity;
+        private int oldId;
 
         /// <summary>
         /// A form in which the user can schedule and unschedule employees for a certain shift.
@@ -31,11 +31,11 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
-            LoadEmployees(working, allEmployees);
+            LoadEmployees(working);
             this.date = date;
             this.shiftTime = shiftTime;
             this.comboBoxShiftTime.SelectedItem = shiftTime;
@@ -43,9 +43,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxCalendarDate.Text = dateAndMonth;
             this.isEditing = editing;
             this.oldId = oldShiftId;
-            this.capacity = capacity;
 
-            numericUpDownCapacity.Value = capacity;
             AddEmployeeListToShift(working);
             LoadDepartments();
         }
@@ -60,11 +58,10 @@ namespace MediaBazaar_ManagementSystem
         /// Loads the employees which are working that shift
         /// </summary>
         /// <param name="working"></param>
-        private void LoadEmployees(List<Employee> working, List<Employee> allEmployees)
+        private void LoadEmployees(List<Employee> working)
         {
-            //employeeStorage = new EmployeeMySQL();
-            //allActiveEmployees = employeeStorage.GetAll(true);
-            allActiveEmployees = allEmployees;
+            employeeStorage = new EmployeeMySQL();
+            allActiveEmployees = employeeStorage.GetAll(true);
 
             foreach (Employee e in working)
             {
@@ -144,32 +141,20 @@ namespace MediaBazaar_ManagementSystem
             // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
             workingEmployeeIds = new List<int>();
-            int capacityNew = Convert.ToInt32(numericUpDownCapacity.Value);
             int shiftId = 0;
 
-
+            // Creates a new shift object and sets the list of employeeIds to the one we just created.
+            currentShift = new Shift(0, date, shiftTime);
 
             // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)
             {
-                // Creates a new shift object and sets the list of employeeIds to the one we just created.
-                currentShift = new Shift(oldId, date, shiftTime, capacityNew);
                 // Removes all information about the shift in the shiftStorage to prevent duplication of entries
                 shiftStorage.Clear(oldId);
-                shiftId = oldId;
-
-                if(capacityNew != capacity)
-                {
-                    shiftStorage.Update(currentShift);
-                }
-            }
-            else
-            {
-                // Creates a new shift object and sets the list of employeeIds to the one we just created.
-                currentShift = new Shift(0, date, shiftTime, capacityNew);
-                shiftId = shiftStorage.Create(currentShift);
             }
 
+            // Adds each employee id to the shiftStorage with the correct shift id
+            shiftId = shiftStorage.Create(currentShift);
 
             foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
             {
@@ -192,22 +177,13 @@ namespace MediaBazaar_ManagementSystem
         private void AddEmployeeToShift()
         {
             // Checks if there's actually an employee selected to be added
-            if (comboBoxSelectEmployees.SelectedIndex != -1 && comboBoxSelectDepartments.SelectedIndex != -1)
+            if (comboBoxSelectEmployees.SelectedIndex != -1)
             {
-                // Ensures the right employee object is used
-                Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
-
-                // Displays a message when the amount of hours an employee has in their contract is gone over
-                if(selectedEmployee.WorkingHours + 4.5f > selectedEmployee.ContractHours)
-                {
-                    MessageBox.Show("This employee has too many hours for their contract");
-                }
-
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
                 int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
-                // Adds 4.5 hours to the selected employees current hours
-                selectedEmployee.WorkingHours += 4.5f;
+                // Ensures the right employee object is used
+                Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
 
                 // Adds the selected employee to the list of employees in the department
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
@@ -232,54 +208,22 @@ namespace MediaBazaar_ManagementSystem
             if (listBoxCurrentEmployees.SelectedIndex != -1)
             {
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
+                int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
 
-                // Removes 4.5 hours from the selected employees hours
-                selectedEmployee.WorkingHours -= 4.5f;
+                // Adds the selected employee to the list of employees in the department
+                allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
 
-                if (comboBoxSelectDepartments.SelectedIndex != -1)
-                {
-                    // Selects the correct index from the combobox
-                    int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+                // Adds the selected employee to the combobox of available employees.
+                comboBoxSelectEmployees.DisplayMember = "Text";
+                comboBoxSelectEmployees.ValueMember = "Employee";
+                comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
-                    RemoveSelectedEmployee(selectedEmployee, selectedIndex);
-                }
-                else
-                {
-                    int selectedIndex = 0;
-                    foreach (Department d in allDepartments)
-                    {
-                        List<Employee> employeesInDepartment = d.Employees;
-                        foreach(Employee e in employeesInDepartment)
-                        {
-                            if (e.Id == selectedEmployee.Id)
-                            {
-                                RemoveSelectedEmployee(selectedEmployee, selectedIndex);
-                            }
-                        }
-
-                        selectedIndex++;
-                    }
-                }
+                // Removes the employee from the listbox of currently scheduled employee.
+                listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
             }
-        }
-
-        /// <summary>
-        /// Removes the selected employee at the department at which it is working.
-        /// </summary>
-        private void RemoveSelectedEmployee(Employee selectedEmployee, int selectedIndex)
-        {
-            allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
-
-            // Adds the selected employee to the combobox of available employees.
-            comboBoxSelectEmployees.DisplayMember = "Text";
-            comboBoxSelectEmployees.ValueMember = "Employee";
-            comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
-
-            // Removes the employee from the listbox of currently scheduled employee.
-            listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
         }
 
         /// <summary>
@@ -304,6 +248,9 @@ namespace MediaBazaar_ManagementSystem
         private void ShowValidEmployees(int id)
         {
             comboBoxSelectEmployees.Items.Clear();
+
+            Console.WriteLine("ID: " + id);
+
             List<Department> allDepartmentInfo = GetDepartmentListFromComboBox();
 
             foreach (Employee e in allActiveEmployees)
@@ -387,10 +334,5 @@ namespace MediaBazaar_ManagementSystem
         }
 
         #endregion
-
-        public List<Employee> AllActiveEmployees
-        {
-            get { return allActiveEmployees; }
-        }
     }
 }

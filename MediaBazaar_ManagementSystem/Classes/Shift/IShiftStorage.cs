@@ -7,8 +7,6 @@ namespace MediaBazaar_ManagementSystem
     {
         int Create(Shift input);
 
-        bool Update(Shift input);
-
         bool Clear(int shiftId);
 
         bool Assign(int shiftId, int employeeId, int departmentId);

@@ -107,12 +107,20 @@
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Item\ItemMySQL.cs" />
+    <Compile Include="Classes\Item\Stock.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
-    <Compile Include="Classes\Shift\EmployeeShift.cs" />
     <Compile Include="Classes\Shift\IShiftStorage.cs" />
     <Compile Include="Classes\Shift\Shift.cs" />
     <Compile Include="Classes\Shift\ShiftMySQL.cs" />
+    <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Classes\Item\Request.cs" />
+    <Compile Include="Forms\ProductRestockDetailsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProductRestockDetailsWindow.Designer.cs">
+      <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShiftTime.cs" />
     <Compile Include="Forms\LoginWindow.cs">
       <SubType>Form</SubType>
@@ -181,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductDetailsWindow.resx">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductRestockDetailsWindow.resx">
+      <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

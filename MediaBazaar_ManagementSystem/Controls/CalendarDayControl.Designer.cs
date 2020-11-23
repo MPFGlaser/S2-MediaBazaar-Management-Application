@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.labelCalendarDate = new System.Windows.Forms.Label();
-            this.labelCalendarDay = new System.Windows.Forms.Label();
+            this.textBoxCalendarDate = new System.Windows.Forms.TextBox();
+            this.textBoxCalendarDay = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.buttonEvening = new System.Windows.Forms.Button();
             this.buttonMorning = new System.Windows.Forms.Button();
             this.buttonAfternoon = new System.Windows.Forms.Button();
-            this.labelCapacityEvening = new System.Windows.Forms.Label();
-            this.labelCapacityAfternoon = new System.Windows.Forms.Label();
-            this.labelCapacityMorning = new System.Windows.Forms.Label();
+            this.textBoxCapacityEvening = new System.Windows.Forms.TextBox();
+            this.textBoxCapacityMorning = new System.Windows.Forms.TextBox();
+            this.textBoxCapacityAfternoon = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -62,8 +62,8 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.labelCalendarDate);
-            this.splitContainer1.Panel1.Controls.Add(this.labelCalendarDay);
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxCalendarDate);
+            this.splitContainer1.Panel1.Controls.Add(this.textBoxCalendarDay);
             this.splitContainer1.Panel1MinSize = 90;
             // 
             // splitContainer1.Panel2
@@ -73,25 +73,39 @@
             this.splitContainer1.SplitterDistance = 90;
             this.splitContainer1.TabIndex = 0;
             // 
-            // labelCalendarDate
+            // textBoxCalendarDate
             // 
-            this.labelCalendarDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelCalendarDate.Location = new System.Drawing.Point(-1, 51);
-            this.labelCalendarDate.Name = "labelCalendarDate";
-            this.labelCalendarDate.Size = new System.Drawing.Size(157, 39);
-            this.labelCalendarDate.TabIndex = 4;
-            this.labelCalendarDate.Text = "September 2";
-            this.labelCalendarDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxCalendarDate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCalendarDate.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCalendarDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCalendarDate.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.textBoxCalendarDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.textBoxCalendarDate.Location = new System.Drawing.Point(3, 55);
+            this.textBoxCalendarDate.Name = "textBoxCalendarDate";
+            this.textBoxCalendarDate.ReadOnly = true;
+            this.textBoxCalendarDate.Size = new System.Drawing.Size(149, 23);
+            this.textBoxCalendarDate.TabIndex = 2;
+            this.textBoxCalendarDate.Text = "September 2";
+            this.textBoxCalendarDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelCalendarDay
+            // textBoxCalendarDay
             // 
-            this.labelCalendarDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.labelCalendarDay.Location = new System.Drawing.Point(-1, 12);
-            this.labelCalendarDay.Name = "labelCalendarDay";
-            this.labelCalendarDay.Size = new System.Drawing.Size(157, 39);
-            this.labelCalendarDay.TabIndex = 3;
-            this.labelCalendarDay.Text = "Wednesday";
-            this.labelCalendarDay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxCalendarDay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCalendarDay.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCalendarDay.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCalendarDay.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.textBoxCalendarDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.textBoxCalendarDay.Location = new System.Drawing.Point(3, 12);
+            this.textBoxCalendarDay.Name = "textBoxCalendarDay";
+            this.textBoxCalendarDay.ReadOnly = true;
+            this.textBoxCalendarDay.Size = new System.Drawing.Size(149, 23);
+            this.textBoxCalendarDay.TabIndex = 1;
+            this.textBoxCalendarDay.Text = "Wednesday";
+            this.textBoxCalendarDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // splitContainer2
             // 
@@ -109,9 +123,9 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.labelCapacityEvening);
-            this.splitContainer2.Panel2.Controls.Add(this.labelCapacityAfternoon);
-            this.splitContainer2.Panel2.Controls.Add(this.labelCapacityMorning);
+            this.splitContainer2.Panel2.Controls.Add(this.textBoxCapacityEvening);
+            this.splitContainer2.Panel2.Controls.Add(this.textBoxCapacityMorning);
+            this.splitContainer2.Panel2.Controls.Add(this.textBoxCapacityAfternoon);
             this.splitContainer2.Panel2MinSize = 50;
             this.splitContainer2.Size = new System.Drawing.Size(155, 136);
             this.splitContainer2.SplitterDistance = 101;
@@ -155,35 +169,52 @@
             this.buttonAfternoon.UseVisualStyleBackColor = true;
             this.buttonAfternoon.Click += new System.EventHandler(this.buttonAfternoon_Click);
             // 
-            // labelCapacityEvening
+            // textBoxCapacityEvening
             // 
-            this.labelCapacityEvening.BackColor = System.Drawing.Color.Red;
-            this.labelCapacityEvening.Location = new System.Drawing.Point(3, 98);
-            this.labelCapacityEvening.Name = "labelCapacityEvening";
-            this.labelCapacityEvening.Size = new System.Drawing.Size(44, 24);
-            this.labelCapacityEvening.TabIndex = 8;
-            this.labelCapacityEvening.Text = "N/A";
-            this.labelCapacityEvening.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxCapacityEvening.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCapacityEvening.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCapacityEvening.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCapacityEvening.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.textBoxCapacityEvening.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxCapacityEvening.Location = new System.Drawing.Point(3, 107);
+            this.textBoxCapacityEvening.Name = "textBoxCapacityEvening";
+            this.textBoxCapacityEvening.ReadOnly = true;
+            this.textBoxCapacityEvening.Size = new System.Drawing.Size(44, 16);
+            this.textBoxCapacityEvening.TabIndex = 5;
+            this.textBoxCapacityEvening.Text = "N/A";
+            this.textBoxCapacityEvening.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelCapacityAfternoon
+            // textBoxCapacityMorning
             // 
-            this.labelCapacityAfternoon.BackColor = System.Drawing.Color.Red;
-            this.labelCapacityAfternoon.Location = new System.Drawing.Point(3, 55);
-            this.labelCapacityAfternoon.Name = "labelCapacityAfternoon";
-            this.labelCapacityAfternoon.Size = new System.Drawing.Size(44, 24);
-            this.labelCapacityAfternoon.TabIndex = 7;
-            this.labelCapacityAfternoon.Text = "N/A";
-            this.labelCapacityAfternoon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxCapacityMorning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCapacityMorning.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCapacityMorning.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCapacityMorning.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.textBoxCapacityMorning.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxCapacityMorning.Location = new System.Drawing.Point(3, 15);
+            this.textBoxCapacityMorning.Name = "textBoxCapacityMorning";
+            this.textBoxCapacityMorning.ReadOnly = true;
+            this.textBoxCapacityMorning.Size = new System.Drawing.Size(44, 16);
+            this.textBoxCapacityMorning.TabIndex = 3;
+            this.textBoxCapacityMorning.Text = "N/A";
+            this.textBoxCapacityMorning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelCapacityMorning
+            // textBoxCapacityAfternoon
             // 
-            this.labelCapacityMorning.BackColor = System.Drawing.Color.Red;
-            this.labelCapacityMorning.Location = new System.Drawing.Point(3, 12);
-            this.labelCapacityMorning.Name = "labelCapacityMorning";
-            this.labelCapacityMorning.Size = new System.Drawing.Size(44, 24);
-            this.labelCapacityMorning.TabIndex = 6;
-            this.labelCapacityMorning.Text = "N/A";
-            this.labelCapacityMorning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxCapacityAfternoon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCapacityAfternoon.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxCapacityAfternoon.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCapacityAfternoon.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.textBoxCapacityAfternoon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxCapacityAfternoon.Location = new System.Drawing.Point(3, 61);
+            this.textBoxCapacityAfternoon.Name = "textBoxCapacityAfternoon";
+            this.textBoxCapacityAfternoon.ReadOnly = true;
+            this.textBoxCapacityAfternoon.Size = new System.Drawing.Size(44, 16);
+            this.textBoxCapacityAfternoon.TabIndex = 4;
+            this.textBoxCapacityAfternoon.Text = "N/A";
+            this.textBoxCapacityAfternoon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // contextMenuStrip1
             // 
@@ -201,11 +232,13 @@
             this.Name = "CalendarDayControl";
             this.Size = new System.Drawing.Size(155, 230);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -215,16 +248,16 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox textBoxCalendarDate;
+        private System.Windows.Forms.TextBox textBoxCalendarDay;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button buttonEvening;
         private System.Windows.Forms.Button buttonAfternoon;
         private System.Windows.Forms.Button buttonMorning;
+        private System.Windows.Forms.TextBox textBoxCapacityEvening;
+        private System.Windows.Forms.TextBox textBoxCapacityAfternoon;
+        private System.Windows.Forms.TextBox textBoxCapacityMorning;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.Label labelCapacityEvening;
-        private System.Windows.Forms.Label labelCapacityAfternoon;
-        private System.Windows.Forms.Label labelCapacityMorning;
-        private System.Windows.Forms.Label labelCalendarDate;
-        private System.Windows.Forms.Label labelCalendarDay;
     }
 }

@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MediaBazaar_ManagementSystem.Classes.Item;
+using MediaBazaar_ManagementSystem.Controls;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,6 +11,8 @@ namespace MediaBazaar_ManagementSystem
     {
         MySqlConnection connection;
         string connectionString;
+        List<Stock> stocks = new List<Stock>();
+        List<Request> requests = new List<Request>();
 
         public ItemMySQL()
         {
@@ -26,7 +30,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description, @departmentId)";
+            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -37,12 +41,11 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
-            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                rowsAffected = command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
@@ -71,7 +74,7 @@ namespace MediaBazaar_ManagementSystem
         public Item Get(int id)
         {
             Item output = null;
-            String query = "SELECT id, name, brand, code, category, quantity, price, active, description, departmentId FROM items WHERE id = @itemId";
+            String query = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@itemId", id);
             try
@@ -80,7 +83,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]), Convert.ToInt32(reader[9]));
+                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
                 }
             }
             catch (Exception ex)
@@ -112,7 +115,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, code, quantity, departmendId;
+                int id, code, quantity;
                 string name, brand, category, description;
                 double price;
                 bool active;
@@ -128,8 +131,8 @@ namespace MediaBazaar_ManagementSystem
                     description = Convert.ToString(reader["description"]);
                     price = Convert.ToDouble(reader["price"]);
                     active = Convert.ToBoolean(reader["active"]);
-                    departmendId = Convert.ToInt32(reader["departmentId"]);
-                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description, departmendId);
+
+                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
                     output.Add(i);
                 }
             }
@@ -155,7 +158,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description, departmentId = @departmentId  WHERE id = @id";
+            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description  WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -166,12 +169,11 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
-            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                rowsAffected = command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
@@ -191,6 +193,127 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return success;
+        }
+        /// <summary>
+        /// Read the requests
+        /// </summary>
+        public int ReadRequest(int id)
+        {
+            int pid = id;
+            int quantity = 0;
+            this.requests = new List<Request>();
+            try
+            {
+                string sql = "SELECT `quantity` FROM `stock_request` WHERE id = @pId AND status = 'Pending';";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@pId", pid);
+                connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    quantity += Convert.ToInt32(dr[0]);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return quantity;
+        }
+        /// <summary>
+        /// Read the stock
+        /// </summary>
+        public List<Stock> ReadStock()
+        {
+            this.stocks = new List<Stock>();
+            try
+            {
+                string sql = "SELECT `id`, `quantity` FROM `items` ORDER BY `quantity`";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Stock stock = new Stock(/*Convert.ToInt32(dr[0]),*/ Convert.ToInt32(dr[0]), Convert.ToInt32(dr[1]));
+                    stocks.Add(stock);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return stocks;
+        }
+
+        /// <summary>
+        /// Updates the specified item.
+        /// </summary>
+        /// <param name="userid">The users id.</param>
+        /// <returns>To know who sent the request</returns>
+        /// /// <param name="productId">The products id.</param>
+        /// <returns>To nkow for which product the request is sent</returns>
+        /// /// /// <param name="quantity">The products quantity restock.</param>
+        /// <returns>To know how much to restock</returns>
+        public void SendStockRequest(int userid, int productId, int quantity)
+        {
+            try
+            {
+                string sql = "INSERT INTO stock_request(productid, quantity, status, userid, date) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                string status = "Pending";
+                ReadStock();
+                cmd.Parameters.AddWithValue("@pId", productId);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@rBy", userid);
+                cmd.Parameters.AddWithValue("@rDate", DateTime.Now.Date);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Request has been sent!");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void AddToStock(int productId, int quantity, int userid)
+        {
+            try
+            {
+                decimal x = 0;
+                ReadStock();
+                foreach (Stock s in stocks)
+                {
+                    if (s.ProductId == productId)
+                    {
+                        x = s.Quantity + quantity;
+                    }
+                }
+                string sql = "UPDATE stock SET quantity = @Quantity WHERE id = @Id";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                cmd.Parameters.AddWithValue("@Quantity", x);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Stock is updated!");
+
+                string sql2 = "INSERT INTO stock_request(productId, quantity, status, requestedBy, requestDate) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
+                MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
+                string status = "Approved";
+                cmd2.Parameters.AddWithValue("@pId", productId);
+                cmd2.Parameters.AddWithValue("@quantity", quantity);
+                cmd2.Parameters.AddWithValue("@status", status);
+                cmd2.Parameters.AddWithValue("@rBy", userid);
+                cmd2.Parameters.AddWithValue("@rDate", DateTime.Now.Date);
+                cmd2.ExecuteNonQuery();
+
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }
