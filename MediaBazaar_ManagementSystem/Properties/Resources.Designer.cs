@@ -61,12 +61,75 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error creating file..
+        /// </summary>
+        internal static string createError {
+            get {
+                return ResourceManager.GetString("createError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No connection file found..
+        /// </summary>
+        internal static string fileNotFound {
+            get {
+                return ResourceManager.GetString("fileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong..
+        /// </summary>
+        internal static string genericError {
+            get {
+                return ResourceManager.GetString("genericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error loading shifts from database..
+        /// </summary>
+        internal static string loadShiftError {
+            get {
+                return ResourceManager.GetString("loadShiftError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error reading file..
+        /// </summary>
+        internal static string readError {
+            get {
+                return ResourceManager.GetString("readError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap reload1 {
             get {
                 object obj = ResourceManager.GetObject("reload1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error retrieving employees..
+        /// </summary>
+        internal static string retrieveEmployeeError {
+            get {
+                return ResourceManager.GetString("retrieveEmployeeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error retrieving items..
+        /// </summary>
+        internal static string retrieveItemError {
+            get {
+                return ResourceManager.GetString("retrieveItemError", resourceCulture);
             }
         }
     }

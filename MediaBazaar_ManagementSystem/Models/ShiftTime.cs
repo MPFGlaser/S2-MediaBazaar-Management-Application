@@ -1,4 +1,4 @@
-﻿namespace MediaBazaar_ManagementSystem.Models
+﻿namespace MediaBazaar_ManagementSystem
 {
     public enum ShiftTime
     {

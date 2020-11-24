@@ -33,11 +33,50 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=8.0.22.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.22\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,79 +87,121 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.22\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.22\lib\net452\Zstandard.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DatabaseHandler.cs" />
-    <Compile Include="Classes\Day.cs" />
-    <Compile Include="Classes\Department.cs" />
-    <Compile Include="Classes\Employee.cs" />
-    <Compile Include="Classes\Item.cs" />
-    <Compile Include="Classes\Shift.cs" />
-    <Compile Include="Classes\StockManager.cs" />
-    <Compile Include="Models\ShiftTime.cs" />
-    <Compile Include="LoginWindow.cs">
+    <Compile Include="Classes\ConnectionString.cs" />
+    <Compile Include="Classes\Department\Department.cs" />
+    <Compile Include="Classes\Department\DepartmentMySQL.cs" />
+    <Compile Include="Classes\Department\IDepartmentStorage.cs" />
+    <Compile Include="Classes\Employee\Employee.cs" />
+    <Compile Include="Classes\Employee\EmployeeMySQL.cs" />
+    <Compile Include="Classes\Employee\Encrypt.cs" />
+    <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
+    <Compile Include="Classes\ErrorMessages.cs" />
+    <Compile Include="Classes\Item\IItemStorage.cs" />
+    <Compile Include="Classes\Item\Item.cs" />
+    <Compile Include="Classes\Item\ItemMySQL.cs" />
+    <Compile Include="Classes\Item\Request.cs" />
+    <Compile Include="Classes\Item\Stock.cs" />
+    <Compile Include="Classes\Login\ILoginStorage.cs" />
+    <Compile Include="Classes\Login\LoginMySQL.cs" />
+    <Compile Include="Classes\Shift\EmployeeShift.cs" />
+    <Compile Include="Classes\Shift\IShiftStorage.cs" />
+    <Compile Include="Classes\Shift\Shift.cs" />
+    <Compile Include="Classes\Shift\ShiftMySQL.cs" />
+    <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Forms\ProductRestockDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginWindow.Designer.cs">
+    <Compile Include="Forms\ProductRestockDetailsWindow.Designer.cs">
+      <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WeekShiftsCapacityEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WeekShiftsCapacityEditor.Designer.cs">
+      <DependentUpon>WeekShiftsCapacityEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShiftTime.cs" />
+    <Compile Include="Forms\LoginWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginWindow.Designer.cs">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Function.cs" />
-    <Compile Include="CalendarDayControl.cs">
+    <Compile Include="Controls\CalendarDayControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CalendarDayControl.Designer.cs">
+    <Compile Include="Controls\CalendarDayControl.Designer.cs">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EmployeeDetailsWindow.cs">
+    <Compile Include="Forms\EmployeeDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmployeeDetailsWindow.Designer.cs">
+    <Compile Include="Forms\EmployeeDetailsWindow.Designer.cs">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.cs">
+    <Compile Include="Forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainWindow.Designer.cs">
+    <Compile Include="Forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="PreferredHours.cs">
+    <Compile Include="Forms\PreferredHours.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PreferredHours.Designer.cs">
+    <Compile Include="Forms\PreferredHours.Designer.cs">
       <DependentUpon>PreferredHours.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductDetailsWindow.cs">
+    <Compile Include="Forms\ProductDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProductDetailsWindow.Designer.cs">
+    <Compile Include="Forms\ProductDetailsWindow.Designer.cs">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchedulingWindow.cs">
+    <Compile Include="Forms\SchedulingWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SchedulingWindow.Designer.cs">
+    <Compile Include="Forms\SchedulingWindow.Designer.cs">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CalendarDayControl.resx">
+    <Compile Include="Forms\WorkingDepartments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WorkingDepartments.Designer.cs">
+      <DependentUpon>WorkingDepartments.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\CalendarDayControl.resx">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDetailsWindow.resx">
+    <EmbeddedResource Include="Forms\EmployeeDetailsWindow.resx">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginWindow.resx">
+    <EmbeddedResource Include="Forms\LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainWindow.resx">
+    <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PreferredHours.resx">
+    <EmbeddedResource Include="Forms\PreferredHours.resx">
       <DependentUpon>PreferredHours.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProductDetailsWindow.resx">
+    <EmbeddedResource Include="Forms\ProductDetailsWindow.resx">
       <DependentUpon>ProductDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProductRestockDetailsWindow.resx">
+      <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WeekShiftsCapacityEditor.resx">
+      <DependentUpon>WeekShiftsCapacityEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,8 +213,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SchedulingWindow.resx">
+    <EmbeddedResource Include="Forms\SchedulingWindow.resx">
       <DependentUpon>SchedulingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WorkingDepartments.resx">
+      <DependentUpon>WorkingDepartments.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -152,5 +236,6 @@
   <ItemGroup>
     <None Include="Resources\reload.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
