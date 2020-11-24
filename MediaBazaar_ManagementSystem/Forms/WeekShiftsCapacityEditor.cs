@@ -23,6 +23,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.weekdays = weekdays;
             SetupGroupboxTitles();
             SetupNumericUpDowns();
+            CreateMissingShifts();
         }
 
         /// <summary>
@@ -158,6 +159,41 @@ namespace MediaBazaar_ManagementSystem.Forms
             groupBoxFriday.Text = "Friday " + weekdays[4].ToString("dd/MM/yyyy");
             groupBoxSaturday.Text = "Saturday " + weekdays[5].ToString("dd/MM/yyyy");
             groupBoxSunday.Text = "Sunday " + weekdays[6].ToString("dd/MM/yyyy");
+        }
+
+        /// <summary>
+        /// Creates the missing shifts.
+        /// </summary>
+        private void CreateMissingShifts()
+        {
+            shiftStorage = new ShiftMySQL();
+
+            foreach(DateTime date in weekdays)
+            {
+                if(weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Morning) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Morning, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
+                    weekShifts.Add(s2);
+                }
+
+                if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
+                    weekShifts.Add(s2);
+                }
+
+                if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Evening, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
+                    weekShifts.Add(s2);
+                }
+            }
         }
 
         private List<Shift> ShiftsToUpdate()
@@ -379,12 +415,6 @@ namespace MediaBazaar_ManagementSystem.Forms
                 {
                     shiftUpdateSucceeded = shiftStorage.Update(s);
                 }
-
-                //int shiftCreateSucceeded = -1;
-                //while (shiftCreateSucceeded == -1)
-                //{
-                //    shiftCreateSucceeded = shiftStorage.Create(s);
-                //}
             }
             this.DialogResult = DialogResult.OK;
         }
