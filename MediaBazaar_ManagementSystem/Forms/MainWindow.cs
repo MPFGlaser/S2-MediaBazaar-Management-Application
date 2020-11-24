@@ -633,8 +633,12 @@ namespace MediaBazaar_ManagementSystem
         {
             int pId = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
             int pQuantity = itemStorage.Get(pId).Quantity;
-            itemStorage.AddToStock(pId, pQuantity);
-            DisplayInformation();
+            if (itemStorage.ReadRequest(pId) > 0)
+            {
+                itemStorage.AddToStock(pId, pQuantity);
+                DisplayInformation();
+            }
+            else MessageBox.Show("Restock unavailable due to restock request quantity being 0!!!");
         }
     } 
     #endregion
