@@ -64,10 +64,10 @@
             this.buttonWorkingDepartments = new System.Windows.Forms.Button();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBoxFunctions = new System.Windows.Forms.TextBox();
             this.buttonPreferredShifts = new System.Windows.Forms.Button();
             this.comboBoxEmployeeHours = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -371,10 +371,10 @@
             // 
             // employeeSpecificsGroup
             // 
+            this.employeeSpecificsGroup.Controls.Add(this.cmbFunctions);
             this.employeeSpecificsGroup.Controls.Add(this.buttonWorkingDepartments);
             this.employeeSpecificsGroup.Controls.Add(this.checkBoxActive);
             this.employeeSpecificsGroup.Controls.Add(this.label13);
-            this.employeeSpecificsGroup.Controls.Add(this.textBoxFunctions);
             this.employeeSpecificsGroup.Location = new System.Drawing.Point(219, 186);
             this.employeeSpecificsGroup.Name = "employeeSpecificsGroup";
             this.employeeSpecificsGroup.Size = new System.Drawing.Size(200, 123);
@@ -414,13 +414,6 @@
             this.label13.TabIndex = 40;
             this.label13.Text = "Functions";
             // 
-            // textBoxFunctions
-            // 
-            this.textBoxFunctions.Location = new System.Drawing.Point(6, 55);
-            this.textBoxFunctions.Name = "textBoxFunctions";
-            this.textBoxFunctions.Size = new System.Drawing.Size(127, 20);
-            this.textBoxFunctions.TabIndex = 47;
-            // 
             // buttonPreferredShifts
             // 
             this.buttonPreferredShifts.Location = new System.Drawing.Point(224, 119);
@@ -454,6 +447,14 @@
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 51;
             this.label12.Text = "Contract hours type";
+            // 
+            // cmbFunctions
+            // 
+            this.cmbFunctions.FormattingEnabled = true;
+            this.cmbFunctions.Location = new System.Drawing.Point(5, 61);
+            this.cmbFunctions.Name = "cmbFunctions";
+            this.cmbFunctions.Size = new System.Drawing.Size(125, 21);
+            this.cmbFunctions.TabIndex = 51;
             // 
             // EmployeeDetailsWindow
             // 
@@ -518,7 +519,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox employeeSpecificsGroup;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBoxFunctions;
         private System.Windows.Forms.CheckBox checkBoxActive;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxCity;
@@ -528,5 +528,6 @@
         private System.Windows.Forms.Button buttonWorkingDepartments;
         private System.Windows.Forms.ComboBox comboBoxEmployeeHours;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cmbFunctions;
     }
 }
