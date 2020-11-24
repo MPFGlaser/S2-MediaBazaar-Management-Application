@@ -149,8 +149,6 @@ namespace MediaBazaar_ManagementSystem
             int capacityNew = Convert.ToInt32(numericUpDownCapacity.Value);
             int shiftId = 0;
 
-
-
             // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)
             {
@@ -248,26 +246,25 @@ namespace MediaBazaar_ManagementSystem
                 if (comboBoxSelectDepartments.SelectedIndex != -1)
                 {
                     // Selects the correct index from the combobox
-                    int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+                    Department dep = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
+                    int selectedIndex = dep.Id - 1;
 
                     RemoveSelectedEmployee(selectedEmployee, selectedIndex);
                 }
                 else
                 {
-                    int selectedIndex = 0;
-                    foreach (Department d in allDepartments)
+                    /*foreach (Department d in allDepartments)
                     {
                         List<Employee> employeesInDepartment = d.Employees;
-                        foreach(Employee e in employeesInDepartment)
+                        foreach (Employee e in d.Employees)
                         {
-                            if (e.Id == selectedEmployee.Id)
+                            if (e.Equals(selectedEmployee))
                             {
-                                RemoveSelectedEmployee(selectedEmployee, selectedIndex);
+                                RemoveSelectedEmployee(selectedEmployee, d.Id - 1);
                             }
                         }
-
-                        selectedIndex++;
-                    }
+                    }*/
+                    MessageBox.Show("Please select a department first");
                 }
             }
         }
