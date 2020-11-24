@@ -122,6 +122,12 @@
     <Compile Include="Forms\ProductRestockDetailsWindow.Designer.cs">
       <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WeekShiftsCapacityEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WeekShiftsCapacityEditor.Designer.cs">
+      <DependentUpon>WeekShiftsCapacityEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ShiftTime.cs" />
     <Compile Include="Forms\LoginWindow.cs">
       <SubType>Form</SubType>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProductRestockDetailsWindow.resx">
       <DependentUpon>ProductRestockDetailsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WeekShiftsCapacityEditor.resx">
+      <DependentUpon>WeekShiftsCapacityEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
