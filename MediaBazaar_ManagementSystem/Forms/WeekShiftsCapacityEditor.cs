@@ -25,6 +25,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             SetupNumericUpDowns();
         }
 
+        /// <summary>
+        /// Setups the numeric up downs.
+        /// </summary>
         private void SetupNumericUpDowns()
         {
             foreach (Shift s in weekShifts)
@@ -143,6 +146,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             }
         }
 
+        /// <summary>
+        /// Setups the groupbox titles.
+        /// </summary>
         private void SetupGroupboxTitles()
         {
             groupBoxMonday.Text = "Monday " + weekdays[0].ToString("dd/MM/yyyy");
@@ -154,17 +160,233 @@ namespace MediaBazaar_ManagementSystem.Forms
             groupBoxSunday.Text = "Sunday " + weekdays[6].ToString("dd/MM/yyyy");
         }
 
+        private List<Shift> ShiftsToUpdate()
+        {
+            List<Shift> output = new List<Shift>();
+
+            foreach (Shift s in weekShifts)
+            {
+                if (s.Date == weekdays[0])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownMondayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownMondayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownMondayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownMondayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownMondayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownMondayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[1])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownTuesdayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownTuesdayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownTuesdayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[2])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownWednesdayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownWednesdayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownWednesdayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[3])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownThursdayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownThursdayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownThursdayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownThursdayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownThursdayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownThursdayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[4])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownFridayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownFridayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownFridayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownFridayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownFridayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownFridayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[5])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownSaturdayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownSaturdayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownSaturdayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[6])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            if (numericUpDownSundayMorning.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSundayMorning.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Afternoon:
+                            if (numericUpDownSundayAfternoon.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSundayAfternoon.Value);
+                                output.Add(s);
+                            }
+                            break;
+                        case ShiftTime.Evening:
+                            if (numericUpDownSundayEvening.Value != s.Capacity)
+                            {
+                                s.Capacity = Convert.ToInt32(numericUpDownSundayEvening.Value);
+                                output.Add(s);
+                            }
+                            break;
+                    }
+                }
+            }
+
+            return output;
+        }
+
         #region control handlers
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             shiftStorage = new ShiftMySQL();
-            bool success = false;
+            List<Shift> updateMe = ShiftsToUpdate();
 
-
-            if (success)
+            foreach (Shift s in updateMe)
             {
-                this.DialogResult = DialogResult.OK;
+                bool shiftUpdateSucceeded = false;
+                while (shiftUpdateSucceeded == false)
+                {
+                    shiftUpdateSucceeded = shiftStorage.Update(s);
+                }
+
+                //int shiftCreateSucceeded = -1;
+                //while (shiftCreateSucceeded == -1)
+                //{
+                //    shiftCreateSucceeded = shiftStorage.Create(s);
+                //}
             }
+            this.DialogResult = DialogResult.OK;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
