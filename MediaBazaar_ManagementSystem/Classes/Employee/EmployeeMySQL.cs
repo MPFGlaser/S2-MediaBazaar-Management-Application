@@ -25,7 +25,7 @@ namespace MediaBazaar_ManagementSystem
         {
             bool success = false;
             int rowsAffected = 0;
-            String query = "INSERT INTO employees (active, firstName, surName, username, picture, password, phoneNumber, address, city, postalcode, emailAddress, dateOfBirth, spouseName, spousePhoneNumber, bsn, preferredShift, workingDepartments, contractHours) VALUES (@active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @preferredShift, @workingDepartments, @contractHours)";
+            String query = "INSERT INTO employees (active, firstName, surName, username, picture, password, phoneNumber, address, city, postalcode, emailAddress, dateOfBirth, spouseName, spousePhoneNumber, bsn, preferredShift, workingDepartments, contractHours, functions) VALUES (@active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @preferredShift, @workingDepartments, @contractHours, @functions)";
             MySqlCommand command = new MySqlCommand(query, connection);
             //command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
@@ -46,6 +46,7 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
             command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
             command.Parameters.AddWithValue("@contractHours", employee.ContractHours);
+            command.Parameters.AddWithValue("@functions", employee.Function);
 
             try
             {
