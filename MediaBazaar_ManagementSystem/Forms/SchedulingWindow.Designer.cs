@@ -42,6 +42,7 @@
             this.comboBoxSelectDepartments = new System.Windows.Forms.ComboBox();
             this.numericUpDownCapacity = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.labelEmployeeOverScheduled = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,11 +195,21 @@
             this.label1.TabIndex = 42;
             this.label1.Text = "Desired # of employees:";
             // 
+            // labelEmployeeOverScheduled
+            // 
+            this.labelEmployeeOverScheduled.AutoSize = true;
+            this.labelEmployeeOverScheduled.Location = new System.Drawing.Point(205, 12);
+            this.labelEmployeeOverScheduled.Name = "labelEmployeeOverScheduled";
+            this.labelEmployeeOverScheduled.Size = new System.Drawing.Size(0, 13);
+            this.labelEmployeeOverScheduled.TabIndex = 43;
+            this.labelEmployeeOverScheduled.Visible = false;
+            // 
             // SchedulingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 392);
+            this.Controls.Add(this.labelEmployeeOverScheduled);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDownCapacity);
             this.Controls.Add(this.comboBoxSelectDepartments);
@@ -239,5 +250,6 @@
         private System.Windows.Forms.ComboBox comboBoxSelectDepartments;
         private System.Windows.Forms.NumericUpDown numericUpDownCapacity;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelEmployeeOverScheduled;
     }
 }

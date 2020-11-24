@@ -147,7 +147,8 @@ namespace MediaBazaar_ManagementSystem
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
-                    function = Convert.ToInt32(reader["functions"]);
+                    //function = Convert.ToInt32(reader["functions"]);
+                    function = 3;
                     postalCode = Convert.ToString(reader["postalcode"]);
                     city = Convert.ToString(reader["city"]);
                     preferredShift = Convert.ToString(reader["preferredShift"]);

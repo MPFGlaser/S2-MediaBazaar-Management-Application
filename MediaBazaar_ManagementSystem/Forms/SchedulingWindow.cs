@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -200,7 +202,11 @@ namespace MediaBazaar_ManagementSystem
                 // Displays a message when the amount of hours an employee has in their contract is gone over
                 if(selectedEmployee.WorkingHours + 4.5f > selectedEmployee.ContractHours)
                 {
-                    MessageBox.Show("This employee has too many hours for their contract");
+                    //BLINK RED ON TIMER!
+                    labelEmployeeOverScheduled.Text = "Employee " + selectedEmployee.FirstName + " has exceded their weekly hours";
+                    labelEmployeeOverScheduled.BackColor = Color.LightCoral;
+                    labelEmployeeOverScheduled.Visible = true;
+                    Blink();
                 }
 
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
@@ -386,6 +392,18 @@ namespace MediaBazaar_ManagementSystem
             AddEmployeeListToShift(selectedDepartment.Employees);
         }
 
+        private async void Blink()
+        {
+            int i = 0;
+            while (i < 6)
+            {
+                await Task.Delay(500);
+                labelEmployeeOverScheduled.BackColor = labelEmployeeOverScheduled.BackColor == Color.LightCoral ? Color.FromName("Window") : Color.LightCoral;
+                i++;
+            }
+            labelEmployeeOverScheduled.Text = "";
+            labelEmployeeOverScheduled.Visible = false;
+        }
         #endregion
 
         public List<Employee> AllActiveEmployees
