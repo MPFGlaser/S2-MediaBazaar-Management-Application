@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
 using Microsoft.VisualBasic;
+using MediaBazaar_ManagementSystem.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -19,6 +20,7 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allEmployees = new List<Employee>();
         ProductDetailsWindow pdw;
         Employee loggedInUser;
+        ProductRestockDetailsWindow prdw;
 
         public MainWindow(Employee loggedInUser)
         {
@@ -52,6 +54,7 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
+            
         }
 
         #region Logic
@@ -68,6 +71,36 @@ namespace MediaBazaar_ManagementSystem
             PopulateItemsTable();
             LoadAllDepartments();
             SetupCorrectWeekData();
+            CheckForSalesRepresentative();
+            CheckForDepotWorker();
+        }
+
+        /// <summary>
+        /// Function to check if the current user is a sales representative.
+        /// </summary>
+        private void CheckForSalesRepresentative()
+        {
+            if (loggedInUser.Function == 2)
+            {
+                btnSendRestockRequest.Visible = true;
+                pnlSalesRepresentative.Visible = true;
+                pnlSalesRepresentative.Enabled = true;
+            }
+            else pnlSalesRepresentative.Visible = false;
+        }
+
+        /// <summary>
+        /// Function to check if the current user is a depot worker.
+        /// </summary>
+        private void CheckForDepotWorker()
+        {
+            if (loggedInUser.Function == 1)
+            {
+                btnAcceptRestockRequest.Visible = true;
+                pnlDepotWorker.Visible = true;
+                pnlDepotWorker.Enabled = true;
+            }
+            else pnlDepotWorker.Visible = false;
         }
 
         /// <summary>
@@ -144,6 +177,7 @@ namespace MediaBazaar_ManagementSystem
                 foreach (Item i in itemStorage.GetAll(false))
                 {
                     int rowId = dataGridViewStock.Rows.Add();
+                    int stockrequest = itemStorage.ReadRequest(i.Id);
 
                     DataGridViewRow row = dataGridViewStock.Rows[rowId];
 
@@ -153,6 +187,7 @@ namespace MediaBazaar_ManagementSystem
                     row.Cells["code"].Value = i.Code;
                     row.Cells["category"].Value = i.Category;
                     row.Cells["quantity"].Value = i.Quantity;
+                    row.Cells["Stock_request"].Value = stockrequest;
                     row.Cells["price"].Value = i.Price;
                     row.Cells["productActive"].Value = i.Active;
                     row.Cells["description"].Value = i.Description;
@@ -422,6 +457,21 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
         }
+
+        /// <summary>
+        /// Opens a new ProductRestockDetailsWindow so the user can modify the quantity for the restock of product they have selected
+        /// </summary>
+        private void ReStockProduct()
+        {
+            int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+            Item toEdit = itemStorage.Get(id);
+            prdw = new ProductRestockDetailsWindow();
+            prdw.AddItemData(toEdit, loggedInUser.Id);
+            if (prdw.ShowDialog() == DialogResult.OK)
+            {
+                PopulateItemsTable();
+            }
+        }
         #endregion
 
         #region Statistics
@@ -571,6 +621,20 @@ namespace MediaBazaar_ManagementSystem
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Logout();
+        }
+
+        private void btnSendRestockRequest_Click(object sender, EventArgs e)
+        {
+            ReStockProduct();
+            DisplayInformation();
+        }
+
+        private void btnAcceptRestockRequest_Click(object sender, EventArgs e)
+        {
+            int pId = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
+            int pQuantity = itemStorage.Get(pId).Quantity;
+            itemStorage.AddToStock(pId, pQuantity);
+            DisplayInformation();
         }
     } 
     #endregion

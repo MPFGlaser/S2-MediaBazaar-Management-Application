@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -68,6 +68,7 @@
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock_request = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +77,10 @@
             this.buttonStockCategoryRemove = new System.Windows.Forms.Button();
             this.buttonStockCategoryAdd = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.pnlDepotWorker = new System.Windows.Forms.Panel();
+            this.btnAcceptRestockRequest = new System.Windows.Forms.Button();
+            this.pnlSalesRepresentative = new System.Windows.Forms.Panel();
+            this.btnSendRestockRequest = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
@@ -134,6 +139,8 @@
             this.splitContainerStockSecondary.Panel1.SuspendLayout();
             this.splitContainerStockSecondary.Panel2.SuspendLayout();
             this.splitContainerStockSecondary.SuspendLayout();
+            this.pnlDepotWorker.SuspendLayout();
+            this.pnlSalesRepresentative.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
             this.splitContainerStatistics1.Panel1.SuspendLayout();
@@ -437,6 +444,7 @@
             this.code,
             this.category,
             this.quantity,
+            this.Stock_request,
             this.price,
             this.productActive,
             this.description});
@@ -455,25 +463,28 @@
             this.productId.HeaderText = "ID";
             this.productId.Name = "productId";
             this.productId.ReadOnly = true;
-            this.productId.Width = 50;
+            this.productId.Width = 30;
             // 
             // name
             // 
             this.name.HeaderText = "Product Name";
             this.name.Name = "name";
             this.name.ReadOnly = true;
+            this.name.Width = 120;
             // 
             // brand
             // 
             this.brand.HeaderText = "Brand";
             this.brand.Name = "brand";
             this.brand.ReadOnly = true;
+            this.brand.Width = 120;
             // 
             // code
             // 
             this.code.HeaderText = "Code";
             this.code.Name = "code";
             this.code.ReadOnly = true;
+            this.code.Width = 60;
             // 
             // category
             // 
@@ -486,19 +497,28 @@
             this.quantity.HeaderText = "Quantity";
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
+            this.quantity.Width = 50;
+            // 
+            // Stock_request
+            // 
+            this.Stock_request.HeaderText = "Stock Request";
+            this.Stock_request.Name = "Stock_request";
+            this.Stock_request.ReadOnly = true;
+            this.Stock_request.Width = 50;
             // 
             // price
             // 
             this.price.HeaderText = "Price";
             this.price.Name = "price";
             this.price.ReadOnly = true;
+            this.price.Width = 40;
             // 
             // productActive
             // 
             this.productActive.HeaderText = "Active";
             this.productActive.Name = "productActive";
             this.productActive.ReadOnly = true;
-            this.productActive.Width = 50;
+            this.productActive.Width = 40;
             // 
             // description
             // 
@@ -528,6 +548,8 @@
             // splitContainerStockSecondary.Panel2
             // 
             this.splitContainerStockSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.pnlDepotWorker);
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.pnlSalesRepresentative);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.label5);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.checkBoxShowInactiveItems);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockEditProduct);
@@ -578,6 +600,44 @@
             this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Category name";
+            // 
+            // pnlDepotWorker
+            // 
+            this.pnlDepotWorker.Controls.Add(this.btnAcceptRestockRequest);
+            this.pnlDepotWorker.Location = new System.Drawing.Point(149, 85);
+            this.pnlDepotWorker.Name = "pnlDepotWorker";
+            this.pnlDepotWorker.Size = new System.Drawing.Size(149, 44);
+            this.pnlDepotWorker.TabIndex = 9;
+            this.pnlDepotWorker.Visible = false;
+            // 
+            // btnAcceptRestockRequest
+            // 
+            this.btnAcceptRestockRequest.Location = new System.Drawing.Point(7, 7);
+            this.btnAcceptRestockRequest.Name = "btnAcceptRestockRequest";
+            this.btnAcceptRestockRequest.Size = new System.Drawing.Size(139, 24);
+            this.btnAcceptRestockRequest.TabIndex = 0;
+            this.btnAcceptRestockRequest.Text = "Accept restock request";
+            this.btnAcceptRestockRequest.UseVisualStyleBackColor = true;
+            this.btnAcceptRestockRequest.Click += new System.EventHandler(this.btnAcceptRestockRequest_Click);
+            // 
+            // pnlSalesRepresentative
+            // 
+            this.pnlSalesRepresentative.Controls.Add(this.btnSendRestockRequest);
+            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 85);
+            this.pnlSalesRepresentative.Name = "pnlSalesRepresentative";
+            this.pnlSalesRepresentative.Size = new System.Drawing.Size(147, 44);
+            this.pnlSalesRepresentative.TabIndex = 8;
+            this.pnlSalesRepresentative.Visible = false;
+            // 
+            // btnSendRestockRequest
+            // 
+            this.btnSendRestockRequest.Location = new System.Drawing.Point(2, 7);
+            this.btnSendRestockRequest.Name = "btnSendRestockRequest";
+            this.btnSendRestockRequest.Size = new System.Drawing.Size(141, 24);
+            this.btnSendRestockRequest.TabIndex = 0;
+            this.btnSendRestockRequest.Text = "File restock request";
+            this.btnSendRestockRequest.UseVisualStyleBackColor = true;
+            this.btnSendRestockRequest.Click += new System.EventHandler(this.btnSendRestockRequest_Click);
             // 
             // label5
             // 
@@ -659,23 +719,23 @@
             // 
             // StatisticChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "TestData";
-            series2.Points.Add(dataPoint7);
-            series2.Points.Add(dataPoint8);
-            series2.Points.Add(dataPoint9);
-            series2.Points.Add(dataPoint10);
-            series2.Points.Add(dataPoint11);
-            series2.Points.Add(dataPoint12);
-            this.StatisticChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -1045,6 +1105,8 @@
             this.splitContainerStockSecondary.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockSecondary)).EndInit();
             this.splitContainerStockSecondary.ResumeLayout(false);
+            this.pnlDepotWorker.ResumeLayout(false);
+            this.pnlSalesRepresentative.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
             this.splitContainerStatistics1.Panel2.ResumeLayout(false);
@@ -1128,15 +1190,6 @@
         private System.ServiceProcess.ServiceController serviceController1;
         private System.Windows.Forms.CheckBox checkBoxShowInactive;
         private System.Windows.Forms.CheckBox checkBoxShowInactiveItems;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
-        private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn category;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
         private System.Windows.Forms.ComboBox comboBoxAllDepartments;
@@ -1147,6 +1200,20 @@
         private System.Windows.Forms.Button buttonStockCategoryRemove;
         private System.Windows.Forms.Button buttonStockCategoryAdd;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel pnlSalesRepresentative;
+        private System.Windows.Forms.Button btnSendRestockRequest;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn brand;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stock_request;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn description;
+        private System.Windows.Forms.Panel pnlDepotWorker;
+        private System.Windows.Forms.Button btnAcceptRestockRequest;
     }
 }
 

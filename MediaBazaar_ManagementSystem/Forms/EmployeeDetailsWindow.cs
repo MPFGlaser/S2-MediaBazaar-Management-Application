@@ -120,6 +120,7 @@ namespace MediaBazaar_ManagementSystem
             string spousePhone = textBoxSpousePhone.Text;
             string postalCode = textBoxPostalCode.Text;
             string city = textBoxCity.Text;
+            int function = 0;
             Boolean active = checkBoxActive.Checked;
             Boolean allCorrect = true;
 
@@ -181,11 +182,13 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
-            if (!checkNumbers.IsMatch(textBoxFunctions.Text) && editing)
-            {
-                allCorrect = false;
-                textBoxFunctions.BackColor = Color.LightCoral;
-            }
+            //if (!checkNumbers.IsMatch(textBoxFunctions.Text) && editing)
+            //{
+            //    allCorrect = false;
+            //    textBoxFunctions.BackColor = Color.LightCoral;
+            //}
+            if (cmbFunctions.SelectedIndex > -1)
+                function = Convert.ToInt32((cmbFunctions.SelectedItem as ComboboxItem).Value.ToString());
             if (!checkName.IsMatch(textBoxCity.Text))
             {
                 allCorrect = false;
@@ -218,7 +221,7 @@ namespace MediaBazaar_ManagementSystem
                 // Checks whether the form was opened in editing mode or not. If it was, it updates the employee. If not, it creates a new one.
                 if (editing)
                 {
-                    int function = Convert.ToInt32(textBoxFunctions.Text);
+                    //int function = Convert.ToInt32(textBoxFunctions.Text);
                     // Update to use new stuff
                     success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments, contractHours);
                 }
@@ -273,13 +276,24 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.Text = employee.SpousePhone;
             textBoxBsn.Text = employee.Bsn.ToString();
             checkBoxActive.Checked = employee.Active;
-            textBoxFunctions.Text = employee.Function.ToString();
+            //textBoxFunctions.Text = employee.Function.ToString();
             textBoxPostalCode.Text = employee.PostalCode;
             textBoxCity.Text = employee.City;
             preferredHours = employee.PreferredHours;
             workingDepartments = employee.WorkingDepartments;
-
-            foreach(string value in comboBoxEmployeeHours.Items)
+            ComboboxItem x = new ComboboxItem();
+            int cid = 0;
+            foreach(ComboboxItem ci in employeeStorage.GetFunctions())
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = ci.Text;
+                item.Value = ci.Value;
+                if (ci.Value == employee.Function) { x = item; cid = ci.Value; }
+                cmbFunctions.Items.Add(item);
+            }
+            if (cid > 0) cmbFunctions.SelectedItem = x;
+            else cmbFunctions.SelectedItem = -1;
+            foreach (string value in comboBoxEmployeeHours.Items)
             {
                 int hours = Convert.ToInt32(value);
 

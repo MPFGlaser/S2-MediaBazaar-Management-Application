@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MediaBazaar_ManagementSystem.Classes.Item;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -9,6 +10,9 @@ namespace MediaBazaar_ManagementSystem
     {
         MySqlConnection connection;
         string connectionString;
+        Stock stock;
+        List<Stock> stocks = new List<Stock>();
+        List<Request> requests = new List<Request>();
 
         public ItemMySQL()
         {
@@ -191,6 +195,117 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return success;
+        }
+        /// <summary>
+        /// Read the requests
+        /// </summary>
+        public int ReadRequest(int id)
+        {
+            int pid = id;
+            int quantity = 0;
+            this.requests = new List<Request>();
+            try
+            {
+                string sql = "SELECT `quantity` FROM `stock_request` WHERE productid = @pId AND status = 'Pending';";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@pId", pid);
+                connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    quantity += Convert.ToInt32(dr[0]);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return quantity;
+        }
+        /// <summary>
+        /// Read the stock
+        /// </summary>
+        public List<Stock> ReadStock()
+        {
+            this.stocks = new List<Stock>();
+            try
+            {
+                string sql = "SELECT `id`, `quantity` FROM `items`";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                connection.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Stock stock = new Stock(/*Convert.ToInt32(dr[0]),*/ Convert.ToInt32(dr[0]), Convert.ToInt32(dr[1]));
+                    stocks.Add(stock);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return stocks;
+        }
+
+        /// <summary>
+        /// Updates the specified item.
+        /// </summary>
+        /// <param name="userid">The users id.</param>
+        /// <returns>To know who sent the request</returns>
+        /// /// <param name="productId">The products id.</param>
+        /// <returns>To nkow for which product the request is sent</returns>
+        /// /// /// <param name="quantity">The products quantity restock.</param>
+        /// <returns>To know how much to restock</returns>
+        public void SendStockRequest(int userid, int productId, int quantity)
+        {
+            try
+            {
+                string sql = "INSERT INTO stock_request(productid, quantity, status, userid, date) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                string status = "Pending";
+                ReadStock();
+                cmd.Parameters.AddWithValue("@pId", productId);
+                cmd.Parameters.AddWithValue("@quantity", quantity);
+                cmd.Parameters.AddWithValue("@status", status);
+                cmd.Parameters.AddWithValue("@rBy", userid);
+                cmd.Parameters.AddWithValue("@rDate", DateTime.Now.Date);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Request has been sent!");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void AddToStock(int productId, int quantity)
+        {
+            try
+            {
+                int qtoadd = ReadRequest(productId);
+                string sql = "UPDATE items SET quantity = @Quantity WHERE id = @Id;";
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+
+                cmd.Parameters.AddWithValue("@Quantity", quantity+qtoadd);
+                cmd.Parameters.AddWithValue("@Id", productId);
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                
+                string Status = "Done";
+                sql = "UPDATE stock_request SET status = @Status WHERE productid = @pId;";
+                cmd = new MySqlCommand(sql, connection);
+
+                cmd.Parameters.AddWithValue("@Status", Status);
+                cmd.Parameters.AddWithValue("@pId", productId);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Restock request accepted!");
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 }

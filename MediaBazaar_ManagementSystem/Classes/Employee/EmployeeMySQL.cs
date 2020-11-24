@@ -25,9 +25,9 @@ namespace MediaBazaar_ManagementSystem
         {
             bool success = false;
             int rowsAffected = 0;
-            String query = "INSERT INTO employees VALUES (@id, @active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @functions, @preferredShift, @workingDepartments, @contractHours)";
+            String query = "INSERT INTO employees (active, firstName, surName, username, picture, password, phoneNumber, address, city, postalcode, emailAddress, dateOfBirth, spouseName, spousePhoneNumber, bsn, preferredShift, workingDepartments, contractHours) VALUES (@active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @preferredShift, @workingDepartments, @contractHours)";
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@id", employee.Id);
+            //command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
@@ -43,7 +43,6 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@spouseName", employee.SpouseName);
             command.Parameters.AddWithValue("@spousePhoneNumber", employee.SpousePhone);
             command.Parameters.AddWithValue("@bsn", employee.Bsn);
-            command.Parameters.AddWithValue("@functions", 1337);
             command.Parameters.AddWithValue("@preferredShift", employee.PreferredHours);
             command.Parameters.AddWithValue("@workingDepartments", employee.WorkingDepartments);
             command.Parameters.AddWithValue("@contractHours", employee.ContractHours);
@@ -147,7 +146,8 @@ namespace MediaBazaar_ManagementSystem
                     spouseName = Convert.ToString(reader["spouseName"]);
                     spousePhone = Convert.ToString(reader["spousePhoneNUmber"]);
                     bsn = Convert.ToInt32(reader["bsn"]);
-                    function = Convert.ToInt32(reader["functions"]);
+                    if (!reader.IsDBNull(reader.GetOrdinal("functions"))) function = Convert.ToInt32(reader["functions"]);
+                    else function = 0;
                     postalCode = Convert.ToString(reader["postalcode"]);
                     city = Convert.ToString(reader["city"]);
                     preferredShift = Convert.ToString(reader["preferredShift"]);
@@ -308,6 +308,92 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return weekShiftIds;
+        }
+
+        /// <summary>
+        /// Function to create table functions in the database.
+        /// </summary>
+        public void CheckFunctions()
+        {
+            string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                return;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
+            command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            query = "INSERT INTO functions  VALUES (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
+            command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Function to create table functions in the database.
+        /// </summary>
+        public List<ComboboxItem> GetFunctions()
+        {
+            List<ComboboxItem> cmbxlist = new List<ComboboxItem>();
+            string sql = "SELECT * FROM functions;";
+
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                connection.Open();
+
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    ComboboxItem item = new ComboboxItem();
+                    item.Text = rdr.GetString("function");
+                    item.Value = Convert.ToInt32(rdr.GetString("id"));
+                    cmbxlist.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return cmbxlist;
         }
     }
 }
