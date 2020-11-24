@@ -118,6 +118,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.buttonConfirm.TabIndex = 22;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = true;
+            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
             // 
             // buttonCancel
             // 
@@ -128,6 +129,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.buttonCancel.TabIndex = 23;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // groupBoxMonday
             // 
@@ -605,7 +607,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxSunday.Controls.Add(this.numericUpDownSundayMorning);
             this.groupBoxSunday.Controls.Add(this.label20);
             this.groupBoxSunday.Controls.Add(this.label21);
-            this.groupBoxSunday.Location = new System.Drawing.Point(327, 107);
+            this.groupBoxSunday.Location = new System.Drawing.Point(318, 107);
             this.groupBoxSunday.Name = "groupBoxSunday";
             this.groupBoxSunday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxSunday.TabIndex = 21;

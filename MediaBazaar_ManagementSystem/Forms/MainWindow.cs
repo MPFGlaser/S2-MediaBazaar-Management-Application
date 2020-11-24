@@ -22,6 +22,7 @@ namespace MediaBazaar_ManagementSystem
         ProductDetailsWindow pdw;
         Employee loggedInUser;
         ProductRestockDetailsWindow prdw;
+        WeekShiftsCapacityEditor wsce;
 
         public MainWindow(Employee loggedInUser)
         {
@@ -532,7 +533,11 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SetCapacityWholeWeek()
         {
-            throw new NotImplementedException();
+            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays);
+            if (wsce.ShowDialog() == DialogResult.OK)
+            {
+                SetupCorrectWeekData();                
+            }
         }
         #endregion
 
