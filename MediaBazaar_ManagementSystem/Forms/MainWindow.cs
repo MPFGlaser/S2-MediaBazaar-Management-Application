@@ -18,9 +18,11 @@ namespace MediaBazaar_ManagementSystem
         EmployeeDetailsWindow edw;
         List<DateTime> weekDays = new List<DateTime>();
         List<Employee> allEmployees = new List<Employee>();
+        List<Shift> allWeekShifts = new List<Shift>();
         ProductDetailsWindow pdw;
         Employee loggedInUser;
         ProductRestockDetailsWindow prdw;
+        WeekShiftsCapacityEditor wsce;
 
         public MainWindow(Employee loggedInUser)
         {
@@ -223,7 +225,7 @@ namespace MediaBazaar_ManagementSystem
             weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
 
             // Gets all shifts from the shiftStorage between the start and end date of the week
-            List<Shift> allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
+            allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
             // Gets the hours all employees work this specific week
             allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
@@ -525,6 +527,18 @@ namespace MediaBazaar_ManagementSystem
             }
             SetupCorrectWeekData();
         }
+
+        /// <summary>
+        /// Opens a form where the user can set the desired capacity for a whole week's worth of shifts.
+        /// </summary>
+        private void SetCapacityWholeWeek()
+        {
+            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays);
+            if (wsce.ShowDialog() == DialogResult.OK)
+            {
+                SetupCorrectWeekData();                
+            }
+        }
         #endregion
 
         /// <summary>
@@ -639,6 +653,11 @@ namespace MediaBazaar_ManagementSystem
                 DisplayInformation();
             }
             else MessageBox.Show("Restock unavailable due to restock request quantity being 0!!!");
+        }
+
+        private void buttonSetWeekShiftsCapacity_Click(object sender, EventArgs e)
+        {
+            SetCapacityWholeWeek();
         }
     } 
     #endregion
