@@ -120,6 +120,10 @@ namespace MediaBazaar_ManagementSystem
                 comboBoxAllDepartments.DisplayMember = "Text";
                 comboBoxAllDepartments.ValueMember = "Department";
                 comboBoxAllDepartments.Items.Add(new { Text = d.Name, Department = d });
+
+                comboBoxSchedulingDepartment.DisplayMember = "Text";
+                comboBoxSchedulingDepartment.ValueMember = "Department";
+                comboBoxSchedulingDepartment.Items.Add(new { Text = d.Name, Department = d });
             }
         }
 
@@ -539,6 +543,18 @@ namespace MediaBazaar_ManagementSystem
                 SetupCorrectWeekData();                
             }
         }
+
+        /*public Department currentSelectedDepartment()
+        {
+            Department toReturn = null;
+
+            if(comboBoxSchedulingDepartment.SelectedIndex != -1)
+            {
+                toReturn = (Department)comboBoxSchedulingDepartment.SelectedItem;
+            }
+
+            return toReturn;
+        }*/
         #endregion
 
         /// <summary>
@@ -658,6 +674,20 @@ namespace MediaBazaar_ManagementSystem
         private void buttonSetWeekShiftsCapacity_Click(object sender, EventArgs e)
         {
             SetCapacityWholeWeek();
+        }
+
+        private void comboBoxSchedulingDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dynamic depDynamic = comboBoxSchedulingDepartment.SelectedItem;
+            Department selected = (depDynamic).Department;
+
+            calendarDayControlMonday.CurrentSelectedDepartment = selected;
+            calendarDayControlTuesday.CurrentSelectedDepartment = selected;
+            calendarDayControlWednesday.CurrentSelectedDepartment = selected;
+            calendarDayControlThursday.CurrentSelectedDepartment = selected;
+            calendarDayControlFriday.CurrentSelectedDepartment = selected;
+            calendarDayControlSaturday.CurrentSelectedDepartment = selected;
+            calendarDayControlSunday.CurrentSelectedDepartment = selected;
         }
     } 
     #endregion

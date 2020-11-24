@@ -55,7 +55,7 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours, string workingDepartments, int contractHours)
         {
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 1337, postalCode, city, preferredHours, workingDepartments, contractHours);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 6, postalCode, city, preferredHours, workingDepartments, contractHours);
             return employeeStorage.Create(employee);
         }
 

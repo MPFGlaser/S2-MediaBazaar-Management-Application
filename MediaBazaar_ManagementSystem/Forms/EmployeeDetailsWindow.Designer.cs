@@ -61,13 +61,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
             this.employeeSpecificsGroup = new System.Windows.Forms.GroupBox();
+            this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.buttonWorkingDepartments = new System.Windows.Forms.Button();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.buttonPreferredShifts = new System.Windows.Forms.Button();
             this.comboBoxEmployeeHours = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -383,6 +383,14 @@
             this.employeeSpecificsGroup.Text = "Employee specifics";
             this.employeeSpecificsGroup.Visible = false;
             // 
+            // cmbFunctions
+            // 
+            this.cmbFunctions.FormattingEnabled = true;
+            this.cmbFunctions.Location = new System.Drawing.Point(5, 61);
+            this.cmbFunctions.Name = "cmbFunctions";
+            this.cmbFunctions.Size = new System.Drawing.Size(125, 21);
+            this.cmbFunctions.TabIndex = 51;
+            // 
             // buttonWorkingDepartments
             // 
             this.buttonWorkingDepartments.Location = new System.Drawing.Point(6, 88);
@@ -447,14 +455,6 @@
             this.label12.Size = new System.Drawing.Size(99, 13);
             this.label12.TabIndex = 51;
             this.label12.Text = "Contract hours type";
-            // 
-            // cmbFunctions
-            // 
-            this.cmbFunctions.FormattingEnabled = true;
-            this.cmbFunctions.Location = new System.Drawing.Point(5, 61);
-            this.cmbFunctions.Name = "cmbFunctions";
-            this.cmbFunctions.Size = new System.Drawing.Size(125, 21);
-            this.cmbFunctions.TabIndex = 51;
             // 
             // EmployeeDetailsWindow
             // 

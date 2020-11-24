@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
@@ -98,10 +98,11 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainerScheduling1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxSchedulingFunction = new System.Windows.Forms.ComboBox();
+            this.comboBoxSchedulingDepartment = new System.Windows.Forms.ComboBox();
             this.buttonSchedulingNext = new System.Windows.Forms.Button();
             this.buttonSchedulingPrevious = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonSetWeekShiftsCapacity = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -111,7 +112,6 @@
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
             this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonSetWeekShiftsCapacity = new System.Windows.Forms.Button();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -720,23 +720,23 @@
             // 
             // StatisticChart
             // 
-            chartArea2.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "TestData";
-            series2.Points.Add(dataPoint7);
-            series2.Points.Add(dataPoint8);
-            series2.Points.Add(dataPoint9);
-            series2.Points.Add(dataPoint10);
-            series2.Points.Add(dataPoint11);
-            series2.Points.Add(dataPoint12);
-            this.StatisticChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -840,7 +840,7 @@
             // 
             this.splitContainerScheduling1.Panel1.BackColor = System.Drawing.Color.White;
             this.splitContainerScheduling1.Panel1.Controls.Add(this.label2);
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingFunction);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingDepartment);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingNext);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingPrevious);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.groupBox1);
@@ -857,24 +857,21 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Enabled = false;
-            this.label2.Location = new System.Drawing.Point(948, 7);
+            this.label2.Location = new System.Drawing.Point(931, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Function";
-            this.label2.Visible = false;
+            this.label2.Text = "Department:";
             // 
-            // comboBoxSchedulingFunction
+            // comboBoxSchedulingDepartment
             // 
-            this.comboBoxSchedulingFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxSchedulingFunction.Enabled = false;
-            this.comboBoxSchedulingFunction.FormattingEnabled = true;
-            this.comboBoxSchedulingFunction.Location = new System.Drawing.Point(1002, 4);
-            this.comboBoxSchedulingFunction.Name = "comboBoxSchedulingFunction";
-            this.comboBoxSchedulingFunction.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSchedulingFunction.TabIndex = 5;
-            this.comboBoxSchedulingFunction.Visible = false;
+            this.comboBoxSchedulingDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSchedulingDepartment.FormattingEnabled = true;
+            this.comboBoxSchedulingDepartment.Location = new System.Drawing.Point(1002, 4);
+            this.comboBoxSchedulingDepartment.Name = "comboBoxSchedulingDepartment";
+            this.comboBoxSchedulingDepartment.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSchedulingDepartment.TabIndex = 5;
+            this.comboBoxSchedulingDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxSchedulingDepartment_SelectedIndexChanged);
             // 
             // buttonSchedulingNext
             // 
@@ -913,6 +910,17 @@
             this.groupBox1.Size = new System.Drawing.Size(330, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // buttonSetWeekShiftsCapacity
+            // 
+            this.buttonSetWeekShiftsCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.buttonSetWeekShiftsCapacity.Location = new System.Drawing.Point(6, 67);
+            this.buttonSetWeekShiftsCapacity.Name = "buttonSetWeekShiftsCapacity";
+            this.buttonSetWeekShiftsCapacity.Size = new System.Drawing.Size(318, 27);
+            this.buttonSetWeekShiftsCapacity.TabIndex = 7;
+            this.buttonSetWeekShiftsCapacity.Text = "Edit capacity for all shifts this week";
+            this.buttonSetWeekShiftsCapacity.UseVisualStyleBackColor = true;
+            this.buttonSetWeekShiftsCapacity.Click += new System.EventHandler(this.buttonSetWeekShiftsCapacity_Click);
             // 
             // label1
             // 
@@ -1001,17 +1009,6 @@
             this.buttonReloadDatabaseEntries.TabIndex = 5;
             this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
             this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
-            // 
-            // buttonSetWeekShiftsCapacity
-            // 
-            this.buttonSetWeekShiftsCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonSetWeekShiftsCapacity.Location = new System.Drawing.Point(6, 67);
-            this.buttonSetWeekShiftsCapacity.Name = "buttonSetWeekShiftsCapacity";
-            this.buttonSetWeekShiftsCapacity.Size = new System.Drawing.Size(318, 27);
-            this.buttonSetWeekShiftsCapacity.TabIndex = 7;
-            this.buttonSetWeekShiftsCapacity.Text = "Edit capacity for all shifts this week";
-            this.buttonSetWeekShiftsCapacity.UseVisualStyleBackColor = true;
-            this.buttonSetWeekShiftsCapacity.Click += new System.EventHandler(this.buttonSetWeekShiftsCapacity_Click);
             // 
             // calendarDayControlMonday
             // 
@@ -1182,7 +1179,7 @@
         private System.Windows.Forms.Button buttonSchedulingNext;
         private System.Windows.Forms.Button buttonSchedulingPrevious;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxSchedulingFunction;
+        private System.Windows.Forms.ComboBox comboBoxSchedulingDepartment;
         private System.Windows.Forms.SplitContainer splitContainerStatistics1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonStatisticsEmployee;

@@ -22,6 +22,7 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
         private int oldId, capacity;
+        private Department previousSelectedDepartment;
 
         /// <summary>
         /// A form in which the user can schedule and unschedule employees for a certain shift.
@@ -33,7 +34,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees, Department previousSelectedDepartment)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -46,6 +47,7 @@ namespace MediaBazaar_ManagementSystem
             this.isEditing = editing;
             this.oldId = oldShiftId;
             this.capacity = capacity;
+            this.previousSelectedDepartment = previousSelectedDepartment;
 
             numericUpDownCapacity.Value = capacity;
             AddEmployeeListToShift(working);
@@ -101,6 +103,19 @@ namespace MediaBazaar_ManagementSystem
                 comboBoxSelectDepartments.DisplayMember = "Text";
                 comboBoxSelectDepartments.ValueMember = "Department";
                 comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
+            }
+
+            if(previousSelectedDepartment != null)
+            {
+                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department d = (depDynamic).Department;
+                    if(d.Name == previousSelectedDepartment.Name)
+                    {
+                        comboBoxSelectDepartments.SelectedItem = depDynamic;
+                        break;
+                    }
+                }
             }
         }
 
