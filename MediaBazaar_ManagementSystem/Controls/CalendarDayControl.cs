@@ -116,6 +116,11 @@ namespace MediaBazaar_ManagementSystem
                 output = Color.DarkOrange;
             }
 
+            if(numberScheduled == 0 || capacity == 0)
+            {
+                output = Color.Red;
+            }
+
             return output;
         }
 
