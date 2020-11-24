@@ -1,5 +1,4 @@
 ﻿using MediaBazaar_ManagementSystem.Classes.Item;
-using MediaBazaar_ManagementSystem.Controls;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ namespace MediaBazaar_ManagementSystem
     {
         MySqlConnection connection;
         string connectionString;
+        Stock stock;
         List<Stock> stocks = new List<Stock>();
         List<Request> requests = new List<Request>();
 
@@ -30,7 +30,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description)";
+            String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -41,11 +41,12 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
+            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
@@ -74,7 +75,7 @@ namespace MediaBazaar_ManagementSystem
         public Item Get(int id)
         {
             Item output = null;
-            String query = "SELECT id, name, brand, code, category, quantity, price, active, description FROM items WHERE id = @itemId";
+            String query = "SELECT id, name, brand, code, category, quantity, price, active, description, departmentId FROM items WHERE id = @itemId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@itemId", id);
             try
@@ -83,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]));
+                    output = new Item(Convert.ToInt32(reader[0]), Convert.ToString(reader[1]), Convert.ToString(reader[2]), Convert.ToInt32(reader[3]), Convert.ToString(reader[4]), Convert.ToInt32(reader[5]), Convert.ToDouble(reader[6]), Convert.ToBoolean(reader[7]), Convert.ToString(reader[8]), Convert.ToInt32(reader[9]));
                 }
             }
             catch (Exception ex)
@@ -115,7 +116,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int id, code, quantity;
+                int id, code, quantity, departmendId;
                 string name, brand, category, description;
                 double price;
                 bool active;
@@ -131,8 +132,8 @@ namespace MediaBazaar_ManagementSystem
                     description = Convert.ToString(reader["description"]);
                     price = Convert.ToDouble(reader["price"]);
                     active = Convert.ToBoolean(reader["active"]);
-
-                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description);
+                    departmendId = Convert.ToInt32(reader["departmentId"]);
+                    Item i = new Item(id, name, brand, code, category, quantity, price, active, description, departmendId);
                     output.Add(i);
                 }
             }
@@ -158,7 +159,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description  WHERE id = @id";
+            String query = "UPDATE items SET name = @name, brand = @brand, code = @code, category = @category, quantity = @quantity, price = @price, active = @active, description = @description, departmentId = @departmentId  WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", item.Id);
             command.Parameters.AddWithValue("@name", item.Name);
@@ -169,11 +170,12 @@ namespace MediaBazaar_ManagementSystem
             command.Parameters.AddWithValue("@price", item.Price);
             command.Parameters.AddWithValue("@active", item.Active);
             command.Parameters.AddWithValue("@description", item.Description);
+            command.Parameters.AddWithValue("@departmentId", item.DepartmentId);
 
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                rowsAffected = command.ExecuteNonQuery();
                 if (rowsAffected > 0)
                 {
                     success = true;
@@ -204,7 +206,7 @@ namespace MediaBazaar_ManagementSystem
             this.requests = new List<Request>();
             try
             {
-                string sql = "SELECT `quantity` FROM `stock_request` WHERE id = @pId AND status = 'Pending';";
+                string sql = "SELECT `quantity` FROM `stock_request` WHERE productid = @pId AND status = 'Pending';";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@pId", pid);
                 connection.Open();
@@ -228,7 +230,7 @@ namespace MediaBazaar_ManagementSystem
             this.stocks = new List<Stock>();
             try
             {
-                string sql = "SELECT `id`, `quantity` FROM `items` ORDER BY `quantity`";
+                string sql = "SELECT `id`, `quantity` FROM `items`";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
 
                 connection.Open();
@@ -278,37 +280,27 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        public void AddToStock(int productId, int quantity, int userid)
+        public void AddToStock(int productId, int quantity)
         {
             try
             {
-                decimal x = 0;
-                ReadStock();
-                foreach (Stock s in stocks)
-                {
-                    if (s.ProductId == productId)
-                    {
-                        x = s.Quantity + quantity;
-                    }
-                }
-                string sql = "UPDATE stock SET quantity = @Quantity WHERE id = @Id";
+                int qtoadd = ReadRequest(productId);
+                string sql = "UPDATE items SET quantity = @Quantity WHERE id = @Id;";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
 
-                cmd.Parameters.AddWithValue("@Quantity", x);
+                cmd.Parameters.AddWithValue("@Quantity", quantity+qtoadd);
+                cmd.Parameters.AddWithValue("@Id", productId);
                 connection.Open();
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Stock is updated!");
+                
+                string Status = "Done";
+                sql = "UPDATE stock_request SET status = @Status WHERE productid = @pId;";
+                cmd = new MySqlCommand(sql, connection);
 
-                string sql2 = "INSERT INTO stock_request(productId, quantity, status, requestedBy, requestDate) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
-                MySqlCommand cmd2 = new MySqlCommand(sql2, connection);
-                string status = "Approved";
-                cmd2.Parameters.AddWithValue("@pId", productId);
-                cmd2.Parameters.AddWithValue("@quantity", quantity);
-                cmd2.Parameters.AddWithValue("@status", status);
-                cmd2.Parameters.AddWithValue("@rBy", userid);
-                cmd2.Parameters.AddWithValue("@rDate", DateTime.Now.Date);
-                cmd2.ExecuteNonQuery();
-
+                cmd.Parameters.AddWithValue("@Status", Status);
+                cmd.Parameters.AddWithValue("@pId", productId);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Restock request accepted!");
             }
             finally
             {

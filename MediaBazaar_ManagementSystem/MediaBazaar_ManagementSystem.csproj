@@ -107,14 +107,15 @@
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Item\ItemMySQL.cs" />
+    <Compile Include="Classes\Item\Request.cs" />
     <Compile Include="Classes\Item\Stock.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
+    <Compile Include="Classes\Shift\EmployeeShift.cs" />
     <Compile Include="Classes\Shift\IShiftStorage.cs" />
     <Compile Include="Classes\Shift\Shift.cs" />
     <Compile Include="Classes\Shift\ShiftMySQL.cs" />
     <Compile Include="ComboboxItem.cs" />
-    <Compile Include="Classes\Item\Request.cs" />
     <Compile Include="Forms\ProductRestockDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>

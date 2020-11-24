@@ -61,11 +61,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBoxSpousePhone = new System.Windows.Forms.TextBox();
             this.employeeSpecificsGroup = new System.Windows.Forms.GroupBox();
-            this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.buttonWorkingDepartments = new System.Windows.Forms.Button();
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.buttonPreferredShifts = new System.Windows.Forms.Button();
+            this.comboBoxEmployeeHours = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cmbFunctions = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
@@ -373,21 +375,13 @@
             this.employeeSpecificsGroup.Controls.Add(this.buttonWorkingDepartments);
             this.employeeSpecificsGroup.Controls.Add(this.checkBoxActive);
             this.employeeSpecificsGroup.Controls.Add(this.label13);
-            this.employeeSpecificsGroup.Location = new System.Drawing.Point(219, 148);
+            this.employeeSpecificsGroup.Location = new System.Drawing.Point(219, 186);
             this.employeeSpecificsGroup.Name = "employeeSpecificsGroup";
             this.employeeSpecificsGroup.Size = new System.Drawing.Size(200, 123);
             this.employeeSpecificsGroup.TabIndex = 31;
             this.employeeSpecificsGroup.TabStop = false;
             this.employeeSpecificsGroup.Text = "Employee specifics";
             this.employeeSpecificsGroup.Visible = false;
-            // 
-            // cmbFunctions
-            // 
-            this.cmbFunctions.FormattingEnabled = true;
-            this.cmbFunctions.Location = new System.Drawing.Point(8, 60);
-            this.cmbFunctions.Name = "cmbFunctions";
-            this.cmbFunctions.Size = new System.Drawing.Size(125, 21);
-            this.cmbFunctions.TabIndex = 50;
             // 
             // buttonWorkingDepartments
             // 
@@ -430,6 +424,38 @@
             this.buttonPreferredShifts.UseVisualStyleBackColor = true;
             this.buttonPreferredShifts.Click += new System.EventHandler(this.buttonPreferredShifts_Click);
             // 
+            // comboBoxEmployeeHours
+            // 
+            this.comboBoxEmployeeHours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEmployeeHours.FormattingEnabled = true;
+            this.comboBoxEmployeeHours.Items.AddRange(new object[] {
+            "40",
+            "32",
+            "20",
+            "16",
+            "0"});
+            this.comboBoxEmployeeHours.Location = new System.Drawing.Point(224, 160);
+            this.comboBoxEmployeeHours.Name = "comboBoxEmployeeHours";
+            this.comboBoxEmployeeHours.Size = new System.Drawing.Size(127, 21);
+            this.comboBoxEmployeeHours.TabIndex = 50;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(225, 145);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "Contract hours type";
+            // 
+            // cmbFunctions
+            // 
+            this.cmbFunctions.FormattingEnabled = true;
+            this.cmbFunctions.Location = new System.Drawing.Point(5, 61);
+            this.cmbFunctions.Name = "cmbFunctions";
+            this.cmbFunctions.Size = new System.Drawing.Size(125, 21);
+            this.cmbFunctions.TabIndex = 51;
+            // 
             // EmployeeDetailsWindow
             // 
             this.AcceptButton = this.buttonEDWConfirm;
@@ -437,6 +463,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 561);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.comboBoxEmployeeHours);
             this.Controls.Add(this.buttonPreferredShifts);
             this.Controls.Add(this.employeeSpecificsGroup);
             this.Controls.Add(this.groupBox2);
@@ -455,6 +483,7 @@
             this.employeeSpecificsGroup.ResumeLayout(false);
             this.employeeSpecificsGroup.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -497,6 +526,8 @@
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button buttonPreferredShifts;
         private System.Windows.Forms.Button buttonWorkingDepartments;
+        private System.Windows.Forms.ComboBox comboBoxEmployeeHours;
+        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbFunctions;
     }
 }

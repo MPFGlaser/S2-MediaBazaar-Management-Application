@@ -77,6 +77,9 @@
             this.buttonStockCategoryRemove = new System.Windows.Forms.Button();
             this.buttonStockCategoryAdd = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.pnlDepotWorker = new System.Windows.Forms.Panel();
+            this.btnAcceptRestockRequest = new System.Windows.Forms.Button();
+            this.pnlSalesRepresentative = new System.Windows.Forms.Panel();
             this.btnSendRestockRequest = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
@@ -102,13 +105,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelWelcomeText = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.serviceController1 = new System.ServiceProcess.ServiceController();
-            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
-            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
-            this.pnlSalesRepresentative = new System.Windows.Forms.Panel();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -116,6 +112,12 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.labelWelcomeText = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.serviceController1 = new System.ServiceProcess.ServiceController();
+            this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
+            this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -137,6 +139,8 @@
             this.splitContainerStockSecondary.Panel1.SuspendLayout();
             this.splitContainerStockSecondary.Panel2.SuspendLayout();
             this.splitContainerStockSecondary.SuspendLayout();
+            this.pnlDepotWorker.SuspendLayout();
+            this.pnlSalesRepresentative.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
             this.splitContainerStatistics1.Panel1.SuspendLayout();
@@ -151,7 +155,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            this.pnlSalesRepresentative.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -545,6 +548,7 @@
             // splitContainerStockSecondary.Panel2
             // 
             this.splitContainerStockSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStockSecondary.Panel2.Controls.Add(this.pnlDepotWorker);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.pnlSalesRepresentative);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.label5);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.checkBoxShowInactiveItems);
@@ -597,11 +601,39 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "Category name";
             // 
+            // pnlDepotWorker
+            // 
+            this.pnlDepotWorker.Controls.Add(this.btnAcceptRestockRequest);
+            this.pnlDepotWorker.Location = new System.Drawing.Point(149, 85);
+            this.pnlDepotWorker.Name = "pnlDepotWorker";
+            this.pnlDepotWorker.Size = new System.Drawing.Size(149, 44);
+            this.pnlDepotWorker.TabIndex = 9;
+            this.pnlDepotWorker.Visible = false;
+            // 
+            // btnAcceptRestockRequest
+            // 
+            this.btnAcceptRestockRequest.Location = new System.Drawing.Point(7, 7);
+            this.btnAcceptRestockRequest.Name = "btnAcceptRestockRequest";
+            this.btnAcceptRestockRequest.Size = new System.Drawing.Size(139, 24);
+            this.btnAcceptRestockRequest.TabIndex = 0;
+            this.btnAcceptRestockRequest.Text = "Accept restock request";
+            this.btnAcceptRestockRequest.UseVisualStyleBackColor = true;
+            this.btnAcceptRestockRequest.Click += new System.EventHandler(this.btnAcceptRestockRequest_Click);
+            // 
+            // pnlSalesRepresentative
+            // 
+            this.pnlSalesRepresentative.Controls.Add(this.btnSendRestockRequest);
+            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 85);
+            this.pnlSalesRepresentative.Name = "pnlSalesRepresentative";
+            this.pnlSalesRepresentative.Size = new System.Drawing.Size(147, 44);
+            this.pnlSalesRepresentative.TabIndex = 8;
+            this.pnlSalesRepresentative.Visible = false;
+            // 
             // btnSendRestockRequest
             // 
-            this.btnSendRestockRequest.Location = new System.Drawing.Point(3, 7);
+            this.btnSendRestockRequest.Location = new System.Drawing.Point(2, 7);
             this.btnSendRestockRequest.Name = "btnSendRestockRequest";
-            this.btnSendRestockRequest.Size = new System.Drawing.Size(140, 24);
+            this.btnSendRestockRequest.Size = new System.Drawing.Size(141, 24);
             this.btnSendRestockRequest.TabIndex = 0;
             this.btnSendRestockRequest.Text = "File restock request";
             this.btnSendRestockRequest.UseVisualStyleBackColor = true;
@@ -932,49 +964,6 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
-            this.buttonLogin.TabIndex = 1;
-            this.buttonLogin.Text = "Log out";
-            this.buttonLogin.UseVisualStyleBackColor = true;
-            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
-            // 
-            // labelWelcomeText
-            // 
-            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
-            this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
-            this.labelWelcomeText.TabIndex = 2;
-            this.labelWelcomeText.Text = "Welcome";
-            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // buttonReloadDatabaseEntries
-            // 
-            this.buttonReloadDatabaseEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
-            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
-            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
-            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
-            this.buttonReloadDatabaseEntries.TabIndex = 5;
-            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
-            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
-            // 
-            // pnlSalesRepresentative
-            // 
-            this.pnlSalesRepresentative.Controls.Add(this.btnSendRestockRequest);
-            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 95);
-            this.pnlSalesRepresentative.Name = "pnlSalesRepresentative";
-            this.pnlSalesRepresentative.Size = new System.Drawing.Size(152, 44);
-            this.pnlSalesRepresentative.TabIndex = 7;
-            this.pnlSalesRepresentative.Visible = false;
-            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -1045,6 +1034,40 @@
             this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 1;
+            this.buttonLogin.Text = "Log out";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            // 
+            // labelWelcomeText
+            // 
+            this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
+            this.labelWelcomeText.Name = "labelWelcomeText";
+            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
+            this.labelWelcomeText.TabIndex = 2;
+            this.labelWelcomeText.Text = "Welcome";
+            this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // buttonReloadDatabaseEntries
+            // 
+            this.buttonReloadDatabaseEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
+            this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
+            this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
+            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
+            this.buttonReloadDatabaseEntries.TabIndex = 5;
+            this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
+            this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1082,6 +1105,8 @@
             this.splitContainerStockSecondary.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockSecondary)).EndInit();
             this.splitContainerStockSecondary.ResumeLayout(false);
+            this.pnlDepotWorker.ResumeLayout(false);
+            this.pnlSalesRepresentative.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
             this.splitContainerStatistics1.Panel2.ResumeLayout(false);
@@ -1099,7 +1124,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.pnlSalesRepresentative.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1176,6 +1200,7 @@
         private System.Windows.Forms.Button buttonStockCategoryRemove;
         private System.Windows.Forms.Button buttonStockCategoryAdd;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel pnlSalesRepresentative;
         private System.Windows.Forms.Button btnSendRestockRequest;
         private System.Windows.Forms.DataGridViewTextBoxColumn productId;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
@@ -1187,7 +1212,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn productActive;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
-        private System.Windows.Forms.Panel pnlSalesRepresentative;
+        private System.Windows.Forms.Panel pnlDepotWorker;
+        private System.Windows.Forms.Button btnAcceptRestockRequest;
     }
 }
 

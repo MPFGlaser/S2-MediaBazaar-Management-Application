@@ -1,5 +1,4 @@
 ﻿using MediaBazaar_ManagementSystem.Classes.Item;
-using MediaBazaar_ManagementSystem.Controls;
 using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
@@ -20,6 +19,6 @@ namespace MediaBazaar_ManagementSystem
 
         void SendStockRequest(int userid, int productId, int quantity);
 
-        void AddToStock(int productId, int quantity, int userid);
+        void AddToStock(int productId, int quantity);
     }
 }

@@ -8,7 +8,6 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Stock
     {
-
         //private int id;
         private int productId;
 
@@ -18,7 +17,7 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
         {
             //id = givenId;
             Quantity = givenQuantity;
-            productId = givenPId;
+            ProductId = givenPId;
         }
 
         /*public int Id
@@ -41,7 +40,7 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
             {
                 return this.quantity;
             }
-            private set
+            set
             {
                 this.quantity = value;
             }
@@ -52,11 +51,10 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
             {
                 return this.productId;
             }
-            private set
+            set
             {
                 this.productId = value;
             }
         }
-
-    }
+     }
 }

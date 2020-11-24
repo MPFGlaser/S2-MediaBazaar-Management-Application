@@ -7,12 +7,13 @@ namespace MediaBazaar_ManagementSystem
     /// </summary>
     public class Employee
     {
-        private int id, bsn, function;
+        private int id, bsn, function, contractHours;
         private string firstName, surName, userName, password, email, address, spouseName, phoneNumber, spousePhone, postalCode, city, preferredHours, workingDepartments;
         private bool active;
         private DateTime dateOfBirth;
+        private float workingHours = 0;
 
-        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments)
+        public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments, int contractHours)
         {
             this.id = id;
             this.active = active;
@@ -32,6 +33,7 @@ namespace MediaBazaar_ManagementSystem
             this.city = city;
             this.preferredHours = preferredHours;
             this.workingDepartments = workingDepartments;
+            this.contractHours = contractHours;
         }
 
         #region Properties
@@ -141,10 +143,17 @@ namespace MediaBazaar_ManagementSystem
             set { workingDepartments = value; }
         }
 
-        //public enum Function
-        //{
-        //    Function functions;
-        //} 
+        public int ContractHours
+        {
+            get { return contractHours; }
+            set { contractHours = value; }
+        }
+
+        public float WorkingHours
+        {
+            get { return workingHours; }
+            set { workingHours = value; }
+        }
         #endregion
     }
 }

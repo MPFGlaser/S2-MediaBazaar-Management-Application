@@ -23,14 +23,18 @@ namespace MediaBazaar_ManagementSystem
             //Asks the loginStorage to check if the entered details match those we have stored.
             userId = loginStorage.Check(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
 
-            if(userId != -1)
+            if(userId > 0)
             {
                 this.loggedInUser = employeeStorage.Get(userId);
                 this.DialogResult = DialogResult.OK;
             }
-            else
+            else if(userId < 0)
             {
                 MessageBox.Show("Invalid Credentials");
+            }
+            else
+            {
+                MessageBox.Show("Your account has been disabled");
             }
         }
 

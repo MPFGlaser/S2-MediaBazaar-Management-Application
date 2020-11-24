@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -12,13 +13,17 @@ namespace MediaBazaar_ManagementSystem
     public partial class ProductDetailsWindow : Form
     {
         IItemStorage itemStorage;
+        IDepartmentStorage departmentStorage;
         private Item item;
         private bool editing = false;
         private int editId;
+        private List<Department> allDepartments;
 
         public ProductDetailsWindow()
         {
             InitializeComponent();
+            allDepartments = GetAllDepartments();
+            LoadAllDepartments();
             itemStorage = new ItemMySQL();
         }
 
@@ -28,6 +33,29 @@ namespace MediaBazaar_ManagementSystem
         }
 
         #region Logic
+        /// <summary>
+        /// Returns all of the departments from the database
+        /// </summary>
+        private List<Department> GetAllDepartments()
+        {
+            departmentStorage = new DepartmentMySQL();
+            return departmentStorage.GetAll();
+        }
+
+        /// <summary>
+        /// Loads all of the departments into the departments combobox
+        /// </summary>
+        private void LoadAllDepartments()
+        {
+            foreach (Department d in allDepartments)
+            {
+                comboBoxSelectDepartment.DisplayMember = "Text";
+                comboBoxSelectDepartment.ValueMember = "Department";
+                comboBoxSelectDepartment.Items.Add(new { Text = d.Name, Department = d });
+            }
+        }
+
+
         /// <summary>
         /// Creates an Item object with the given parameters ready for being added to the itemStorage
         /// <para>Due to it being for a new item specifically, the id is 0</para>
@@ -40,9 +68,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="price"></param>
         /// <param name="active"></param>
         /// <param name="description"></param>
-        private bool CreateItem(string name, string brand, int code, string category, int quantity, double price, bool active, string description)
+        private bool CreateItem(string name, string brand, int code, string category, int quantity, double price, bool active, string description, int departmentId)
         {
-            item = new Item(0, name, brand, code, category, quantity, price, active, description);
+            item = new Item(0, name, brand, code, category, quantity, price, active, description, departmentId);
             return itemStorage.Create(item);
         }
 
@@ -59,9 +87,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="price"></param>
         /// <param name="active"></param>
         /// <param name="description"></param>
-        private bool UpdateItem(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description)
+        private bool UpdateItem(int id, string name, string brand, int code, string category, int quantity, double price, bool active, string description, int departmentId)
         {
-            item = new Item(id, name, brand, code, category, quantity, price, active, description);
+            item = new Item(id, name, brand, code, category, quantity, price, active, description, departmentId);
             return itemStorage.Update(item);
         }
 
@@ -77,6 +105,8 @@ namespace MediaBazaar_ManagementSystem
             // Sets some editing-specific variables to the right values
             editing = true;
             editId = item.Id;
+            labelID.Visible = true;
+            labelIDTitle.Visible = true;
 
             // Fills all the controls with the right values
             labelID.Text = item.Id.ToString();
@@ -88,6 +118,22 @@ namespace MediaBazaar_ManagementSystem
             textBoxCategory.Text = item.Category;
             richTextBoxDescription.Text = item.Description;
             checkBoxActive.Checked = item.Active;
+            comboBoxSelectDepartment.SelectedIndex = GetDepartmentIndex(item.DepartmentId);
+        }
+
+        public int GetDepartmentIndex(int departmentId)
+        {
+            int index = -1, count = 0;
+            foreach(dynamic dynamicDepartment in comboBoxSelectDepartment.Items)
+            {
+                Department dep = (dynamicDepartment).Department;
+                if(dep.Id == departmentId)
+                {
+                    index = count;
+                }
+                count++;
+            }
+            return index;
         }
 
         /// <summary>
@@ -104,9 +150,14 @@ namespace MediaBazaar_ManagementSystem
             Regex checkCategory = new Regex(@"^[a-zA-Z\s]+$");
             Regex checkCode = new Regex(@"^[0-9]*\d{4,15}$");
 
+            // The department selected by the user
+            dynamic departmentDynamic = comboBoxSelectDepartment.SelectedItem;
+            Department selectedDepartment = (departmentDynamic).Department;
+
             // Assigns the value of each input to its corresponding variable
             double price = Convert.ToDouble(numericUpDownPrice.Value);
             int quantity = Convert.ToInt32(numericUpDownQuantity.Value);
+            int departmentId = selectedDepartment.Id;
             bool active = checkBoxActive.Checked;
             string name = textBoxName.Text;
             string brand = textBoxBrand.Text;
@@ -136,6 +187,11 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxCode.BackColor = Color.LightCoral;
             }
+            if (comboBoxSelectDepartment.SelectedIndex == -1)
+            {
+                allCorrect = false;
+                comboBoxSelectDepartment.BackColor = Color.LightCoral;
+            }
 
             // If all regex expressions pass, this is run
             if (allCorrect)
@@ -149,12 +205,12 @@ namespace MediaBazaar_ManagementSystem
                 if (editing)
                 {
                     // Creates an Item object ready for updating an entry in the itemStorage
-                    success = UpdateItem(editId, name, brand, code, category, quantity, price, active, description);
+                    success = UpdateItem(editId, name, brand, code, category, quantity, price, active, description, departmentId);
                 }
                 else
                 {
                     // Creates an Item object ready for being added to the itemStorage
-                    success = CreateItem(name, brand, code, category, quantity, price, active, description);
+                    success = CreateItem(name, brand, code, category, quantity, price, active, description, departmentId);
                 }
 
                 if (success)
@@ -175,6 +231,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxCategory.BackColor = Color.FromName("Window");
             numericUpDownPrice.BackColor = Color.FromName("Window");
             numericUpDownQuantity.BackColor = Color.FromName("Window");
+            comboBoxSelectDepartment.BackColor = Color.FromName("Window");
         }
         #endregion
 

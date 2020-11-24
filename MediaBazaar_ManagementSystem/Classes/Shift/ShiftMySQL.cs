@@ -109,11 +109,12 @@ namespace MediaBazaar_ManagementSystem
         public int Create(Shift input)
         {
             int output = 0;
-            String query = ("INSERT INTO shifts VALUES (@id, @date, @shiftType); SELECT LAST_INSERT_ID()");
+            String query = ("INSERT INTO shifts VALUES (@id, @date, @shiftType, @capacity); SELECT LAST_INSERT_ID()");
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", input.Id);
             command.Parameters.AddWithValue("@date", input.Date);
             command.Parameters.AddWithValue("@shiftType", input.ShiftTime);
+            command.Parameters.AddWithValue("@capacity", input.Capacity);
 
             try
             {
@@ -183,14 +184,14 @@ namespace MediaBazaar_ManagementSystem
                 int shiftExists = Convert.ToInt32(command.ExecuteScalar());
                 if (shiftExists != 0)
                 {
-                    String sql1 = "SELECT id FROM shifts WHERE date = @date AND shiftType = @shiftType";
+                    String sql1 = "SELECT id, capacity FROM shifts WHERE date = @date AND shiftType = @shiftType";
                     MySqlCommand command1 = new MySqlCommand(sql1, connection);
                     command1.Parameters.AddWithValue("@date", dateSql);
                     command1.Parameters.AddWithValue("@shiftType", time);
                     MySqlDataReader reader = command1.ExecuteReader();
                     while (reader.Read())
                     {
-                        output = new Shift(Convert.ToInt32(reader[0]), date, time);
+                        output = new Shift(Convert.ToInt32(reader[0]), date, time, Convert.ToInt32(reader[1]));
                     }
                 }
             }
@@ -351,8 +352,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-
-                    temp = new Shift(Convert.ToInt32(reader[0]), (DateTime)reader[1], (ShiftTime)reader[2]);
+                    temp = new Shift(Convert.ToInt32(reader[0]), (DateTime)reader[1], (ShiftTime)reader[2], Convert.ToInt32(reader[3]));
                     weekShifts.Add(temp);
                 }
 
@@ -387,6 +387,47 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return weekShifts;
+        }
+
+        public bool Update(Shift input)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            string dateSql = input.Date.ToString("yyyy-MM-dd");
+
+
+            String query = "UPDATE shifts SET date = @date, shiftType = @shiftType, capacity = @capacity WHERE id = @id";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@date", dateSql);
+            command.Parameters.AddWithValue("@shiftType", input.ShiftTime);
+            command.Parameters.AddWithValue("@capacity", input.Capacity);
+            command.Parameters.AddWithValue("@id", input.Id);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if(rowsAffected > 0)
+                {
+                    success = true;
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+                success = false;
+                throw;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
         }
     }
 }

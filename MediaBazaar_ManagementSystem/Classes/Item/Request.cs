@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaBazaar_ManagementSystem.Controls
+namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Request
     {
