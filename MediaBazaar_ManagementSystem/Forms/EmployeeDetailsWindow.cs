@@ -55,7 +55,7 @@ namespace MediaBazaar_ManagementSystem
         /// <returns></returns>
         private bool CreateEmployee(bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, string postalCode, string city, string preferredHours, string workingDepartments, int contractHours)
         {
-            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 6, postalCode, city, preferredHours, workingDepartments, contractHours);
+            employee = new Employee(0, active, firstName, surName, userName, password, email, phoneNumber, address, dateOfBirth, bsn, spouseName, spousePhone, 0, postalCode, city, preferredHours, workingDepartments, contractHours);
             return employeeStorage.Create(employee);
         }
 
@@ -120,7 +120,7 @@ namespace MediaBazaar_ManagementSystem
             string spousePhone = textBoxSpousePhone.Text;
             string postalCode = textBoxPostalCode.Text;
             string city = textBoxCity.Text;
-            int function = 0;
+            int function = -1;
             Boolean active = checkBoxActive.Checked;
             Boolean allCorrect = true;
 
@@ -284,15 +284,17 @@ namespace MediaBazaar_ManagementSystem
             workingDepartments = employee.WorkingDepartments;
             ComboboxItem x = new ComboboxItem();
             int cid = 0;
-            foreach(ComboboxItem ci in employeeStorage.GetFunctions())
+            Dictionary<int, string> items = new Dictionary<int, string>();
+            items = employeeStorage.GetFunctions();
+            foreach (int cindex in items.Keys)
             {
                 ComboboxItem item = new ComboboxItem();
-                item.Text = ci.Text;
-                item.Value = ci.Value;
-                if (ci.Value == employee.Function) { x = item; cid = ci.Value; }
+                item.Text = items[cindex];
+                item.Value = cindex;
+                if (cindex == employee.Function) { x = item; cid = cindex; }
                 cmbFunctions.Items.Add(item);
             }
-            if (cid > 0) cmbFunctions.SelectedItem = x;
+            if (cid >= 0) cmbFunctions.SelectedItem = x;
             else cmbFunctions.SelectedItem = -1;
             //foreach (string value in comboBoxEmployeeHours.Items)
             //{

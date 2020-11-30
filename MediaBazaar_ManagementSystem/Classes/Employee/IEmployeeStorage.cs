@@ -13,7 +13,9 @@ namespace MediaBazaar_ManagementSystem
 
         List<Employee> GetAll(bool activeOnly);
 
-        List<ComboboxItem> GetFunctions();
+        Dictionary<int, string> GetFunctions();
+
+        void CheckFunctions();
 
         List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
 

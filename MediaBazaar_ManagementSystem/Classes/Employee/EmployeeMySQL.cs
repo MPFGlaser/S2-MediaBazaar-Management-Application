@@ -347,7 +347,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-            query = "INSERT INTO functions  VALUES (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
+            query = "INSERT INTO functions  VALUES  (0,'New Employee'), (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
             command = new MySqlCommand(query, connection);
             try
             {
@@ -366,9 +366,9 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Function to create table functions in the database.
         /// </summary>
-        public List<ComboboxItem> GetFunctions()
+        public Dictionary<int, string> GetFunctions()
         {
-            List<ComboboxItem> cmbxlist = new List<ComboboxItem>();
+            Dictionary<int, string> functions = new Dictionary<int, string>();
             string sql = "SELECT * FROM functions;";
 
             try
@@ -380,10 +380,7 @@ namespace MediaBazaar_ManagementSystem
 
                 while (rdr.Read())
                 {
-                    ComboboxItem item = new ComboboxItem();
-                    item.Text = rdr.GetString("function");
-                    item.Value = Convert.ToInt32(rdr.GetString("id"));
-                    cmbxlist.Add(item);
+                    functions.Add(Convert.ToInt32(rdr.GetString("id")), rdr.GetString("function"));
                 }
             }
             catch (Exception ex)
@@ -394,7 +391,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-            return cmbxlist;
+            return functions;
         }
     }
 }
