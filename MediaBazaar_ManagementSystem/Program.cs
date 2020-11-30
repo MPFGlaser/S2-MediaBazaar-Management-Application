@@ -16,7 +16,7 @@ namespace MediaBazaar_ManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            EmployeeMySQL esqlhandler = new EmployeeMySQL();
+            IEmployeeStorage esqlhandler = new EmployeeMySQL();
             esqlhandler.CheckFunctions();
 
             createLogin();
