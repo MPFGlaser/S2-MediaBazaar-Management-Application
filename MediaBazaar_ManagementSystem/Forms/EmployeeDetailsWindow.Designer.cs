@@ -66,11 +66,12 @@
             this.checkBoxActive = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.buttonPreferredShifts = new System.Windows.Forms.Button();
-            this.comboBoxEmployeeHours = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDownEmployeeHours = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.employeeSpecificsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEmployeeHours)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -432,29 +433,21 @@
             this.buttonPreferredShifts.UseVisualStyleBackColor = true;
             this.buttonPreferredShifts.Click += new System.EventHandler(this.buttonPreferredShifts_Click);
             // 
-            // comboBoxEmployeeHours
-            // 
-            this.comboBoxEmployeeHours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxEmployeeHours.FormattingEnabled = true;
-            this.comboBoxEmployeeHours.Items.AddRange(new object[] {
-            "40",
-            "32",
-            "20",
-            "16",
-            "0"});
-            this.comboBoxEmployeeHours.Location = new System.Drawing.Point(224, 160);
-            this.comboBoxEmployeeHours.Name = "comboBoxEmployeeHours";
-            this.comboBoxEmployeeHours.Size = new System.Drawing.Size(127, 21);
-            this.comboBoxEmployeeHours.TabIndex = 50;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(225, 145);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(99, 13);
+            this.label12.Size = new System.Drawing.Size(76, 13);
             this.label12.TabIndex = 51;
-            this.label12.Text = "Contract hours type";
+            this.label12.Text = "Contract hours";
+            // 
+            // numericUpDownEmployeeHours
+            // 
+            this.numericUpDownEmployeeHours.Location = new System.Drawing.Point(225, 160);
+            this.numericUpDownEmployeeHours.Name = "numericUpDownEmployeeHours";
+            this.numericUpDownEmployeeHours.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownEmployeeHours.TabIndex = 52;
             // 
             // EmployeeDetailsWindow
             // 
@@ -463,8 +456,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonEDWCancel;
             this.ClientSize = new System.Drawing.Size(434, 561);
+            this.Controls.Add(this.numericUpDownEmployeeHours);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.comboBoxEmployeeHours);
             this.Controls.Add(this.buttonPreferredShifts);
             this.Controls.Add(this.employeeSpecificsGroup);
             this.Controls.Add(this.groupBox2);
@@ -482,6 +475,7 @@
             this.groupBox2.PerformLayout();
             this.employeeSpecificsGroup.ResumeLayout(false);
             this.employeeSpecificsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEmployeeHours)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -526,8 +520,8 @@
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button buttonPreferredShifts;
         private System.Windows.Forms.Button buttonWorkingDepartments;
-        private System.Windows.Forms.ComboBox comboBoxEmployeeHours;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbFunctions;
+        private System.Windows.Forms.NumericUpDown numericUpDownEmployeeHours;
     }
 }
