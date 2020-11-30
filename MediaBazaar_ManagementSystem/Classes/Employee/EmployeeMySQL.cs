@@ -268,7 +268,7 @@ namespace MediaBazaar_ManagementSystem
                     {
                         if (es.EmployeeId == e.Id)
                         {
-                            e.WorkingHours += 4.5f;
+                            e.WorkingHours += Globals.shiftDuration;
                         }
                     }
                 }

@@ -198,7 +198,7 @@ namespace MediaBazaar_ManagementSystem
                 Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
 
                 // Displays a message when the amount of hours an employee has in their contract is gone over
-                if(selectedEmployee.WorkingHours + 4.5f > selectedEmployee.ContractHours)
+                if(selectedEmployee.WorkingHours + Globals.shiftDuration > selectedEmployee.ContractHours)
                 {
                     //BLINK RED ON TIMER!
                     labelEmployeeOverScheduled.Text = "Employee " + selectedEmployee.FirstName + " has exceded their weekly hours";
@@ -210,8 +210,8 @@ namespace MediaBazaar_ManagementSystem
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
                 int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
 
-                // Adds 4.5 hours to the selected employees current hours
-                selectedEmployee.WorkingHours += 4.5f;
+                // Adds 4 hours to the selected employees current hours
+                selectedEmployee.WorkingHours += Globals.shiftDuration;
 
                 // Adds the selected employee to the list of employees in the department
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
@@ -240,8 +240,8 @@ namespace MediaBazaar_ManagementSystem
                 // Ensures the right employee object is used
                 Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
 
-                // Removes 4.5 hours from the selected employees hours
-                selectedEmployee.WorkingHours -= 4.5f;
+                // Removes 4 hours from the selected employees hours
+                selectedEmployee.WorkingHours -= Globals.shiftDuration;
 
                 if (comboBoxSelectDepartments.SelectedIndex != -1)
                 {
