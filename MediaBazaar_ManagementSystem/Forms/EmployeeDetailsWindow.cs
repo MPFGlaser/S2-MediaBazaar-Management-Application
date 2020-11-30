@@ -199,11 +199,11 @@ namespace MediaBazaar_ManagementSystem
                 allCorrect = false;
                 textBoxPostalCode.BackColor = Color.LightCoral;
             }
-            if(comboBoxEmployeeHours.SelectedIndex == -1)
-            {
-                allCorrect = false;
-                comboBoxEmployeeHours.BackColor = Color.LightCoral;
-            }
+            //if(comboBoxEmployeeHours.SelectedIndex == -1)
+            //{
+            //    allCorrect = false;
+            //    comboBoxEmployeeHours.BackColor = Color.LightCoral;
+            //}
 
             // If all regex expressions have successfully passed, this runs
             if (allCorrect)
@@ -212,10 +212,11 @@ namespace MediaBazaar_ManagementSystem
                 
                 // This conversion seems sketchy, but because it was checked by the regex before, it should not pose a problem.
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
-                int contractHours = Convert.ToInt32(comboBoxEmployeeHours.SelectedItem.ToString());
+                //int contractHours = Convert.ToInt32(comboBoxEmployeeHours.SelectedItem.ToString());
+                int contractHours = Convert.ToInt32(numericUpDownEmployeeHours.Value);
                 if (contractHours == 0)
                 {
-                    contractHours = 200;
+                    contractHours = Globals.zeroHourContract;
                 }
 
                 // Checks whether the form was opened in editing mode or not. If it was, it updates the employee. If not, it creates a new one.
@@ -293,15 +294,23 @@ namespace MediaBazaar_ManagementSystem
             }
             if (cid > 0) cmbFunctions.SelectedItem = x;
             else cmbFunctions.SelectedItem = -1;
-            foreach (string value in comboBoxEmployeeHours.Items)
-            {
-                int hours = Convert.ToInt32(value);
+            //foreach (string value in comboBoxEmployeeHours.Items)
+            //{
+            //    int hours = Convert.ToInt32(value);
 
-                if(employee.ContractHours == hours || (hours == 0 && employee.ContractHours == 200))
-                {
-                    comboBoxEmployeeHours.SelectedIndex = index;
-                }
-                index++;
+            //    if(employee.ContractHours == hours || (hours == 0 && employee.ContractHours == 200))
+            //    {
+            //        comboBoxEmployeeHours.SelectedIndex = index;
+            //    }
+            //    index++;
+            //}
+            if (employee.ContractHours == Globals.zeroHourContract)
+            {
+                numericUpDownEmployeeHours.Value = 0;
+            }
+            else
+            {
+                numericUpDownEmployeeHours.Value = employee.ContractHours;
             }
 
             PreventUserLockout();
@@ -326,7 +335,7 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.BackColor = Color.FromName("Window");
             textBoxPostalCode.BackColor = Color.FromName("Window");
             textBoxCity.BackColor = Color.FromName("Window");
-            comboBoxEmployeeHours.BackColor = Color.FromName("Window");
+            numericUpDownEmployeeHours.BackColor = Color.FromName("Window");
         }
 
         // Loads all of the departmenst from the departmentStorage and sets them into the combobox
