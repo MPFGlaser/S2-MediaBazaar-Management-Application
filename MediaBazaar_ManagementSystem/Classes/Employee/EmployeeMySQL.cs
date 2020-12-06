@@ -418,10 +418,9 @@ namespace MediaBazaar_ManagementSystem
                     for(int i = 0; i < reader.FieldCount; i++)
                     {
                         string name = reader.GetName(i);
-                        bool value;
                         if (name != "id" && name != "function")
                         {
-                            value = Convert.ToBoolean(reader.GetValue(i));
+                            bool value = Convert.ToBoolean(reader.GetValue(i));
                             permissions.Add(name, value);
                         }
                     }
