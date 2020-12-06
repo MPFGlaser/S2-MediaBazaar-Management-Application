@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -392,6 +391,60 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
             return functions;
+        }
+
+        /// <summary>
+        /// Gets the permissions associated with the function id supplied.
+        /// </summary>
+        /// <param name="function">The function.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public List<string> GetPermissions(int function)
+        {
+            List<string> output = new List<string>();
+            Dictionary<string, bool> permissions = new Dictionary<string, bool>();
+
+            String query = "SELECT * FROM functions WHERE id = @functionId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@functionId", function);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    for(int i = 0; i < reader.FieldCount; i++)
+                    {
+                        string name = reader.GetName(i);
+                        bool value;
+                        if (name != "id" && name != "function")
+                        {
+                            value = Convert.ToBoolean(reader.GetValue(i));
+                            permissions.Add(name, value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            foreach(KeyValuePair<string, bool> permission in permissions)
+            {
+                if(permission.Value == true)
+                {
+                    output.Add(permission.Key);
+                }
+            }
+
+            return output;
         }
     }
 }

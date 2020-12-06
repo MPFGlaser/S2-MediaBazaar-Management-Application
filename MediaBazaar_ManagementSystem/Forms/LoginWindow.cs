@@ -13,6 +13,8 @@ namespace MediaBazaar_ManagementSystem
         public LoginWindow()
         {
             InitializeComponent();
+            PermissionSelectionWindow permissionSelectionWindow = new PermissionSelectionWindow();
+            permissionSelectionWindow.ShowDialog();
         }
 
         private void Login()
@@ -26,6 +28,7 @@ namespace MediaBazaar_ManagementSystem
             if(userId > 0)
             {
                 this.loggedInUser = employeeStorage.Get(userId);
+                this.loggedInUser.Permissions = employeeStorage.GetPermissions(loggedInUser.Function);
                 this.DialogResult = DialogResult.OK;
             }
             else if(userId < 0)
