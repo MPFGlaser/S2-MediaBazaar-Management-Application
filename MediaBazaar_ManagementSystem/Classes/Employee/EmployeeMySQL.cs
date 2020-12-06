@@ -314,55 +314,55 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Function to create table functions in the database.
         /// </summary>
-        public void CheckFunctions()
-        {
-            string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
+        //public void CheckFunctions()
+        //{
+        //    string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+        //    MySqlCommand command = new MySqlCommand(query, connection);
+        //    try
+        //    {
+        //        connection.Open();
+        //        command.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-                return;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "INSERT INTO functions  VALUES  (0,'New Employee'), (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+        //        return;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //    query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
+        //    command = new MySqlCommand(query, connection);
+        //    try
+        //    {
+        //        connection.Open();
+        //        command.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ErrorMessages.Generic(ex);
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //    query = "INSERT INTO functions  VALUES  (0,'New Employee'), (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
+        //    command = new MySqlCommand(query, connection);
+        //    try
+        //    {
+        //        connection.Open();
+        //        command.ExecuteNonQuery();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ErrorMessages.Generic(ex);
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //}
         /// <summary>
         /// Function to create table functions in the database.
         /// </summary>

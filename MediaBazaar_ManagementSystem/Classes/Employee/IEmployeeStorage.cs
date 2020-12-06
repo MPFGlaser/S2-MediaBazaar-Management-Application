@@ -15,7 +15,7 @@ namespace MediaBazaar_ManagementSystem
 
         Dictionary<int, string> GetFunctions();
 
-        void CheckFunctions();
+        //void CheckFunctions();
 
         List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
 
