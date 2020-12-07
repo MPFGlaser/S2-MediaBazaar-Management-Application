@@ -15,8 +15,10 @@ namespace MediaBazaar_ManagementSystem
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
+            AreCheckboxesEnabled(false);
             SetUniformHeight();
             PopulateComboBox();
+            Console.WriteLine(comboBoxCurrentFunction.SelectedIndex.ToString());
         }
 
         // if a manager, function management should all be ticked & greyed out to prevent locking oneself out!
@@ -85,6 +87,22 @@ namespace MediaBazaar_ManagementSystem
             // Statistics
             checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
             checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
+        }
+
+        private void AreCheckboxesEnabled(bool isEnabled)
+        {
+            foreach(GroupBox gb in flowLayoutPanel.Controls)
+            {
+                gb.Enabled = isEnabled;
+
+                foreach(FlowLayoutPanel flp in gb.Controls)
+                {
+                    foreach(CheckBox cb in flp.Controls)
+                    {
+                        cb.Enabled = isEnabled;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -176,6 +194,15 @@ namespace MediaBazaar_ManagementSystem
 
         private void comboBoxCurrentFunction_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(comboBoxCurrentFunction.SelectedIndex == -1)
+            {
+                AreCheckboxesEnabled(false);
+            }
+            else
+            {
+                AreCheckboxesEnabled(true);
+            }
+
             foreach (KeyValuePair<int, string> i in functions)
             {
                 if (comboBoxCurrentFunction.SelectedItem.ToString() == i.Value)
@@ -183,6 +210,8 @@ namespace MediaBazaar_ManagementSystem
                     selectedFunctionId = i.Key;
                 }
             }
+
+            this.Text = "Currently editing permissions for: " + comboBoxCurrentFunction.SelectedItem.ToString();
             LoadPermissions(selectedFunctionId);
             FillCheckboxes();
 
