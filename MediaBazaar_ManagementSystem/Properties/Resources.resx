@@ -120,6 +120,9 @@
   <data name="createError" xml:space="preserve">
     <value>Error creating file.</value>
   </data>
+  <data name="databaseSaveError" xml:space="preserve">
+    <value>Error saving to the database.</value>
+  </data>
   <data name="fileNotFound" xml:space="preserve">
     <value>No connection file found.</value>
   </data>

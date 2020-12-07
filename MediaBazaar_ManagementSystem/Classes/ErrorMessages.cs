@@ -13,6 +13,7 @@ namespace MediaBazaar_ManagementSystem
         private static string retrieveItemError = Properties.Resources.retrieveItemError;
         private static string loadShiftError = Properties.Resources.loadShiftError;
         private static string informationInvalidError = Properties.Resources.informationInvalidError;
+        private static string databaseSaveError = Properties.Resources.databaseSaveError;
 
         private static void Show(string errorMessage)
         {
@@ -62,6 +63,16 @@ namespace MediaBazaar_ManagementSystem
         public static void InformationInvalid()
         {
             Show(informationInvalidError);
+        }
+
+        public static void DatabaseSave()
+        {
+            Show(databaseSaveError);
+        }
+
+        public static void DatabaseSave(Exception e)
+        {
+            Show(databaseSaveError, e);
         }
     }
 }
