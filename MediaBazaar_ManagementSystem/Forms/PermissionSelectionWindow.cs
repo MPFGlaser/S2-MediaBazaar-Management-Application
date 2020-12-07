@@ -190,12 +190,15 @@ namespace MediaBazaar_ManagementSystem
                 checkBoxFunctionsAdd.Enabled = false;
                 checkBoxGeneralLoginApplication.Checked = true;
                 checkBoxGeneralLoginApplication.Enabled = false;
+                checkBoxEmployeesView.Checked = true;
+                checkBoxEmployeesView.Enabled = false;
             }
             else
             {
                 checkBoxFunctionsEdit.Enabled = true;
                 checkBoxFunctionsAdd.Enabled = true;
                 checkBoxGeneralLoginApplication.Enabled = true;
+                checkBoxEmployeesView.Enabled = true;
             }
         }
 
