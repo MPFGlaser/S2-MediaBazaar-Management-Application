@@ -15,12 +15,8 @@ namespace MediaBazaar_ManagementSystem
 
         Dictionary<int, string> GetFunctions();
 
-        //void CheckFunctions();
-
         List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
 
         List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday);
-
-        List<string> GetPermissions(int function);
     }
 }
