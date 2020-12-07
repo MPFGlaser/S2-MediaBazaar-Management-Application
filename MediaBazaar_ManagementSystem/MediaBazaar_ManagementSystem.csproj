@@ -104,6 +104,8 @@
     <Compile Include="Classes\Employee\Encrypt.cs" />
     <Compile Include="Classes\Employee\IEmployeeStorage.cs" />
     <Compile Include="Classes\ErrorMessages.cs" />
+    <Compile Include="Classes\Function\FunctionMySQL.cs" />
+    <Compile Include="Classes\Function\IFunctionStorage.cs" />
     <Compile Include="Classes\Item\IItemStorage.cs" />
     <Compile Include="Classes\Item\Item.cs" />
     <Compile Include="Classes\Item\ItemMySQL.cs" />
@@ -116,6 +118,18 @@
     <Compile Include="Classes\Shift\Shift.cs" />
     <Compile Include="Classes\Shift\ShiftMySQL.cs" />
     <Compile Include="ComboboxItem.cs" />
+    <Compile Include="Forms\AddNewFunctionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddNewFunctionWindow.Designer.cs">
+      <DependentUpon>AddNewFunctionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PermissionSelectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PermissionSelectionWindow.Designer.cs">
+      <DependentUpon>PermissionSelectionWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ProductRestockDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +197,9 @@
     <EmbeddedResource Include="Controls\CalendarDayControl.resx">
       <DependentUpon>CalendarDayControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddNewFunctionWindow.resx">
+      <DependentUpon>AddNewFunctionWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EmployeeDetailsWindow.resx">
       <DependentUpon>EmployeeDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PermissionSelectionWindow.resx">
+      <DependentUpon>PermissionSelectionWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PreferredHours.resx">
       <DependentUpon>PreferredHours.cs</DependentUpon>

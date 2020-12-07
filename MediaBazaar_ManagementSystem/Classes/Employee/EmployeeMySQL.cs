@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -309,89 +308,6 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return weekShiftIds;
-        }
-
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public void CheckFunctions()
-        {
-            string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-
-                return;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "INSERT INTO functions  VALUES  (0,'New Employee'), (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public Dictionary<int, string> GetFunctions()
-        {
-            Dictionary<int, string> functions = new Dictionary<int, string>();
-            string sql = "SELECT * FROM functions;";
-
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
-                connection.Open();
-
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    functions.Add(Convert.ToInt32(rdr.GetString("id")), rdr.GetString("function"));
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return functions;
         }
     }
 }
