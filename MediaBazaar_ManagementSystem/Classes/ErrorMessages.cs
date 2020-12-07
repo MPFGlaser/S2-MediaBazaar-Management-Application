@@ -12,6 +12,7 @@ namespace MediaBazaar_ManagementSystem
         private static string retrieveEmployeeError = Properties.Resources.retrieveEmployeeError;
         private static string retrieveItemError = Properties.Resources.retrieveItemError;
         private static string loadShiftError = Properties.Resources.loadShiftError;
+        private static string informationInvalidError = Properties.Resources.informationInvalidError;
 
         private static void Show(string errorMessage)
         {
@@ -56,6 +57,11 @@ namespace MediaBazaar_ManagementSystem
         public static void Shift(Exception e)
         {
             Show(loadShiftError, e);
+        }
+
+        public static void InformationInvalid()
+        {
+            Show(informationInvalidError);
         }
     }
 }
