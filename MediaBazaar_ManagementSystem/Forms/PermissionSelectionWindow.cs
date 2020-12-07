@@ -6,7 +6,6 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class PermissionSelectionWindow : Form
     {
-        IEmployeeStorage employeeStorage;
         IFunctionStorage functionStorage;
         AddNewFunctionWindow addNewFunctionWindow;
         Dictionary<int, string> functions;
@@ -16,7 +15,6 @@ namespace MediaBazaar_ManagementSystem
         public PermissionSelectionWindow()
         {
             InitializeComponent();
-            employeeStorage = new EmployeeMySQL();
             functionStorage = new FunctionMySQL();
             AreCheckboxesEnabled(false);
             SetUniformHeight();
@@ -92,6 +90,60 @@ namespace MediaBazaar_ManagementSystem
             // Statistics
             checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
             checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
+        }
+
+        /// <summary>
+        /// Saves the permission values.
+        /// </summary>
+        private void Save()
+        {
+            Dictionary<string, bool> updatedPermissions = new Dictionary<string, bool>();
+
+
+            // General
+            updatedPermissions.Add("login_application", checkBoxGeneralLoginApplication.Checked ? true : false);
+            updatedPermissions.Add("login_website", checkBoxGeneralLoginWebsite.Checked ? true : false);
+            updatedPermissions.Add("clock_in_out", checkBoxGeneralClockInOut.Checked ? true : false);
+
+            // Employee management
+            updatedPermissions.Add("employee_view", checkBoxEmployeesView.Checked ? true : false);
+            updatedPermissions.Add("employee_edit", checkBoxEmployeesEdit.Checked ? true : false);
+            updatedPermissions.Add("employee_add", checkBoxEmployeesAdd.Checked ? true : false);
+            updatedPermissions.Add("employee_change_active", checkBoxEmployeesActive.Checked ? true : false);
+
+            // Stock management
+            updatedPermissions.Add("product_view", checkBoxProductsView.Checked ? true : false);
+            updatedPermissions.Add("product_edit", checkBoxProductsEdit.Checked ? true : false);
+            updatedPermissions.Add("product_add", checkBoxProductsAdd.Checked ? true : false);
+            updatedPermissions.Add("product_change_active", checkBoxProductsActive.Checked ? true : false);
+            updatedPermissions.Add("product_restock_file", checkBoxProductsRestockFile.Checked ? true : false);
+            updatedPermissions.Add("product_restock_accept", checkBoxProductsRestockAccept.Checked ? true : false);
+
+            // Department management
+            updatedPermissions.Add("department_view", checkBoxDepartmentsView.Checked ? true : false);
+            updatedPermissions.Add("department_edit", checkBoxDepartmentsEdit.Checked ? true : false);
+            updatedPermissions.Add("department_add", checkBoxDepartmentsAdd.Checked ? true : false);
+            updatedPermissions.Add("department_change_active", checkBoxDepartmentsChangeActive.Checked ? true : false);
+
+            // Function management
+            updatedPermissions.Add("function_add", checkBoxFunctionsAdd.Checked ? true : false);
+            updatedPermissions.Add("function_edit", checkBoxFunctionsEdit.Checked ? true : false);
+
+            // Scheduling
+            updatedPermissions.Add("schedule_employee_add", checkBoxSchedulingScheduleEmployees.Checked ? true : false);
+            updatedPermissions.Add("schedule_employee_remove", checkBoxSchedulingUnscheduleEmployees.Checked ? true : false);
+            updatedPermissions.Add("schedule_capacity_set", checkBoxSchedulingShiftCapacity.Checked ? true : false);
+
+            // Swapping
+            updatedPermissions.Add("swapping_accept", checkBoxSwappingAccept.Checked ? true : false);
+            updatedPermissions.Add("swapping_request", checkBoxSwappingRequest.Checked ? true : false);
+            updatedPermissions.Add("swapping_approve", checkBoxSwappingApprove.Checked ? true : false);
+
+            // Statistics
+            updatedPermissions.Add("statistics_view", checkBoxStatisticsView.Checked ? true : false);
+
+
+            functionStorage.Update(selectedFunctionId, updatedPermissions);
         }
 
         /// <summary>
@@ -248,12 +300,23 @@ namespace MediaBazaar_ManagementSystem
             {
                 PopulateComboBox();
                 comboBoxCurrentFunction.SelectedItem = addNewFunctionWindow.Title;
+                foreach (KeyValuePair<int, string> i in functions)
+                {
+                    if (comboBoxCurrentFunction.SelectedItem.ToString() == i.Value)
+                    {
+                        selectedFunctionId = i.Key;
+                    }
+                }
             }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-
+            Save();
+            if(checkBoxCloseOnSave.Checked == true)
+            {
+                this.Close();
+            }
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -133,9 +130,52 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
-        public bool Update()
+        /// <summary>
+        /// Updates the specified function with its new permissions.
+        /// </summary>
+        /// <param name="functionId">The function identifier.</param>
+        /// <param name="Dictionary`2">The permisssions</param>
+        /// <returns></returns>
+        public bool Update(int functionId, Dictionary<string, bool> permissions)
         {
-            throw new NotImplementedException();
+            string querySet = null;
+
+            foreach (KeyValuePair<string, bool> i in permissions)
+            {
+                querySet += i.Key + " = " + Convert.ToInt32(i.Value) + ", ";
+            }
+
+            querySet = querySet.Remove(querySet.Length - 2, 1);
+
+            bool success = false;
+            int rowsAffected = 0;
+            String query = $"UPDATE functions SET {querySet} WHERE id = @id";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@id", functionId);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+                success = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
         }
     }
 }

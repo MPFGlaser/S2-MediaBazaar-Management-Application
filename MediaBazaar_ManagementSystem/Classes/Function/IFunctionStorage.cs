@@ -6,7 +6,7 @@ namespace MediaBazaar_ManagementSystem
     {
         bool Create(string name);
 
-        bool Update();
+        bool Update(int functionId, Dictionary<string, bool> permissions);
 
         Dictionary<int, string> GetFunctions();
 
