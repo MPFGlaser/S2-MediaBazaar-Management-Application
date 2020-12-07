@@ -454,7 +454,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeAdd()
         {
-            edw = new EmployeeDetailsWindow(loggedInUser.Id);
+            edw = new EmployeeDetailsWindow(loggedInUser);
             if (edw.ShowDialog() == DialogResult.OK)
             {
                 PopulateEmployeesTable();
@@ -470,7 +470,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
                 Employee toEdit = employeeStorage.Get(id);
-                edw = new EmployeeDetailsWindow(loggedInUser.Id);
+                edw = new EmployeeDetailsWindow(loggedInUser);
                 edw.AddEmployeeData(toEdit);
                 if (edw.ShowDialog() == DialogResult.OK)
                 {
