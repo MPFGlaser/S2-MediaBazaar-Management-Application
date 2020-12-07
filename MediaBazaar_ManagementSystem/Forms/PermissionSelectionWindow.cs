@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
@@ -143,7 +144,16 @@ namespace MediaBazaar_ManagementSystem
             updatedPermissions.Add("statistics_view", checkBoxStatisticsView.Checked ? true : false);
 
 
-            functionStorage.Update(selectedFunctionId, updatedPermissions);
+            bool success = functionStorage.Update(selectedFunctionId, updatedPermissions);
+
+            if (success == true)
+            {
+                IndicateSuccessfulSave();
+            }
+            else
+            {
+                ErrorMessages.DatabaseSave();
+            }
         }
 
         /// <summary>
@@ -152,13 +162,13 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="isEnabled">if set to <c>true</c> [is enabled].</param>
         private void AreCheckboxesEnabled(bool isEnabled)
         {
-            foreach(GroupBox gb in flowLayoutPanel.Controls)
+            foreach (GroupBox gb in flowLayoutPanel.Controls)
             {
                 gb.Enabled = isEnabled;
 
-                foreach(FlowLayoutPanel flp in gb.Controls)
+                foreach (FlowLayoutPanel flp in gb.Controls)
                 {
-                    foreach(CheckBox cb in flp.Controls)
+                    foreach (CheckBox cb in flp.Controls)
                     {
                         cb.Enabled = isEnabled;
                     }
@@ -222,6 +232,16 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
+        /// Indicates the successful save to the user.
+        /// </summary>
+        private async void IndicateSuccessfulSave()
+        {
+            labelSaveSuccessful.Visible = true;
+            await Task.Delay(2000);
+            labelSaveSuccessful.Visible = false;
+        }
+
+        /// <summary>
         /// Every time the size of the flowLayoutPanel is updated, it checks if the width is smaller than necessary for it to tile two controls next to each other.
         /// <para>When that's the case, the extra blank space in some controls is removed.</para>
         /// <para>When it's wide enough again to also tile horizontally, the blank space is added again.</para>
@@ -261,7 +281,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void comboBoxCurrentFunction_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxCurrentFunction.SelectedIndex == -1)
+            if (comboBoxCurrentFunction.SelectedIndex == -1)
             {
                 AreCheckboxesEnabled(false);
             }
@@ -296,7 +316,7 @@ namespace MediaBazaar_ManagementSystem
         {
             addNewFunctionWindow = new AddNewFunctionWindow();
 
-            if(addNewFunctionWindow.ShowDialog() == DialogResult.OK)
+            if (addNewFunctionWindow.ShowDialog() == DialogResult.OK)
             {
                 PopulateComboBox();
                 comboBoxCurrentFunction.SelectedItem = addNewFunctionWindow.Title;
@@ -313,7 +333,7 @@ namespace MediaBazaar_ManagementSystem
         private void buttonSave_Click(object sender, EventArgs e)
         {
             Save();
-            if(checkBoxCloseOnSave.Checked == true)
+            if (checkBoxCloseOnSave.Checked == true)
             {
                 this.Close();
             }

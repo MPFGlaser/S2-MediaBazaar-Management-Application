@@ -78,6 +78,7 @@ namespace MediaBazaar_ManagementSystem
             this.buttonCancel = new System.Windows.Forms.Button();
             this.checkBoxCloseOnSave = new System.Windows.Forms.CheckBox();
             this.buttonAddNewFunction = new System.Windows.Forms.Button();
+            this.labelSaveSuccessful = new System.Windows.Forms.Label();
             this.flowLayoutPanel.SuspendLayout();
             this.groupBoxGeneral.SuspendLayout();
             this.flowLayoutPanelGeneral.SuspendLayout();
@@ -658,6 +659,18 @@ namespace MediaBazaar_ManagementSystem
             this.buttonAddNewFunction.UseVisualStyleBackColor = true;
             this.buttonAddNewFunction.Click += new System.EventHandler(this.buttonAddNewFunction_Click);
             // 
+            // labelSaveSuccessful
+            // 
+            this.labelSaveSuccessful.BackColor = System.Drawing.Color.LightGreen;
+            this.labelSaveSuccessful.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSaveSuccessful.Location = new System.Drawing.Point(137, 189);
+            this.labelSaveSuccessful.Name = "labelSaveSuccessful";
+            this.labelSaveSuccessful.Size = new System.Drawing.Size(439, 65);
+            this.labelSaveSuccessful.TabIndex = 5;
+            this.labelSaveSuccessful.Text = "Permissions saved successfully";
+            this.labelSaveSuccessful.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelSaveSuccessful.Visible = false;
+            // 
             // PermissionSelectionWindow
             // 
             this.AcceptButton = this.buttonSave;
@@ -669,6 +682,7 @@ namespace MediaBazaar_ManagementSystem
             this.Controls.Add(this.checkBoxCloseOnSave);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.labelSaveSuccessful);
             this.Controls.Add(this.comboBoxCurrentFunction);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.label1);
@@ -765,5 +779,6 @@ namespace MediaBazaar_ManagementSystem
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.CheckBox checkBoxCloseOnSave;
         private System.Windows.Forms.Button buttonAddNewFunction;
+        private System.Windows.Forms.Label labelSaveSuccessful;
     }
 }
