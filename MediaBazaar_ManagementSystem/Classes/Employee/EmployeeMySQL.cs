@@ -398,11 +398,9 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         /// <param name="function">The function.</param>
         /// <returns></returns>
-        /// <exception cref="System.NotImplementedException"></exception>
         public List<string> GetPermissions(int function)
         {
             List<string> output = new List<string>();
-            Dictionary<string, bool> permissions = new Dictionary<string, bool>();
 
             String query = "SELECT * FROM functions WHERE id = @functionId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -421,7 +419,10 @@ namespace MediaBazaar_ManagementSystem
                         if (name != "id" && name != "function")
                         {
                             bool value = Convert.ToBoolean(reader.GetValue(i));
-                            permissions.Add(name, value);
+                            if(value == true)
+                            {
+                                output.Add(name);
+                            }
                         }
                     }
                 }
@@ -433,14 +434,6 @@ namespace MediaBazaar_ManagementSystem
             finally
             {
                 connection.Close();
-            }
-
-            foreach(KeyValuePair<string, bool> permission in permissions)
-            {
-                if(permission.Value == true)
-                {
-                    output.Add(permission.Key);
-                }
             }
 
             return output;
