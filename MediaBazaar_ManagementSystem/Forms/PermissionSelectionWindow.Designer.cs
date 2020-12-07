@@ -32,65 +32,65 @@ namespace MediaBazaar_ManagementSystem
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBoxGeneral = new System.Windows.Forms.GroupBox();
-            this.checkBoxGeneralClockInOut = new System.Windows.Forms.CheckBox();
-            this.checkBoxGeneralLoginWebsite = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelGeneral = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxGeneralLoginApplication = new System.Windows.Forms.CheckBox();
+            this.checkBoxGeneralLoginWebsite = new System.Windows.Forms.CheckBox();
+            this.checkBoxGeneralClockInOut = new System.Windows.Forms.CheckBox();
             this.groupBoxEmployeeManagement = new System.Windows.Forms.GroupBox();
-            this.checkBoxEmployeesActive = new System.Windows.Forms.CheckBox();
-            this.checkBoxEmployeesAdd = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelEmployeeManagement = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxEmployeesView = new System.Windows.Forms.CheckBox();
             this.checkBoxEmployeesEdit = new System.Windows.Forms.CheckBox();
+            this.checkBoxEmployeesAdd = new System.Windows.Forms.CheckBox();
+            this.checkBoxEmployeesActive = new System.Windows.Forms.CheckBox();
             this.groupBoxStockManagement = new System.Windows.Forms.GroupBox();
-            this.checkBoxProductsRestockAccept = new System.Windows.Forms.CheckBox();
-            this.checkBoxProductsRestockFile = new System.Windows.Forms.CheckBox();
-            this.checkBoxProductsActive = new System.Windows.Forms.CheckBox();
-            this.checkBoxProductsAdd = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelStockManagement = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxProductsView = new System.Windows.Forms.CheckBox();
             this.checkBoxProductsEdit = new System.Windows.Forms.CheckBox();
+            this.checkBoxProductsAdd = new System.Windows.Forms.CheckBox();
+            this.checkBoxProductsActive = new System.Windows.Forms.CheckBox();
+            this.checkBoxProductsRestockFile = new System.Windows.Forms.CheckBox();
+            this.checkBoxProductsRestockAccept = new System.Windows.Forms.CheckBox();
             this.groupBoxDepartmentManagement = new System.Windows.Forms.GroupBox();
-            this.checkBoxDepartmentsEdit = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelDepartmentManagement = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxDepartmentsView = new System.Windows.Forms.CheckBox();
+            this.checkBoxDepartmentsEdit = new System.Windows.Forms.CheckBox();
+            this.checkBoxDepartmentsAdd = new System.Windows.Forms.CheckBox();
+            this.checkBoxDepartmentsChangeActive = new System.Windows.Forms.CheckBox();
             this.groupBoxFunctionManagement = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanelFunctionManagement = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxFunctionsAdd = new System.Windows.Forms.CheckBox();
             this.checkBoxFunctionsEdit = new System.Windows.Forms.CheckBox();
             this.groupBoxScheduling = new System.Windows.Forms.GroupBox();
-            this.checkBoxScheduling = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelScheduling = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxSchedulingScheduleEmployees = new System.Windows.Forms.CheckBox();
+            this.checkBoxSchedulingUnscheduleEmployees = new System.Windows.Forms.CheckBox();
             this.checkBoxSchedulingShiftCapacity = new System.Windows.Forms.CheckBox();
             this.groupBoxSwapping = new System.Windows.Forms.GroupBox();
-            this.checkBoxSwappingApprove = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanelSwapping = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxSwappingAccept = new System.Windows.Forms.CheckBox();
             this.checkBoxSwappingRequest = new System.Windows.Forms.CheckBox();
+            this.checkBoxSwappingApprove = new System.Windows.Forms.CheckBox();
             this.groupBoxStatistics = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanelStatistics = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxStatisticsView = new System.Windows.Forms.CheckBox();
             this.comboBoxCurrentFunction = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanelStockManagement = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelEmployeeManagement = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelGeneral = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelDepartmentManagement = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelFunctionManagement = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelScheduling = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelStatistics = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanelSwapping = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBoxDepartmentAdd = new System.Windows.Forms.CheckBox();
-            this.checkBoxDepartmentChangeActive = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel.SuspendLayout();
             this.groupBoxGeneral.SuspendLayout();
-            this.groupBoxEmployeeManagement.SuspendLayout();
-            this.groupBoxStockManagement.SuspendLayout();
-            this.groupBoxDepartmentManagement.SuspendLayout();
-            this.groupBoxFunctionManagement.SuspendLayout();
-            this.groupBoxScheduling.SuspendLayout();
-            this.groupBoxSwapping.SuspendLayout();
-            this.groupBoxStatistics.SuspendLayout();
-            this.flowLayoutPanelStockManagement.SuspendLayout();
-            this.flowLayoutPanelEmployeeManagement.SuspendLayout();
             this.flowLayoutPanelGeneral.SuspendLayout();
+            this.groupBoxEmployeeManagement.SuspendLayout();
+            this.flowLayoutPanelEmployeeManagement.SuspendLayout();
+            this.groupBoxStockManagement.SuspendLayout();
+            this.flowLayoutPanelStockManagement.SuspendLayout();
+            this.groupBoxDepartmentManagement.SuspendLayout();
             this.flowLayoutPanelDepartmentManagement.SuspendLayout();
+            this.groupBoxFunctionManagement.SuspendLayout();
             this.flowLayoutPanelFunctionManagement.SuspendLayout();
+            this.groupBoxScheduling.SuspendLayout();
             this.flowLayoutPanelScheduling.SuspendLayout();
-            this.flowLayoutPanelStatistics.SuspendLayout();
+            this.groupBoxSwapping.SuspendLayout();
             this.flowLayoutPanelSwapping.SuspendLayout();
+            this.groupBoxStatistics.SuspendLayout();
+            this.flowLayoutPanelStatistics.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -135,15 +135,29 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General";
             // 
-            // checkBoxGeneralClockInOut
+            // flowLayoutPanelGeneral
             // 
-            this.checkBoxGeneralClockInOut.AutoSize = true;
-            this.checkBoxGeneralClockInOut.Location = new System.Drawing.Point(3, 49);
-            this.checkBoxGeneralClockInOut.Name = "checkBoxGeneralClockInOut";
-            this.checkBoxGeneralClockInOut.Size = new System.Drawing.Size(84, 17);
-            this.checkBoxGeneralClockInOut.TabIndex = 2;
-            this.checkBoxGeneralClockInOut.Text = "Clock in/out";
-            this.checkBoxGeneralClockInOut.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelGeneral.AutoSize = true;
+            this.flowLayoutPanelGeneral.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralLoginApplication);
+            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralLoginWebsite);
+            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralClockInOut);
+            this.flowLayoutPanelGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelGeneral.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelGeneral.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelGeneral.Name = "flowLayoutPanelGeneral";
+            this.flowLayoutPanelGeneral.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelGeneral.TabIndex = 3;
+            // 
+            // checkBoxGeneralLoginApplication
+            // 
+            this.checkBoxGeneralLoginApplication.AutoSize = true;
+            this.checkBoxGeneralLoginApplication.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxGeneralLoginApplication.Name = "checkBoxGeneralLoginApplication";
+            this.checkBoxGeneralLoginApplication.Size = new System.Drawing.Size(103, 17);
+            this.checkBoxGeneralLoginApplication.TabIndex = 0;
+            this.checkBoxGeneralLoginApplication.Text = "Application login";
+            this.checkBoxGeneralLoginApplication.UseVisualStyleBackColor = true;
             // 
             // checkBoxGeneralLoginWebsite
             // 
@@ -155,15 +169,15 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxGeneralLoginWebsite.Text = "Website login";
             this.checkBoxGeneralLoginWebsite.UseVisualStyleBackColor = true;
             // 
-            // checkBoxGeneralLoginApplication
+            // checkBoxGeneralClockInOut
             // 
-            this.checkBoxGeneralLoginApplication.AutoSize = true;
-            this.checkBoxGeneralLoginApplication.Location = new System.Drawing.Point(3, 3);
-            this.checkBoxGeneralLoginApplication.Name = "checkBoxGeneralLoginApplication";
-            this.checkBoxGeneralLoginApplication.Size = new System.Drawing.Size(103, 17);
-            this.checkBoxGeneralLoginApplication.TabIndex = 0;
-            this.checkBoxGeneralLoginApplication.Text = "Application login";
-            this.checkBoxGeneralLoginApplication.UseVisualStyleBackColor = true;
+            this.checkBoxGeneralClockInOut.AutoSize = true;
+            this.checkBoxGeneralClockInOut.Location = new System.Drawing.Point(3, 49);
+            this.checkBoxGeneralClockInOut.Name = "checkBoxGeneralClockInOut";
+            this.checkBoxGeneralClockInOut.Size = new System.Drawing.Size(84, 17);
+            this.checkBoxGeneralClockInOut.TabIndex = 2;
+            this.checkBoxGeneralClockInOut.Text = "Clock in/out";
+            this.checkBoxGeneralClockInOut.UseVisualStyleBackColor = true;
             // 
             // groupBoxEmployeeManagement
             // 
@@ -178,25 +192,20 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxEmployeeManagement.TabStop = false;
             this.groupBoxEmployeeManagement.Text = "Employee management";
             // 
-            // checkBoxEmployeesActive
+            // flowLayoutPanelEmployeeManagement
             // 
-            this.checkBoxEmployeesActive.AutoSize = true;
-            this.checkBoxEmployeesActive.Location = new System.Drawing.Point(3, 72);
-            this.checkBoxEmployeesActive.Name = "checkBoxEmployeesActive";
-            this.checkBoxEmployeesActive.Size = new System.Drawing.Size(191, 17);
-            this.checkBoxEmployeesActive.TabIndex = 5;
-            this.checkBoxEmployeesActive.Text = "Change employee\'s \"active\" status";
-            this.checkBoxEmployeesActive.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxEmployeesAdd
-            // 
-            this.checkBoxEmployeesAdd.AutoSize = true;
-            this.checkBoxEmployeesAdd.Location = new System.Drawing.Point(3, 49);
-            this.checkBoxEmployeesAdd.Name = "checkBoxEmployeesAdd";
-            this.checkBoxEmployeesAdd.Size = new System.Drawing.Size(98, 17);
-            this.checkBoxEmployeesAdd.TabIndex = 4;
-            this.checkBoxEmployeesAdd.Text = "Add employees";
-            this.checkBoxEmployeesAdd.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelEmployeeManagement.AutoSize = true;
+            this.flowLayoutPanelEmployeeManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesView);
+            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesEdit);
+            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesAdd);
+            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesActive);
+            this.flowLayoutPanelEmployeeManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelEmployeeManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelEmployeeManagement.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelEmployeeManagement.Name = "flowLayoutPanelEmployeeManagement";
+            this.flowLayoutPanelEmployeeManagement.Size = new System.Drawing.Size(219, 92);
+            this.flowLayoutPanelEmployeeManagement.TabIndex = 6;
             // 
             // checkBoxEmployeesView
             // 
@@ -218,6 +227,26 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxEmployeesEdit.Text = "Edit employees";
             this.checkBoxEmployeesEdit.UseVisualStyleBackColor = true;
             // 
+            // checkBoxEmployeesAdd
+            // 
+            this.checkBoxEmployeesAdd.AutoSize = true;
+            this.checkBoxEmployeesAdd.Location = new System.Drawing.Point(3, 49);
+            this.checkBoxEmployeesAdd.Name = "checkBoxEmployeesAdd";
+            this.checkBoxEmployeesAdd.Size = new System.Drawing.Size(98, 17);
+            this.checkBoxEmployeesAdd.TabIndex = 4;
+            this.checkBoxEmployeesAdd.Text = "Add employees";
+            this.checkBoxEmployeesAdd.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEmployeesActive
+            // 
+            this.checkBoxEmployeesActive.AutoSize = true;
+            this.checkBoxEmployeesActive.Location = new System.Drawing.Point(3, 72);
+            this.checkBoxEmployeesActive.Name = "checkBoxEmployeesActive";
+            this.checkBoxEmployeesActive.Size = new System.Drawing.Size(191, 17);
+            this.checkBoxEmployeesActive.TabIndex = 5;
+            this.checkBoxEmployeesActive.Text = "Change employee\'s \"active\" status";
+            this.checkBoxEmployeesActive.UseVisualStyleBackColor = true;
+            // 
             // groupBoxStockManagement
             // 
             this.groupBoxStockManagement.AutoSize = true;
@@ -231,45 +260,21 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxStockManagement.TabStop = false;
             this.groupBoxStockManagement.Text = "Stock management";
             // 
-            // checkBoxProductsRestockAccept
+            // flowLayoutPanelStockManagement
             // 
-            this.checkBoxProductsRestockAccept.AutoSize = true;
-            this.checkBoxProductsRestockAccept.Location = new System.Drawing.Point(3, 118);
-            this.checkBoxProductsRestockAccept.Name = "checkBoxProductsRestockAccept";
-            this.checkBoxProductsRestockAccept.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxProductsRestockAccept.TabIndex = 11;
-            this.checkBoxProductsRestockAccept.Text = "Accept restock request";
-            this.checkBoxProductsRestockAccept.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxProductsRestockFile
-            // 
-            this.checkBoxProductsRestockFile.AutoSize = true;
-            this.checkBoxProductsRestockFile.Location = new System.Drawing.Point(3, 95);
-            this.checkBoxProductsRestockFile.Name = "checkBoxProductsRestockFile";
-            this.checkBoxProductsRestockFile.Size = new System.Drawing.Size(118, 17);
-            this.checkBoxProductsRestockFile.TabIndex = 10;
-            this.checkBoxProductsRestockFile.Text = "File restock request";
-            this.checkBoxProductsRestockFile.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxProductsActive
-            // 
-            this.checkBoxProductsActive.AutoSize = true;
-            this.checkBoxProductsActive.Location = new System.Drawing.Point(3, 72);
-            this.checkBoxProductsActive.Name = "checkBoxProductsActive";
-            this.checkBoxProductsActive.Size = new System.Drawing.Size(182, 17);
-            this.checkBoxProductsActive.TabIndex = 9;
-            this.checkBoxProductsActive.Text = "Change product\'s \"active\" status";
-            this.checkBoxProductsActive.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxProductsAdd
-            // 
-            this.checkBoxProductsAdd.AutoSize = true;
-            this.checkBoxProductsAdd.Location = new System.Drawing.Point(3, 49);
-            this.checkBoxProductsAdd.Name = "checkBoxProductsAdd";
-            this.checkBoxProductsAdd.Size = new System.Drawing.Size(89, 17);
-            this.checkBoxProductsAdd.TabIndex = 8;
-            this.checkBoxProductsAdd.Text = "Add products";
-            this.checkBoxProductsAdd.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelStockManagement.AutoSize = true;
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsView);
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsEdit);
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsAdd);
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsActive);
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsRestockFile);
+            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsRestockAccept);
+            this.flowLayoutPanelStockManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelStockManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelStockManagement.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelStockManagement.Name = "flowLayoutPanelStockManagement";
+            this.flowLayoutPanelStockManagement.Size = new System.Drawing.Size(219, 138);
+            this.flowLayoutPanelStockManagement.TabIndex = 12;
             // 
             // checkBoxProductsView
             // 
@@ -291,6 +296,46 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsEdit.Text = "Edit products";
             this.checkBoxProductsEdit.UseVisualStyleBackColor = true;
             // 
+            // checkBoxProductsAdd
+            // 
+            this.checkBoxProductsAdd.AutoSize = true;
+            this.checkBoxProductsAdd.Location = new System.Drawing.Point(3, 49);
+            this.checkBoxProductsAdd.Name = "checkBoxProductsAdd";
+            this.checkBoxProductsAdd.Size = new System.Drawing.Size(89, 17);
+            this.checkBoxProductsAdd.TabIndex = 8;
+            this.checkBoxProductsAdd.Text = "Add products";
+            this.checkBoxProductsAdd.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxProductsActive
+            // 
+            this.checkBoxProductsActive.AutoSize = true;
+            this.checkBoxProductsActive.Location = new System.Drawing.Point(3, 72);
+            this.checkBoxProductsActive.Name = "checkBoxProductsActive";
+            this.checkBoxProductsActive.Size = new System.Drawing.Size(182, 17);
+            this.checkBoxProductsActive.TabIndex = 9;
+            this.checkBoxProductsActive.Text = "Change product\'s \"active\" status";
+            this.checkBoxProductsActive.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxProductsRestockFile
+            // 
+            this.checkBoxProductsRestockFile.AutoSize = true;
+            this.checkBoxProductsRestockFile.Location = new System.Drawing.Point(3, 95);
+            this.checkBoxProductsRestockFile.Name = "checkBoxProductsRestockFile";
+            this.checkBoxProductsRestockFile.Size = new System.Drawing.Size(118, 17);
+            this.checkBoxProductsRestockFile.TabIndex = 10;
+            this.checkBoxProductsRestockFile.Text = "File restock request";
+            this.checkBoxProductsRestockFile.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxProductsRestockAccept
+            // 
+            this.checkBoxProductsRestockAccept.AutoSize = true;
+            this.checkBoxProductsRestockAccept.Location = new System.Drawing.Point(3, 118);
+            this.checkBoxProductsRestockAccept.Name = "checkBoxProductsRestockAccept";
+            this.checkBoxProductsRestockAccept.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxProductsRestockAccept.TabIndex = 11;
+            this.checkBoxProductsRestockAccept.Text = "Accept restock request";
+            this.checkBoxProductsRestockAccept.UseVisualStyleBackColor = true;
+            // 
             // groupBoxDepartmentManagement
             // 
             this.groupBoxDepartmentManagement.AutoSize = true;
@@ -304,15 +349,20 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxDepartmentManagement.TabStop = false;
             this.groupBoxDepartmentManagement.Text = "Department management";
             // 
-            // checkBoxDepartmentsEdit
+            // flowLayoutPanelDepartmentManagement
             // 
-            this.checkBoxDepartmentsEdit.AutoSize = true;
-            this.checkBoxDepartmentsEdit.Location = new System.Drawing.Point(3, 26);
-            this.checkBoxDepartmentsEdit.Name = "checkBoxDepartmentsEdit";
-            this.checkBoxDepartmentsEdit.Size = new System.Drawing.Size(105, 17);
-            this.checkBoxDepartmentsEdit.TabIndex = 1;
-            this.checkBoxDepartmentsEdit.Text = "Edit departments";
-            this.checkBoxDepartmentsEdit.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelDepartmentManagement.AutoSize = true;
+            this.flowLayoutPanelDepartmentManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsView);
+            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsEdit);
+            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsAdd);
+            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsChangeActive);
+            this.flowLayoutPanelDepartmentManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelDepartmentManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelDepartmentManagement.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelDepartmentManagement.Name = "flowLayoutPanelDepartmentManagement";
+            this.flowLayoutPanelDepartmentManagement.Size = new System.Drawing.Size(219, 92);
+            this.flowLayoutPanelDepartmentManagement.TabIndex = 2;
             // 
             // checkBoxDepartmentsView
             // 
@@ -323,6 +373,36 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxDepartmentsView.TabIndex = 0;
             this.checkBoxDepartmentsView.Text = "View departments";
             this.checkBoxDepartmentsView.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDepartmentsEdit
+            // 
+            this.checkBoxDepartmentsEdit.AutoSize = true;
+            this.checkBoxDepartmentsEdit.Location = new System.Drawing.Point(3, 26);
+            this.checkBoxDepartmentsEdit.Name = "checkBoxDepartmentsEdit";
+            this.checkBoxDepartmentsEdit.Size = new System.Drawing.Size(105, 17);
+            this.checkBoxDepartmentsEdit.TabIndex = 1;
+            this.checkBoxDepartmentsEdit.Text = "Edit departments";
+            this.checkBoxDepartmentsEdit.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDepartmentsAdd
+            // 
+            this.checkBoxDepartmentsAdd.AutoSize = true;
+            this.checkBoxDepartmentsAdd.Location = new System.Drawing.Point(3, 49);
+            this.checkBoxDepartmentsAdd.Name = "checkBoxDepartmentsAdd";
+            this.checkBoxDepartmentsAdd.Size = new System.Drawing.Size(106, 17);
+            this.checkBoxDepartmentsAdd.TabIndex = 2;
+            this.checkBoxDepartmentsAdd.Text = "Add departments";
+            this.checkBoxDepartmentsAdd.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDepartmentsChangeActive
+            // 
+            this.checkBoxDepartmentsChangeActive.AutoSize = true;
+            this.checkBoxDepartmentsChangeActive.Location = new System.Drawing.Point(3, 72);
+            this.checkBoxDepartmentsChangeActive.Name = "checkBoxDepartmentsChangeActive";
+            this.checkBoxDepartmentsChangeActive.Size = new System.Drawing.Size(199, 17);
+            this.checkBoxDepartmentsChangeActive.TabIndex = 3;
+            this.checkBoxDepartmentsChangeActive.Text = "Change department\'s \"active\" status";
+            this.checkBoxDepartmentsChangeActive.UseVisualStyleBackColor = true;
             // 
             // groupBoxFunctionManagement
             // 
@@ -336,6 +416,19 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxFunctionManagement.TabIndex = 4;
             this.groupBoxFunctionManagement.TabStop = false;
             this.groupBoxFunctionManagement.Text = "Function management";
+            // 
+            // flowLayoutPanelFunctionManagement
+            // 
+            this.flowLayoutPanelFunctionManagement.AutoSize = true;
+            this.flowLayoutPanelFunctionManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelFunctionManagement.Controls.Add(this.checkBoxFunctionsAdd);
+            this.flowLayoutPanelFunctionManagement.Controls.Add(this.checkBoxFunctionsEdit);
+            this.flowLayoutPanelFunctionManagement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelFunctionManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelFunctionManagement.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelFunctionManagement.Name = "flowLayoutPanelFunctionManagement";
+            this.flowLayoutPanelFunctionManagement.Size = new System.Drawing.Size(219, 46);
+            this.flowLayoutPanelFunctionManagement.TabIndex = 2;
             // 
             // checkBoxFunctionsAdd
             // 
@@ -370,15 +463,19 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxScheduling.TabStop = false;
             this.groupBoxScheduling.Text = "Scheduling";
             // 
-            // checkBoxScheduling
+            // flowLayoutPanelScheduling
             // 
-            this.checkBoxScheduling.AutoSize = true;
-            this.checkBoxScheduling.Location = new System.Drawing.Point(3, 26);
-            this.checkBoxScheduling.Name = "checkBoxScheduling";
-            this.checkBoxScheduling.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxScheduling.TabIndex = 2;
-            this.checkBoxScheduling.Text = "Unschedule employees";
-            this.checkBoxScheduling.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelScheduling.AutoSize = true;
+            this.flowLayoutPanelScheduling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxSchedulingScheduleEmployees);
+            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxSchedulingUnscheduleEmployees);
+            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxSchedulingShiftCapacity);
+            this.flowLayoutPanelScheduling.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelScheduling.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelScheduling.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelScheduling.Name = "flowLayoutPanelScheduling";
+            this.flowLayoutPanelScheduling.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelScheduling.TabIndex = 3;
             // 
             // checkBoxSchedulingScheduleEmployees
             // 
@@ -389,6 +486,16 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSchedulingScheduleEmployees.TabIndex = 1;
             this.checkBoxSchedulingScheduleEmployees.Text = "Schedule employees";
             this.checkBoxSchedulingScheduleEmployees.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSchedulingUnscheduleEmployees
+            // 
+            this.checkBoxSchedulingUnscheduleEmployees.AutoSize = true;
+            this.checkBoxSchedulingUnscheduleEmployees.Location = new System.Drawing.Point(3, 26);
+            this.checkBoxSchedulingUnscheduleEmployees.Name = "checkBoxSchedulingUnscheduleEmployees";
+            this.checkBoxSchedulingUnscheduleEmployees.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxSchedulingUnscheduleEmployees.TabIndex = 2;
+            this.checkBoxSchedulingUnscheduleEmployees.Text = "Unschedule employees";
+            this.checkBoxSchedulingUnscheduleEmployees.UseVisualStyleBackColor = true;
             // 
             // checkBoxSchedulingShiftCapacity
             // 
@@ -413,15 +520,19 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxSwapping.TabStop = false;
             this.groupBoxSwapping.Text = "Swapping";
             // 
-            // checkBoxSwappingApprove
+            // flowLayoutPanelSwapping
             // 
-            this.checkBoxSwappingApprove.AutoSize = true;
-            this.checkBoxSwappingApprove.Location = new System.Drawing.Point(3, 49);
-            this.checkBoxSwappingApprove.Name = "checkBoxSwappingApprove";
-            this.checkBoxSwappingApprove.Size = new System.Drawing.Size(116, 17);
-            this.checkBoxSwappingApprove.TabIndex = 2;
-            this.checkBoxSwappingApprove.Text = "Approve shift swap";
-            this.checkBoxSwappingApprove.UseVisualStyleBackColor = true;
+            this.flowLayoutPanelSwapping.AutoSize = true;
+            this.flowLayoutPanelSwapping.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingAccept);
+            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingRequest);
+            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingApprove);
+            this.flowLayoutPanelSwapping.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelSwapping.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelSwapping.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelSwapping.Name = "flowLayoutPanelSwapping";
+            this.flowLayoutPanelSwapping.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelSwapping.TabIndex = 3;
             // 
             // checkBoxSwappingAccept
             // 
@@ -443,6 +554,16 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSwappingRequest.Text = "Request shift swap";
             this.checkBoxSwappingRequest.UseVisualStyleBackColor = true;
             // 
+            // checkBoxSwappingApprove
+            // 
+            this.checkBoxSwappingApprove.AutoSize = true;
+            this.checkBoxSwappingApprove.Location = new System.Drawing.Point(3, 49);
+            this.checkBoxSwappingApprove.Name = "checkBoxSwappingApprove";
+            this.checkBoxSwappingApprove.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxSwappingApprove.TabIndex = 2;
+            this.checkBoxSwappingApprove.Text = "Approve shift swap";
+            this.checkBoxSwappingApprove.UseVisualStyleBackColor = true;
+            // 
             // groupBoxStatistics
             // 
             this.groupBoxStatistics.AutoSize = true;
@@ -455,6 +576,18 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxStatistics.TabIndex = 3;
             this.groupBoxStatistics.TabStop = false;
             this.groupBoxStatistics.Text = "Statistics";
+            // 
+            // flowLayoutPanelStatistics
+            // 
+            this.flowLayoutPanelStatistics.AutoSize = true;
+            this.flowLayoutPanelStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelStatistics.Controls.Add(this.checkBoxStatisticsView);
+            this.flowLayoutPanelStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelStatistics.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelStatistics.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanelStatistics.Name = "flowLayoutPanelStatistics";
+            this.flowLayoutPanelStatistics.Size = new System.Drawing.Size(219, 23);
+            this.flowLayoutPanelStatistics.TabIndex = 1;
             // 
             // checkBoxStatisticsView
             // 
@@ -475,139 +608,7 @@ namespace MediaBazaar_ManagementSystem
             this.comboBoxCurrentFunction.Name = "comboBoxCurrentFunction";
             this.comboBoxCurrentFunction.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCurrentFunction.TabIndex = 4;
-            // 
-            // flowLayoutPanelStockManagement
-            // 
-            this.flowLayoutPanelStockManagement.AutoSize = true;
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsView);
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsEdit);
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsAdd);
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsActive);
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsRestockFile);
-            this.flowLayoutPanelStockManagement.Controls.Add(this.checkBoxProductsRestockAccept);
-            this.flowLayoutPanelStockManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelStockManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelStockManagement.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelStockManagement.Name = "flowLayoutPanelStockManagement";
-            this.flowLayoutPanelStockManagement.Size = new System.Drawing.Size(219, 138);
-            this.flowLayoutPanelStockManagement.TabIndex = 12;
-            // 
-            // flowLayoutPanelEmployeeManagement
-            // 
-            this.flowLayoutPanelEmployeeManagement.AutoSize = true;
-            this.flowLayoutPanelEmployeeManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesView);
-            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesEdit);
-            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesAdd);
-            this.flowLayoutPanelEmployeeManagement.Controls.Add(this.checkBoxEmployeesActive);
-            this.flowLayoutPanelEmployeeManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelEmployeeManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelEmployeeManagement.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelEmployeeManagement.Name = "flowLayoutPanelEmployeeManagement";
-            this.flowLayoutPanelEmployeeManagement.Size = new System.Drawing.Size(219, 92);
-            this.flowLayoutPanelEmployeeManagement.TabIndex = 6;
-            // 
-            // flowLayoutPanelGeneral
-            // 
-            this.flowLayoutPanelGeneral.AutoSize = true;
-            this.flowLayoutPanelGeneral.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralLoginApplication);
-            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralLoginWebsite);
-            this.flowLayoutPanelGeneral.Controls.Add(this.checkBoxGeneralClockInOut);
-            this.flowLayoutPanelGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelGeneral.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelGeneral.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelGeneral.Name = "flowLayoutPanelGeneral";
-            this.flowLayoutPanelGeneral.Size = new System.Drawing.Size(219, 69);
-            this.flowLayoutPanelGeneral.TabIndex = 3;
-            // 
-            // flowLayoutPanelDepartmentManagement
-            // 
-            this.flowLayoutPanelDepartmentManagement.AutoSize = true;
-            this.flowLayoutPanelDepartmentManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsView);
-            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentsEdit);
-            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentAdd);
-            this.flowLayoutPanelDepartmentManagement.Controls.Add(this.checkBoxDepartmentChangeActive);
-            this.flowLayoutPanelDepartmentManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelDepartmentManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelDepartmentManagement.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelDepartmentManagement.Name = "flowLayoutPanelDepartmentManagement";
-            this.flowLayoutPanelDepartmentManagement.Size = new System.Drawing.Size(219, 92);
-            this.flowLayoutPanelDepartmentManagement.TabIndex = 2;
-            // 
-            // flowLayoutPanelFunctionManagement
-            // 
-            this.flowLayoutPanelFunctionManagement.AutoSize = true;
-            this.flowLayoutPanelFunctionManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelFunctionManagement.Controls.Add(this.checkBoxFunctionsAdd);
-            this.flowLayoutPanelFunctionManagement.Controls.Add(this.checkBoxFunctionsEdit);
-            this.flowLayoutPanelFunctionManagement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelFunctionManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelFunctionManagement.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelFunctionManagement.Name = "flowLayoutPanelFunctionManagement";
-            this.flowLayoutPanelFunctionManagement.Size = new System.Drawing.Size(219, 46);
-            this.flowLayoutPanelFunctionManagement.TabIndex = 2;
-            // 
-            // flowLayoutPanelScheduling
-            // 
-            this.flowLayoutPanelScheduling.AutoSize = true;
-            this.flowLayoutPanelScheduling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxSchedulingScheduleEmployees);
-            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxScheduling);
-            this.flowLayoutPanelScheduling.Controls.Add(this.checkBoxSchedulingShiftCapacity);
-            this.flowLayoutPanelScheduling.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelScheduling.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelScheduling.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelScheduling.Name = "flowLayoutPanelScheduling";
-            this.flowLayoutPanelScheduling.Size = new System.Drawing.Size(219, 69);
-            this.flowLayoutPanelScheduling.TabIndex = 3;
-            // 
-            // flowLayoutPanelStatistics
-            // 
-            this.flowLayoutPanelStatistics.AutoSize = true;
-            this.flowLayoutPanelStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelStatistics.Controls.Add(this.checkBoxStatisticsView);
-            this.flowLayoutPanelStatistics.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelStatistics.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelStatistics.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelStatistics.Name = "flowLayoutPanelStatistics";
-            this.flowLayoutPanelStatistics.Size = new System.Drawing.Size(219, 23);
-            this.flowLayoutPanelStatistics.TabIndex = 1;
-            // 
-            // flowLayoutPanelSwapping
-            // 
-            this.flowLayoutPanelSwapping.AutoSize = true;
-            this.flowLayoutPanelSwapping.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingAccept);
-            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingRequest);
-            this.flowLayoutPanelSwapping.Controls.Add(this.checkBoxSwappingApprove);
-            this.flowLayoutPanelSwapping.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelSwapping.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelSwapping.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelSwapping.Name = "flowLayoutPanelSwapping";
-            this.flowLayoutPanelSwapping.Size = new System.Drawing.Size(219, 69);
-            this.flowLayoutPanelSwapping.TabIndex = 3;
-            // 
-            // checkBoxDepartmentAdd
-            // 
-            this.checkBoxDepartmentAdd.AutoSize = true;
-            this.checkBoxDepartmentAdd.Location = new System.Drawing.Point(3, 49);
-            this.checkBoxDepartmentAdd.Name = "checkBoxDepartmentAdd";
-            this.checkBoxDepartmentAdd.Size = new System.Drawing.Size(106, 17);
-            this.checkBoxDepartmentAdd.TabIndex = 2;
-            this.checkBoxDepartmentAdd.Text = "Add departments";
-            this.checkBoxDepartmentAdd.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDepartmentChangeActive
-            // 
-            this.checkBoxDepartmentChangeActive.AutoSize = true;
-            this.checkBoxDepartmentChangeActive.Location = new System.Drawing.Point(3, 72);
-            this.checkBoxDepartmentChangeActive.Name = "checkBoxDepartmentChangeActive";
-            this.checkBoxDepartmentChangeActive.Size = new System.Drawing.Size(199, 17);
-            this.checkBoxDepartmentChangeActive.TabIndex = 3;
-            this.checkBoxDepartmentChangeActive.Text = "Change department\'s \"active\" status";
-            this.checkBoxDepartmentChangeActive.UseVisualStyleBackColor = true;
+            this.comboBoxCurrentFunction.SelectedIndexChanged += new System.EventHandler(this.comboBoxCurrentFunction_SelectedIndexChanged);
             // 
             // PermissionSelectionWindow
             // 
@@ -624,36 +625,36 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanel.PerformLayout();
             this.groupBoxGeneral.ResumeLayout(false);
             this.groupBoxGeneral.PerformLayout();
-            this.groupBoxEmployeeManagement.ResumeLayout(false);
-            this.groupBoxEmployeeManagement.PerformLayout();
-            this.groupBoxStockManagement.ResumeLayout(false);
-            this.groupBoxStockManagement.PerformLayout();
-            this.groupBoxDepartmentManagement.ResumeLayout(false);
-            this.groupBoxDepartmentManagement.PerformLayout();
-            this.groupBoxFunctionManagement.ResumeLayout(false);
-            this.groupBoxFunctionManagement.PerformLayout();
-            this.groupBoxScheduling.ResumeLayout(false);
-            this.groupBoxScheduling.PerformLayout();
-            this.groupBoxSwapping.ResumeLayout(false);
-            this.groupBoxSwapping.PerformLayout();
-            this.groupBoxStatistics.ResumeLayout(false);
-            this.groupBoxStatistics.PerformLayout();
-            this.flowLayoutPanelStockManagement.ResumeLayout(false);
-            this.flowLayoutPanelStockManagement.PerformLayout();
-            this.flowLayoutPanelEmployeeManagement.ResumeLayout(false);
-            this.flowLayoutPanelEmployeeManagement.PerformLayout();
             this.flowLayoutPanelGeneral.ResumeLayout(false);
             this.flowLayoutPanelGeneral.PerformLayout();
+            this.groupBoxEmployeeManagement.ResumeLayout(false);
+            this.groupBoxEmployeeManagement.PerformLayout();
+            this.flowLayoutPanelEmployeeManagement.ResumeLayout(false);
+            this.flowLayoutPanelEmployeeManagement.PerformLayout();
+            this.groupBoxStockManagement.ResumeLayout(false);
+            this.groupBoxStockManagement.PerformLayout();
+            this.flowLayoutPanelStockManagement.ResumeLayout(false);
+            this.flowLayoutPanelStockManagement.PerformLayout();
+            this.groupBoxDepartmentManagement.ResumeLayout(false);
+            this.groupBoxDepartmentManagement.PerformLayout();
             this.flowLayoutPanelDepartmentManagement.ResumeLayout(false);
             this.flowLayoutPanelDepartmentManagement.PerformLayout();
+            this.groupBoxFunctionManagement.ResumeLayout(false);
+            this.groupBoxFunctionManagement.PerformLayout();
             this.flowLayoutPanelFunctionManagement.ResumeLayout(false);
             this.flowLayoutPanelFunctionManagement.PerformLayout();
+            this.groupBoxScheduling.ResumeLayout(false);
+            this.groupBoxScheduling.PerformLayout();
             this.flowLayoutPanelScheduling.ResumeLayout(false);
             this.flowLayoutPanelScheduling.PerformLayout();
-            this.flowLayoutPanelStatistics.ResumeLayout(false);
-            this.flowLayoutPanelStatistics.PerformLayout();
+            this.groupBoxSwapping.ResumeLayout(false);
+            this.groupBoxSwapping.PerformLayout();
             this.flowLayoutPanelSwapping.ResumeLayout(false);
             this.flowLayoutPanelSwapping.PerformLayout();
+            this.groupBoxStatistics.ResumeLayout(false);
+            this.groupBoxStatistics.PerformLayout();
+            this.flowLayoutPanelStatistics.ResumeLayout(false);
+            this.flowLayoutPanelStatistics.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -689,7 +690,7 @@ namespace MediaBazaar_ManagementSystem
         private System.Windows.Forms.CheckBox checkBoxDepartmentsView;
         private System.Windows.Forms.CheckBox checkBoxFunctionsAdd;
         private System.Windows.Forms.CheckBox checkBoxFunctionsEdit;
-        private System.Windows.Forms.CheckBox checkBoxScheduling;
+        private System.Windows.Forms.CheckBox checkBoxSchedulingUnscheduleEmployees;
         private System.Windows.Forms.CheckBox checkBoxSchedulingScheduleEmployees;
         private System.Windows.Forms.CheckBox checkBoxSchedulingShiftCapacity;
         private System.Windows.Forms.GroupBox groupBoxSwapping;
@@ -704,7 +705,7 @@ namespace MediaBazaar_ManagementSystem
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelScheduling;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelSwapping;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStatistics;
-        private System.Windows.Forms.CheckBox checkBoxDepartmentAdd;
-        private System.Windows.Forms.CheckBox checkBoxDepartmentChangeActive;
+        private System.Windows.Forms.CheckBox checkBoxDepartmentsAdd;
+        private System.Windows.Forms.CheckBox checkBoxDepartmentsChangeActive;
     }
 }
