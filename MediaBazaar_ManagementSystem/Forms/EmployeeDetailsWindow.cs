@@ -10,6 +10,7 @@ namespace MediaBazaar_ManagementSystem
     {
         IEmployeeStorage employeeStorage;
         IDepartmentStorage departmentStorage;
+        IFunctionStorage functionStorage;
 
         private Employee employee;
         private Boolean editing = false;
@@ -24,6 +25,7 @@ namespace MediaBazaar_ManagementSystem
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
             departmentStorage = new DepartmentMySQL();
+            functionStorage = new FunctionMySQL();
             this.currentUser = currentUser;
             LoadDepartments();
         }
@@ -285,7 +287,7 @@ namespace MediaBazaar_ManagementSystem
             ComboboxItem x = new ComboboxItem();
             int cid = 0;
             Dictionary<int, string> items = new Dictionary<int, string>();
-            items = employeeStorage.GetFunctions();
+            items = functionStorage.GetFunctions();
             foreach (int cindex in items.Keys)
             {
                 ComboboxItem item = new ComboboxItem();

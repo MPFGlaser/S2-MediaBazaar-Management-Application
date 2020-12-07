@@ -7,6 +7,7 @@ namespace MediaBazaar_ManagementSystem
     public partial class PermissionSelectionWindow : Form
     {
         IEmployeeStorage employeeStorage;
+        IFunctionStorage functionStorage;
         Dictionary<int, string> functions;
         List<string> permissionsGranted;
         int selectedFunctionId = -1;
@@ -15,6 +16,7 @@ namespace MediaBazaar_ManagementSystem
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
+            functionStorage = new FunctionMySQL();
             AreCheckboxesEnabled(false);
             SetUniformHeight();
             PopulateComboBox();
@@ -26,7 +28,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void PopulateComboBox()
         {
-            functions = employeeStorage.GetFunctions();
+            functions = functionStorage.GetFunctions();
             foreach (KeyValuePair<int, string> i in functions)
             {
                 comboBoxCurrentFunction.Items.Add(i.Value);
@@ -38,7 +40,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void LoadPermissions(int function)
         {
-            permissionsGranted = employeeStorage.GetPermissions(function);
+            permissionsGranted = functionStorage.GetPermissions(function);
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ namespace MediaBazaar_ManagementSystem
     {
         ILoginStorage loginStorage;
         IEmployeeStorage employeeStorage;
+        IFunctionStorage functionStorage;
         private int userId = -1;
         private Employee loggedInUser;
 
@@ -19,6 +20,7 @@ namespace MediaBazaar_ManagementSystem
         {
             loginStorage = new LoginMySQL();
             employeeStorage = new EmployeeMySQL();
+            functionStorage = new FunctionMySQL();
 
             //Asks the loginStorage to check if the entered details match those we have stored.
             userId = loginStorage.Check(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
@@ -26,7 +28,7 @@ namespace MediaBazaar_ManagementSystem
             if(userId > 0)
             {
                 this.loggedInUser = employeeStorage.Get(userId);
-                this.loggedInUser.Permissions = employeeStorage.GetPermissions(loggedInUser.Function);
+                this.loggedInUser.Permissions = functionStorage.GetPermissions(loggedInUser.Function);
                 this.DialogResult = DialogResult.OK;
             }
             else if(userId < 0)
