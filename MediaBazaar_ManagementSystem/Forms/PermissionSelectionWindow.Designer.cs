@@ -74,6 +74,10 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelStatistics = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxStatisticsView = new System.Windows.Forms.CheckBox();
             this.comboBoxCurrentFunction = new System.Windows.Forms.ComboBox();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxCloseOnSave = new System.Windows.Forms.CheckBox();
+            this.buttonAddNewFunction = new System.Windows.Forms.Button();
             this.flowLayoutPanel.SuspendLayout();
             this.groupBoxGeneral.SuspendLayout();
             this.flowLayoutPanelGeneral.SuspendLayout();
@@ -118,7 +122,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanel.Controls.Add(this.groupBoxStatistics);
             this.flowLayoutPanel.Location = new System.Drawing.Point(12, 33);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(715, 444);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(715, 415);
             this.flowLayoutPanel.TabIndex = 3;
             this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel_Paint);
             // 
@@ -155,7 +159,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxGeneralLoginApplication.Location = new System.Drawing.Point(3, 3);
             this.checkBoxGeneralLoginApplication.Name = "checkBoxGeneralLoginApplication";
             this.checkBoxGeneralLoginApplication.Size = new System.Drawing.Size(103, 17);
-            this.checkBoxGeneralLoginApplication.TabIndex = 0;
+            this.checkBoxGeneralLoginApplication.TabIndex = 2;
             this.checkBoxGeneralLoginApplication.Text = "Application login";
             this.checkBoxGeneralLoginApplication.UseVisualStyleBackColor = true;
             // 
@@ -165,7 +169,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxGeneralLoginWebsite.Location = new System.Drawing.Point(3, 26);
             this.checkBoxGeneralLoginWebsite.Name = "checkBoxGeneralLoginWebsite";
             this.checkBoxGeneralLoginWebsite.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxGeneralLoginWebsite.TabIndex = 1;
+            this.checkBoxGeneralLoginWebsite.TabIndex = 3;
             this.checkBoxGeneralLoginWebsite.Text = "Website login";
             this.checkBoxGeneralLoginWebsite.UseVisualStyleBackColor = true;
             // 
@@ -175,7 +179,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxGeneralClockInOut.Location = new System.Drawing.Point(3, 49);
             this.checkBoxGeneralClockInOut.Name = "checkBoxGeneralClockInOut";
             this.checkBoxGeneralClockInOut.Size = new System.Drawing.Size(84, 17);
-            this.checkBoxGeneralClockInOut.TabIndex = 2;
+            this.checkBoxGeneralClockInOut.TabIndex = 4;
             this.checkBoxGeneralClockInOut.Text = "Clock in/out";
             this.checkBoxGeneralClockInOut.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +217,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxEmployeesView.Location = new System.Drawing.Point(3, 3);
             this.checkBoxEmployeesView.Name = "checkBoxEmployeesView";
             this.checkBoxEmployeesView.Size = new System.Drawing.Size(102, 17);
-            this.checkBoxEmployeesView.TabIndex = 2;
+            this.checkBoxEmployeesView.TabIndex = 5;
             this.checkBoxEmployeesView.Text = "View employees";
             this.checkBoxEmployeesView.UseVisualStyleBackColor = true;
             // 
@@ -223,7 +227,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxEmployeesEdit.Location = new System.Drawing.Point(3, 26);
             this.checkBoxEmployeesEdit.Name = "checkBoxEmployeesEdit";
             this.checkBoxEmployeesEdit.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxEmployeesEdit.TabIndex = 3;
+            this.checkBoxEmployeesEdit.TabIndex = 6;
             this.checkBoxEmployeesEdit.Text = "Edit employees";
             this.checkBoxEmployeesEdit.UseVisualStyleBackColor = true;
             // 
@@ -233,7 +237,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxEmployeesAdd.Location = new System.Drawing.Point(3, 49);
             this.checkBoxEmployeesAdd.Name = "checkBoxEmployeesAdd";
             this.checkBoxEmployeesAdd.Size = new System.Drawing.Size(98, 17);
-            this.checkBoxEmployeesAdd.TabIndex = 4;
+            this.checkBoxEmployeesAdd.TabIndex = 7;
             this.checkBoxEmployeesAdd.Text = "Add employees";
             this.checkBoxEmployeesAdd.UseVisualStyleBackColor = true;
             // 
@@ -243,7 +247,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxEmployeesActive.Location = new System.Drawing.Point(3, 72);
             this.checkBoxEmployeesActive.Name = "checkBoxEmployeesActive";
             this.checkBoxEmployeesActive.Size = new System.Drawing.Size(191, 17);
-            this.checkBoxEmployeesActive.TabIndex = 5;
+            this.checkBoxEmployeesActive.TabIndex = 8;
             this.checkBoxEmployeesActive.Text = "Change employee\'s \"active\" status";
             this.checkBoxEmployeesActive.UseVisualStyleBackColor = true;
             // 
@@ -282,7 +286,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsView.Location = new System.Drawing.Point(3, 3);
             this.checkBoxProductsView.Name = "checkBoxProductsView";
             this.checkBoxProductsView.Size = new System.Drawing.Size(93, 17);
-            this.checkBoxProductsView.TabIndex = 6;
+            this.checkBoxProductsView.TabIndex = 9;
             this.checkBoxProductsView.Text = "View products";
             this.checkBoxProductsView.UseVisualStyleBackColor = true;
             // 
@@ -292,7 +296,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsEdit.Location = new System.Drawing.Point(3, 26);
             this.checkBoxProductsEdit.Name = "checkBoxProductsEdit";
             this.checkBoxProductsEdit.Size = new System.Drawing.Size(88, 17);
-            this.checkBoxProductsEdit.TabIndex = 7;
+            this.checkBoxProductsEdit.TabIndex = 10;
             this.checkBoxProductsEdit.Text = "Edit products";
             this.checkBoxProductsEdit.UseVisualStyleBackColor = true;
             // 
@@ -302,7 +306,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsAdd.Location = new System.Drawing.Point(3, 49);
             this.checkBoxProductsAdd.Name = "checkBoxProductsAdd";
             this.checkBoxProductsAdd.Size = new System.Drawing.Size(89, 17);
-            this.checkBoxProductsAdd.TabIndex = 8;
+            this.checkBoxProductsAdd.TabIndex = 11;
             this.checkBoxProductsAdd.Text = "Add products";
             this.checkBoxProductsAdd.UseVisualStyleBackColor = true;
             // 
@@ -312,7 +316,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsActive.Location = new System.Drawing.Point(3, 72);
             this.checkBoxProductsActive.Name = "checkBoxProductsActive";
             this.checkBoxProductsActive.Size = new System.Drawing.Size(182, 17);
-            this.checkBoxProductsActive.TabIndex = 9;
+            this.checkBoxProductsActive.TabIndex = 12;
             this.checkBoxProductsActive.Text = "Change product\'s \"active\" status";
             this.checkBoxProductsActive.UseVisualStyleBackColor = true;
             // 
@@ -322,7 +326,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsRestockFile.Location = new System.Drawing.Point(3, 95);
             this.checkBoxProductsRestockFile.Name = "checkBoxProductsRestockFile";
             this.checkBoxProductsRestockFile.Size = new System.Drawing.Size(118, 17);
-            this.checkBoxProductsRestockFile.TabIndex = 10;
+            this.checkBoxProductsRestockFile.TabIndex = 13;
             this.checkBoxProductsRestockFile.Text = "File restock request";
             this.checkBoxProductsRestockFile.UseVisualStyleBackColor = true;
             // 
@@ -332,7 +336,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxProductsRestockAccept.Location = new System.Drawing.Point(3, 118);
             this.checkBoxProductsRestockAccept.Name = "checkBoxProductsRestockAccept";
             this.checkBoxProductsRestockAccept.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxProductsRestockAccept.TabIndex = 11;
+            this.checkBoxProductsRestockAccept.TabIndex = 14;
             this.checkBoxProductsRestockAccept.Text = "Accept restock request";
             this.checkBoxProductsRestockAccept.UseVisualStyleBackColor = true;
             // 
@@ -370,7 +374,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxDepartmentsView.Location = new System.Drawing.Point(3, 3);
             this.checkBoxDepartmentsView.Name = "checkBoxDepartmentsView";
             this.checkBoxDepartmentsView.Size = new System.Drawing.Size(110, 17);
-            this.checkBoxDepartmentsView.TabIndex = 0;
+            this.checkBoxDepartmentsView.TabIndex = 15;
             this.checkBoxDepartmentsView.Text = "View departments";
             this.checkBoxDepartmentsView.UseVisualStyleBackColor = true;
             // 
@@ -380,7 +384,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxDepartmentsEdit.Location = new System.Drawing.Point(3, 26);
             this.checkBoxDepartmentsEdit.Name = "checkBoxDepartmentsEdit";
             this.checkBoxDepartmentsEdit.Size = new System.Drawing.Size(105, 17);
-            this.checkBoxDepartmentsEdit.TabIndex = 1;
+            this.checkBoxDepartmentsEdit.TabIndex = 16;
             this.checkBoxDepartmentsEdit.Text = "Edit departments";
             this.checkBoxDepartmentsEdit.UseVisualStyleBackColor = true;
             // 
@@ -390,7 +394,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxDepartmentsAdd.Location = new System.Drawing.Point(3, 49);
             this.checkBoxDepartmentsAdd.Name = "checkBoxDepartmentsAdd";
             this.checkBoxDepartmentsAdd.Size = new System.Drawing.Size(106, 17);
-            this.checkBoxDepartmentsAdd.TabIndex = 2;
+            this.checkBoxDepartmentsAdd.TabIndex = 17;
             this.checkBoxDepartmentsAdd.Text = "Add departments";
             this.checkBoxDepartmentsAdd.UseVisualStyleBackColor = true;
             // 
@@ -400,7 +404,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxDepartmentsChangeActive.Location = new System.Drawing.Point(3, 72);
             this.checkBoxDepartmentsChangeActive.Name = "checkBoxDepartmentsChangeActive";
             this.checkBoxDepartmentsChangeActive.Size = new System.Drawing.Size(199, 17);
-            this.checkBoxDepartmentsChangeActive.TabIndex = 3;
+            this.checkBoxDepartmentsChangeActive.TabIndex = 19;
             this.checkBoxDepartmentsChangeActive.Text = "Change department\'s \"active\" status";
             this.checkBoxDepartmentsChangeActive.UseVisualStyleBackColor = true;
             // 
@@ -436,7 +440,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxFunctionsAdd.Location = new System.Drawing.Point(3, 3);
             this.checkBoxFunctionsAdd.Name = "checkBoxFunctionsAdd";
             this.checkBoxFunctionsAdd.Size = new System.Drawing.Size(91, 17);
-            this.checkBoxFunctionsAdd.TabIndex = 1;
+            this.checkBoxFunctionsAdd.TabIndex = 20;
             this.checkBoxFunctionsAdd.Text = "Add functions";
             this.checkBoxFunctionsAdd.UseVisualStyleBackColor = true;
             // 
@@ -446,7 +450,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxFunctionsEdit.Location = new System.Drawing.Point(3, 26);
             this.checkBoxFunctionsEdit.Name = "checkBoxFunctionsEdit";
             this.checkBoxFunctionsEdit.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxFunctionsEdit.TabIndex = 0;
+            this.checkBoxFunctionsEdit.TabIndex = 21;
             this.checkBoxFunctionsEdit.Text = "Edit functions";
             this.checkBoxFunctionsEdit.UseVisualStyleBackColor = true;
             // 
@@ -483,7 +487,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSchedulingScheduleEmployees.Location = new System.Drawing.Point(3, 3);
             this.checkBoxSchedulingScheduleEmployees.Name = "checkBoxSchedulingScheduleEmployees";
             this.checkBoxSchedulingScheduleEmployees.Size = new System.Drawing.Size(124, 17);
-            this.checkBoxSchedulingScheduleEmployees.TabIndex = 1;
+            this.checkBoxSchedulingScheduleEmployees.TabIndex = 22;
             this.checkBoxSchedulingScheduleEmployees.Text = "Schedule employees";
             this.checkBoxSchedulingScheduleEmployees.UseVisualStyleBackColor = true;
             // 
@@ -493,7 +497,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSchedulingUnscheduleEmployees.Location = new System.Drawing.Point(3, 26);
             this.checkBoxSchedulingUnscheduleEmployees.Name = "checkBoxSchedulingUnscheduleEmployees";
             this.checkBoxSchedulingUnscheduleEmployees.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxSchedulingUnscheduleEmployees.TabIndex = 2;
+            this.checkBoxSchedulingUnscheduleEmployees.TabIndex = 23;
             this.checkBoxSchedulingUnscheduleEmployees.Text = "Unschedule employees";
             this.checkBoxSchedulingUnscheduleEmployees.UseVisualStyleBackColor = true;
             // 
@@ -503,7 +507,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSchedulingShiftCapacity.Location = new System.Drawing.Point(3, 49);
             this.checkBoxSchedulingShiftCapacity.Name = "checkBoxSchedulingShiftCapacity";
             this.checkBoxSchedulingShiftCapacity.Size = new System.Drawing.Size(107, 17);
-            this.checkBoxSchedulingShiftCapacity.TabIndex = 0;
+            this.checkBoxSchedulingShiftCapacity.TabIndex = 24;
             this.checkBoxSchedulingShiftCapacity.Text = "Set shift capacity";
             this.checkBoxSchedulingShiftCapacity.UseVisualStyleBackColor = true;
             // 
@@ -540,7 +544,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSwappingAccept.Location = new System.Drawing.Point(3, 3);
             this.checkBoxSwappingAccept.Name = "checkBoxSwappingAccept";
             this.checkBoxSwappingAccept.Size = new System.Drawing.Size(110, 17);
-            this.checkBoxSwappingAccept.TabIndex = 1;
+            this.checkBoxSwappingAccept.TabIndex = 25;
             this.checkBoxSwappingAccept.Text = "Accept shift swap";
             this.checkBoxSwappingAccept.UseVisualStyleBackColor = true;
             // 
@@ -550,7 +554,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSwappingRequest.Location = new System.Drawing.Point(3, 26);
             this.checkBoxSwappingRequest.Name = "checkBoxSwappingRequest";
             this.checkBoxSwappingRequest.Size = new System.Drawing.Size(116, 17);
-            this.checkBoxSwappingRequest.TabIndex = 0;
+            this.checkBoxSwappingRequest.TabIndex = 26;
             this.checkBoxSwappingRequest.Text = "Request shift swap";
             this.checkBoxSwappingRequest.UseVisualStyleBackColor = true;
             // 
@@ -560,7 +564,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxSwappingApprove.Location = new System.Drawing.Point(3, 49);
             this.checkBoxSwappingApprove.Name = "checkBoxSwappingApprove";
             this.checkBoxSwappingApprove.Size = new System.Drawing.Size(116, 17);
-            this.checkBoxSwappingApprove.TabIndex = 2;
+            this.checkBoxSwappingApprove.TabIndex = 27;
             this.checkBoxSwappingApprove.Text = "Approve shift swap";
             this.checkBoxSwappingApprove.UseVisualStyleBackColor = true;
             // 
@@ -595,7 +599,7 @@ namespace MediaBazaar_ManagementSystem
             this.checkBoxStatisticsView.Location = new System.Drawing.Point(3, 3);
             this.checkBoxStatisticsView.Name = "checkBoxStatisticsView";
             this.checkBoxStatisticsView.Size = new System.Drawing.Size(92, 17);
-            this.checkBoxStatisticsView.TabIndex = 0;
+            this.checkBoxStatisticsView.TabIndex = 28;
             this.checkBoxStatisticsView.Text = "View statistics";
             this.checkBoxStatisticsView.UseVisualStyleBackColor = true;
             // 
@@ -607,14 +611,64 @@ namespace MediaBazaar_ManagementSystem
             this.comboBoxCurrentFunction.Location = new System.Drawing.Point(100, 6);
             this.comboBoxCurrentFunction.Name = "comboBoxCurrentFunction";
             this.comboBoxCurrentFunction.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCurrentFunction.TabIndex = 4;
+            this.comboBoxCurrentFunction.TabIndex = 0;
             this.comboBoxCurrentFunction.SelectedIndexChanged += new System.EventHandler(this.comboBoxCurrentFunction_SelectedIndexChanged);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(652, 454);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 31;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCancel.Location = new System.Drawing.Point(12, 454);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 32;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCloseOnSave
+            // 
+            this.checkBoxCloseOnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxCloseOnSave.AutoSize = true;
+            this.checkBoxCloseOnSave.Location = new System.Drawing.Point(530, 458);
+            this.checkBoxCloseOnSave.Name = "checkBoxCloseOnSave";
+            this.checkBoxCloseOnSave.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxCloseOnSave.TabIndex = 30;
+            this.checkBoxCloseOnSave.Text = "Close after saving?";
+            this.checkBoxCloseOnSave.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddNewFunction
+            // 
+            this.buttonAddNewFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAddNewFunction.Location = new System.Drawing.Point(221, 5);
+            this.buttonAddNewFunction.Name = "buttonAddNewFunction";
+            this.buttonAddNewFunction.Size = new System.Drawing.Size(23, 23);
+            this.buttonAddNewFunction.TabIndex = 1;
+            this.buttonAddNewFunction.Text = "➕";
+            this.buttonAddNewFunction.UseVisualStyleBackColor = true;
+            this.buttonAddNewFunction.Click += new System.EventHandler(this.buttonAddNewFunction_Click);
             // 
             // PermissionSelectionWindow
             // 
+            this.AcceptButton = this.buttonSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(739, 489);
+            this.Controls.Add(this.buttonAddNewFunction);
+            this.Controls.Add(this.checkBoxCloseOnSave);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.comboBoxCurrentFunction);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.label1);
@@ -707,5 +761,9 @@ namespace MediaBazaar_ManagementSystem
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStatistics;
         private System.Windows.Forms.CheckBox checkBoxDepartmentsAdd;
         private System.Windows.Forms.CheckBox checkBoxDepartmentsChangeActive;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.CheckBox checkBoxCloseOnSave;
+        private System.Windows.Forms.Button buttonAddNewFunction;
     }
 }

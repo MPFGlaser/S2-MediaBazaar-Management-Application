@@ -21,8 +21,6 @@ namespace MediaBazaar_ManagementSystem
             Console.WriteLine(comboBoxCurrentFunction.SelectedIndex.ToString());
         }
 
-        // if a manager, function management should all be ticked & greyed out to prevent locking oneself out!
-
         /// <summary>
         /// Populates the ComboBox with all functions found in the database.
         /// </summary>
@@ -43,6 +41,9 @@ namespace MediaBazaar_ManagementSystem
             permissionsGranted = employeeStorage.GetPermissions(function);
         }
 
+        /// <summary>
+        /// Fills the checkboxes according to the permissions present in permissionsGranted.
+        /// </summary>
         private void FillCheckboxes()
         {
             // General
@@ -89,6 +90,10 @@ namespace MediaBazaar_ManagementSystem
             checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
         }
 
+        /// <summary>
+        /// Can enable/disable all checkboxes in the form.
+        /// </summary>
+        /// <param name="isEnabled">if set to <c>true</c> [is enabled].</param>
         private void AreCheckboxesEnabled(bool isEnabled)
         {
             foreach(GroupBox gb in flowLayoutPanel.Controls)
@@ -192,6 +197,12 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the comboBoxCurrentFunction control.
+        /// 
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void comboBoxCurrentFunction_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(comboBoxCurrentFunction.SelectedIndex == -1)
@@ -223,6 +234,16 @@ namespace MediaBazaar_ManagementSystem
             {
                 PreventManagerLockout(false);
             }
+        }
+
+        private void buttonAddNewFunction_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
