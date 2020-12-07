@@ -13,8 +13,6 @@ namespace MediaBazaar_ManagementSystem
         public LoginWindow()
         {
             InitializeComponent();
-            PermissionSelectionWindow permissionSelectionWindow = new PermissionSelectionWindow();
-            permissionSelectionWindow.ShowDialog();
         }
 
         private void Login()
