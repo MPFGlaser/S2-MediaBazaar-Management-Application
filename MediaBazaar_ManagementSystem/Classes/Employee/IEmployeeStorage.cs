@@ -13,8 +13,6 @@ namespace MediaBazaar_ManagementSystem
 
         List<Employee> GetAll(bool activeOnly);
 
-        Dictionary<int, string> GetFunctions();
-
         List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
 
         List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday);
