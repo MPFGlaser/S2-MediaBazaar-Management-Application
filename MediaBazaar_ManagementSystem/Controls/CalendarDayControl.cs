@@ -14,6 +14,7 @@ namespace MediaBazaar_ManagementSystem
         private DateTime date;
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
+        private Employee loggedInUser;
 
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
@@ -25,9 +26,10 @@ namespace MediaBazaar_ManagementSystem
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
         /// <para>Has counters to indicate the occupancy of the shift.</para>
         /// </summary>
-        public CalendarDayControl()
+        public CalendarDayControl(Employee loggedInUser)
         {
             InitializeComponent();
+            this.loggedInUser = loggedInUser;
         }
 
         #region Logic
@@ -139,25 +141,18 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, 
+                    shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees, loggedInUser);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, 
+                    shiftEmployees, false, 0, 0, allEmployees, loggedInUser);
             }
 
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                //if(newShift != null)
-                //{
-                //    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                //    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
-                //}
-                //else
-                //{
-                //    SetShiftOccupation(time, 0, 0);
-                //}
                 ReloadCalendarDayEvent?.Invoke();
                 ReloadEmployeeHoursEvent?.Invoke();
             }
