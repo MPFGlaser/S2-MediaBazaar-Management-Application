@@ -688,7 +688,8 @@ namespace MediaBazaar_ManagementSystem
             this.Controls.Add(this.label1);
             this.MinimumSize = new System.Drawing.Size(288, 300);
             this.Name = "PermissionSelectionWindow";
-            this.Text = "Currently editing permissions for: ";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Select a function to edit...";
             this.flowLayoutPanel.ResumeLayout(false);
             this.flowLayoutPanel.PerformLayout();
             this.groupBoxGeneral.ResumeLayout(false);
