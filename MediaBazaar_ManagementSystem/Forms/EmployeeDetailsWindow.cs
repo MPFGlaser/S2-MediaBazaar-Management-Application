@@ -12,7 +12,7 @@ namespace MediaBazaar_ManagementSystem
         IDepartmentStorage departmentStorage;
         IFunctionStorage functionStorage;
 
-        private Employee employee;
+        private Employee employee, loggedInUser;
         private Boolean editing = false;
         private int editId, currentUser;
         string preferredHours = "000000000000000000000", workingDepartments = "";
@@ -20,19 +20,30 @@ namespace MediaBazaar_ManagementSystem
         PreferredHours ph;
         WorkingDepartments wd;
 
-        public EmployeeDetailsWindow(int currentUser)
+        public EmployeeDetailsWindow(Employee loggedInUser)
         {
             InitializeComponent();
             employeeStorage = new EmployeeMySQL();
             departmentStorage = new DepartmentMySQL();
             functionStorage = new FunctionMySQL();
-            this.currentUser = currentUser;
+            this.currentUser = loggedInUser.Id;
+            this.loggedInUser = loggedInUser;
             LoadDepartments();
+            CheckPermissions();
         }
 
         public Employee Employee
         {
             get { return this.employee; }
+        }
+
+        /// <summary>
+        /// Checks the permissions of the loggedInUser and disables functions accordingly.
+        /// </summary>
+        private void CheckPermissions()
+        {
+            if (!loggedInUser.Permissions.Contains("employee_change_active"))
+                checkBoxActive.Enabled = false;
         }
 
         #region Logic

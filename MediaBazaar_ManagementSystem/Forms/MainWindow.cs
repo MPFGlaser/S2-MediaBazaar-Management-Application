@@ -34,18 +34,9 @@ namespace MediaBazaar_ManagementSystem
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
             toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Data");
 
+            CheckPermissions();
             HideInactiveEmployees(true);
             HideInactiveItems(true);
-
-            // Removes statistics tab until implementation is finished in the future.
-            tabControl1.TabPages.Remove(tabPage3);
-
-            // Removes certain tabs for the user in case they have a function that may not access those features.
-            if (loggedInUser.Function == 1)
-            {
-                tabControl1.TabPages.Remove(tabPage1);
-                tabControl1.TabPages.Remove(tabPage4);
-            }
 
             this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
 
@@ -59,6 +50,99 @@ namespace MediaBazaar_ManagementSystem
 
             
         }
+
+        #region Access Control        
+        /// <summary>
+        /// Checks the permissions of the loggedInUser and disables functions accordingly.
+        /// </summary>
+        private void CheckPermissions()
+        {
+            // Employee tab
+            if (loggedInUser.Permissions.Contains("employee_view"))
+            {
+                if (!loggedInUser.Permissions.Contains("employee_edit"))
+                    buttonEmployeeModify.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("employee_add"))
+                    buttonEmployeesAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("function_edit") || !loggedInUser.Permissions.Contains("function_add"))
+                    buttonEditFunctionPermissions.Visible = false;
+
+                if (!loggedInUser.Permissions.Contains("department_view"))
+                {
+                    foreach (Control c in splitContainerEmployeesSecondary.Panel1.Controls)
+                    {
+                        c.Enabled = false;
+                    }
+                }
+
+                if (!loggedInUser.Permissions.Contains("department_add"))
+                    buttonEmployeesDepartmentAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("department_change_active"))
+                {
+                    buttonEmployeesDepartmentRemove.Enabled = false;
+                }
+
+                // department_edit currently has no corresponding function.
+            }
+            else
+            {
+                // Removes the tab as the user doesn't have permission to view employee data.
+                tabControl1.TabPages.Remove(tabPage1);
+            }
+
+            // Stock tab
+            if (loggedInUser.Permissions.Contains("product_view"))
+            {
+                if (!loggedInUser.Permissions.Contains("product_edit"))
+                    buttonStockEditProduct.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("product_add"))
+                    buttonStockAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("product_restock_file"))
+                    btnSendRestockRequest.Visible = false;
+
+                if (!loggedInUser.Permissions.Contains("product_restock_accept"))
+                    btnAcceptRestockRequest.Visible = false;
+
+                // We need something for the categories, still. No permissions for it and the controls are disabled by default.
+            }
+            else
+            {
+                // Removes the stock tab as the user has no permission to view product data.
+                tabControl1.TabPages.Remove(tabPage2);
+            }
+
+            // Statistics tab
+            if (loggedInUser.Permissions.Contains("statistics_view"))
+            {
+                // We need to add more functions/permissions for statistics.
+            }
+            else
+            {
+                // Removes the statistics tab as the user has no permission to view statistics.
+                tabControl1.TabPages.Remove(tabPage3);
+            }
+
+            // Scheduling tab
+            if (loggedInUser.Permissions.Contains("schedule_employee_add") ||
+                loggedInUser.Permissions.Contains("schedule_employee_remove") ||
+                loggedInUser.Permissions.Contains("schedule_capacity_set"))
+            {
+                if (!loggedInUser.Permissions.Contains("schedule_capacity_set"))
+                    buttonSetWeekShiftsCapacity.Enabled = false;
+            }
+            else
+            {
+                // Removes the scheduling tab as the user has no access to scheduling functions whatsoever.
+                tabControl1.TabPages.Remove(tabPage4);
+            }
+
+        }
+        #endregion
 
         #region Logic
         #region Preparation
@@ -232,13 +316,13 @@ namespace MediaBazaar_ManagementSystem
             allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
 
             // Sets the correct data on the CalendarDayControl elements
-            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
-            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
-            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts);
-            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts);
-            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
-            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
-            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts, loggedInUser);
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts, loggedInUser);
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts, loggedInUser);
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts, loggedInUser);
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts, loggedInUser);
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts, loggedInUser);
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts, loggedInUser);
 
             SetupCorrectEmployees();
         }
@@ -370,7 +454,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeAdd()
         {
-            edw = new EmployeeDetailsWindow(loggedInUser.Id);
+            edw = new EmployeeDetailsWindow(loggedInUser);
             if (edw.ShowDialog() == DialogResult.OK)
             {
                 PopulateEmployeesTable();
@@ -386,7 +470,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
                 Employee toEdit = employeeStorage.Get(id);
-                edw = new EmployeeDetailsWindow(loggedInUser.Id);
+                edw = new EmployeeDetailsWindow(loggedInUser);
                 edw.AddEmployeeData(toEdit);
                 if (edw.ShowDialog() == DialogResult.OK)
                 {
@@ -435,7 +519,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void StockAdd()
         {
-            pdw = new ProductDetailsWindow();
+            pdw = new ProductDetailsWindow(loggedInUser);
             if (pdw.ShowDialog() == DialogResult.OK)
             {
                 PopulateItemsTable();
@@ -451,7 +535,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
                 Item toEdit = itemStorage.Get(id);
-                pdw = new ProductDetailsWindow();
+                pdw = new ProductDetailsWindow(loggedInUser);
                 pdw.AddItemData(toEdit);
                 if (pdw.ShowDialog() == DialogResult.OK)
                 {

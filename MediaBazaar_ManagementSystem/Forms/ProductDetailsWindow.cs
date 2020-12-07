@@ -14,22 +14,34 @@ namespace MediaBazaar_ManagementSystem
     {
         IItemStorage itemStorage;
         IDepartmentStorage departmentStorage;
+        Employee loggedInUser;
         private Item item;
         private bool editing = false;
         private int editId;
         private List<Department> allDepartments;
 
-        public ProductDetailsWindow()
+        public ProductDetailsWindow(Employee loggedInUser)
         {
             InitializeComponent();
             allDepartments = GetAllDepartments();
+            this.loggedInUser = loggedInUser;
             LoadAllDepartments();
             itemStorage = new ItemMySQL();
+            CheckPermisssions();
         }
 
         public Item Item
         {
             get { return this.item; }
+        }
+
+        /// <summary>
+        /// Checks the permissions of the loggedInUser and disables functions accordingly.
+        /// </summary>
+        private void CheckPermisssions()
+        {
+            if (!loggedInUser.Permissions.Contains("product_change_active"))
+                checkBoxActive.Enabled = false;
         }
 
         #region Logic

@@ -22,6 +22,7 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
         private int oldId, capacity;
+        private Employee loggedInUser;
 
         /// <summary>
         /// A form in which the user can schedule and unschedule employees for a certain shift.
@@ -33,7 +34,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime,
+            DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity,
+            List<Employee> allEmployees, Employee loggedInUser)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -46,16 +49,42 @@ namespace MediaBazaar_ManagementSystem
             this.isEditing = editing;
             this.oldId = oldShiftId;
             this.capacity = capacity;
+            this.loggedInUser = loggedInUser;
 
             numericUpDownCapacity.Value = capacity;
             AddEmployeeListToShift(working);
             LoadDepartments();
+            CheckPermissions();
         }
 
         public List<int> WorkingEmployeeIds
         {
             get { return workingEmployeeIds; }
         }
+
+        #region Access control
+        /// <summary>
+        /// Checks the permissions of the loggedInUser and disables functions accordingly.
+        /// </summary>
+        private void CheckPermissions()
+        {
+            if (!loggedInUser.Permissions.Contains("schedule_capacity_set"))
+            {
+                label1.Enabled = false;
+                numericUpDownCapacity.Enabled = false;
+            }
+
+            if (!loggedInUser.Permissions.Contains("schedule_employee_add"))
+            {
+                comboBoxSelectEmployees.Enabled = false;
+                comboBoxSelectDepartments.Enabled = false;
+                buttonAddEmployeeToShift.Enabled = false;
+            }
+
+            if (!loggedInUser.Permissions.Contains("schedule_employee_remove"))
+                buttonRemoveEmployeeFromShift.Enabled = false;
+        }
+        #endregion
 
         #region Logic
         /// <summary>
@@ -158,7 +187,7 @@ namespace MediaBazaar_ManagementSystem
                 shiftStorage.Clear(oldId);
                 shiftId = oldId;
 
-                if(capacityNew != capacity)
+                if (capacityNew != capacity)
                 {
                     shiftStorage.Update(currentShift);
                 }
@@ -198,7 +227,7 @@ namespace MediaBazaar_ManagementSystem
                 Employee selectedEmployee = (comboBoxSelectEmployees.SelectedItem as dynamic).Employee;
 
                 // Displays a message when the amount of hours an employee has in their contract is gone over
-                if(selectedEmployee.WorkingHours + Globals.shiftDuration > selectedEmployee.ContractHours)
+                if (selectedEmployee.WorkingHours + Globals.shiftDuration > selectedEmployee.ContractHours)
                 {
                     //BLINK RED ON TIMER!
                     labelEmployeeOverScheduled.Text = "Employee " + selectedEmployee.FirstName + " has exceded their weekly hours";
@@ -312,7 +341,7 @@ namespace MediaBazaar_ManagementSystem
             foreach (Employee e in allActiveEmployees)
             {
                 List<int> allowedDepartments = new List<int>();
-                if(e.WorkingDepartments != string.Empty)
+                if (e.WorkingDepartments != string.Empty)
                 {
                     allowedDepartments = e.WorkingDepartments.Split(',').Select(int.Parse).ToList();
                 }
@@ -320,7 +349,7 @@ namespace MediaBazaar_ManagementSystem
                 if (allowedDepartments.Contains(id))
                 {
                     bool allowed = true;
-                    foreach(Department d in allDepartmentInfo)
+                    foreach (Department d in allDepartmentInfo)
                     {
                         List<Employee> employeesInDepartment = d.Employees;
 
