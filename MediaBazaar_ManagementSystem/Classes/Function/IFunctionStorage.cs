@@ -4,7 +4,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public interface IFunctionStorage
     {
-        bool Create();
+        bool Create(string name);
 
         bool Update();
 

@@ -18,9 +18,41 @@ namespace MediaBazaar_ManagementSystem
             connection = new MySqlConnection(connectionString);
         }
 
-        public bool Create()
+        /// <summary>
+        /// Creates a function in the database with the given name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns></returns>
+        public bool Create(string name)
         {
-            throw new NotImplementedException();
+            bool success = false;
+            int rowsAffected = 0;
+            String query = "INSERT INTO functions (function) VALUES (@function)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@function", name);
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+                success = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
         }
 
         /// <summary>

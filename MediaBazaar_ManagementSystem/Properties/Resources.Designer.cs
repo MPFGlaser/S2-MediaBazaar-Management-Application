@@ -88,6 +88,15 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Information entered is invalid..
+        /// </summary>
+        internal static string informationInvalidError {
+            get {
+                return ResourceManager.GetString("informationInvalidError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading shifts from database..
         /// </summary>
         internal static string loadShiftError {

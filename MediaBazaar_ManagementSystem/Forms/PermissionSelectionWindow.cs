@@ -8,6 +8,7 @@ namespace MediaBazaar_ManagementSystem
     {
         IEmployeeStorage employeeStorage;
         IFunctionStorage functionStorage;
+        AddNewFunctionWindow addNewFunctionWindow;
         Dictionary<int, string> functions;
         List<string> permissionsGranted;
         int selectedFunctionId = -1;
@@ -28,6 +29,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void PopulateComboBox()
         {
+            comboBoxCurrentFunction.Items.Clear();
             functions = functionStorage.GetFunctions();
             foreach (KeyValuePair<int, string> i in functions)
             {
@@ -240,7 +242,13 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonAddNewFunction_Click(object sender, EventArgs e)
         {
+            addNewFunctionWindow = new AddNewFunctionWindow();
 
+            if(addNewFunctionWindow.ShowDialog() == DialogResult.OK)
+            {
+                PopulateComboBox();
+                comboBoxCurrentFunction.SelectedItem = addNewFunctionWindow.Title;
+            }
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
