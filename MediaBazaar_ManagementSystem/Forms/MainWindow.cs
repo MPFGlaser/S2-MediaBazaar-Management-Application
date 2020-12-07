@@ -23,6 +23,7 @@ namespace MediaBazaar_ManagementSystem
         Employee loggedInUser;
         ProductRestockDetailsWindow prdw;
         WeekShiftsCapacityEditor wsce;
+        PermissionSelectionWindow psw;
 
         public MainWindow(Employee loggedInUser)
         {
@@ -658,6 +659,12 @@ namespace MediaBazaar_ManagementSystem
         private void buttonSetWeekShiftsCapacity_Click(object sender, EventArgs e)
         {
             SetCapacityWholeWeek();
+        }
+
+        private void buttonEditFunctionPermissions_Click(object sender, EventArgs e)
+        {
+            psw = new PermissionSelectionWindow();
+            psw.Show();
         }
     } 
     #endregion
