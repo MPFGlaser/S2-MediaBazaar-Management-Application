@@ -316,13 +316,13 @@ namespace MediaBazaar_ManagementSystem
             allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
 
             // Sets the correct data on the CalendarDayControl elements
-            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
-            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
-            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts);
-            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts);
-            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
-            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
-            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts, loggedInUser);
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts, loggedInUser);
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts, loggedInUser);
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts, loggedInUser);
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts, loggedInUser);
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts, loggedInUser);
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts, loggedInUser);
 
             SetupCorrectEmployees();
         }
@@ -519,7 +519,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void StockAdd()
         {
-            pdw = new ProductDetailsWindow();
+            pdw = new ProductDetailsWindow(loggedInUser);
             if (pdw.ShowDialog() == DialogResult.OK)
             {
                 PopulateItemsTable();
@@ -535,7 +535,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
                 Item toEdit = itemStorage.Get(id);
-                pdw = new ProductDetailsWindow();
+                pdw = new ProductDetailsWindow(loggedInUser);
                 pdw.AddItemData(toEdit);
                 if (pdw.ShowDialog() == DialogResult.OK)
                 {

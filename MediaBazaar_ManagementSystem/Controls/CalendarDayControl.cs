@@ -14,7 +14,7 @@ namespace MediaBazaar_ManagementSystem
         private DateTime date;
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
-        private Employee loggedInUser;
+        private Employee loggedInUser = null;
 
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
@@ -26,10 +26,9 @@ namespace MediaBazaar_ManagementSystem
         /// A user control that provides the user with 3 shifts for a pre-determined day of the year.
         /// <para>Has counters to indicate the occupancy of the shift.</para>
         /// </summary>
-        public CalendarDayControl(Employee loggedInUser)
+        public CalendarDayControl()
         {
             InitializeComponent();
-            this.loggedInUser = loggedInUser;
         }
 
         #region Logic
@@ -39,8 +38,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="date"></param>
         /// <param name="weekday"></param>
         /// <param name="allWeekShifts"></param>
-        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
+        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts, Employee loggedInUser)
         {
+            this.loggedInUser = loggedInUser;
             this.date = date;
 
             labelCalendarDay.Text = weekday;
