@@ -188,9 +188,18 @@ namespace MediaBazaar_ManagementSystem
                 shiftStorage.Clear(oldId);
                 shiftId = oldId;
 
-                if(capacityNew != capacity)
+                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
                 {
-                    shiftStorage.Update(currentShift);
+                    Department dep = (depDynamic).Department;
+                    if (departmentCapacity.ContainsKey(dep.Id))
+                    {
+                        shiftStorage.UpdateCapacityPerDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
+                    else
+                    {
+                        shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
+                    
                 }
             }
             else
@@ -198,6 +207,12 @@ namespace MediaBazaar_ManagementSystem
                 // Creates a new shift object and sets the list of employeeIds to the one we just created.
                 currentShift = new Shift(0, date, shiftTime, capacityNew);
                 shiftId = shiftStorage.Create(currentShift);
+
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department dep = (depDynamic).Department;
+                    shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                }
             }
 
 
@@ -418,6 +433,13 @@ namespace MediaBazaar_ManagementSystem
             ShowValidEmployees(selectedDepartment.Id);
             AddEmployeeListToShift(selectedDepartment.Employees);
             numericUpDownCapacity.Value = selectedDepartment.Capacity;
+        }
+
+        private void numericUpDownCapacity_ValueChanged(object sender, EventArgs e)
+        {
+            List<Department> allDepartments = GetDepartmentListFromComboBox();
+            int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+            allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
         }
 
         private async void Blink()

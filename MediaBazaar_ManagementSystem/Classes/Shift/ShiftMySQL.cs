@@ -362,7 +362,7 @@ namespace MediaBazaar_ManagementSystem
             bool success = false;
             int rowsAffected = 0;
 
-            String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shfitId = @shiftId AND departmentId = @departmentId";
+            String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@shiftId", shiftId);
             command.Parameters.AddWithValue("@departmentId", departmentId);

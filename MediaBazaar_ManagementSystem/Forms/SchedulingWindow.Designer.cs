@@ -185,6 +185,7 @@
             this.numericUpDownCapacity.Name = "numericUpDownCapacity";
             this.numericUpDownCapacity.Size = new System.Drawing.Size(51, 20);
             this.numericUpDownCapacity.TabIndex = 41;
+            this.numericUpDownCapacity.ValueChanged += new System.EventHandler(this.numericUpDownCapacity_ValueChanged);
             // 
             // label1
             // 
