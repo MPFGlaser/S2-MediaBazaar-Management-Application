@@ -357,6 +357,37 @@ namespace MediaBazaar_ManagementSystem
             return success;
         }
 
+        public bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shfitId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@capacity", capacity);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
+        }
+
         public Dictionary<int, int> GetCapacityPerDepartment(int shiftId)
         {
             Dictionary<int, int> output = new Dictionary<int, int>();
