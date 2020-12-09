@@ -13,17 +13,43 @@ namespace MediaBazaar_ManagementSystem.Forms
     public partial class WeekShiftsCapacityEditor : Form
     {
         IShiftStorage shiftStorage;
+        IDepartmentStorage departmentStorage;
         List<DateTime> weekdays;
         List<Shift> weekShifts;
+        int currentDepartmentId;
 
-        public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays)
+        public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays, int currentDepartmentId)
         {
             InitializeComponent();
             this.weekShifts = weekShifts;
             this.weekdays = weekdays;
+            this.currentDepartmentId = currentDepartmentId;
+            LoadAllDepartments(currentDepartmentId);
             SetupGroupboxTitles();
             SetupNumericUpDowns();
             CreateMissingShifts();
+        }
+
+        private void LoadAllDepartments(int departmentId)
+        {
+            departmentStorage = new DepartmentMySQL();
+            List<Department> allDepartments = departmentStorage.GetAll();
+
+            foreach(Department d in allDepartments)
+            {
+                comboBoxSelectDepartment.DisplayMember = "Text";
+                comboBoxSelectDepartment.ValueMember = "Department";
+                comboBoxSelectDepartment.Items.Add(new { Text = d.Name, Department = d });
+            }
+
+            foreach(dynamic dynamicDep in comboBoxSelectDepartment.Items)
+            {
+                Department dep = dynamicDep.Department;
+                if(dep.Id == departmentId)
+                {
+                    comboBoxSelectDepartment.SelectedItem = dynamicDep;
+                }
+            }
         }
 
         /// <summary>

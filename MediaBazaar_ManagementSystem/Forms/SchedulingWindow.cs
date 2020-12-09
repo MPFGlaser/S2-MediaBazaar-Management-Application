@@ -199,7 +199,6 @@ namespace MediaBazaar_ManagementSystem
                     {
                         shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
                     }
-                    
                 }
             }
             else

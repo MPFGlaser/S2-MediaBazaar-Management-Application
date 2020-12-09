@@ -537,24 +537,21 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SetCapacityWholeWeek()
         {
-            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays);
+            int selectedId = -1;
+
+            if(comboBoxSchedulingDepartment.SelectedIndex > -1)
+            {
+                dynamic selectedDynamic = comboBoxSchedulingDepartment.SelectedItem;
+                Department selectedDepartment = selectedDynamic.Department;
+                selectedId = selectedDepartment.Id;
+            }
+            
+            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays, selectedId);
             if (wsce.ShowDialog() == DialogResult.OK)
             {
                 SetupCorrectWeekData();                
             }
         }
-
-        /*public Department currentSelectedDepartment()
-        {
-            Department toReturn = null;
-
-            if(comboBoxSchedulingDepartment.SelectedIndex != -1)
-            {
-                toReturn = (Department)comboBoxSchedulingDepartment.SelectedItem;
-            }
-
-            return toReturn;
-        }*/
         #endregion
 
         /// <summary>
