@@ -23,6 +23,12 @@ namespace MediaBazaar_ManagementSystem
 
         List<Employee> GetDepartmentEmployees(int shiftId, int departmentId);
 
+        bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity);
+
+        bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity);
+
+        Dictionary<int, int> GetCapacityPerDepartment(int shiftId);
+
         int GetOccupation(int shiftId);
     }
 }

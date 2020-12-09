@@ -23,6 +23,7 @@ namespace MediaBazaar_ManagementSystem
         private bool isEditing;
         private int oldId, capacity;
         private Department previousSelectedDepartment;
+        private Dictionary<int, int> departmentCapacity = new Dictionary<int, int>();
 
         /// <summary>
         /// A form in which the user can schedule and unschedule employees for a certain shift.
@@ -93,11 +94,24 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             allDepartments = departmentStorage.GetAll();
 
+            if (isEditing)
+            {
+                this.departmentCapacity = shiftStorage.GetCapacityPerDepartment(oldId);
+            }
+
             foreach (Department d in allDepartments)
             {
                 if (isEditing)
                 {
                     d.Employees = shiftStorage.GetDepartmentEmployees(oldId, d.Id);
+                    if (departmentCapacity.ContainsKey(d.Id))
+                    {
+                        d.Capacity = departmentCapacity[d.Id];
+                    }
+                    else
+                    {
+                        d.Capacity = 0;
+                    }
                 }
 
                 comboBoxSelectDepartments.DisplayMember = "Text";
@@ -113,6 +127,7 @@ namespace MediaBazaar_ManagementSystem
                     if(d.Name == previousSelectedDepartment.Name)
                     {
                         comboBoxSelectDepartments.SelectedItem = depDynamic;
+                        numericUpDownCapacity.Value = d.Capacity;
                         break;
                     }
                 }
@@ -402,6 +417,7 @@ namespace MediaBazaar_ManagementSystem
             Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
             ShowValidEmployees(selectedDepartment.Id);
             AddEmployeeListToShift(selectedDepartment.Employees);
+            numericUpDownCapacity.Value = selectedDepartment.Capacity;
         }
 
         private async void Blink()
