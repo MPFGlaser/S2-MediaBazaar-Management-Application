@@ -149,7 +149,7 @@ namespace MediaBazaar_ManagementSystem
 
             bool success = false;
             int rowsAffected = 0;
-            String query = $"UPDATE functions SET {querySet} WHERE id = @id";
+            String query = $"UPDATE functions SET {querySet}WHERE id = @id";
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@id", functionId);
 

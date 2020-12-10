@@ -123,7 +123,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanel.Controls.Add(this.groupBoxStatistics);
             this.flowLayoutPanel.Location = new System.Drawing.Point(12, 33);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(715, 415);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(725, 492);
             this.flowLayoutPanel.TabIndex = 3;
             this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel_Paint);
             // 
@@ -133,9 +133,9 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxGeneral.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxGeneral.Controls.Add(this.flowLayoutPanelGeneral);
             this.groupBoxGeneral.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxGeneral.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxGeneral.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxGeneral.Name = "groupBoxGeneral";
-            this.groupBoxGeneral.Size = new System.Drawing.Size(225, 88);
+            this.groupBoxGeneral.Size = new System.Drawing.Size(230, 88);
             this.groupBoxGeneral.TabIndex = 0;
             this.groupBoxGeneral.TabStop = false;
             this.groupBoxGeneral.Text = "General";
@@ -151,7 +151,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelGeneral.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelGeneral.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelGeneral.Name = "flowLayoutPanelGeneral";
-            this.flowLayoutPanelGeneral.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelGeneral.Size = new System.Drawing.Size(224, 69);
             this.flowLayoutPanelGeneral.TabIndex = 3;
             // 
             // checkBoxGeneralLoginApplication
@@ -189,10 +189,10 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxEmployeeManagement.AutoSize = true;
             this.groupBoxEmployeeManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxEmployeeManagement.Controls.Add(this.flowLayoutPanelEmployeeManagement);
-            this.groupBoxEmployeeManagement.Location = new System.Drawing.Point(234, 3);
-            this.groupBoxEmployeeManagement.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxEmployeeManagement.Location = new System.Drawing.Point(239, 3);
+            this.groupBoxEmployeeManagement.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxEmployeeManagement.Name = "groupBoxEmployeeManagement";
-            this.groupBoxEmployeeManagement.Size = new System.Drawing.Size(225, 111);
+            this.groupBoxEmployeeManagement.Size = new System.Drawing.Size(230, 111);
             this.groupBoxEmployeeManagement.TabIndex = 1;
             this.groupBoxEmployeeManagement.TabStop = false;
             this.groupBoxEmployeeManagement.Text = "Employee management";
@@ -209,7 +209,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelEmployeeManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelEmployeeManagement.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelEmployeeManagement.Name = "flowLayoutPanelEmployeeManagement";
-            this.flowLayoutPanelEmployeeManagement.Size = new System.Drawing.Size(219, 92);
+            this.flowLayoutPanelEmployeeManagement.Size = new System.Drawing.Size(224, 92);
             this.flowLayoutPanelEmployeeManagement.TabIndex = 6;
             // 
             // checkBoxEmployeesView
@@ -257,10 +257,10 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxStockManagement.AutoSize = true;
             this.groupBoxStockManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxStockManagement.Controls.Add(this.flowLayoutPanelStockManagement);
-            this.groupBoxStockManagement.Location = new System.Drawing.Point(465, 3);
-            this.groupBoxStockManagement.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxStockManagement.Location = new System.Drawing.Point(475, 3);
+            this.groupBoxStockManagement.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxStockManagement.Name = "groupBoxStockManagement";
-            this.groupBoxStockManagement.Size = new System.Drawing.Size(225, 157);
+            this.groupBoxStockManagement.Size = new System.Drawing.Size(230, 157);
             this.groupBoxStockManagement.TabIndex = 2;
             this.groupBoxStockManagement.TabStop = false;
             this.groupBoxStockManagement.Text = "Stock management";
@@ -278,7 +278,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelStockManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelStockManagement.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelStockManagement.Name = "flowLayoutPanelStockManagement";
-            this.flowLayoutPanelStockManagement.Size = new System.Drawing.Size(219, 138);
+            this.flowLayoutPanelStockManagement.Size = new System.Drawing.Size(224, 138);
             this.flowLayoutPanelStockManagement.TabIndex = 12;
             // 
             // checkBoxProductsView
@@ -347,9 +347,9 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxDepartmentManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxDepartmentManagement.Controls.Add(this.flowLayoutPanelDepartmentManagement);
             this.groupBoxDepartmentManagement.Location = new System.Drawing.Point(3, 166);
-            this.groupBoxDepartmentManagement.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxDepartmentManagement.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxDepartmentManagement.Name = "groupBoxDepartmentManagement";
-            this.groupBoxDepartmentManagement.Size = new System.Drawing.Size(225, 111);
+            this.groupBoxDepartmentManagement.Size = new System.Drawing.Size(230, 111);
             this.groupBoxDepartmentManagement.TabIndex = 3;
             this.groupBoxDepartmentManagement.TabStop = false;
             this.groupBoxDepartmentManagement.Text = "Department management";
@@ -366,7 +366,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelDepartmentManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelDepartmentManagement.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelDepartmentManagement.Name = "flowLayoutPanelDepartmentManagement";
-            this.flowLayoutPanelDepartmentManagement.Size = new System.Drawing.Size(219, 92);
+            this.flowLayoutPanelDepartmentManagement.Size = new System.Drawing.Size(224, 92);
             this.flowLayoutPanelDepartmentManagement.TabIndex = 2;
             // 
             // checkBoxDepartmentsView
@@ -414,10 +414,10 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxFunctionManagement.AutoSize = true;
             this.groupBoxFunctionManagement.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxFunctionManagement.Controls.Add(this.flowLayoutPanelFunctionManagement);
-            this.groupBoxFunctionManagement.Location = new System.Drawing.Point(234, 166);
-            this.groupBoxFunctionManagement.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxFunctionManagement.Location = new System.Drawing.Point(239, 166);
+            this.groupBoxFunctionManagement.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxFunctionManagement.Name = "groupBoxFunctionManagement";
-            this.groupBoxFunctionManagement.Size = new System.Drawing.Size(225, 65);
+            this.groupBoxFunctionManagement.Size = new System.Drawing.Size(230, 65);
             this.groupBoxFunctionManagement.TabIndex = 4;
             this.groupBoxFunctionManagement.TabStop = false;
             this.groupBoxFunctionManagement.Text = "Function management";
@@ -432,7 +432,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelFunctionManagement.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelFunctionManagement.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelFunctionManagement.Name = "flowLayoutPanelFunctionManagement";
-            this.flowLayoutPanelFunctionManagement.Size = new System.Drawing.Size(219, 46);
+            this.flowLayoutPanelFunctionManagement.Size = new System.Drawing.Size(224, 46);
             this.flowLayoutPanelFunctionManagement.TabIndex = 2;
             // 
             // checkBoxFunctionsAdd
@@ -460,10 +460,10 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxScheduling.AutoSize = true;
             this.groupBoxScheduling.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxScheduling.Controls.Add(this.flowLayoutPanelScheduling);
-            this.groupBoxScheduling.Location = new System.Drawing.Point(465, 166);
-            this.groupBoxScheduling.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxScheduling.Location = new System.Drawing.Point(475, 166);
+            this.groupBoxScheduling.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxScheduling.Name = "groupBoxScheduling";
-            this.groupBoxScheduling.Size = new System.Drawing.Size(225, 88);
+            this.groupBoxScheduling.Size = new System.Drawing.Size(230, 88);
             this.groupBoxScheduling.TabIndex = 4;
             this.groupBoxScheduling.TabStop = false;
             this.groupBoxScheduling.Text = "Scheduling";
@@ -479,7 +479,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelScheduling.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelScheduling.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelScheduling.Name = "flowLayoutPanelScheduling";
-            this.flowLayoutPanelScheduling.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelScheduling.Size = new System.Drawing.Size(224, 69);
             this.flowLayoutPanelScheduling.TabIndex = 3;
             // 
             // checkBoxSchedulingScheduleEmployees
@@ -518,9 +518,9 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxSwapping.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxSwapping.Controls.Add(this.flowLayoutPanelSwapping);
             this.groupBoxSwapping.Location = new System.Drawing.Point(3, 283);
-            this.groupBoxSwapping.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxSwapping.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxSwapping.Name = "groupBoxSwapping";
-            this.groupBoxSwapping.Size = new System.Drawing.Size(225, 88);
+            this.groupBoxSwapping.Size = new System.Drawing.Size(230, 88);
             this.groupBoxSwapping.TabIndex = 4;
             this.groupBoxSwapping.TabStop = false;
             this.groupBoxSwapping.Text = "Swapping";
@@ -536,7 +536,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelSwapping.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelSwapping.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelSwapping.Name = "flowLayoutPanelSwapping";
-            this.flowLayoutPanelSwapping.Size = new System.Drawing.Size(219, 69);
+            this.flowLayoutPanelSwapping.Size = new System.Drawing.Size(224, 69);
             this.flowLayoutPanelSwapping.TabIndex = 3;
             // 
             // checkBoxSwappingAccept
@@ -574,10 +574,10 @@ namespace MediaBazaar_ManagementSystem
             this.groupBoxStatistics.AutoSize = true;
             this.groupBoxStatistics.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxStatistics.Controls.Add(this.flowLayoutPanelStatistics);
-            this.groupBoxStatistics.Location = new System.Drawing.Point(234, 283);
-            this.groupBoxStatistics.MinimumSize = new System.Drawing.Size(225, 0);
+            this.groupBoxStatistics.Location = new System.Drawing.Point(239, 283);
+            this.groupBoxStatistics.MinimumSize = new System.Drawing.Size(230, 0);
             this.groupBoxStatistics.Name = "groupBoxStatistics";
-            this.groupBoxStatistics.Size = new System.Drawing.Size(225, 42);
+            this.groupBoxStatistics.Size = new System.Drawing.Size(230, 42);
             this.groupBoxStatistics.TabIndex = 3;
             this.groupBoxStatistics.TabStop = false;
             this.groupBoxStatistics.Text = "Statistics";
@@ -591,7 +591,7 @@ namespace MediaBazaar_ManagementSystem
             this.flowLayoutPanelStatistics.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelStatistics.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanelStatistics.Name = "flowLayoutPanelStatistics";
-            this.flowLayoutPanelStatistics.Size = new System.Drawing.Size(219, 23);
+            this.flowLayoutPanelStatistics.Size = new System.Drawing.Size(224, 23);
             this.flowLayoutPanelStatistics.TabIndex = 1;
             // 
             // checkBoxStatisticsView
@@ -618,7 +618,7 @@ namespace MediaBazaar_ManagementSystem
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(652, 454);
+            this.buttonSave.Location = new System.Drawing.Point(662, 531);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 31;
@@ -630,22 +630,23 @@ namespace MediaBazaar_ManagementSystem
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 454);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 531);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 32;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // checkBoxCloseOnSave
             // 
             this.checkBoxCloseOnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxCloseOnSave.AutoSize = true;
-            this.checkBoxCloseOnSave.Location = new System.Drawing.Point(530, 458);
+            this.checkBoxCloseOnSave.Location = new System.Drawing.Point(563, 535);
             this.checkBoxCloseOnSave.Name = "checkBoxCloseOnSave";
-            this.checkBoxCloseOnSave.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxCloseOnSave.Size = new System.Drawing.Size(93, 17);
             this.checkBoxCloseOnSave.TabIndex = 30;
-            this.checkBoxCloseOnSave.Text = "Close after saving?";
+            this.checkBoxCloseOnSave.Text = "Close on save";
             this.checkBoxCloseOnSave.UseVisualStyleBackColor = true;
             // 
             // buttonAddNewFunction
@@ -662,10 +663,11 @@ namespace MediaBazaar_ManagementSystem
             // labelSaveSuccessful
             // 
             this.labelSaveSuccessful.BackColor = System.Drawing.Color.LightGreen;
-            this.labelSaveSuccessful.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSaveSuccessful.Location = new System.Drawing.Point(137, 189);
+            this.labelSaveSuccessful.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelSaveSuccessful.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSaveSuccessful.Location = new System.Drawing.Point(0, 0);
             this.labelSaveSuccessful.Name = "labelSaveSuccessful";
-            this.labelSaveSuccessful.Size = new System.Drawing.Size(439, 65);
+            this.labelSaveSuccessful.Size = new System.Drawing.Size(749, 26);
             this.labelSaveSuccessful.TabIndex = 5;
             this.labelSaveSuccessful.Text = "Permissions saved successfully";
             this.labelSaveSuccessful.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -677,16 +679,17 @@ namespace MediaBazaar_ManagementSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(739, 489);
+            this.ClientSize = new System.Drawing.Size(749, 566);
+            this.ControlBox = false;
+            this.Controls.Add(this.labelSaveSuccessful);
             this.Controls.Add(this.buttonAddNewFunction);
             this.Controls.Add(this.checkBoxCloseOnSave);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.labelSaveSuccessful);
             this.Controls.Add(this.comboBoxCurrentFunction);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(288, 300);
+            this.MinimumSize = new System.Drawing.Size(293, 300);
             this.Name = "PermissionSelectionWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a function to edit...";
