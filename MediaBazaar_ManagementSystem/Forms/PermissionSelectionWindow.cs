@@ -12,6 +12,7 @@ namespace MediaBazaar_ManagementSystem
         Dictionary<int, string> functions;
         List<string> permissionsGranted;
         int selectedFunctionId = -1;
+        bool unsavedChanges = false;
 
         public PermissionSelectionWindow()
         {
@@ -20,7 +21,7 @@ namespace MediaBazaar_ManagementSystem
             AreCheckboxesEnabled(false);
             SetUniformHeight();
             PopulateComboBox();
-            Console.WriteLine(comboBoxCurrentFunction.SelectedIndex.ToString());
+            CreateCheckBoxChangedEventHandlers();
         }
 
         /// <summary>
@@ -89,8 +90,7 @@ namespace MediaBazaar_ManagementSystem
             checkBoxSwappingApprove.Checked = permissionsGranted.Contains("swapping_approve") ? true : false;
 
             // Statistics
-            checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
-            checkBoxGeneralLoginApplication.Checked = permissionsGranted.Contains("login_application") ? true : false;
+            checkBoxStatisticsView.Checked = permissionsGranted.Contains("statistics_view") ? true : false;
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace MediaBazaar_ManagementSystem
         private async void IndicateSuccessfulSave()
         {
             labelSaveSuccessful.Visible = true;
-            await Task.Delay(2000);
+            await Task.Delay(1500);
             labelSaveSuccessful.Visible = false;
         }
 
@@ -277,6 +277,33 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
+        /// Creates the CheckBox changed event handlers.
+        /// </summary>
+        private void CreateCheckBoxChangedEventHandlers()
+        {
+            foreach (GroupBox gb in flowLayoutPanel.Controls)
+            {
+                foreach (FlowLayoutPanel flp in gb.Controls)
+                {
+                    foreach (CheckBox cb in flp.Controls)
+                    {
+                        cb.CheckedChanged += new System.EventHandler(ChangesMade);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the unsavedChanges bool once changes are made.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void ChangesMade(object sender, EventArgs e)
+        {
+            unsavedChanges = true;
+        }
+
+        /// <summary>
         /// Handles the SelectedIndexChanged event of the comboBoxCurrentFunction control.
         /// 
         /// </summary>
@@ -284,6 +311,12 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void comboBoxCurrentFunction_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Autosave permissions when function selection is changed
+            if (unsavedChanges == true)
+            {
+                Save();
+            }
+
             if (comboBoxCurrentFunction.SelectedIndex == -1)
             {
                 AreCheckboxesEnabled(false);
@@ -313,6 +346,8 @@ namespace MediaBazaar_ManagementSystem
             {
                 PreventManagerLockout(false);
             }
+
+            unsavedChanges = false;
         }
 
         private void buttonAddNewFunction_Click(object sender, EventArgs e)
@@ -341,5 +376,18 @@ namespace MediaBazaar_ManagementSystem
                 this.Close();
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            if (unsavedChanges == true)
+            {
+                DialogResult requestToSave = MessageBox.Show("Some changes you've made aren't saved yet.\nDo you want to save?", "Unsaved changes", MessageBoxButtons.YesNo);
+                if (requestToSave == DialogResult.Yes)
+                {
+                    Save();
+                }
+            }
+            this.Close();
+        }      
     }
 }
