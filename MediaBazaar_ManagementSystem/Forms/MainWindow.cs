@@ -226,7 +226,7 @@ namespace MediaBazaar_ManagementSystem
                     DataGridViewRow row = dataGridViewEmployees.Rows[rowId];
 
                     row.Cells["id"].Value = e.Id;
-                    row.Cells["active"].Value = e.Active;
+                    row.Cells["active"].Value = e.Active ? "✓" : "✕";
                     row.Cells["firstName"].Value = e.FirstName;
                     row.Cells["surName"].Value = e.SurName;
                     row.Cells["username"].Value = e.UserName;
@@ -401,7 +401,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
                 {
-                    if (!(bool)row.Cells["active"].Value)
+                    if (row.Cells["active"].Value == "✕")
                     {
                         row.Visible = false;
                     }
@@ -411,7 +411,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
                 {
-                    if (!(bool)row.Cells["active"].Value)
+                    if (row.Cells["active"].Value == "✕")
                     {
                         row.Visible = true;
                     }
