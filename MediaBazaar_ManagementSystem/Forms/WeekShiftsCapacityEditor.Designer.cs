@@ -686,6 +686,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.comboBoxSelectDepartment.Name = "comboBoxSelectDepartment";
             this.comboBoxSelectDepartment.Size = new System.Drawing.Size(131, 21);
             this.comboBoxSelectDepartment.TabIndex = 24;
+            this.comboBoxSelectDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectDepartment_SelectedIndexChanged);
             // 
             // label22
             // 
