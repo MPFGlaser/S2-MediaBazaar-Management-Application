@@ -32,12 +32,12 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.buttonConfirm = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBoxMonday = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDownMondayMorning = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDownMondayAfternoon = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownMondayEvening = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownMondayAfternoon = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMondayMorning = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxTuesday = new System.Windows.Forms.GroupBox();
             this.numericUpDownTuesdayEvening = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -81,9 +81,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.groupBoxMonday.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayMorning)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayEvening)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayMorning)).BeginInit();
             this.groupBoxTuesday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTuesdayEvening)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTuesdayAfternoon)).BeginInit();
@@ -146,6 +146,18 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxMonday.TabStop = false;
             this.groupBoxMonday.Text = "Monday";
             // 
+            // numericUpDownMondayEvening
+            // 
+            this.numericUpDownMondayEvening.Location = new System.Drawing.Point(92, 61);
+            this.numericUpDownMondayEvening.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDownMondayEvening.Name = "numericUpDownMondayEvening";
+            this.numericUpDownMondayEvening.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDownMondayEvening.TabIndex = 3;
+            // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(6, 16);
@@ -154,36 +166,6 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.label1.TabIndex = 15;
             this.label1.Text = "08:00 - 12:30";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numericUpDownMondayMorning
-            // 
-            this.numericUpDownMondayMorning.Location = new System.Drawing.Point(92, 16);
-            this.numericUpDownMondayMorning.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numericUpDownMondayMorning.Name = "numericUpDownMondayMorning";
-            this.numericUpDownMondayMorning.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDownMondayMorning.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(6, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 20);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "12:30 - 17:00";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(6, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 20);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "17:00 - 21:30";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numericUpDownMondayAfternoon
             // 
@@ -197,17 +179,35 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownMondayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownMondayAfternoon.TabIndex = 2;
             // 
-            // numericUpDownMondayEvening
+            // numericUpDownMondayMorning
             // 
-            this.numericUpDownMondayEvening.Location = new System.Drawing.Point(92, 61);
-            this.numericUpDownMondayEvening.Maximum = new decimal(new int[] {
+            this.numericUpDownMondayMorning.Location = new System.Drawing.Point(92, 16);
+            this.numericUpDownMondayMorning.Maximum = new decimal(new int[] {
             9999,
             0,
             0,
             0});
-            this.numericUpDownMondayEvening.Name = "numericUpDownMondayEvening";
-            this.numericUpDownMondayEvening.Size = new System.Drawing.Size(48, 20);
-            this.numericUpDownMondayEvening.TabIndex = 3;
+            this.numericUpDownMondayMorning.Name = "numericUpDownMondayMorning";
+            this.numericUpDownMondayMorning.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDownMondayMorning.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 20);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "17:00 - 21:30";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(6, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 20);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "12:30 - 17:00";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBoxTuesday
             // 
@@ -693,12 +693,18 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.Controls.Add(this.buttonConfirm);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBoxMonday);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(641, 276);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(641, 276);
             this.Name = "WeekShiftsCapacityEditor";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "WeekShiftsCapacityEditor";
             this.groupBoxMonday.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayMorning)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayEvening)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayMorning)).EndInit();
             this.groupBoxTuesday.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTuesdayEvening)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTuesdayAfternoon)).EndInit();
