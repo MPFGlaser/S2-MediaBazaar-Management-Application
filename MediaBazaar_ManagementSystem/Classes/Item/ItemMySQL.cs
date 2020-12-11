@@ -261,7 +261,7 @@ namespace MediaBazaar_ManagementSystem
         {
             try
             {
-                string sql = "INSERT INTO stock_request(productid, quantity, status, userid, date) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
+                string sql = "INSERT INTO stock_request(productid, quantity, status, userid, dateFiled) VALUES(@pId, @quantity, @status, @rBy, @rDate)";
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
                 string status = "Pending";
                 ReadStock();
@@ -269,7 +269,7 @@ namespace MediaBazaar_ManagementSystem
                 cmd.Parameters.AddWithValue("@quantity", quantity);
                 cmd.Parameters.AddWithValue("@status", status);
                 cmd.Parameters.AddWithValue("@rBy", userid);
-                cmd.Parameters.AddWithValue("@rDate", DateTime.Now.Date);
+                cmd.Parameters.AddWithValue("@rDate", DateTime.Now);
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Request has been sent!");
@@ -286,6 +286,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int qtoadd = ReadRequest(productId);
                 string sql = "UPDATE items SET quantity = @Quantity WHERE id = @Id;";
+                
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
 
                 cmd.Parameters.AddWithValue("@Quantity", quantity+qtoadd);
@@ -294,11 +295,13 @@ namespace MediaBazaar_ManagementSystem
                 cmd.ExecuteNonQuery();
                 
                 string Status = "Done";
-                sql = "UPDATE stock_request SET status = @Status WHERE productid = @pId;";
+                DateTime dateAccepted = DateTime.Now;
+                sql = "UPDATE stock_request SET status = @Status, dateAccepted = @dateAccepted WHERE productid = @pId;";
                 cmd = new MySqlCommand(sql, connection);
 
                 cmd.Parameters.AddWithValue("@Status", Status);
                 cmd.Parameters.AddWithValue("@pId", productId);
+                cmd.Parameters.AddWithValue("dateAccepted",dateAccepted);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Restock request accepted!");
             }
