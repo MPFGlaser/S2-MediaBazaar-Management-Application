@@ -132,18 +132,7 @@ namespace MediaBazaar_ManagementSystem.Forms
 
             foreach (Shift s in weekShifts)
             {
-                Console.WriteLine("SHIFT ID IN SAVE: " + s.Id);
                 Dictionary<int, int> temp = toUpdate[s.Id];
-                foreach(KeyValuePair<int, int> KVP in temp)
-                {
-                    Console.WriteLine("departmentID: " + KVP.Key + " Value: " + KVP.Value);
-                }
-                /*int capacity = temp[currentDepartmentId];
-                shiftUpdateSucceeded = false;
-                while (shiftUpdateSucceeded == false)
-                {
-                    shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, currentDepartmentId, capacity);
-                }*/
             }
             return shiftUpdateSucceeded;
         }
@@ -151,7 +140,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         private Dictionary<int, Dictionary<int, int>> UpdateCapacities()
         {
             Dictionary<int, Dictionary<int, int>> output = new Dictionary<int, Dictionary<int, int>>();
-            Dictionary<int, int> departmentCapacity = new Dictionary<int, int>();
+            Dictionary<int, int> departmentCapacity;
 
             foreach (Shift s in weekShifts)
             {
@@ -160,7 +149,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Department dep = depDynamic.Department;
                     if(dep.Id == currentDepartmentId)
                     {
-                        Console.WriteLine("SHIFT ID IN UPDATE: " + s.Id);
+                        departmentCapacity = new Dictionary<int, int>();
                         if (s.Date == weekdays[0])
                         {
                             switch (s.ShiftTime)
@@ -272,11 +261,10 @@ namespace MediaBazaar_ManagementSystem.Forms
                                     break;
                             }
                         }
+                        output.Add(s.Id, departmentCapacity);
                     }
                 }
-                output.Add(s.Id, departmentCapacity);
-                Console.WriteLine("SHIFTID: " + s.Id + " DepID: " +currentDepartmentId+" Cap: " + departmentCapacity[currentDepartmentId]);
-                departmentCapacity.Clear();
+                
             }
 
             return output;
@@ -285,7 +273,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         #region control handlers
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            /*shiftStorage = new ShiftMySQL();
+            shiftStorage = new ShiftMySQL();
             Dictionary<int, Dictionary<int, int>> toUpdate = UpdateCapacities();
 
             foreach (Shift s in weekShifts)
@@ -297,7 +285,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 {
                     shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, currentDepartmentId, capacity);
                 }
-            }*/
+            }
             if (SaveShiftCapacityChanges())
             {
                 this.DialogResult = DialogResult.OK;
@@ -312,7 +300,6 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void comboBoxSelectDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("CHANGES MADE: " + changesMade);
             if (changesMade)
             {
                 SaveShiftCapacityChanges();
