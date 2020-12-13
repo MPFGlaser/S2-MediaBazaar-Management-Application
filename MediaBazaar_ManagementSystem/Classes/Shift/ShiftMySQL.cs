@@ -326,6 +326,98 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+        public bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "INSERT INTO capacity_per_department VALUES (@shiftId, @departmentId, @capacity)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@capacity", capacity);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
+        }
+
+        public bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@capacity", capacity);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
+        }
+
+        public Dictionary<int, int> GetCapacityPerDepartment(int shiftId)
+        {
+            Dictionary<int, int> output = new Dictionary<int, int>();
+
+            String query = "SELECT departmentId, capacity FROM capacity_per_department WHERE shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    output.Add(Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]));
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return output;
+        }
+
         /// <summary>
         /// Gets a list of shifts occurring between the two specified dates.
         /// </summary>

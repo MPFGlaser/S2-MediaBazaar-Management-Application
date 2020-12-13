@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +14,7 @@ namespace MediaBazaar_ManagementSystem
         private DateTime date;
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
+        private Department currentSelectedDepartment = null;
         private Employee loggedInUser = null;
 
         public delegate void ReloadCalendarDayHelper();
@@ -137,17 +138,17 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             newShift = shiftStorage.Get(date, time);
 
+            //Department currentSelectedDepartment = currentSelectedDepartment();
+
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, 
-                    shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees, loggedInUser);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees, currentSelectedDepartment, loggedInUser);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, 
-                    shiftEmployees, false, 0, 0, allEmployees, loggedInUser);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees, currentSelectedDepartment, loggedInUser);
             }
 
             // Show a dialog for the shift
@@ -160,6 +161,11 @@ namespace MediaBazaar_ManagementSystem
         #endregion
 
         #region Button-related functions
+        public Department CurrentSelectedDepartment
+        {
+            set { this.currentSelectedDepartment = value; }
+        }
+
         private void buttonMorning_Click(object sender, EventArgs e)
         {
             ShowShift(ShiftTime.Morning);

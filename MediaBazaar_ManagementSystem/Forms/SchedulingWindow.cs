@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -22,6 +22,8 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
         private int oldId, capacity;
+        private Department previousSelectedDepartment;
+        private Dictionary<int, int> departmentCapacity = new Dictionary<int, int>();
         private Employee loggedInUser;
 
         /// <summary>
@@ -34,9 +36,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         /// <param name="editing"></param>
         /// <param name="oldShiftId"></param>
-        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime,
-            DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity,
-            List<Employee> allEmployees, Employee loggedInUser)
+        public SchedulingWindow(string dateAndMonth, string weekDay, ShiftTime shiftTime, DateTime date, List<Employee> working, bool editing, int oldShiftId, int capacity, List<Employee> allEmployees, Department previousSelectedDepartment, Employee loggedInUser)
         {
             InitializeComponent();
             InitializeComboBoxShiftTime();
@@ -49,6 +49,7 @@ namespace MediaBazaar_ManagementSystem
             this.isEditing = editing;
             this.oldId = oldShiftId;
             this.capacity = capacity;
+            this.previousSelectedDepartment = previousSelectedDepartment;
             this.loggedInUser = loggedInUser;
 
             numericUpDownCapacity.Value = capacity;
@@ -120,16 +121,43 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             allDepartments = departmentStorage.GetAll();
 
+            if (isEditing)
+            {
+                this.departmentCapacity = shiftStorage.GetCapacityPerDepartment(oldId);
+            }
+
             foreach (Department d in allDepartments)
             {
                 if (isEditing)
                 {
                     d.Employees = shiftStorage.GetDepartmentEmployees(oldId, d.Id);
+                    if (departmentCapacity.ContainsKey(d.Id))
+                    {
+                        d.Capacity = departmentCapacity[d.Id];
+                    }
+                    else
+                    {
+                        d.Capacity = 0;
+                    }
                 }
 
                 comboBoxSelectDepartments.DisplayMember = "Text";
                 comboBoxSelectDepartments.ValueMember = "Department";
                 comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
+            }
+
+            if(previousSelectedDepartment != null)
+            {
+                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department d = (depDynamic).Department;
+                    if(d.Name == previousSelectedDepartment.Name)
+                    {
+                        comboBoxSelectDepartments.SelectedItem = depDynamic;
+                        numericUpDownCapacity.Value = d.Capacity;
+                        break;
+                    }
+                }
             }
         }
 
@@ -187,9 +215,17 @@ namespace MediaBazaar_ManagementSystem
                 shiftStorage.Clear(oldId);
                 shiftId = oldId;
 
-                if (capacityNew != capacity)
+                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
                 {
-                    shiftStorage.Update(currentShift);
+                    Department dep = (depDynamic).Department;
+                    if (departmentCapacity.ContainsKey(dep.Id))
+                    {
+                        shiftStorage.UpdateCapacityPerDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
+                    else
+                    {
+                        shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
                 }
             }
             else
@@ -197,6 +233,12 @@ namespace MediaBazaar_ManagementSystem
                 // Creates a new shift object and sets the list of employeeIds to the one we just created.
                 currentShift = new Shift(0, date, shiftTime, capacityNew);
                 shiftId = shiftStorage.Create(currentShift);
+
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department dep = (depDynamic).Department;
+                    shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                }
             }
 
 
@@ -416,6 +458,14 @@ namespace MediaBazaar_ManagementSystem
             Department selectedDepartment = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
             ShowValidEmployees(selectedDepartment.Id);
             AddEmployeeListToShift(selectedDepartment.Employees);
+            numericUpDownCapacity.Value = selectedDepartment.Capacity;
+        }
+
+        private void numericUpDownCapacity_ValueChanged(object sender, EventArgs e)
+        {
+            List<Department> allDepartments = GetDepartmentListFromComboBox();
+            int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
+            allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
         }
 
         private async void Blink()

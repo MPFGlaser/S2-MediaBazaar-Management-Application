@@ -92,7 +92,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainerScheduling1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxSchedulingFunction = new System.Windows.Forms.ComboBox();
+            this.comboBoxSchedulingDepartment = new System.Windows.Forms.ComboBox();
             this.buttonSchedulingNext = new System.Windows.Forms.Button();
             this.buttonSchedulingPrevious = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -808,7 +808,7 @@
             // 
             this.splitContainerScheduling1.Panel1.BackColor = System.Drawing.Color.White;
             this.splitContainerScheduling1.Panel1.Controls.Add(this.label2);
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingFunction);
+            this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingDepartment);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingNext);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingPrevious);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.groupBox1);
@@ -825,24 +825,21 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Enabled = false;
-            this.label2.Location = new System.Drawing.Point(948, 7);
+            this.label2.Location = new System.Drawing.Point(931, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Function";
-            this.label2.Visible = false;
+            this.label2.Text = "Department:";
             // 
-            // comboBoxSchedulingFunction
+            // comboBoxSchedulingDepartment
             // 
-            this.comboBoxSchedulingFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxSchedulingFunction.Enabled = false;
-            this.comboBoxSchedulingFunction.FormattingEnabled = true;
-            this.comboBoxSchedulingFunction.Location = new System.Drawing.Point(1002, 4);
-            this.comboBoxSchedulingFunction.Name = "comboBoxSchedulingFunction";
-            this.comboBoxSchedulingFunction.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSchedulingFunction.TabIndex = 5;
-            this.comboBoxSchedulingFunction.Visible = false;
+            this.comboBoxSchedulingDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSchedulingDepartment.FormattingEnabled = true;
+            this.comboBoxSchedulingDepartment.Location = new System.Drawing.Point(1002, 4);
+            this.comboBoxSchedulingDepartment.Name = "comboBoxSchedulingDepartment";
+            this.comboBoxSchedulingDepartment.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSchedulingDepartment.TabIndex = 5;
+            this.comboBoxSchedulingDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxSchedulingDepartment_SelectedIndexChanged);
             // 
             // buttonSchedulingNext
             // 
@@ -1208,7 +1205,7 @@
         private System.Windows.Forms.Button buttonSchedulingNext;
         private System.Windows.Forms.Button buttonSchedulingPrevious;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxSchedulingFunction;
+        private System.Windows.Forms.ComboBox comboBoxSchedulingDepartment;
         private System.Windows.Forms.SplitContainer splitContainerStatistics1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonStatisticsEmployee;

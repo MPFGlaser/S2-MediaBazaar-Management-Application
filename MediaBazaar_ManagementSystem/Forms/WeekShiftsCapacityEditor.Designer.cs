@@ -80,6 +80,8 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSundayMorning = new System.Windows.Forms.NumericUpDown();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.comboBoxSelectDepartment = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.groupBoxMonday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayEvening)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).BeginInit();
@@ -139,7 +141,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxMonday.Controls.Add(this.numericUpDownMondayMorning);
             this.groupBoxMonday.Controls.Add(this.label3);
             this.groupBoxMonday.Controls.Add(this.label2);
-            this.groupBoxMonday.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxMonday.Location = new System.Drawing.Point(165, 12);
             this.groupBoxMonday.Name = "groupBoxMonday";
             this.groupBoxMonday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxMonday.TabIndex = 6;
@@ -157,6 +159,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownMondayEvening.Name = "numericUpDownMondayEvening";
             this.numericUpDownMondayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownMondayEvening.TabIndex = 3;
+            this.numericUpDownMondayEvening.ValueChanged += new System.EventHandler(this.numericUpDownMondayEvening_ValueChanged);
             // 
             // label1
             // 
@@ -178,6 +181,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownMondayAfternoon.Name = "numericUpDownMondayAfternoon";
             this.numericUpDownMondayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownMondayAfternoon.TabIndex = 2;
+            this.numericUpDownMondayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownMondayAfternoon_ValueChanged);
             // 
             // numericUpDownMondayMorning
             // 
@@ -190,6 +194,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownMondayMorning.Name = "numericUpDownMondayMorning";
             this.numericUpDownMondayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownMondayMorning.TabIndex = 1;
+            this.numericUpDownMondayMorning.ValueChanged += new System.EventHandler(this.numericUpDownMondayMorning_ValueChanged);
             // 
             // label3
             // 
@@ -217,7 +222,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxTuesday.Controls.Add(this.numericUpDownTuesdayMorning);
             this.groupBoxTuesday.Controls.Add(this.label5);
             this.groupBoxTuesday.Controls.Add(this.label6);
-            this.groupBoxTuesday.Location = new System.Drawing.Point(165, 12);
+            this.groupBoxTuesday.Location = new System.Drawing.Point(318, 12);
             this.groupBoxTuesday.Name = "groupBoxTuesday";
             this.groupBoxTuesday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxTuesday.TabIndex = 21;
@@ -235,6 +240,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownTuesdayEvening.Name = "numericUpDownTuesdayEvening";
             this.numericUpDownTuesdayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownTuesdayEvening.TabIndex = 6;
+            this.numericUpDownTuesdayEvening.ValueChanged += new System.EventHandler(this.numericUpDownTuesdayEvening_ValueChanged);
             // 
             // label4
             // 
@@ -256,6 +262,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownTuesdayAfternoon.Name = "numericUpDownTuesdayAfternoon";
             this.numericUpDownTuesdayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownTuesdayAfternoon.TabIndex = 5;
+            this.numericUpDownTuesdayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownTuesdayAfternoon_ValueChanged);
             // 
             // numericUpDownTuesdayMorning
             // 
@@ -268,6 +275,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownTuesdayMorning.Name = "numericUpDownTuesdayMorning";
             this.numericUpDownTuesdayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownTuesdayMorning.TabIndex = 4;
+            this.numericUpDownTuesdayMorning.ValueChanged += new System.EventHandler(this.numericUpDownTuesdayMorning_ValueChanged);
             // 
             // label5
             // 
@@ -295,7 +303,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxWednesday.Controls.Add(this.numericUpDownWednesdayMorning);
             this.groupBoxWednesday.Controls.Add(this.label8);
             this.groupBoxWednesday.Controls.Add(this.label9);
-            this.groupBoxWednesday.Location = new System.Drawing.Point(318, 12);
+            this.groupBoxWednesday.Location = new System.Drawing.Point(471, 12);
             this.groupBoxWednesday.Name = "groupBoxWednesday";
             this.groupBoxWednesday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxWednesday.TabIndex = 21;
@@ -313,6 +321,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownWednesdayEvening.Name = "numericUpDownWednesdayEvening";
             this.numericUpDownWednesdayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownWednesdayEvening.TabIndex = 9;
+            this.numericUpDownWednesdayEvening.ValueChanged += new System.EventHandler(this.numericUpDownWednesdayEvening_ValueChanged);
             // 
             // label7
             // 
@@ -334,6 +343,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownWednesdayAfternoon.Name = "numericUpDownWednesdayAfternoon";
             this.numericUpDownWednesdayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownWednesdayAfternoon.TabIndex = 8;
+            this.numericUpDownWednesdayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownWednesdayAfternoon_ValueChanged);
             // 
             // numericUpDownWednesdayMorning
             // 
@@ -346,6 +356,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownWednesdayMorning.Name = "numericUpDownWednesdayMorning";
             this.numericUpDownWednesdayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownWednesdayMorning.TabIndex = 7;
+            this.numericUpDownWednesdayMorning.ValueChanged += new System.EventHandler(this.numericUpDownWednesdayMorning_ValueChanged);
             // 
             // label8
             // 
@@ -373,7 +384,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxThursday.Controls.Add(this.numericUpDownThursdayMorning);
             this.groupBoxThursday.Controls.Add(this.label11);
             this.groupBoxThursday.Controls.Add(this.label12);
-            this.groupBoxThursday.Location = new System.Drawing.Point(471, 12);
+            this.groupBoxThursday.Location = new System.Drawing.Point(12, 107);
             this.groupBoxThursday.Name = "groupBoxThursday";
             this.groupBoxThursday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxThursday.TabIndex = 21;
@@ -391,6 +402,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownThursdayEvening.Name = "numericUpDownThursdayEvening";
             this.numericUpDownThursdayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownThursdayEvening.TabIndex = 12;
+            this.numericUpDownThursdayEvening.ValueChanged += new System.EventHandler(this.numericUpDownThursdayEvening_ValueChanged);
             // 
             // label10
             // 
@@ -412,6 +424,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownThursdayAfternoon.Name = "numericUpDownThursdayAfternoon";
             this.numericUpDownThursdayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownThursdayAfternoon.TabIndex = 11;
+            this.numericUpDownThursdayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownThursdayAfternoon_ValueChanged);
             // 
             // numericUpDownThursdayMorning
             // 
@@ -424,6 +437,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownThursdayMorning.Name = "numericUpDownThursdayMorning";
             this.numericUpDownThursdayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownThursdayMorning.TabIndex = 10;
+            this.numericUpDownThursdayMorning.ValueChanged += new System.EventHandler(this.numericUpDownThursdayMorning_ValueChanged);
             // 
             // label11
             // 
@@ -451,7 +465,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxFriday.Controls.Add(this.numericUpDownFridayMorning);
             this.groupBoxFriday.Controls.Add(this.label14);
             this.groupBoxFriday.Controls.Add(this.label15);
-            this.groupBoxFriday.Location = new System.Drawing.Point(12, 107);
+            this.groupBoxFriday.Location = new System.Drawing.Point(165, 107);
             this.groupBoxFriday.Name = "groupBoxFriday";
             this.groupBoxFriday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxFriday.TabIndex = 21;
@@ -469,6 +483,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownFridayEvening.Name = "numericUpDownFridayEvening";
             this.numericUpDownFridayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownFridayEvening.TabIndex = 15;
+            this.numericUpDownFridayEvening.ValueChanged += new System.EventHandler(this.numericUpDownFridayEvening_ValueChanged);
             // 
             // label13
             // 
@@ -490,6 +505,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownFridayAfternoon.Name = "numericUpDownFridayAfternoon";
             this.numericUpDownFridayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownFridayAfternoon.TabIndex = 14;
+            this.numericUpDownFridayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownFridayAfternoon_ValueChanged);
             // 
             // numericUpDownFridayMorning
             // 
@@ -502,6 +518,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownFridayMorning.Name = "numericUpDownFridayMorning";
             this.numericUpDownFridayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownFridayMorning.TabIndex = 13;
+            this.numericUpDownFridayMorning.ValueChanged += new System.EventHandler(this.numericUpDownFridayMorning_ValueChanged);
             // 
             // label14
             // 
@@ -529,7 +546,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxSaturday.Controls.Add(this.numericUpDownSaturdayMorning);
             this.groupBoxSaturday.Controls.Add(this.label17);
             this.groupBoxSaturday.Controls.Add(this.label18);
-            this.groupBoxSaturday.Location = new System.Drawing.Point(165, 107);
+            this.groupBoxSaturday.Location = new System.Drawing.Point(318, 107);
             this.groupBoxSaturday.Name = "groupBoxSaturday";
             this.groupBoxSaturday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxSaturday.TabIndex = 21;
@@ -547,6 +564,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSaturdayEvening.Name = "numericUpDownSaturdayEvening";
             this.numericUpDownSaturdayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSaturdayEvening.TabIndex = 18;
+            this.numericUpDownSaturdayEvening.ValueChanged += new System.EventHandler(this.numericUpDownSaturdayEvening_ValueChanged);
             // 
             // label16
             // 
@@ -568,6 +586,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSaturdayAfternoon.Name = "numericUpDownSaturdayAfternoon";
             this.numericUpDownSaturdayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSaturdayAfternoon.TabIndex = 17;
+            this.numericUpDownSaturdayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownSaturdayAfternoon_ValueChanged);
             // 
             // numericUpDownSaturdayMorning
             // 
@@ -580,6 +599,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSaturdayMorning.Name = "numericUpDownSaturdayMorning";
             this.numericUpDownSaturdayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSaturdayMorning.TabIndex = 16;
+            this.numericUpDownSaturdayMorning.ValueChanged += new System.EventHandler(this.numericUpDownSaturdayMorning_ValueChanged);
             // 
             // label17
             // 
@@ -607,7 +627,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxSunday.Controls.Add(this.numericUpDownSundayMorning);
             this.groupBoxSunday.Controls.Add(this.label20);
             this.groupBoxSunday.Controls.Add(this.label21);
-            this.groupBoxSunday.Location = new System.Drawing.Point(318, 107);
+            this.groupBoxSunday.Location = new System.Drawing.Point(471, 107);
             this.groupBoxSunday.Name = "groupBoxSunday";
             this.groupBoxSunday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxSunday.TabIndex = 21;
@@ -625,6 +645,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSundayEvening.Name = "numericUpDownSundayEvening";
             this.numericUpDownSundayEvening.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSundayEvening.TabIndex = 21;
+            this.numericUpDownSundayEvening.ValueChanged += new System.EventHandler(this.numericUpDownSundayEvening_ValueChanged);
             // 
             // label19
             // 
@@ -646,6 +667,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSundayAfternoon.Name = "numericUpDownSundayAfternoon";
             this.numericUpDownSundayAfternoon.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSundayAfternoon.TabIndex = 20;
+            this.numericUpDownSundayAfternoon.ValueChanged += new System.EventHandler(this.numericUpDownSundayAfternoon_ValueChanged);
             // 
             // numericUpDownSundayMorning
             // 
@@ -658,6 +680,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.numericUpDownSundayMorning.Name = "numericUpDownSundayMorning";
             this.numericUpDownSundayMorning.Size = new System.Drawing.Size(48, 20);
             this.numericUpDownSundayMorning.TabIndex = 19;
+            this.numericUpDownSundayMorning.ValueChanged += new System.EventHandler(this.numericUpDownSundayMorning_ValueChanged);
             // 
             // label20
             // 
@@ -677,6 +700,24 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.label21.Text = "12:30 - 17:00";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // comboBoxSelectDepartment
+            // 
+            this.comboBoxSelectDepartment.FormattingEnabled = true;
+            this.comboBoxSelectDepartment.Location = new System.Drawing.Point(21, 29);
+            this.comboBoxSelectDepartment.Name = "comboBoxSelectDepartment";
+            this.comboBoxSelectDepartment.Size = new System.Drawing.Size(131, 21);
+            this.comboBoxSelectDepartment.TabIndex = 24;
+            this.comboBoxSelectDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectDepartment_SelectedIndexChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(18, 12);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(62, 13);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Department";
+            // 
             // WeekShiftsCapacityEditor
             // 
             this.AcceptButton = this.buttonConfirm;
@@ -684,6 +725,8 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(625, 237);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.comboBoxSelectDepartment);
             this.Controls.Add(this.groupBoxSunday);
             this.Controls.Add(this.groupBoxSaturday);
             this.Controls.Add(this.groupBoxFriday);
@@ -730,6 +773,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSundayAfternoon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSundayMorning)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -786,5 +830,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         private System.Windows.Forms.NumericUpDown numericUpDownSundayMorning;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox comboBoxSelectDepartment;
+        private System.Windows.Forms.Label label22;
     }
 }
