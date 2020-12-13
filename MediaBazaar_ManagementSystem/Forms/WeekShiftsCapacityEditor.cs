@@ -97,11 +97,12 @@ namespace MediaBazaar_ManagementSystem.Forms
         }
 
         /// <summary>
-        /// Creates the missing shifts.
+        /// Creates the missing shifts and sets shift capacity for each department to 0 for these new shifts.
         /// </summary>
         private void CreateMissingShifts()
         {
             shiftStorage = new ShiftMySQL();
+            List<Shift> tempNewShifts = new List<Shift>();
 
             foreach(DateTime date in weekdays)
             {
@@ -110,7 +111,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Morning, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
                 }
 
                 if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
@@ -118,7 +119,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
                 }
 
                 if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
@@ -126,8 +127,19 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Evening, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
                 }
+            }
+
+            foreach (Shift s in tempNewShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                
+                        shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
+                }
+                weekShifts.Add(s);
             }
         }
 
