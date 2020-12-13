@@ -304,6 +304,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 bool shiftUpdateSucceeded = false;
                 while (shiftUpdateSucceeded == false)
                 {
+                    //Currently only updates existing shifts... has to also add shifts if necessary...
                     shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, currentDepartmentId, capacity);
                 }
             }
