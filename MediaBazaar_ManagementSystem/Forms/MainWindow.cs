@@ -103,11 +103,11 @@ namespace MediaBazaar_ManagementSystem
                     buttonStockAdd.Enabled = false;
 
                 if (!loggedInUser.Permissions.Contains("product_restock_file"))
-                    btnSendRestockRequest.Visible = false;
-
+                    pnlSalesRepresentative.Visible = false;
+                else pnlSalesRepresentative.Visible = true;
                 if (!loggedInUser.Permissions.Contains("product_restock_accept"))
-                    btnAcceptRestockRequest.Visible = false;
-
+                    pnlDepotWorker.Visible = false;
+                else pnlDepotWorker.Visible = true;
                 // We need something for the categories, still. No permissions for it and the controls are disabled by default.
             }
             else
@@ -158,36 +158,6 @@ namespace MediaBazaar_ManagementSystem
             PopulateItemsTable();
             LoadAllDepartments();
             SetupCorrectWeekData();
-            CheckForSalesRepresentative();
-            CheckForDepotWorker();
-        }
-
-        /// <summary>
-        /// Function to check if the current user is a sales representative.
-        /// </summary>
-        private void CheckForSalesRepresentative()
-        {
-            if (loggedInUser.Function == 2)
-            {
-                btnSendRestockRequest.Visible = true;
-                pnlSalesRepresentative.Visible = true;
-                pnlSalesRepresentative.Enabled = true;
-            }
-            else pnlSalesRepresentative.Visible = false;
-        }
-
-        /// <summary>
-        /// Function to check if the current user is a depot worker.
-        /// </summary>
-        private void CheckForDepotWorker()
-        {
-            if (loggedInUser.Function == 1)
-            {
-                btnAcceptRestockRequest.Visible = true;
-                pnlDepotWorker.Visible = true;
-                pnlDepotWorker.Enabled = true;
-            }
-            else pnlDepotWorker.Visible = false;
         }
 
         /// <summary>
