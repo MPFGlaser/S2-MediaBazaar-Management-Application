@@ -18,8 +18,9 @@ namespace MediaBazaar_ManagementSystem.Forms
         List<Shift> weekShifts;
         List<int> initialShiftIds = new List<int>();
         int currentDepartmentId;
-        bool changesMade = false;
-        private Dictionary<int, Dictionary<int, int>> allDepartmentCapacityInWeek = new Dictionary<int, Dictionary<int, int>>(), allDepartmentsWithValues = new Dictionary<int, Dictionary<int, int>>();
+        bool changesMade = false, autoChanged = false;
+        //<shiftId <departmentId, capacity>>
+        private Dictionary<int, Dictionary<int, int>> allDepartmentCapacityInWeek = new Dictionary<int, Dictionary<int, int>>(), valuesToSave = new Dictionary<int, Dictionary<int, int>>();
 
         public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays, int currentDepartmentId)
         {
@@ -122,19 +123,6 @@ namespace MediaBazaar_ManagementSystem.Forms
                     weekShifts.Add(s2);
                 }
             }
-        }
-
-        private bool SaveShiftCapacityChanges()
-        {
-            shiftStorage = new ShiftMySQL();
-            Dictionary<int, Dictionary<int, int>> toUpdate = UpdateCapacities();
-            bool shiftUpdateSucceeded = false;
-
-            foreach (Shift s in weekShifts)
-            {
-                Dictionary<int, int> temp = toUpdate[s.Id];
-            }
-            return shiftUpdateSucceeded;
         }
 
         private Dictionary<int, Dictionary<int, int>> UpdateCapacities()
@@ -270,15 +258,33 @@ namespace MediaBazaar_ManagementSystem.Forms
             return output;
         }
 
+        private void SaveNewShiftValues()
+        {
+            foreach (Shift s in weekShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                    if (dep.Id == currentDepartmentId)
+                    {
+                        if (valuesToSave.ContainsKey(s.Id))
+                        {
+                            allDepartmentCapacityInWeek[s.Id] = valuesToSave[s.Id];
+                        }
+                    }
+                }
+            }
+        }
+
         #region control handlers
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             shiftStorage = new ShiftMySQL();
-            Dictionary<int, Dictionary<int, int>> toUpdate = UpdateCapacities();
+            valuesToSave = UpdateCapacities();
 
             foreach (Shift s in weekShifts)
             {
-                Dictionary<int, int> temp = toUpdate[s.Id];
+                Dictionary<int, int> temp = valuesToSave[s.Id];
                 int capacity = temp[currentDepartmentId];
                 bool shiftUpdateSucceeded = false;
                 while (shiftUpdateSucceeded == false)
@@ -286,10 +292,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, currentDepartmentId, capacity);
                 }
             }
-            if (SaveShiftCapacityChanges())
-            {
-                this.DialogResult = DialogResult.OK;
-            }
+            this.DialogResult = DialogResult.OK;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -302,15 +305,17 @@ namespace MediaBazaar_ManagementSystem.Forms
         {
             if (changesMade)
             {
-                SaveShiftCapacityChanges();
+                valuesToSave = UpdateCapacities();
+                SaveNewShiftValues();
                 changesMade = false;
             }
-
             dynamic depDynamic = comboBoxSelectDepartment.SelectedItem;
             Department selectedDepartment = depDynamic.Department;
-            this.currentDepartmentId = selectedDepartment.Id;
+            currentDepartmentId = selectedDepartment.Id;
+            autoChanged = true;
             SetAllUpdownsToZero();
             SetupNumericUpDowns();
+            autoChanged = false;
         }
         #endregion
 
@@ -634,107 +639,128 @@ namespace MediaBazaar_ManagementSystem.Forms
         #region Numeric UpDown Value Change Handlers
         private void numericUpDownMondayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if(!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownMondayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownMondayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownTuesdayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownTuesdayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownTuesdayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownWednesdayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownWednesdayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownWednesdayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownThursdayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownThursdayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownThursdayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownFridayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownFridayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownFridayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSaturdayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSaturdayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSaturdayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSundayMorning_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSundayAfternoon_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
 
         private void numericUpDownSundayEvening_ValueChanged(object sender, EventArgs e)
         {
-            changesMade = true;
+            if (!autoChanged)
+                changesMade = true;
         }
         #endregion
     }
