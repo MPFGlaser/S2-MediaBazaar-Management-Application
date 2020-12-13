@@ -19,12 +19,10 @@ namespace MediaBazaar_ManagementSystem.Forms
         List<int> initialShiftIds = new List<int>();
         int currentDepartmentId;
         bool changesMade = false, autoChanged = false;
-        //<shiftId <departmentId, capacity>>
         private Dictionary<int, Dictionary<int, int>> allDepartmentCapacityInWeek = new Dictionary<int, Dictionary<int, int>>(), valuesToSave = new Dictionary<int, Dictionary<int, int>>();
 
         public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays, int currentDepartmentId)
         {
-            
             InitializeComponent();
             this.weekShifts = weekShifts;
             this.weekdays = weekdays;
@@ -36,6 +34,10 @@ namespace MediaBazaar_ManagementSystem.Forms
             CreateMissingShifts();
         }
 
+        /// <summary>
+        /// Loads all of the capacities per department from the database.
+        /// </summary>
+        /// <param name="weekShifts">A list of all of the shifts in this week</param>
         private void LoadAllCapacities(List<Shift> weekShifts)
         {
             shiftStorage = new ShiftMySQL();
@@ -54,6 +56,10 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.allDepartmentCapacityInWeek = weekDepartments;
         }
 
+        /// <summary>
+        /// Loads all of the departments from the database.
+        /// </summary>
+        /// <param name="departmentId">ID of the currently selected department</param>
         private void LoadAllDepartments(int departmentId)
         {
             departmentStorage = new DepartmentMySQL();
@@ -125,6 +131,30 @@ namespace MediaBazaar_ManagementSystem.Forms
             }
         }
 
+        /// <summary>
+        /// Updates the current capacities to have the newly set values.
+        /// </summary>
+        private void SaveNewShiftValues()
+        {
+            foreach (Shift s in weekShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                    if (dep.Id == currentDepartmentId)
+                    {
+                        if (valuesToSave.ContainsKey(s.Id))
+                        {
+                            allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the new values for the capacities in a dictionary.
+        /// </summary>
         private Dictionary<int, Dictionary<int, int>> UpdateCapacities()
         {
             Dictionary<int, Dictionary<int, int>> output = new Dictionary<int, Dictionary<int, int>>();
@@ -258,25 +288,10 @@ namespace MediaBazaar_ManagementSystem.Forms
             return output;
         }
 
-        private void SaveNewShiftValues()
-        {
-            foreach (Shift s in weekShifts)
-            {
-                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
-                {
-                    Department dep = depDynamic.Department;
-                    if (dep.Id == currentDepartmentId)
-                    {
-                        if (valuesToSave.ContainsKey(s.Id))
-                        {
-                            allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
-                        }
-                    }
-                }
-            }
-        }
-
         #region control handlers
+        /// <summary>
+        /// Saves the set number of capacity in the database.
+        /// </summary>
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             shiftStorage = new ShiftMySQL();
@@ -301,6 +316,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.Close();
         }
 
+        /// <summary>
+        /// Saves the changes when a new department is selected.
+        /// </summary>
         private void comboBoxSelectDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (changesMade)
@@ -514,8 +532,6 @@ namespace MediaBazaar_ManagementSystem.Forms
             }
         }
 
-        
-
         /// <summary>
         /// Set all numeric updowns to 0.
         /// </summary>
@@ -639,6 +655,9 @@ namespace MediaBazaar_ManagementSystem.Forms
         #endregion
 
         #region Numeric UpDown Value Change Handlers
+        /// <summary>
+        /// Adds an eventhandler to each of the numericUpDowns which makes it so that changes are only saved once a manual change is made by the user.
+        /// </summary>
         private void numericUpDownMondayMorning_ValueChanged(object sender, EventArgs e)
         {
             if(!autoChanged)
