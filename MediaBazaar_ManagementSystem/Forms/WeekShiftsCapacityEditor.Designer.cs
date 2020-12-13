@@ -736,7 +736,13 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.Controls.Add(this.buttonConfirm);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBoxMonday);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(641, 276);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(641, 276);
             this.Name = "WeekShiftsCapacityEditor";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "WeekShiftsCapacityEditor";
             this.groupBoxMonday.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayEvening)).EndInit();

@@ -32,6 +32,8 @@ namespace MediaBazaar_ManagementSystem.Forms
             SetupGroupboxTitles();
             SetupNumericUpDowns();
             CreateMissingShifts();
+
+            this.Text = $"Changing capacity of shifts in the week of Monday { weekdays[1].ToString("d") }";
         }
 
         /// <summary>

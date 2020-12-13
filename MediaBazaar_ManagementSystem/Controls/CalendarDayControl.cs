@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +15,7 @@ namespace MediaBazaar_ManagementSystem
         Shift newShift;
         List<Employee> shiftEmployees = new List<Employee>(), allEmployees;
         private Department currentSelectedDepartment = null;
+        private Employee loggedInUser = null;
 
         public delegate void ReloadCalendarDayHelper();
         public event ReloadCalendarDayHelper ReloadCalendarDayEvent;
@@ -38,8 +39,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="date"></param>
         /// <param name="weekday"></param>
         /// <param name="allWeekShifts"></param>
-        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts)
+        public void DisplayCorrectDate(DateTime date, string weekday, List<Shift> allWeekShifts, Employee loggedInUser)
         {
+            this.loggedInUser = loggedInUser;
             this.date = date;
 
             labelCalendarDay.Text = weekday;
@@ -142,25 +144,16 @@ namespace MediaBazaar_ManagementSystem
             if (newShift != null)
             {
                 shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees, currentSelectedDepartment);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, true, newShift.Id, newShift.Capacity, allEmployees, currentSelectedDepartment, loggedInUser);
             }
             else
             {
-                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees, currentSelectedDepartment);
+                schedule = new SchedulingWindow(labelCalendarDate.Text, labelCalendarDay.Text, time, date, shiftEmployees, false, 0, 0, allEmployees, currentSelectedDepartment, loggedInUser);
             }
 
             // Show a dialog for the shift
             if (schedule.ShowDialog() == DialogResult.OK)
             {
-                //if(newShift != null)
-                //{
-                //    shiftEmployees = shiftStorage.GetEmployees(newShift.Id);
-                //    SetShiftOccupation(time, shiftEmployees.Count(), newShift.Capacity);
-                //}
-                //else
-                //{
-                //    SetShiftOccupation(time, 0, 0);
-                //}
                 ReloadCalendarDayEvent?.Invoke();
                 ReloadEmployeeHoursEvent?.Invoke();
             }

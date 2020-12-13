@@ -42,18 +42,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewEmployees = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.active = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerEmployeesSecondary = new System.Windows.Forms.SplitContainer();
             this.comboBoxAllDepartments = new System.Windows.Forms.ComboBox();
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
+            this.buttonEditFunctionPermissions = new System.Windows.Forms.Button();
             this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
             this.buttonEmployeesAdd = new System.Windows.Forms.Button();
@@ -119,6 +113,14 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.active = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Function = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
@@ -213,6 +215,7 @@
             this.dataGridViewEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.active,
+            this.Function,
             this.firstName,
             this.surName,
             this.username,
@@ -223,59 +226,12 @@
             this.dataGridViewEmployees.MultiSelect = false;
             this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.ReadOnly = true;
+            this.dataGridViewEmployees.RowHeadersVisible = false;
             this.dataGridViewEmployees.RowHeadersWidth = 21;
+            this.dataGridViewEmployees.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridViewEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewEmployees.Size = new System.Drawing.Size(823, 405);
             this.dataGridViewEmployees.TabIndex = 0;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "ID";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 50;
-            // 
-            // active
-            // 
-            this.active.HeaderText = "Active";
-            this.active.Name = "active";
-            this.active.ReadOnly = true;
-            this.active.Width = 50;
-            // 
-            // firstName
-            // 
-            this.firstName.HeaderText = "First Name";
-            this.firstName.Name = "firstName";
-            this.firstName.ReadOnly = true;
-            this.firstName.Width = 150;
-            // 
-            // surName
-            // 
-            this.surName.HeaderText = "Surname";
-            this.surName.Name = "surName";
-            this.surName.ReadOnly = true;
-            this.surName.Width = 160;
-            // 
-            // username
-            // 
-            this.username.HeaderText = "Username";
-            this.username.Name = "username";
-            this.username.ReadOnly = true;
-            this.username.Width = 130;
-            // 
-            // phoneNumber
-            // 
-            this.phoneNumber.HeaderText = "Phone Number";
-            this.phoneNumber.Name = "phoneNumber";
-            this.phoneNumber.ReadOnly = true;
-            this.phoneNumber.Width = 125;
-            // 
-            // emailAddress
-            // 
-            this.emailAddress.HeaderText = "Email";
-            this.emailAddress.Name = "emailAddress";
-            this.emailAddress.ReadOnly = true;
-            this.emailAddress.Width = 129;
             // 
             // splitContainerEmployeesSecondary
             // 
@@ -299,6 +255,7 @@
             // splitContainerEmployeesSecondary.Panel2
             // 
             this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEditFunctionPermissions);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.checkBoxShowInactive);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
@@ -348,6 +305,16 @@
             this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
             this.labelEmployeesDepartmentName.Text = "Department name";
+            // 
+            // buttonEditFunctionPermissions
+            // 
+            this.buttonEditFunctionPermissions.Location = new System.Drawing.Point(2, 73);
+            this.buttonEditFunctionPermissions.Name = "buttonEditFunctionPermissions";
+            this.buttonEditFunctionPermissions.Size = new System.Drawing.Size(141, 23);
+            this.buttonEditFunctionPermissions.TabIndex = 5;
+            this.buttonEditFunctionPermissions.Text = "Edit function permissions";
+            this.buttonEditFunctionPermissions.UseVisualStyleBackColor = true;
+            this.buttonEditFunctionPermissions.Click += new System.EventHandler(this.buttonEditFunctionPermissions_Click);
             // 
             // checkBoxShowInactive
             // 
@@ -454,6 +421,7 @@
             this.dataGridViewStock.MultiSelect = false;
             this.dataGridViewStock.Name = "dataGridViewStock";
             this.dataGridViewStock.ReadOnly = true;
+            this.dataGridViewStock.RowHeadersVisible = false;
             this.dataGridViewStock.RowHeadersWidth = 21;
             this.dataGridViewStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewStock.Size = new System.Drawing.Size(823, 405);
@@ -1080,6 +1048,64 @@
             this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
             // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 43;
+            // 
+            // active
+            // 
+            this.active.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.active.HeaderText = "Active";
+            this.active.Name = "active";
+            this.active.ReadOnly = true;
+            this.active.Width = 40;
+            // 
+            // Function
+            // 
+            this.Function.HeaderText = "Function";
+            this.Function.Name = "Function";
+            this.Function.ReadOnly = true;
+            this.Function.Width = 75;
+            // 
+            // firstName
+            // 
+            this.firstName.HeaderText = "First Name";
+            this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
+            this.firstName.Width = 125;
+            // 
+            // surName
+            // 
+            this.surName.HeaderText = "Surname";
+            this.surName.Name = "surName";
+            this.surName.ReadOnly = true;
+            this.surName.Width = 160;
+            // 
+            // username
+            // 
+            this.username.HeaderText = "Username";
+            this.username.Name = "username";
+            this.username.ReadOnly = true;
+            this.username.Width = 130;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.HeaderText = "Phone Number";
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.ReadOnly = true;
+            this.phoneNumber.Width = 125;
+            // 
+            // emailAddress
+            // 
+            this.emailAddress.HeaderText = "Email";
+            this.emailAddress.Name = "emailAddress";
+            this.emailAddress.ReadOnly = true;
+            this.emailAddress.Width = 129;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1188,13 +1214,6 @@
         private System.Windows.Forms.Button buttonStatisticsDepartment;
         private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn active;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn username;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirth;
         private System.Windows.Forms.DataGridViewTextBoxColumn bsn;
         private System.Windows.Forms.DataGridViewTextBoxColumn spouseName;
@@ -1227,6 +1246,15 @@
         private System.Windows.Forms.Panel pnlDepotWorker;
         private System.Windows.Forms.Button btnAcceptRestockRequest;
         private System.Windows.Forms.Button buttonSetWeekShiftsCapacity;
+        private System.Windows.Forms.Button buttonEditFunctionPermissions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn active;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Function;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
     }
 }
 

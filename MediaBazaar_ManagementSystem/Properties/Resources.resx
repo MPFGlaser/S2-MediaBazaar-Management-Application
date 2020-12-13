@@ -120,11 +120,17 @@
   <data name="createError" xml:space="preserve">
     <value>Error creating file.</value>
   </data>
+  <data name="databaseSaveError" xml:space="preserve">
+    <value>Error saving to the database.</value>
+  </data>
   <data name="fileNotFound" xml:space="preserve">
     <value>No connection file found.</value>
   </data>
   <data name="genericError" xml:space="preserve">
     <value>Something went wrong.</value>
+  </data>
+  <data name="informationInvalidError" xml:space="preserve">
+    <value>Information entered is invalid.</value>
   </data>
   <data name="loadShiftError" xml:space="preserve">
     <value>Error loading shifts from database.</value>

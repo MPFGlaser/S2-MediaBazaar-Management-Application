@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -268,7 +267,7 @@ namespace MediaBazaar_ManagementSystem
                     {
                         if (es.EmployeeId == e.Id)
                         {
-                            e.WorkingHours += 4.5f;
+                            e.WorkingHours += Globals.shiftDuration;
                         }
                     }
                 }
@@ -309,92 +308,6 @@ namespace MediaBazaar_ManagementSystem
             }
 
             return weekShiftIds;
-        }
-
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public void CheckFunctions()
-        {
-            string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
-            MySqlCommand command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-
-                return;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "INSERT INTO functions  VALUES (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public List<ComboboxItem> GetFunctions()
-        {
-            List<ComboboxItem> cmbxlist = new List<ComboboxItem>();
-            string sql = "SELECT * FROM functions;";
-
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
-                connection.Open();
-
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    ComboboxItem item = new ComboboxItem();
-                    item.Text = rdr.GetString("function");
-                    item.Value = Convert.ToInt32(rdr.GetString("id"));
-                    cmbxlist.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return cmbxlist;
         }
     }
 }
