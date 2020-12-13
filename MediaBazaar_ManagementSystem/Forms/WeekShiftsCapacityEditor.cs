@@ -269,7 +269,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     {
                         if (valuesToSave.ContainsKey(s.Id))
                         {
-                            allDepartmentCapacityInWeek[s.Id] = valuesToSave[s.Id];
+                            allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
                         }
                     }
                 }
@@ -332,182 +332,184 @@ namespace MediaBazaar_ManagementSystem.Forms
                     foreach (KeyValuePair<int, int> dictKVP in allDepartmentCapacityInWeek[s.Id])
                     {
                         Dictionary<int, int> dict = new Dictionary<int, int> { { dictKVP.Key, dictKVP.Value } };
-                        if (s.Date == weekdays[0])
+                        if (dict.ContainsKey(currentDepartmentId))
                         {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[0])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownMondayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownMondayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownMondayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[1])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[1])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownTuesdayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownTuesdayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownTuesdayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[2])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[2])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownWednesdayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownWednesdayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownWednesdayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[3])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[3])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownThursdayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownThursdayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownThursdayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[4])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[4])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownFridayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownFridayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownFridayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[5])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[5])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSaturdayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSaturdayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSaturdayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
-                        }
 
-                        if (s.Date == weekdays[6])
-                        {
-                            switch (s.ShiftTime)
+                            if (s.Date == weekdays[6])
                             {
-                                case ShiftTime.Morning:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSundayMorning.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Afternoon:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSundayAfternoon.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
-                                case ShiftTime.Evening:
-                                    if (dict.ContainsKey(currentDepartmentId))
-                                    {
-                                        numericUpDownSundayEvening.Value = dict[currentDepartmentId];
-                                    }
-                                    break;
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }
-
                 }
             }
         }
