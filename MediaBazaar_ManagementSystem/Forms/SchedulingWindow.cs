@@ -225,7 +225,7 @@ namespace MediaBazaar_ManagementSystem
                 // Creates a new shift object and sets the list of employeeIds to the one we just created.
                 currentShift = new Shift(oldId, date, shiftTime, capacityNew);
                 // Removes all information about the shift in the shiftStorage to prevent duplication of entries
-                MessageBox.Show(shiftStorage.Clear(oldId).ToString()+oldId.ToString());
+                shiftStorage.Clear(oldId);
                 shiftId = oldId;
 
                 foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
@@ -377,17 +377,16 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void RemoveSelectedEmployee(Employee selectedEmployee, int selectedIndex)
         {
-           
-
             // Adds the selected employee to the combobox of available employees.
             comboBoxSelectEmployees.DisplayMember = "Text";
             comboBoxSelectEmployees.ValueMember = "Employee";
             comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
-            MessageBox.Show(allDepartments[selectedIndex].Employees.Count.ToString());
-            Employee comboEmployee = GetComboBoxEmployee(selectedEmployee).Employee;
-            allDepartments[selectedIndex].Employees.Remove(comboEmployee);
-            MessageBox.Show(allDepartments[selectedIndex].Employees.Count.ToString());
+            Employee tempemp=null;
+            foreach (Employee e in allDepartments[selectedIndex].Employees)
+                if (e.Id == selectedEmployee.Id) tempemp = e;
+            if (tempemp!=null) allDepartments[selectedIndex].Employees.Remove(tempemp);
+            
 
             // Removes the employee from the listbox of currently scheduled employee.
             //listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
