@@ -35,7 +35,6 @@
             this.comboBoxSelectEmployees = new System.Windows.Forms.ComboBox();
             this.buttonAddEmployeeToShift = new System.Windows.Forms.Button();
             this.buttonRemoveEmployeeFromShift = new System.Windows.Forms.Button();
-            this.listBoxCurrentEmployees = new System.Windows.Forms.ListBox();
             this.textBoxWeekDay = new System.Windows.Forms.TextBox();
             this.buttonScheduleConfirm = new System.Windows.Forms.Button();
             this.buttonScheduleCancel = new System.Windows.Forms.Button();
@@ -43,7 +42,12 @@
             this.numericUpDownCapacity = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.labelEmployeeOverScheduled = new System.Windows.Forms.Label();
+            this.dataGridViewScheduling = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScheduling)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxCalendarDate
@@ -123,15 +127,6 @@
             this.buttonRemoveEmployeeFromShift.UseVisualStyleBackColor = true;
             this.buttonRemoveEmployeeFromShift.Click += new System.EventHandler(this.buttonRemoveEmployeeFromShift_Click);
             // 
-            // listBoxCurrentEmployees
-            // 
-            this.listBoxCurrentEmployees.FormattingEnabled = true;
-            this.listBoxCurrentEmployees.Location = new System.Drawing.Point(205, 39);
-            this.listBoxCurrentEmployees.Name = "listBoxCurrentEmployees";
-            this.listBoxCurrentEmployees.Size = new System.Drawing.Size(290, 316);
-            this.listBoxCurrentEmployees.Sorted = true;
-            this.listBoxCurrentEmployees.TabIndex = 10;
-            // 
             // textBoxWeekDay
             // 
             this.textBoxWeekDay.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -205,11 +200,55 @@
             this.labelEmployeeOverScheduled.TabIndex = 43;
             this.labelEmployeeOverScheduled.Visible = false;
             // 
+            // dataGridViewScheduling
+            // 
+            this.dataGridViewScheduling.AllowUserToAddRows = false;
+            this.dataGridViewScheduling.AllowUserToDeleteRows = false;
+            this.dataGridViewScheduling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScheduling.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.firstName,
+            this.surName});
+            this.dataGridViewScheduling.Location = new System.Drawing.Point(205, 39);
+            this.dataGridViewScheduling.MultiSelect = false;
+            this.dataGridViewScheduling.Name = "dataGridViewScheduling";
+            this.dataGridViewScheduling.ReadOnly = true;
+            this.dataGridViewScheduling.RowHeadersVisible = false;
+            this.dataGridViewScheduling.RowHeadersWidth = 21;
+            this.dataGridViewScheduling.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridViewScheduling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewScheduling.Size = new System.Drawing.Size(290, 293);
+            this.dataGridViewScheduling.TabIndex = 44;
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.id.Width = 43;
+            // 
+            // firstName
+            // 
+            this.firstName.HeaderText = "First Name";
+            this.firstName.Name = "firstName";
+            this.firstName.ReadOnly = true;
+            this.firstName.Width = 125;
+            // 
+            // surName
+            // 
+            this.surName.HeaderText = "Surname";
+            this.surName.Name = "surName";
+            this.surName.ReadOnly = true;
+            this.surName.Width = 120;
+            // 
             // SchedulingWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 392);
+            this.Controls.Add(this.dataGridViewScheduling);
             this.Controls.Add(this.labelEmployeeOverScheduled);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDownCapacity);
@@ -217,7 +256,6 @@
             this.Controls.Add(this.buttonScheduleConfirm);
             this.Controls.Add(this.buttonScheduleCancel);
             this.Controls.Add(this.textBoxWeekDay);
-            this.Controls.Add(this.listBoxCurrentEmployees);
             this.Controls.Add(this.buttonRemoveEmployeeFromShift);
             this.Controls.Add(this.buttonAddEmployeeToShift);
             this.Controls.Add(this.comboBoxSelectEmployees);
@@ -230,6 +268,7 @@
             this.Name = "SchedulingWindow";
             this.Text = "Schedule a shift";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCapacity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScheduling)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,7 +283,6 @@
         private System.Windows.Forms.ComboBox comboBoxSelectEmployees;
         private System.Windows.Forms.Button buttonAddEmployeeToShift;
         private System.Windows.Forms.Button buttonRemoveEmployeeFromShift;
-        private System.Windows.Forms.ListBox listBoxCurrentEmployees;
         private System.Windows.Forms.TextBox textBoxWeekDay;
         private System.Windows.Forms.Button buttonScheduleConfirm;
         private System.Windows.Forms.Button buttonScheduleCancel;
@@ -252,5 +290,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDownCapacity;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelEmployeeOverScheduled;
+        private System.Windows.Forms.DataGridView dataGridViewScheduling;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surName;
     }
 }

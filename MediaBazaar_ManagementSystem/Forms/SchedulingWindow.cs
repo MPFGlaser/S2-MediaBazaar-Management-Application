@@ -51,6 +51,7 @@ namespace MediaBazaar_ManagementSystem
             this.capacity = capacity;
             this.previousSelectedDepartment = previousSelectedDepartment;
             this.loggedInUser = loggedInUser;
+            employeeStorage = new EmployeeMySQL();
 
             numericUpDownCapacity.Value = capacity;
             AddEmployeeListToShift(working);
@@ -186,12 +187,24 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="toAddToShift"></param>
         private void AddEmployeeListToShift(List<Employee> toAddToShift)
         {
-            listBoxCurrentEmployees.Items.Clear();
+            dataGridViewScheduling.Rows.Clear(); 
+            dataGridViewScheduling.Refresh();
             foreach (Employee e in toAddToShift)
             {
-                listBoxCurrentEmployees.DisplayMember = "Text";
-                listBoxCurrentEmployees.ValueMember = "Employee";
-                listBoxCurrentEmployees.Items.Add(new { Text = e.FirstName + " " + e.SurName, Employee = e });
+                int rowId = dataGridViewScheduling.Rows.Add();
+                DataGridViewRow row = dataGridViewScheduling.Rows[rowId];
+                row.Cells["id"].Value = e.Id;
+                row.Cells["firstName"].Value = e.FirstName;
+                row.Cells["surName"].Value = e.SurName;
+            }
+            foreach (DataGridViewRow row in dataGridViewScheduling.Rows)
+            {
+                int employeeid = Convert.ToInt32(row.Cells["id"].Value);
+                int nrofshifts = employeeStorage.CheckNrOfShifts(employeeid, this.date.Date.ToString("yyyy-MM-dd"));
+                if (nrofshifts > 2)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
             }
         }
 
@@ -212,7 +225,7 @@ namespace MediaBazaar_ManagementSystem
                 // Creates a new shift object and sets the list of employeeIds to the one we just created.
                 currentShift = new Shift(oldId, date, shiftTime, capacityNew);
                 // Removes all information about the shift in the shiftStorage to prevent duplication of entries
-                shiftStorage.Clear(oldId);
+                MessageBox.Show(shiftStorage.Clear(oldId).ToString()+oldId.ToString());
                 shiftId = oldId;
 
                 foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
@@ -288,9 +301,22 @@ namespace MediaBazaar_ManagementSystem
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
 
                 // Adds the selected employee to the listbox with currently scheduled employees.
-                listBoxCurrentEmployees.DisplayMember = "Text";
-                listBoxCurrentEmployees.ValueMember = "Employee";
-                listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
+                //listBoxCurrentEmployees.DisplayMember = "Text";
+                //listBoxCurrentEmployees.ValueMember = "Employee";
+                //listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
+                int rowId = dataGridViewScheduling.Rows.Add();
+                DataGridViewRow row = dataGridViewScheduling.Rows[rowId];
+                row.Cells["id"].Value = selectedEmployee.Id;
+                row.Cells["firstName"].Value = selectedEmployee.FirstName;
+                row.Cells["surName"].Value = selectedEmployee.SurName;
+
+                    int nrofshifts = employeeStorage.CheckNrOfShifts(selectedEmployee.Id, this.date.Date.ToString("yyyy-MM-dd"));
+                    
+                    if (nrofshifts > 2)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                
 
                 // Removes the employee from the list of available employees and resets the selection index.
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
@@ -303,13 +329,19 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void RemoveEmployeeFromShift()
         {
+            int index = dataGridViewScheduling.CurrentRow.Index;
             // Checks if there's actually an employee selected to be removed
-            if (listBoxCurrentEmployees.SelectedIndex != -1)
+            if (dataGridViewScheduling.SelectedRows.Count == 1)
             {
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
 
                 // Ensures the right employee object is used
-                Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+                //Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
+                DataGridViewRow row = dataGridViewScheduling.SelectedRows[0];
+                
+                int employeeID = Convert.ToInt32(row.Cells["ID"].Value);
+
+                Employee selectedEmployee = employeeStorage.Get(employeeID);
 
                 // Removes 4 hours from the selected employees hours
                 selectedEmployee.WorkingHours -= Globals.shiftDuration;
@@ -319,7 +351,7 @@ namespace MediaBazaar_ManagementSystem
                     // Selects the correct index from the combobox
                     Department dep = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
                     int selectedIndex = dep.Id - 1;
-
+                    
                     RemoveSelectedEmployee(selectedEmployee, selectedIndex);
                 }
                 else
@@ -345,15 +377,39 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void RemoveSelectedEmployee(Employee selectedEmployee, int selectedIndex)
         {
-            allDepartments[selectedIndex].Employees.Remove(selectedEmployee);
+           
 
             // Adds the selected employee to the combobox of available employees.
             comboBoxSelectEmployees.DisplayMember = "Text";
             comboBoxSelectEmployees.ValueMember = "Employee";
             comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
+            MessageBox.Show(allDepartments[selectedIndex].Employees.Count.ToString());
+            Employee comboEmployee = GetComboBoxEmployee(selectedEmployee).Employee;
+            allDepartments[selectedIndex].Employees.Remove(comboEmployee);
+            MessageBox.Show(allDepartments[selectedIndex].Employees.Count.ToString());
+
             // Removes the employee from the listbox of currently scheduled employee.
-            listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+            //listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
+            int selectedRowCount = dataGridViewScheduling.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                for (int i = 0; i < selectedRowCount; i++)
+                {
+                    dataGridViewScheduling.Rows.RemoveAt(dataGridViewScheduling.SelectedRows[0].Index);
+                }
+            }
+        }
+
+        private dynamic GetComboBoxEmployee(Employee selectedEmployee)
+        {
+            Employee emp = null;
+            foreach (dynamic empDynamic in comboBoxSelectEmployees.Items)
+            {
+                emp = (empDynamic).Employee;
+                if (emp.Id == selectedEmployee.Id) return empDynamic;
+            }
+            return emp;
         }
 
         /// <summary>
@@ -465,7 +521,12 @@ namespace MediaBazaar_ManagementSystem
         {
             List<Department> allDepartments = GetDepartmentListFromComboBox();
             int selectedIndex = comboBoxSelectDepartments.SelectedIndex;
-            allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
+            if (selectedIndex < 0)
+            {
+                numericUpDownCapacity.Value = 0;
+                MessageBox.Show("Please select a department!");
+            }
+            else allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
         }
 
         private async void Blink()
