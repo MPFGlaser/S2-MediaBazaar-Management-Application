@@ -309,5 +309,34 @@ namespace MediaBazaar_ManagementSystem
 
             return weekShiftIds;
         }
+
+        public int CheckNrOfShifts(int id, string date)
+        {
+            int appearence = 0;
+            string query = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId in (SELECT id FROM shifts where date=@date);";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@date", date);
+            command.Parameters.AddWithValue("@id", id);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appearence++;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return appearence;
+        }
     }
 }
