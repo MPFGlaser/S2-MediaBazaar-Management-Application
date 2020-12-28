@@ -20,6 +20,7 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allEmployees = new List<Employee>();
         List<Shift> allWeekShifts = new List<Shift>();
         ProductDetailsWindow pdw;
+        ClockInOutWindow ciow;
         Employee loggedInUser;
         ProductRestockDetailsWindow prdw;
         WeekShiftsCapacityEditor wsce;
@@ -406,6 +407,17 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
+        /// Opens a new ClockInOutWindow so the user can clock in or out an employee
+        /// </summary>
+        private void ClockInOutAnEmployee()
+        {
+            int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+            ciow = new ClockInOutWindow(id);
+            ciow.Show();
+            
+        }
+
+        /// <summary>
         /// Adds a department to the combobox and departmentStorage
         /// </summary>
         private void EmployeeDepartmentAdd()
@@ -758,6 +770,11 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlFriday.CurrentSelectedDepartment = selected;
             calendarDayControlSaturday.CurrentSelectedDepartment = selected;
             calendarDayControlSunday.CurrentSelectedDepartment = selected;
+        }
+
+        private void btnClockinOut_Click(object sender, EventArgs e)
+        {
+            ClockInOutAnEmployee();
         }
 
         private void buttonEditFunctionPermissions_Click(object sender, EventArgs e)
