@@ -157,9 +157,22 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Department dep = depDynamic.Department;
                     if (dep.Id == currentDepartmentId)
                     {
-                        if (valuesToSave.ContainsKey(s.Id))
+                        if (allDepartmentCapacityInWeek.ContainsKey(currentDepartmentId))
                         {
-                            allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
+                            if (valuesToSave.ContainsKey(s.Id))
+                            {
+                                allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
+                            }
+                        }
+                        else
+                        {
+                            if (valuesToSave.ContainsKey(s.Id))
+                            {
+                                Dictionary<int, int> temp = new Dictionary<int, int>();
+                                temp.Add(currentDepartmentId, valuesToSave[s.Id][currentDepartmentId]);
+                                allDepartmentCapacityInWeek.Add(s.Id,temp);
+                            }
+                            
                         }
                     }
                 }
@@ -313,13 +326,22 @@ namespace MediaBazaar_ManagementSystem.Forms
 
             foreach (Shift s in weekShifts)
             {
-                Dictionary<int, int> temp = valuesToSave[s.Id];
-                int capacity = temp[currentDepartmentId];
-                bool shiftUpdateSucceeded = false;
-                while (shiftUpdateSucceeded == false)
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
                 {
-                    //Currently only updates existing shifts... has to also add shifts if necessary...
-                    shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, currentDepartmentId, capacity);
+                    Department dep = depDynamic.Department;
+                    if (allDepartmentCapacityInWeek.ContainsKey(s.Id))
+                    {
+                        Dictionary<int, int> temp = allDepartmentCapacityInWeek[s.Id];
+                        if (temp.ContainsKey(dep.Id))
+                        {
+                            int capacity = temp[dep.Id];
+                            bool shiftUpdateSucceeded = false;
+                            while (shiftUpdateSucceeded == false)
+                            {
+                                shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, dep.Id, capacity);
+                            }
+                        }
+                    }
                 }
             }
             this.DialogResult = DialogResult.OK;

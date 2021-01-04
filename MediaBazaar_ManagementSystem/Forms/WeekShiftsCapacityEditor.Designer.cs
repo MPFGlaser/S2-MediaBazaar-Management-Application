@@ -114,7 +114,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(536, 202);
+            this.buttonConfirm.Location = new System.Drawing.Point(1011, 151);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
             this.buttonConfirm.TabIndex = 22;
@@ -125,7 +125,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 202);
+            this.buttonCancel.Location = new System.Drawing.Point(21, 151);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 23;
@@ -141,7 +141,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxMonday.Controls.Add(this.numericUpDownMondayMorning);
             this.groupBoxMonday.Controls.Add(this.label3);
             this.groupBoxMonday.Controls.Add(this.label2);
-            this.groupBoxMonday.Location = new System.Drawing.Point(165, 12);
+            this.groupBoxMonday.Location = new System.Drawing.Point(21, 56);
             this.groupBoxMonday.Name = "groupBoxMonday";
             this.groupBoxMonday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxMonday.TabIndex = 6;
@@ -222,7 +222,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxTuesday.Controls.Add(this.numericUpDownTuesdayMorning);
             this.groupBoxTuesday.Controls.Add(this.label5);
             this.groupBoxTuesday.Controls.Add(this.label6);
-            this.groupBoxTuesday.Location = new System.Drawing.Point(318, 12);
+            this.groupBoxTuesday.Location = new System.Drawing.Point(174, 56);
             this.groupBoxTuesday.Name = "groupBoxTuesday";
             this.groupBoxTuesday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxTuesday.TabIndex = 21;
@@ -303,7 +303,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxWednesday.Controls.Add(this.numericUpDownWednesdayMorning);
             this.groupBoxWednesday.Controls.Add(this.label8);
             this.groupBoxWednesday.Controls.Add(this.label9);
-            this.groupBoxWednesday.Location = new System.Drawing.Point(471, 12);
+            this.groupBoxWednesday.Location = new System.Drawing.Point(327, 56);
             this.groupBoxWednesday.Name = "groupBoxWednesday";
             this.groupBoxWednesday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxWednesday.TabIndex = 21;
@@ -384,7 +384,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxThursday.Controls.Add(this.numericUpDownThursdayMorning);
             this.groupBoxThursday.Controls.Add(this.label11);
             this.groupBoxThursday.Controls.Add(this.label12);
-            this.groupBoxThursday.Location = new System.Drawing.Point(12, 107);
+            this.groupBoxThursday.Location = new System.Drawing.Point(480, 56);
             this.groupBoxThursday.Name = "groupBoxThursday";
             this.groupBoxThursday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxThursday.TabIndex = 21;
@@ -465,7 +465,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxFriday.Controls.Add(this.numericUpDownFridayMorning);
             this.groupBoxFriday.Controls.Add(this.label14);
             this.groupBoxFriday.Controls.Add(this.label15);
-            this.groupBoxFriday.Location = new System.Drawing.Point(165, 107);
+            this.groupBoxFriday.Location = new System.Drawing.Point(633, 56);
             this.groupBoxFriday.Name = "groupBoxFriday";
             this.groupBoxFriday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxFriday.TabIndex = 21;
@@ -546,7 +546,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxSaturday.Controls.Add(this.numericUpDownSaturdayMorning);
             this.groupBoxSaturday.Controls.Add(this.label17);
             this.groupBoxSaturday.Controls.Add(this.label18);
-            this.groupBoxSaturday.Location = new System.Drawing.Point(318, 107);
+            this.groupBoxSaturday.Location = new System.Drawing.Point(786, 56);
             this.groupBoxSaturday.Name = "groupBoxSaturday";
             this.groupBoxSaturday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxSaturday.TabIndex = 21;
@@ -627,7 +627,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.groupBoxSunday.Controls.Add(this.numericUpDownSundayMorning);
             this.groupBoxSunday.Controls.Add(this.label20);
             this.groupBoxSunday.Controls.Add(this.label21);
-            this.groupBoxSunday.Location = new System.Drawing.Point(471, 107);
+            this.groupBoxSunday.Location = new System.Drawing.Point(939, 56);
             this.groupBoxSunday.Name = "groupBoxSunday";
             this.groupBoxSunday.Size = new System.Drawing.Size(147, 89);
             this.groupBoxSunday.TabIndex = 21;
@@ -712,7 +712,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(18, 12);
+            this.label22.Location = new System.Drawing.Point(18, 9);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(62, 13);
             this.label22.TabIndex = 25;
@@ -724,7 +724,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(625, 237);
+            this.ClientSize = new System.Drawing.Size(1104, 181);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.comboBoxSelectDepartment);
             this.Controls.Add(this.groupBoxSunday);
@@ -737,9 +737,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.groupBoxMonday);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(641, 276);
+            this.MaximumSize = new System.Drawing.Size(1120, 220);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(641, 276);
+            this.MinimumSize = new System.Drawing.Size(1120, 220);
             this.Name = "WeekShiftsCapacityEditor";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
