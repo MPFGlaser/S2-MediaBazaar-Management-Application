@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaBazaar_ManagementSystem.Classes.Scheduling
+namespace MediaBazaar_ManagementSystem
 {
     /// <summary>
     /// 
     /// </summary>
-    class WorkingEmployee
+    public class WorkingEmployee
     {
         private int shiftId, employeeId, departmentId;
 
