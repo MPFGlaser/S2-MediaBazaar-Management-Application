@@ -82,11 +82,22 @@ namespace UnitTests
         {
             List<Employee> employees = new List<Employee>();
 
+            // All days preferred
             employees.Add(new Employee(1, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-            employees.Add(new Employee(2, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-            employees.Add(new Employee(3, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-            employees.Add(new Employee(4, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-            employees.Add(new Employee(5, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
+
+            // Only wants to work on Tuesdays, Thursdays, and Saturdays.
+            employees.Add(new Employee(2, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "000111000111000111000", "9,5,7,2,6,3,1,8,4", 40));
+
+            // Can't work evenings
+            employees.Add(new Employee(3, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "110110110110110110110", "9,5,7,2,6,3,1,8,4", 40));
+
+            // Only works afternoons
+            employees.Add(new Employee(4, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "010010010010010010010", "9,5,7,2,6,3,1,8,4", 40));
+
+            // Only works mornings
+            employees.Add(new Employee(5, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "100100100100100100100", "9,5,7,2,6,3,1,8,4", 40));
+
+
             employees.Add(new Employee(6, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(7, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(8, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
@@ -102,14 +113,30 @@ namespace UnitTests
             employees.Add(new Employee(18, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(19, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(20, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-            employees.Add(new Employee(21, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
+
+            // Not enough contract hours anymore
+            employees.Add(new Employee(21, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 8));
 
             return employees;
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void PreferredHoursFilterForMondayEveningTest()
         {
+            IFilter preferredHours = new FilterPreferredHours();
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = employees;
+            controlEmployees.RemoveAt(1);
+            controlEmployees.RemoveAt(2);
+            controlEmployees.RemoveAt(3);
+            controlEmployees.RemoveAt(4);
+
+            List<Employee> availableEmployees = preferredHours.Filter(shifts[2], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(availableEmployees, controlEmployees);
         }
     }
 }
