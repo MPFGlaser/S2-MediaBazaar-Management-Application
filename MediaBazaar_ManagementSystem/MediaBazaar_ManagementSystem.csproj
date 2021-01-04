@@ -115,6 +115,7 @@
     <Compile Include="Classes\Login\LoginMySQL.cs" />
     <Compile Include="Classes\Scheduling\FilterAlreadyScheduled.cs" />
     <Compile Include="Classes\Scheduling\FilterContractHoursViolation.cs" />
+    <Compile Include="Classes\Scheduling\FilterNotAllowedInDepartment.cs" />
     <Compile Include="Classes\Scheduling\FilterPreferredHours.cs" />
     <Compile Include="Classes\Scheduling\FilterScheduledTwiceAlready.cs" />
     <Compile Include="Classes\Scheduling\FilterSickOrDayOff.cs" />
