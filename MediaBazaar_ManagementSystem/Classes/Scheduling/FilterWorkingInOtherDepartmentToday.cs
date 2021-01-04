@@ -5,7 +5,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public class FilterWorkingInOtherDepartmentToday : IFilter
     {
-        public List<Employee> Filter(List<WorkingEmployee> workingEmployees, List<Employee> employees)
+        public List<Employee> Filter(Shift shift, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
         {
             throw new NotImplementedException();
         }
