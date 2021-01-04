@@ -20,5 +20,7 @@ namespace MediaBazaar_ManagementSystem
         int CheckNrOfShifts(int id, string date);
 
         List<(int, DateTime)> GetAbsentDays();
+
+        List<WorkingEmployee> GetWorkingEmployees();
     }
 }

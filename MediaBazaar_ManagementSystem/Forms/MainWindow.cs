@@ -627,11 +627,12 @@ namespace MediaBazaar_ManagementSystem
         private void StartAutomaticScheduling()
         {
             employeeStorage = new EmployeeMySQL();
-            List<Employee> allEmployees = employeeStorage.GetAll(true);
+            List<Employee> availableEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
-            CreateMissingShifts(); //Use allWeekShifts
+            List<WorkingEmployee> currentWorkingEmployees = employeeStorage.GetWorkingEmployees();
+            CreateMissingShifts();
 
-            foreach(Employee e in allEmployees)
+            foreach(Employee e in availableEmployees)
             {
                 foreach((int employeeId, DateTime absentDate) absentList in absentDays)
                 {
@@ -644,7 +645,7 @@ namespace MediaBazaar_ManagementSystem
 
             foreach(Shift s in allWeekShifts)
             {
-                //Schedule(s, allWeekShifts, (workingemployeeslist), allEmployees);
+                //Schedule(s, allWeekShifts, currentWorkingEmployees, allEmployees);
             }
         }
         #endregion
