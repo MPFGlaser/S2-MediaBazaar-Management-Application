@@ -760,5 +760,34 @@ namespace MediaBazaar_ManagementSystem
             }
             return date;
         }
+
+        public List<int> GetAllShiftIds()
+        {
+            List<int> shiftIds = new List<int>();
+
+            String query = "SELECT id FROM shifts";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    shiftIds.Add(Convert.ToInt32(reader[0]));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return shiftIds;
+        }
     }
 }

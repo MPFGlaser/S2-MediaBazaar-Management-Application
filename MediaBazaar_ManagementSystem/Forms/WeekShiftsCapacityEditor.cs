@@ -103,7 +103,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         /// </summary>
         private void CreateMissingShifts()
         {
-            shiftStorage = new ShiftMySQL();
+            /*shiftStorage = new ShiftMySQL();
             List<Shift> tempNewShifts = new List<Shift>();
 
             foreach(DateTime date in weekdays)
@@ -142,7 +142,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                         shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
                 }
                 weekShifts.Add(s);
-            }
+            }*/
         }
 
         /// <summary>

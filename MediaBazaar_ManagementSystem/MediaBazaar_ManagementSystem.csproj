@@ -113,6 +113,14 @@
     <Compile Include="Classes\Item\Stock.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
+    <Compile Include="Classes\Scheduling\FilterAlreadyScheduled.cs" />
+    <Compile Include="Classes\Scheduling\FilterContractHoursViolation.cs" />
+    <Compile Include="Classes\Scheduling\FilterPreferredHours.cs" />
+    <Compile Include="Classes\Scheduling\FilterScheduledTwiceAlready.cs" />
+    <Compile Include="Classes\Scheduling\FilterSickOrDayOff.cs" />
+    <Compile Include="Classes\Scheduling\FilterWorkingInOtherDepartmentToday.cs" />
+    <Compile Include="Classes\Scheduling\IFilter.cs" />
+    <Compile Include="Classes\Scheduling\WorkingEmployee.cs" />
     <Compile Include="Classes\Shift\EmployeeShift.cs" />
     <Compile Include="Classes\Shift\IShiftStorage.cs" />
     <Compile Include="Classes\Shift\Shift.cs" />

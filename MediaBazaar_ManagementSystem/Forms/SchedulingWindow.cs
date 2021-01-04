@@ -356,17 +356,6 @@ namespace MediaBazaar_ManagementSystem
                 }
                 else
                 {
-                    /*foreach (Department d in allDepartments)
-                    {
-                        List<Employee> employeesInDepartment = d.Employees;
-                        foreach (Employee e in d.Employees)
-                        {
-                            if (e.Equals(selectedEmployee))
-                            {
-                                RemoveSelectedEmployee(selectedEmployee, d.Id - 1);
-                            }
-                        }
-                    }*/
                     MessageBox.Show("Please select a department first");
                 }
             }
