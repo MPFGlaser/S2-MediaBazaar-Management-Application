@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem
 {
-    public class FilterSickOrDayOff : IFilter
+    public class FilterNotAllowedInDepartment : IFilter
     {
         public List<Employee> Filter(Shift shift, int departmentId, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
         {
@@ -11,7 +14,9 @@ namespace MediaBazaar_ManagementSystem
 
             foreach(Employee employee in employees)
             {
-                if (!employee.NotWorkingDays.Contains(shift.Date))
+                string[] workingDepartments = employee.WorkingDepartments.Split(',');
+
+                if (workingDepartments.Contains(departmentId.ToString()))
                 {
                     output.Add(employee);
                 }
