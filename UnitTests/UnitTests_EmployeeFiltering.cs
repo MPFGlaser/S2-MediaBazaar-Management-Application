@@ -66,7 +66,13 @@ namespace UnitTests
             workingEmployees.Add(new WorkingEmployee(5, 27, 3));
             workingEmployees.Add(new WorkingEmployee(6, 27, 3));
             workingEmployees.Add(new WorkingEmployee(7, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(8, 27, 3));
+
+            workingEmployees.Add(new WorkingEmployee(8, 2, 3));
+            workingEmployees.Add(new WorkingEmployee(8, 5, 3));
+            workingEmployees.Add(new WorkingEmployee(8, 8, 3));
+            workingEmployees.Add(new WorkingEmployee(8, 17, 3));
+            workingEmployees.Add(new WorkingEmployee(8, 20, 3));
+
             workingEmployees.Add(new WorkingEmployee(9, 27, 3));
             workingEmployees.Add(new WorkingEmployee(10, 27, 3));
             workingEmployees.Add(new WorkingEmployee(11, 27, 3));
@@ -226,6 +232,28 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 15);
 
             List<Employee> availableEmployees = scheduledAlready.Filter(shifts[0], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod]
+        public void AlreadyScheduledOnWednesdayAfternoonTest()
+        {
+            IFilter scheduledAlready = new FilterAlreadyScheduled();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 2);
+            controlEmployees.RemoveAll(employee => employee.Id == 5);
+            controlEmployees.RemoveAll(employee => employee.Id == 8);
+            controlEmployees.RemoveAll(employee => employee.Id == 17);
+            controlEmployees.RemoveAll(employee => employee.Id == 20);
+
+            List<Employee> availableEmployees = scheduledAlready.Filter(shifts[7], shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
