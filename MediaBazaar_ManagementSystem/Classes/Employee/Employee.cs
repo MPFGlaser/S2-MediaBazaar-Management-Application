@@ -37,6 +37,7 @@ namespace MediaBazaar_ManagementSystem
             this.preferredHours = preferredHours;
             this.workingDepartments = workingDepartments;
             this.contractHours = contractHours;
+            this.notWorkingDays = new List<DateTime>();
         }
 
         #region Properties
