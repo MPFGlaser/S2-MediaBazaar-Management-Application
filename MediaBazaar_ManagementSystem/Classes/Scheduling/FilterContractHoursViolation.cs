@@ -9,5 +9,10 @@ namespace MediaBazaar_ManagementSystem
         {
             throw new NotImplementedException();
         }
+
+        public List<Employee> Filter(List<WorkingEmployee> workingEmployees, List<Employee> employees)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

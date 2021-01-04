@@ -18,5 +18,7 @@ namespace MediaBazaar_ManagementSystem
         List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday);
 
         int CheckNrOfShifts(int id, string date);
+
+        List<(int, DateTime)> GetAbsentDays();
     }
 }

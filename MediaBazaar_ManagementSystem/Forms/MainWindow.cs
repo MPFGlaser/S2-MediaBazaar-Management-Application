@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+using System.Linq;
 using Microsoft.VisualBasic;
 using MediaBazaar_ManagementSystem.Forms;
 
@@ -560,8 +561,9 @@ namespace MediaBazaar_ManagementSystem
         private void SetCapacityWholeWeek()
         {
             int selectedId = -1;
+            CreateMissingShifts();
 
-            if(comboBoxSchedulingDepartment.SelectedIndex > -1)
+            if (comboBoxSchedulingDepartment.SelectedIndex > -1)
             {
                 dynamic selectedDynamic = comboBoxSchedulingDepartment.SelectedItem;
                 Department selectedDepartment = selectedDynamic.Department;
@@ -572,6 +574,77 @@ namespace MediaBazaar_ManagementSystem
             if (wsce.ShowDialog() == DialogResult.OK)
             {
                 SetupCorrectWeekData();                
+            }
+        }
+
+        private void CreateMissingShifts()
+        {
+            shiftStorage = new ShiftMySQL();
+            List<Shift> tempNewShifts = new List<Shift>();
+
+            foreach (DateTime date in weekDays)
+            {
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Morning) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Morning, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Evening, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
+                    tempNewShifts.Add(s2);
+                }
+            }
+
+            foreach (Shift s in tempNewShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSchedulingDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+
+                    shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
+                }
+                allWeekShifts.Add(s);
+            }
+        }
+
+        /// <summary>
+        /// Starts the automated scheduling.
+        /// </summary>
+        private void StartAutomaticScheduling()
+        {
+            employeeStorage = new EmployeeMySQL();
+            List<Employee> allEmployees = employeeStorage.GetAll(true);
+            List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
+            CreateMissingShifts(); //Use allWeekShifts
+
+            foreach(Employee e in allEmployees)
+            {
+                foreach((int employeeId, DateTime absentDate) absentList in absentDays)
+                {
+                    if(e.Id == absentList.employeeId)
+                    {
+                        e.NotWorkingDays.Add(absentList.absentDate);
+                    }
+                }
+            }
+
+            foreach(Shift s in allWeekShifts)
+            {
+                //Schedule(s, allWeekShifts, (workingemployeeslist), allEmployees);
             }
         }
         #endregion

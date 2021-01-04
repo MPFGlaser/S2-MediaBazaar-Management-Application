@@ -233,7 +233,7 @@ namespace MediaBazaar_ManagementSystem
         {
             List<int> weekShiftIds = GetShiftIdsInWeek(monday, sunday);
             List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-            int index = 0;
+            //int index = 0;
 
             String working_employees = "SELECT shiftId, employeeId FROM working_employees";
             MySqlCommand working_employeesCommand = new MySqlCommand(working_employees, connection);
@@ -337,6 +337,33 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
             return appearence;
+        }
+
+        public List<(int, DateTime)> GetAbsentDays()
+        {
+            List<(int, DateTime)> allAbsentDays = new List<(int, DateTime)>();
+            string query = "SELECT employeeId, date FROM reports;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    allAbsentDays.Add((Convert.ToInt32(reader[0]), DateTime.Parse(reader.GetString(1))));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return allAbsentDays;
         }
     }
 }
