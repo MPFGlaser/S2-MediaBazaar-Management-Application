@@ -5,7 +5,7 @@ namespace MediaBazaar_ManagementSystem
 {
     public class FilterPreferredHours : IFilter
     {
-        public List<Employee> Filter(Shift shift, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
+        public List<Employee> Filter(Shift shift, int departmentId, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
         {
             List<Employee> output = new List<Employee>();
             DayOfWeek day = shift.Date.DayOfWeek;
