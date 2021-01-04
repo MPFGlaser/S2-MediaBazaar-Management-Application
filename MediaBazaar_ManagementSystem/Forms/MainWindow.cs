@@ -630,7 +630,9 @@ namespace MediaBazaar_ManagementSystem
             List<Employee> availableEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
             List<WorkingEmployee> currentWorkingEmployees = employeeStorage.GetWorkingEmployees();
+            List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             CreateMissingShifts();
+            bool isEditing;
 
             foreach(Employee e in availableEmployees)
             {
@@ -643,9 +645,78 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
+            //MAX ZN SHIT
+
             foreach(Shift s in allWeekShifts)
             {
-                //Schedule(s, allWeekShifts, currentWorkingEmployees, allEmployees);
+
+                if (allShiftIds.Contains(s.Id))
+                {
+                    isEditing = true;
+                }
+                else
+                {
+                    isEditing = false;
+                }
+                
+                Schedule(s, allEmployees, isEditing);
+            }
+        }
+
+        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, bool isEditing)
+        {
+            // Makes sure everything is set up correctly.
+            shiftStorage = new ShiftMySQL();
+            List<int> workingEmployeeIds = new List<int>();
+            int capacityNew = Convert.ToInt32(numericUpDownCapacity.Value);
+            int shiftId = 0;
+
+            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
+            if (isEditing)
+            {
+                // Creates a new shift object and sets the list of employeeIds to the one we just created.
+                currentShift = new Shift(oldId, date, shiftTime, capacityNew);
+                // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+                shiftStorage.Clear(oldId);
+                shiftId = oldId;
+
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department dep = (depDynamic).Department;
+                    if (departmentCapacity.ContainsKey(dep.Id))
+                    {
+                        shiftStorage.UpdateCapacityPerDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
+                    else
+                    {
+                        shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                    }
+                }
+            }
+            else
+            {
+                // Creates a new shift object and sets the list of employeeIds to the one we just created.
+                currentShift = new Shift(0, date, shiftTime, capacityNew);
+                shiftId = shiftStorage.Create(currentShift);
+
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+                {
+                    Department dep = (depDynamic).Department;
+                    shiftStorage.AddCapacityForDepartment(shiftId, dep.Id, dep.Capacity);
+                }
+            }
+
+
+            foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
+            {
+                Department dep = (depDynamic).Department;
+
+                // Makes a list of all ids of the employees scheduled for that shift
+                foreach (Employee emp in dep.Employees)
+                {
+                    //workingEmployeeIds.Add(emp.Id);
+                    shiftStorage.Assign(shiftId, emp.Id, dep.Id);
+                }
             }
         }
         #endregion
