@@ -128,15 +128,16 @@ namespace UnitTests
             List<Shift> shifts = GenerateShiftList();
             List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
 
-            List<Employee> controlEmployees = employees;
-            controlEmployees.RemoveAt(1);
-            controlEmployees.RemoveAt(2);
-            controlEmployees.RemoveAt(3);
-            controlEmployees.RemoveAt(4);
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 2);
+            controlEmployees.RemoveAll(employee => employee.Id == 3);
+            controlEmployees.RemoveAll(employee => employee.Id == 4);
+            controlEmployees.RemoveAll(employee => employee.Id == 5);
 
             List<Employee> availableEmployees = preferredHours.Filter(shifts[2], shifts, workingEmployees, employees);
 
-            CollectionAssert.AreEquivalent(availableEmployees, controlEmployees);
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
     }
 }

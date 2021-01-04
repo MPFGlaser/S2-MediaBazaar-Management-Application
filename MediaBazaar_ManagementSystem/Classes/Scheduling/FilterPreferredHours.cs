@@ -14,7 +14,7 @@ namespace MediaBazaar_ManagementSystem
             foreach(Employee employee in employees)
             {
                 List<String> employeePreferredHours = SplitPreferredHours(employee.PreferredHours);
-                if(!WantsToWorkShift(day, shiftTime, employeePreferredHours))
+                if(WantsToWorkShift(day, shiftTime, employeePreferredHours))
                 {
                     output.Add(employee);
                 }
@@ -84,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
             switch (shiftTime)
             {
                 case ShiftTime.Morning:
-                    if(preferredHours[0] == 1)
+                    if(preferredHours[0].ToString() == "1")
                     {
                         return true;
                     }
@@ -93,7 +93,7 @@ namespace MediaBazaar_ManagementSystem
                         return false;
                     }
                 case ShiftTime.Afternoon:
-                    if (preferredHours[1] == 1)
+                    if (preferredHours[1].ToString() == "1")
                     {
                         return true;
                     }
@@ -102,7 +102,7 @@ namespace MediaBazaar_ManagementSystem
                         return false;
                     }
                 case ShiftTime.Evening:
-                    if (preferredHours[2] == 1)
+                    if (preferredHours[2].ToString() == "1")
                     {
                         return true;
                     }
