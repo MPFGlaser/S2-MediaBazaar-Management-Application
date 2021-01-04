@@ -5,9 +5,19 @@ namespace MediaBazaar_ManagementSystem
 {
     public class FilterSickOrDayOff : IFilter
     {
-        public List<Employee> Filter(Shift shift, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
+        public List<Employee> Filter(Shift shift, int departmentId, List<Shift> weekShifts, List<WorkingEmployee> workingEmployees, List<Employee> employees)
         {
-            throw new NotImplementedException();
+            List<Employee> output = new List<Employee>();
+
+            foreach(Employee employee in employees)
+            {
+                if (!employee.NotWorkingDays.Contains(shift.Date))
+                {
+                    output.Add(employee);
+                }
+            }
+
+            return output;
         }
     }
 }
