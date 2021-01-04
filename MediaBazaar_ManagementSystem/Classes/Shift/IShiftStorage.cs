@@ -15,6 +15,8 @@ namespace MediaBazaar_ManagementSystem
 
         int Exists(DateTime date, ShiftTime time);
 
+        List<int> GetAllShiftIds();
+
         Shift Get(DateTime date, ShiftTime time);
 
         List<Shift> GetShiftsByEmployee(int id, string date);

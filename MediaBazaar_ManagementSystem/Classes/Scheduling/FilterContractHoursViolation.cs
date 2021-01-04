@@ -32,5 +32,10 @@ namespace MediaBazaar_ManagementSystem
 
             return output;
         }
+
+        public List<Employee> Filter(List<WorkingEmployee> workingEmployees, List<Employee> employees)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
