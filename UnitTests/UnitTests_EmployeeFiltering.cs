@@ -58,6 +58,7 @@ namespace UnitTests
 
             // Employee 1 is scheduled twice already for Monday
             workingEmployees.Add(new WorkingEmployee(1, 1, 3));
+            workingEmployees.Add(new WorkingEmployee(1, 15, 3));
             workingEmployees.Add(new WorkingEmployee(2, 1, 3));
             workingEmployees.Add(new WorkingEmployee(3, 2, 3));
 
@@ -206,6 +207,25 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 11);
 
             List<Employee> availableEmployees = scheduledTwiceAlready.Filter(shifts[19], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod]
+        public void AlreadyScheduledOnMondayMorningTest()
+        {
+            IFilter scheduledAlready = new FilterAlreadyScheduled();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 1);
+            controlEmployees.RemoveAll(employee => employee.Id == 15);
+
+            List<Employee> availableEmployees = scheduledAlready.Filter(shifts[0], shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
