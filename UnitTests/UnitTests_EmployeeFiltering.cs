@@ -97,8 +97,9 @@ namespace UnitTests
             // Only works mornings
             employees.Add(new Employee(5, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "100100100100100100100", "9,5,7,2,6,3,1,8,4", 40));
 
+            // Can work all days except for Mondays & Saturdays
+            employees.Add(new Employee(6, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "000111111111111000111", "9,5,7,2,6,3,1,8,4", 40));
 
-            employees.Add(new Employee(6, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(7, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(8, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(9, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
@@ -134,8 +135,27 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 3);
             controlEmployees.RemoveAll(employee => employee.Id == 4);
             controlEmployees.RemoveAll(employee => employee.Id == 5);
+            controlEmployees.RemoveAll(employee => employee.Id == 6);
 
             List<Employee> availableEmployees = preferredHours.Filter(shifts[2], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod]
+        public void PreferredHoursFilterForSaturdayMorningTest()
+        {
+            IFilter preferredHours = new FilterPreferredHours();
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 4);
+            controlEmployees.RemoveAll(employee => employee.Id == 6);
+
+            List<Employee> availableEmployees = preferredHours.Filter(shifts[15], shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
