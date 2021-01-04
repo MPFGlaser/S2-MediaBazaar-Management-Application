@@ -56,20 +56,33 @@ namespace UnitTests
             // Data based on that found in the production database as of 2020/01/04 11:15
             List<WorkingEmployee> workingEmployees = new List<WorkingEmployee>();
 
-            workingEmployees.Add(new WorkingEmployee(22, 7, 9));
-            workingEmployees.Add(new WorkingEmployee(8, 7, 9));
-            workingEmployees.Add(new WorkingEmployee(8, 7, 9));
-            workingEmployees.Add(new WorkingEmployee(44, 7, 9));
-            workingEmployees.Add(new WorkingEmployee(46, 18, 9));
-            workingEmployees.Add(new WorkingEmployee(43, 18, 9));
-            workingEmployees.Add(new WorkingEmployee(69, 27, 0));
-            workingEmployees.Add(new WorkingEmployee(70, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(71, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(72, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(73, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(74, 27, 3));
-            workingEmployees.Add(new WorkingEmployee(75, 27, 3));
+            // Employee 1 is scheduled twice already for Monday
+            workingEmployees.Add(new WorkingEmployee(1, 1, 3));
+            workingEmployees.Add(new WorkingEmployee(2, 1, 3));
+            workingEmployees.Add(new WorkingEmployee(3, 2, 3));
 
+            workingEmployees.Add(new WorkingEmployee(4, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(5, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(6, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(7, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(8, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(9, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(10, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(11, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(12, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(13, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(14, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(15, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(16, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(17, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(18, 27, 3));
+
+            // Employee 9 & 11 is scheduled twice already for Sunday
+            workingEmployees.Add(new WorkingEmployee(19, 9, 3));
+            workingEmployees.Add(new WorkingEmployee(20, 27, 3));
+            workingEmployees.Add(new WorkingEmployee(21, 9, 3));
+            workingEmployees.Add(new WorkingEmployee(19, 11, 3));
+            workingEmployees.Add(new WorkingEmployee(21, 11, 3));
 
             return workingEmployees;
         }
@@ -156,6 +169,43 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 6);
 
             List<Employee> availableEmployees = preferredHours.Filter(shifts[15], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod]
+        public void ScheduledTwiceOnMondayEveningTest()
+        {
+            IFilter scheduledTwiceAlready = new FilterScheduledTwiceAlready();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 1);
+
+            List<Employee> availableEmployees = scheduledTwiceAlready.Filter(shifts[2], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod]
+        public void ScheduledTwiceOnSundayAfternoonTest()
+        {
+            IFilter scheduledTwiceAlready = new FilterScheduledTwiceAlready();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            controlEmployees.RemoveAll(employee => employee.Id == 9);
+            controlEmployees.RemoveAll(employee => employee.Id == 11);
+
+            List<Employee> availableEmployees = scheduledTwiceAlready.Filter(shifts[19], shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
