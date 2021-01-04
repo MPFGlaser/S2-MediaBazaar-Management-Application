@@ -141,7 +141,7 @@ namespace UnitTests
             return employees;
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Preferred Hours")]
         public void PreferredHoursFilterForMondayEveningTest()
         {
             IFilter preferredHours = new FilterPreferredHours();
@@ -162,7 +162,7 @@ namespace UnitTests
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Preferred Hours")]
         public void PreferredHoursFilterForSaturdayMorningTest()
         {
             IFilter preferredHours = new FilterPreferredHours();
@@ -180,7 +180,7 @@ namespace UnitTests
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Scheduled Twice")]
         public void ScheduledTwiceOnMondayEveningTest()
         {
             IFilter scheduledTwiceAlready = new FilterScheduledTwiceAlready();
@@ -198,7 +198,7 @@ namespace UnitTests
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Scheduled Twice")]
         public void ScheduledTwiceOnSundayAfternoonTest()
         {
             IFilter scheduledTwiceAlready = new FilterScheduledTwiceAlready();
@@ -217,7 +217,7 @@ namespace UnitTests
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Already scheduled")]
         public void AlreadyScheduledOnMondayMorningTest()
         {
             IFilter scheduledAlready = new FilterAlreadyScheduled();
@@ -236,7 +236,7 @@ namespace UnitTests
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Already scheduled")]
         public void AlreadyScheduledOnWednesdayAfternoonTest()
         {
             IFilter scheduledAlready = new FilterAlreadyScheduled();
@@ -254,6 +254,114 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 20);
 
             List<Employee> availableEmployees = scheduledAlready.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Already scheduled in other department")]
+        public void AlreadyScheduledInOtherDepartmentOnThursdayTest()
+        {
+            IFilter scheduledInOtherDepartment = new FilterWorkingInOtherDepartmentToday();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = scheduledInOtherDepartment.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Already scheduled in other department")]
+        public void AlreadyScheduledInOtherDepartmentOnTuesdayTest()
+        {
+            IFilter scheduledInOtherDepartment = new FilterWorkingInOtherDepartmentToday();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = scheduledInOtherDepartment.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Sick or day off")]
+        public void SickOnMondayTest()
+        {
+            IFilter sickOrDayOff = new FilterSickOrDayOff();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = sickOrDayOff.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Sick or day off")]
+        public void SickOnSundayTest()
+        {
+            IFilter sickOrDayOff = new FilterSickOrDayOff();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = sickOrDayOff.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Exceeded contract hours")]
+        public void ExceededContractHoursOnFridayTest()
+        {
+            IFilter contractHoursViolation = new FilterContractHoursViolation();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = contractHoursViolation.Filter(shifts[7], shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("Exceeded contract hours")]
+        public void ExceededContractHoursOnWednesdayTest()
+        {
+            IFilter contractHoursViolation = new FilterContractHoursViolation();
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            List<Employee> availableEmployees = contractHoursViolation.Filter(shifts[7], shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
