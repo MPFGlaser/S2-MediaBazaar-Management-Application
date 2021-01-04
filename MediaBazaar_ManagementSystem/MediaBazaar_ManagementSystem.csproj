@@ -120,6 +120,7 @@
     <Compile Include="Classes\Scheduling\FilterSickOrDayOff.cs" />
     <Compile Include="Classes\Scheduling\FilterWorkingInOtherDepartmentToday.cs" />
     <Compile Include="Classes\Scheduling\IFilter.cs" />
+    <Compile Include="Classes\Scheduling\WorkingEmployee.cs" />
     <Compile Include="Classes\Shift\EmployeeShift.cs" />
     <Compile Include="Classes\Shift\IShiftStorage.cs" />
     <Compile Include="Classes\Shift\Shift.cs" />
