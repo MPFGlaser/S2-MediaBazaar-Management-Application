@@ -141,12 +141,15 @@ namespace UnitTests
             employees.Add(new Employee(14, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(15, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(16, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
+            employees[15].NotWorkingDays.Add(DateTime.Parse("06/01/2021"));
 
-            // May not work in department 9
+            // May not work in department 9. Employee 19 is also sick on Sunday
             employees.Add(new Employee(17, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(18, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(19, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
-           
+            employees[18].NotWorkingDays.Add(DateTime.Parse("10/01/2021"));
+
+
             // Not enough contract hours anymore (20 has 4 more left)
             employees.Add(new Employee(20, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 12));
             employees.Add(new Employee(21, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 8));
@@ -314,7 +317,7 @@ namespace UnitTests
         }
 
         [TestMethod, TestCategory("Sick or day off")]
-        public void SickOnMondayTest()
+        public void SickOnWednesdayTest()
         {
             IFilter sickOrDayOff = new FilterSickOrDayOff();
 
@@ -324,7 +327,7 @@ namespace UnitTests
 
             List<Employee> controlEmployees = new List<Employee>(employees);
 
-            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+            controlEmployees.RemoveAll(employee => employee.Id == 16);
 
             List<Employee> availableEmployees = sickOrDayOff.Filter(shifts[7], 1, shifts, workingEmployees, employees);
 
@@ -342,9 +345,9 @@ namespace UnitTests
 
             List<Employee> controlEmployees = new List<Employee>(employees);
 
-            //controlEmployees.RemoveAll(employee => employee.Id == 2);
+            controlEmployees.RemoveAll(employee => employee.Id == 19);
 
-            List<Employee> availableEmployees = sickOrDayOff.Filter(shifts[7], 1, shifts, workingEmployees, employees);
+            List<Employee> availableEmployees = sickOrDayOff.Filter(shifts[19], 1, shifts, workingEmployees, employees);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
