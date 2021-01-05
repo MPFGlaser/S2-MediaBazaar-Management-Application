@@ -456,7 +456,8 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            comboBoxSelectEmployees.SelectedIndex = 0;
+            if(comboBoxSelectEmployees.Items.Count > 0)
+                comboBoxSelectEmployees.SelectedIndex = 0;
         }
         #endregion
 

@@ -630,7 +630,6 @@ namespace MediaBazaar_ManagementSystem
             CreateMissingShifts();
             List<Employee> allEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
-            List<WorkingEmployee> currentWorkingEmployees = employeeStorage.GetWorkingEmployees();
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
 
@@ -647,58 +646,64 @@ namespace MediaBazaar_ManagementSystem
 
             foreach(Shift s in allWeekShifts)
             {
-                foreach(Department d in allDepartments)
+                List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
+                foreach (Department d in allDepartments)
                 {
-                    //List<Employee> availableEmployees = FILTER(allEmployees);
-                    List<Employee> availableEmployees = allEmployees;
+                    List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees());
                     d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
-                    Schedule(s, availableEmployees, d);
+                    Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d);
                 }
-                
             }
+        }
+
+        private List<Employee> Filter(Shift shift, int departmentId, List<Shift> shifts, List<WorkingEmployee> we, List<Employee> e)
+        {
+            List<Employee> filteredEmployees = new List<Employee>(e);
+            List<WorkingEmployee> workingEmployees = new List<WorkingEmployee>(we);
+
+            IFilter alreadyScheduled = new FilterAlreadyScheduled();
+            IFilter sickOrDayOff = new FilterSickOrDayOff();
+            IFilter scheduledTwice = new FilterScheduledTwiceAlready();
+            IFilter notAllowedInDepartment = new FilterNotAllowedInDepartment();
+            IFilter otherDepartment = new FilterWorkingInOtherDepartmentToday();
+            IFilter contractHours = new FilterContractHoursViolation();
+            IFilter preferredHours = new FilterPreferredHours();
+
+            filteredEmployees = alreadyScheduled.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = sickOrDayOff.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = scheduledTwice.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = notAllowedInDepartment.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = otherDepartment.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = contractHours.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = preferredHours.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+
+            return filteredEmployees;
         }
 
         private void Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
         {
             // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
-            List<int> workingEmployeeIds = new List<int>();
-            int capacityNew = 5; //Temporary hardcoded because lack of data
-            int shiftId = 0;
-            Shift currentShift;
-            List<Employee> randomEmployeeList = ShuffleEmployeeList(availableEmployees);
+            int capacityNew = 3; //Temporary hardcoded because lack of data
 
-            // Creates a new shift object and sets the list of employeeIds to the one we just created.
-            currentShift = new Shift(toSchedule.Id, toSchedule.Date, toSchedule.ShiftTime, capacityNew);
             // Removes all information about the shift in the shiftStorage to prevent duplication of entries
             shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
-            shiftId = toSchedule.Id;
 
-            if (currentDepartment.Capacity == -1 || currentDepartment.Capacity == 0)
+            if (currentDepartment.Capacity <= 0)
             {
-                shiftStorage.UpdateCapacityPerDepartment(shiftId, currentDepartment.Id, capacityNew);
+                shiftStorage.UpdateCapacityPerDepartment(toSchedule.Id, currentDepartment.Id, capacityNew);
                 currentDepartment.Capacity = capacityNew;
             }
 
-            //Check if is allowed to work in this department
-            foreach(Employee e in randomEmployeeList)
+            for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
             {
-                if (currentDepartment.Employees.Count < currentDepartment.Capacity)
-                {
-                    currentDepartment.Employees.Add(e);
-                }
-            }
-
-            // Makes a list of all ids of the employees scheduled for that shift
-            foreach (Employee emp in currentDepartment.Employees)
-            {
-                shiftStorage.Assign(shiftId, emp.Id, currentDepartment.Id);
+                shiftStorage.Assign(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id);
             }
         }
 
         public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
         {
-            Random rng = new Random();
+            Random rng = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
             List<Employee> toReturn = toShuffle;
             int n = toShuffle.Count;
             while (n > 1)
@@ -915,7 +920,7 @@ namespace MediaBazaar_ManagementSystem
             ClockInOutAnEmployee();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonAutomaticScheduling_Click(object sender, EventArgs e)
         {
             // Set cursor as hourglass
             this.UseWaitCursor = true;
