@@ -356,7 +356,7 @@ namespace MediaBazaar_ManagementSystem
                 }
                 else
                 {
-                    MessageBox.Show("Please select a department first");
+                    MessageBox.Show("Please select a department first1");
                 }
             }
         }
@@ -512,7 +512,7 @@ namespace MediaBazaar_ManagementSystem
             if (selectedIndex < 0)
             {
                 numericUpDownCapacity.Value = 0;
-                MessageBox.Show("Please select a department!");
+                //MessageBox.Show("Please select a department!2");
             }
             else allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
         }

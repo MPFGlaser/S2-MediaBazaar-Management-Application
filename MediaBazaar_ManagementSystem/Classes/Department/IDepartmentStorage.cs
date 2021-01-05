@@ -9,5 +9,7 @@ namespace MediaBazaar_ManagementSystem
         void Remove(int id);
 
         List<Department> GetAll();
+
+        int GetCapacityForDepartmentInShift(int departmentId, int shiftId);
     }
 }
