@@ -7,7 +7,7 @@ namespace MediaBazaar_ManagementSystem
     /// </summary>
     public class Department
     {
-        private int id;
+        private int id, occupation, capacity;
         private string name;
         private List<Employee> employees = new List<Employee>();
         private List<Item> items = new List<Item>();
@@ -21,6 +21,18 @@ namespace MediaBazaar_ManagementSystem
         public int Id
         {
             get { return id; }
+        }
+
+        public int Capacity
+        {
+            get { return capacity; }
+            set { capacity = value; }
+        }
+
+        public int Occupation
+        {
+            get { return occupation; }
+            set { occupation = value; }
         }
 
         public string Name

@@ -15,7 +15,11 @@ namespace MediaBazaar_ManagementSystem
 
         int Exists(DateTime date, ShiftTime time);
 
+        List<int> GetAllShiftIds();
+
         Shift Get(DateTime date, ShiftTime time);
+
+        List<Shift> GetShiftsByEmployee(int id, string date);
 
         List<Shift> GetWeek(DateTime monday, DateTime sunday);
 
@@ -23,6 +27,26 @@ namespace MediaBazaar_ManagementSystem
 
         List<Employee> GetDepartmentEmployees(int shiftId, int departmentId);
 
+        bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity);
+
+        bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity);
+
+        Dictionary<int, int> GetCapacityPerDepartment(int shiftId);
+
         int GetOccupation(int shiftId);
+
+        void CreateAttendance(int employeeId, int shiftId, string clockin);
+
+        int CheckAttendance(int userid, int shiftid);
+
+        void ModifyClockInAttendance(int attid, string clockin);
+
+        void ModifyClockOutAttendance(int attid, string clockout, int minutes);
+
+        string GetClockInAttendance(int id);
+
+        string GetClockOutAttendance(int id);
+
+        bool ClearDept(int shiftId, int departmentId);
     }
 }

@@ -13,136 +13,73 @@ namespace MediaBazaar_ManagementSystem.Forms
     public partial class WeekShiftsCapacityEditor : Form
     {
         IShiftStorage shiftStorage;
+        IDepartmentStorage departmentStorage;
         List<DateTime> weekdays;
         List<Shift> weekShifts;
+        List<int> initialShiftIds = new List<int>();
+        int currentDepartmentId;
+        bool changesMade = false, autoChanged = false;
+        private Dictionary<int, Dictionary<int, int>> allDepartmentCapacityInWeek = new Dictionary<int, Dictionary<int, int>>(), valuesToSave = new Dictionary<int, Dictionary<int, int>>();
 
-        public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays)
+        public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays, int currentDepartmentId)
         {
             InitializeComponent();
             this.weekShifts = weekShifts;
             this.weekdays = weekdays;
+            this.currentDepartmentId = currentDepartmentId;
+            LoadAllCapacities(weekShifts);
+            LoadAllDepartments(currentDepartmentId);
             SetupGroupboxTitles();
             SetupNumericUpDowns();
             CreateMissingShifts();
+
+            this.Text = $"Changing capacity of shifts in the week of Monday { weekdays[1].ToString("d") }";
         }
 
         /// <summary>
-        /// Setups the numeric up downs.
+        /// Loads all of the capacities per department from the database.
         /// </summary>
-        private void SetupNumericUpDowns()
+        /// <param name="weekShifts">A list of all of the shifts in this week</param>
+        private void LoadAllCapacities(List<Shift> weekShifts)
         {
-            foreach (Shift s in weekShifts)
+            shiftStorage = new ShiftMySQL();
+            Dictionary<int, Dictionary<int, int>> weekDepartments = new Dictionary<int, Dictionary<int, int>>();
+
+            foreach(Shift s in weekShifts)
             {
-                if (s.Date == weekdays[0])
+                Dictionary<int, int> temp = shiftStorage.GetCapacityPerDepartment(s.Id);
+                if(temp.Count() > 0)
                 {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownMondayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownMondayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownMondayEvening.Value = s.Capacity;
-                            break;
-                    }
+                    weekDepartments.Add(s.Id, temp);
+                    this.initialShiftIds.Add(s.Id);
                 }
+            }
 
-                if (s.Date == weekdays[1])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownTuesdayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownTuesdayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownTuesdayEvening.Value = s.Capacity;
-                            break;
-                    }
-                }
+            this.allDepartmentCapacityInWeek = weekDepartments;
+        }
 
-                if (s.Date == weekdays[2])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownWednesdayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownWednesdayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownWednesdayEvening.Value = s.Capacity;
-                            break;
-                    }
-                }
+        /// <summary>
+        /// Loads all of the departments from the database.
+        /// </summary>
+        /// <param name="departmentId">ID of the currently selected department</param>
+        private void LoadAllDepartments(int departmentId)
+        {
+            departmentStorage = new DepartmentMySQL();
+            List<Department> allDepartments = departmentStorage.GetAll();
 
-                if (s.Date == weekdays[3])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownThursdayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownThursdayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownThursdayEvening.Value = s.Capacity;
-                            break;
-                    }
-                }
+            foreach(Department d in allDepartments)
+            {
+                comboBoxSelectDepartment.DisplayMember = "Text";
+                comboBoxSelectDepartment.ValueMember = "Department";
+                comboBoxSelectDepartment.Items.Add(new { Text = d.Name, Department = d });
+            }
 
-                if (s.Date == weekdays[4])
+            foreach(dynamic dynamicDep in comboBoxSelectDepartment.Items)
+            {
+                Department dep = dynamicDep.Department;
+                if(dep.Id == departmentId)
                 {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownFridayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownFridayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownFridayEvening.Value = s.Capacity;
-                            break;
-                    }
-                }
-
-                if (s.Date == weekdays[5])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownSaturdayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownSaturdayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownSaturdayEvening.Value = s.Capacity;
-                            break;
-                    }
-                }
-
-                if (s.Date == weekdays[6])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            numericUpDownSundayMorning.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Afternoon:
-                            numericUpDownSundayAfternoon.Value = s.Capacity;
-                            break;
-                        case ShiftTime.Evening:
-                            numericUpDownSundayEvening.Value = s.Capacity;
-                            break;
-                    }
+                    comboBoxSelectDepartment.SelectedItem = dynamicDep;
                 }
             }
         }
@@ -162,11 +99,12 @@ namespace MediaBazaar_ManagementSystem.Forms
         }
 
         /// <summary>
-        /// Creates the missing shifts.
+        /// Creates the missing shifts and sets shift capacity for each department to 0 for these new shifts.
         /// </summary>
         private void CreateMissingShifts()
         {
-            shiftStorage = new ShiftMySQL();
+            /*shiftStorage = new ShiftMySQL();
+            List<Shift> tempNewShifts = new List<Shift>();
 
             foreach(DateTime date in weekdays)
             {
@@ -175,7 +113,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Morning, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
                 }
 
                 if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
@@ -183,7 +121,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
                 }
 
                 if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
@@ -191,229 +129,219 @@ namespace MediaBazaar_ManagementSystem.Forms
                     Shift s = new Shift(0, date, ShiftTime.Evening, 0);
                     int newId = shiftStorage.Create(s);
                     Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
-                    weekShifts.Add(s2);
+                    tempNewShifts.Add(s2);
+                }
+            }
+
+            foreach (Shift s in tempNewShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                
+                        shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
+                }
+                weekShifts.Add(s);
+            }*/
+        }
+
+        /// <summary>
+        /// Updates the current capacities to have the newly set values.
+        /// </summary>
+        private void SaveNewShiftValues()
+        {
+            foreach (Shift s in weekShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                    if (dep.Id == currentDepartmentId)
+                    {
+                        if (allDepartmentCapacityInWeek.ContainsKey(currentDepartmentId))
+                        {
+                            if (valuesToSave.ContainsKey(s.Id))
+                            {
+                                allDepartmentCapacityInWeek[s.Id][currentDepartmentId] = valuesToSave[s.Id][currentDepartmentId];
+                            }
+                        }
+                        else
+                        {
+                            if (valuesToSave.ContainsKey(s.Id))
+                            {
+                                Dictionary<int, int> temp = new Dictionary<int, int>();
+                                temp.Add(currentDepartmentId, valuesToSave[s.Id][currentDepartmentId]);
+                                allDepartmentCapacityInWeek.Add(s.Id,temp);
+                            }
+                            
+                        }
+                    }
                 }
             }
         }
 
-        private List<Shift> ShiftsToUpdate()
+        /// <summary>
+        /// Sets the new values for the capacities in a dictionary.
+        /// </summary>
+        private Dictionary<int, Dictionary<int, int>> UpdateCapacities()
         {
-            List<Shift> output = new List<Shift>();
+            Dictionary<int, Dictionary<int, int>> output = new Dictionary<int, Dictionary<int, int>>();
+            Dictionary<int, int> departmentCapacity;
 
             foreach (Shift s in weekShifts)
             {
-                if (s.Date == weekdays[0])
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
                 {
-                    switch (s.ShiftTime)
+                    Department dep = depDynamic.Department;
+                    if(dep.Id == currentDepartmentId)
                     {
-                        case ShiftTime.Morning:
-                            if (numericUpDownMondayMorning.Value != s.Capacity)
+                        departmentCapacity = new Dictionary<int, int>();
+                        if (s.Date == weekdays[0])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownMondayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownMondayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownMondayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownMondayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownMondayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownMondayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownMondayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownMondayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[1])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownTuesdayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[1])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownTuesdayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownTuesdayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownTuesdayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownTuesdayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownTuesdayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownTuesdayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[2])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownWednesdayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[2])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownWednesdayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownWednesdayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownWednesdayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownWednesdayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownWednesdayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownWednesdayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[3])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownThursdayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[3])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownThursdayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownThursdayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownThursdayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownThursdayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownThursdayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownThursdayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownThursdayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownThursdayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[4])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownFridayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[4])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownFridayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownFridayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownFridayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownFridayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownFridayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownFridayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownFridayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownFridayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[5])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownSaturdayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[5])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSaturdayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSaturdayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSaturdayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownSaturdayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownSaturdayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownSaturdayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
-                    }
-                }
+                        }
 
-                if (s.Date == weekdays[6])
-                {
-                    switch (s.ShiftTime)
-                    {
-                        case ShiftTime.Morning:
-                            if (numericUpDownSundayMorning.Value != s.Capacity)
+                        if (s.Date == weekdays[6])
+                        {
+                            switch (s.ShiftTime)
                             {
-                                s.Capacity = Convert.ToInt32(numericUpDownSundayMorning.Value);
-                                output.Add(s);
+                                case ShiftTime.Morning:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSundayMorning.Value));
+                                    break;
+                                case ShiftTime.Afternoon:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSundayAfternoon.Value));
+                                    break;
+                                case ShiftTime.Evening:
+                                    departmentCapacity.Add(currentDepartmentId, Convert.ToInt32(numericUpDownSundayEvening.Value));
+                                    break;
                             }
-                            break;
-                        case ShiftTime.Afternoon:
-                            if (numericUpDownSundayAfternoon.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownSundayAfternoon.Value);
-                                output.Add(s);
-                            }
-                            break;
-                        case ShiftTime.Evening:
-                            if (numericUpDownSundayEvening.Value != s.Capacity)
-                            {
-                                s.Capacity = Convert.ToInt32(numericUpDownSundayEvening.Value);
-                                output.Add(s);
-                            }
-                            break;
+                        }
+                        output.Add(s.Id, departmentCapacity);
                     }
                 }
+                
             }
 
             return output;
         }
 
         #region control handlers
+        /// <summary>
+        /// Saves the set number of capacity in the database.
+        /// </summary>
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             shiftStorage = new ShiftMySQL();
-            List<Shift> updateMe = ShiftsToUpdate();
+            valuesToSave = UpdateCapacities();
 
-            foreach (Shift s in updateMe)
+            foreach (Shift s in weekShifts)
             {
-                bool shiftUpdateSucceeded = false;
-                while (shiftUpdateSucceeded == false)
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
                 {
-                    shiftUpdateSucceeded = shiftStorage.Update(s);
+                    Department dep = depDynamic.Department;
+                    if (allDepartmentCapacityInWeek.ContainsKey(s.Id))
+                    {
+                        Dictionary<int, int> temp = allDepartmentCapacityInWeek[s.Id];
+                        if (temp.ContainsKey(dep.Id))
+                        {
+                            int capacity = temp[dep.Id];
+                            bool shiftUpdateSucceeded = false;
+                            while (shiftUpdateSucceeded == false)
+                            {
+                                shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, dep.Id, capacity);
+                            }
+                        }
+                    }
                 }
             }
             this.DialogResult = DialogResult.OK;
@@ -423,6 +351,474 @@ namespace MediaBazaar_ManagementSystem.Forms
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        /// <summary>
+        /// Saves the changes when a new department is selected.
+        /// </summary>
+        private void comboBoxSelectDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (changesMade)
+            {
+                valuesToSave = UpdateCapacities();
+                SaveNewShiftValues();
+                changesMade = false;
+            }
+            dynamic depDynamic = comboBoxSelectDepartment.SelectedItem;
+            Department selectedDepartment = depDynamic.Department;
+            currentDepartmentId = selectedDepartment.Id;
+            autoChanged = true;
+            SetAllUpdownsToZero();
+            SetupNumericUpDowns();
+            autoChanged = false;
+        }
+        #endregion
+
+        #region Numeric UpDown Value Handlers
+        /// <summary>
+        /// Setups the numeric up downs.
+        /// </summary>
+        private void SetupNumericUpDowns()
+        {
+            foreach (Shift s in weekShifts)
+            {
+                if (allDepartmentCapacityInWeek.ContainsKey(s.Id))
+                {
+                    foreach (KeyValuePair<int, int> dictKVP in allDepartmentCapacityInWeek[s.Id])
+                    {
+                        Dictionary<int, int> dict = new Dictionary<int, int> { { dictKVP.Key, dictKVP.Value } };
+                        if (dict.ContainsKey(currentDepartmentId))
+                        {
+                            if (s.Date == weekdays[0])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownMondayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[1])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownTuesdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[2])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownWednesdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[3])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownThursdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[4])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownFridayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[5])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSaturdayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+
+                            if (s.Date == weekdays[6])
+                            {
+                                switch (s.ShiftTime)
+                                {
+                                    case ShiftTime.Morning:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayMorning.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Afternoon:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayAfternoon.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                    case ShiftTime.Evening:
+                                        if (dict.ContainsKey(currentDepartmentId))
+                                        {
+                                            numericUpDownSundayEvening.Value = dict[currentDepartmentId];
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set all numeric updowns to 0.
+        /// </summary>
+        private void SetAllUpdownsToZero()
+        {
+            foreach (Shift s in weekShifts)
+            {
+                if (s.Date == weekdays[0])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownMondayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownMondayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownMondayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[1])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownTuesdayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownTuesdayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownTuesdayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[2])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownWednesdayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownWednesdayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownWednesdayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[3])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownThursdayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownThursdayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownThursdayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[4])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownFridayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownFridayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownFridayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[5])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownSaturdayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownSaturdayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownSaturdayEvening.Value = 0;
+                            break;
+                    }
+                }
+
+                if (s.Date == weekdays[6])
+                {
+                    switch (s.ShiftTime)
+                    {
+                        case ShiftTime.Morning:
+                            numericUpDownSundayMorning.Value = 0;
+                            break;
+                        case ShiftTime.Afternoon:
+                            numericUpDownSundayAfternoon.Value = 0;
+                            break;
+                        case ShiftTime.Evening:
+                            numericUpDownSundayEvening.Value = 0;
+                            break;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Numeric UpDown Value Change Handlers
+        /// <summary>
+        /// Adds an eventhandler to each of the numericUpDowns which makes it so that changes are only saved once a manual change is made by the user.
+        /// </summary>
+        private void numericUpDownMondayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if(!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownMondayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownMondayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownTuesdayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownTuesdayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownTuesdayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownWednesdayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownWednesdayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownWednesdayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownThursdayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownThursdayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownThursdayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownFridayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownFridayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownFridayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSaturdayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSaturdayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSaturdayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSundayMorning_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSundayAfternoon_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
+        }
+
+        private void numericUpDownSundayEvening_ValueChanged(object sender, EventArgs e)
+        {
+            if (!autoChanged)
+                changesMade = true;
         }
         #endregion
     }

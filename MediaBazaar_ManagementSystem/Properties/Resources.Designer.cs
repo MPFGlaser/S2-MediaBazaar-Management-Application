@@ -70,6 +70,15 @@ namespace MediaBazaar_ManagementSystem.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error saving to the database..
+        /// </summary>
+        internal static string databaseSaveError {
+            get {
+                return ResourceManager.GetString("databaseSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No connection file found..
         /// </summary>
         internal static string fileNotFound {
@@ -84,6 +93,15 @@ namespace MediaBazaar_ManagementSystem.Properties {
         internal static string genericError {
             get {
                 return ResourceManager.GetString("genericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information entered is invalid..
+        /// </summary>
+        internal static string informationInvalidError {
+            get {
+                return ResourceManager.GetString("informationInvalidError", resourceCulture);
             }
         }
         

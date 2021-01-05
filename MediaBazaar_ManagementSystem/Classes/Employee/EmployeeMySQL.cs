@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -234,7 +233,6 @@ namespace MediaBazaar_ManagementSystem
         {
             List<int> weekShiftIds = GetShiftIdsInWeek(monday, sunday);
             List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-            int index = 0;
 
             String working_employees = "SELECT shiftId, employeeId FROM working_employees";
             MySqlCommand working_employeesCommand = new MySqlCommand(working_employees, connection);
@@ -268,7 +266,7 @@ namespace MediaBazaar_ManagementSystem
                     {
                         if (es.EmployeeId == e.Id)
                         {
-                            e.WorkingHours += 4.5f;
+                            e.WorkingHours += Globals.shiftDuration;
                         }
                     }
                 }
@@ -311,90 +309,87 @@ namespace MediaBazaar_ManagementSystem
             return weekShiftIds;
         }
 
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public void CheckFunctions()
+        public int CheckNrOfShifts(int id, string date)
         {
-            string query = "CREATE TABLE `functions` (`id` int(2) NOT NULL, `function` varchar(20) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            int appearence = 0;
+            string query = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId in (SELECT id FROM shifts where date=@date);";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@date", date);
+            command.Parameters.AddWithValue("@id", id);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appearence++;
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return appearence;
+        }
+
+        public List<(int, DateTime)> GetAbsentDays()
+        {
+            List<(int, DateTime)> allAbsentDays = new List<(int, DateTime)>();
+            string query = "SELECT employeeId, date FROM reports;";
             MySqlCommand command = new MySqlCommand(query, connection);
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-
-                return;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "ALTER TABLE `functions` ADD PRIMARY KEY (`id`);";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            query = "INSERT INTO functions  VALUES (1,'Depot worker'), (2,'Sales representative'),  (3,'Manager'), (4,'Cashier'), (5,'Human resources');";
-            command = new MySqlCommand(query, connection);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                ErrorMessages.Generic(ex);
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
-        /// <summary>
-        /// Function to create table functions in the database.
-        /// </summary>
-        public List<ComboboxItem> GetFunctions()
-        {
-            List<ComboboxItem> cmbxlist = new List<ComboboxItem>();
-            string sql = "SELECT * FROM functions;";
-
-            try
-            {
-                MySqlCommand cmd = new MySqlCommand(sql, connection);
-                connection.Open();
-
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    ComboboxItem item = new ComboboxItem();
-                    item.Text = rdr.GetString("function");
-                    item.Value = Convert.ToInt32(rdr.GetString("id"));
-                    cmbxlist.Add(item);
+                    allAbsentDays.Add((Convert.ToInt32(reader[0]), DateTime.Parse(reader.GetString(1))));
                 }
+
+                reader.Close();
             }
             catch (Exception ex)
             {
-                ErrorMessages.Generic(ex);
+                ErrorMessages.Shift(ex);
             }
             finally
             {
                 connection.Close();
             }
-            return cmbxlist;
+            return allAbsentDays;
+        }
+
+        public List<WorkingEmployee> GetWorkingEmployees()
+        {
+            List<WorkingEmployee> allWorkingEmployees = new List<WorkingEmployee>();
+            string query = "SELECT * FROM working_employees;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    allWorkingEmployees.Add(new WorkingEmployee(Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2])));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return allWorkingEmployees;
         }
     }
 }

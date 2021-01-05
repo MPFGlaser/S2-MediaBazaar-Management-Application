@@ -13,10 +13,14 @@ namespace MediaBazaar_ManagementSystem
 
         List<Employee> GetAll(bool activeOnly);
 
-        List<ComboboxItem> GetFunctions();
-
         List<Employee> GetHoursWorked(List<Employee> selectedEmployee, DateTime monday, DateTime sunday);
 
         List<int> GetShiftIdsInWeek(DateTime monday, DateTime sunday);
+
+        int CheckNrOfShifts(int id, string date);
+
+        List<(int, DateTime)> GetAbsentDays();
+
+        List<WorkingEmployee> GetWorkingEmployees();
     }
 }

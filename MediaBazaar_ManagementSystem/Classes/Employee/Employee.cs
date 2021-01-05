@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -12,6 +13,8 @@ namespace MediaBazaar_ManagementSystem
         private bool active;
         private DateTime dateOfBirth;
         private float workingHours = 0;
+        private List<string> permissions;
+        private List<DateTime> notWorkingDays;
 
         public Employee(int id, bool active, string firstName, string surName, string userName, string password, string email, string phoneNumber, string address, DateTime dateOfBirth, int bsn, string spouseName, string spousePhone, int function, string postalCode, string city, string preferredHours, string workingDepartments, int contractHours)
         {
@@ -34,6 +37,7 @@ namespace MediaBazaar_ManagementSystem
             this.preferredHours = preferredHours;
             this.workingDepartments = workingDepartments;
             this.contractHours = contractHours;
+            this.notWorkingDays = new List<DateTime>();
         }
 
         #region Properties
@@ -153,6 +157,18 @@ namespace MediaBazaar_ManagementSystem
         {
             get { return workingHours; }
             set { workingHours = value; }
+        }
+
+        public List<string> Permissions
+        {
+            get { return permissions; }
+            set { permissions = value; }
+        }
+
+        public List<DateTime> NotWorkingDays
+        {
+            get { return notWorkingDays; }
+            set { notWorkingDays = value; }
         }
         #endregion
     }

@@ -172,11 +172,26 @@ namespace MediaBazaar_ManagementSystem
         public Shift Get(DateTime date, ShiftTime time)
         {
             Shift output = null;
+            int shifttype = 0;
             string dateSql = date.ToString("yyyy-MM-dd HH:mm:ss");
             String sql = "SELECT count(*) FROM shifts WHERE date = @date AND shiftType = @shiftType";
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.Parameters.AddWithValue("@date", dateSql);
-            command.Parameters.AddWithValue("@shiftType", time);
+            switch (time)
+            {
+                case ShiftTime.Morning:
+                    shifttype = 0;
+                    break;
+                case ShiftTime.Afternoon:
+                    shifttype = 1;
+                    break;
+                case ShiftTime.Evening:
+                    shifttype = 2;
+                    break;
+                default:
+                    break;
+            }
+            command.Parameters.AddWithValue("@shiftType", shifttype);
 
             try
             {
@@ -187,7 +202,7 @@ namespace MediaBazaar_ManagementSystem
                     String sql1 = "SELECT id, capacity FROM shifts WHERE date = @date AND shiftType = @shiftType";
                     MySqlCommand command1 = new MySqlCommand(sql1, connection);
                     command1.Parameters.AddWithValue("@date", dateSql);
-                    command1.Parameters.AddWithValue("@shiftType", time);
+                    command1.Parameters.AddWithValue("@shiftType", shifttype);
                     MySqlDataReader reader = command1.ExecuteReader();
                     while (reader.Read())
                     {
@@ -207,13 +222,91 @@ namespace MediaBazaar_ManagementSystem
             return output;
         }
 
+
         /// <summary>
-        /// Gets a list of employees within a specified department working the specified shift.
+        /// Gets information of a shift based on the specified employee and date.
         /// </summary>
-        /// <param name="shiftId">The shift identifier.</param>
-        /// <param name="departmentId">The department identifier.</param>
-        /// <returns>A list of employees within one department that works the specified shift.</returns>
-        public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
+        /// <param name="employee">The employee.</param>
+        /// <param name="date">The date.</param>
+        /// <returns>The shift found.</returns>
+        public List<Shift> GetShiftsByEmployee(int id, string date)
+        {
+            List<Shift> allshifts = new List<Shift>();
+            List<Shift> outputs = new List<Shift>();
+            string query = "SELECT id, date, shiftType, capacity FROM shifts WHERE date=@date ORDER BY shiftType ASC;";
+            try
+            {
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@date", date);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                Shift shift = null;
+                while (reader.Read())
+                {
+                    int shiftid = Convert.ToInt32(reader[0]);
+                    DateTime shiftdate = Convert.ToDateTime(reader[1]);
+                    int shifttype = Convert.ToInt32(reader[2]);
+                    int capacity = Convert.ToInt32(reader[3]);
+                    switch (shifttype)
+                    {
+                        case 0:
+                            shift = new Shift(shiftid, shiftdate, ShiftTime.Morning, capacity);
+                            allshifts.Add(shift);
+                            break;
+                        case 1:
+                            shift = new Shift(shiftid, shiftdate, ShiftTime.Afternoon, capacity);
+                            allshifts.Add(shift);
+                            break;
+                        case 2:
+                            shift = new Shift(shiftid, shiftdate, ShiftTime.Evening, capacity);
+                            allshifts.Add(shift);
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            if (allshifts.Count>0)
+            foreach (Shift s in allshifts)
+            {
+                string sql = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId=@shiftId;";
+                try
+                { 
+                    connection.Open();
+                    MySqlCommand cmd2 = new MySqlCommand(sql, connection);
+                    cmd2.Parameters.AddWithValue("@id", id);
+                    cmd2.Parameters.AddWithValue("@shiftId", s.Id);
+                    MySqlDataReader reader2 = cmd2.ExecuteReader();
+                    while (reader2.Read())
+                    {
+                        outputs.Add(s);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessages.Shift(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return outputs;
+        }
+
+            /// <summary>
+            /// Gets a list of employees within a specified department working the specified shift.
+            /// </summary>
+            /// <param name="shiftId">The shift identifier.</param>
+            /// <param name="departmentId">The department identifier.</param>
+            /// <returns>A list of employees within one department that works the specified shift.</returns>
+            public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
         {
             List<int> employeeIds = new List<int>();
             List<Employee> output = new List<Employee>();
@@ -313,6 +406,98 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Open();
                 output = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return output;
+        }
+
+        public bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "INSERT INTO capacity_per_department VALUES (@shiftId, @departmentId, @capacity)";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@capacity", capacity);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
+        }
+
+        public bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+            command.Parameters.AddWithValue("@capacity", capacity);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return success;
+        }
+
+        public Dictionary<int, int> GetCapacityPerDepartment(int shiftId)
+        {
+            Dictionary<int, int> output = new Dictionary<int, int>();
+
+            String query = "SELECT departmentId, capacity FROM capacity_per_department WHERE shiftId = @shiftId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    output.Add(Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]));
+                }
+                reader.Close();
             }
             catch (Exception ex)
             {
@@ -427,6 +612,222 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
+            return success;
+        }
+
+        public void CreateAttendance(int employeeId, int shiftId, string clockin)
+        {
+            string sql = "INSERT INTO employee_attendance (employeeid, shiftid, clockin) VALUES (@employeeId, @shiftId, @clockin);";
+            
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@employeeId", employeeId);
+                command.Parameters.AddWithValue("@shiftId", shiftId);
+                command.Parameters.AddWithValue("@clockin", clockin);
+                command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void ModifyClockInAttendance(int attid, string clockin)
+        {
+            string sql = "UPDATE employee_attendance SET clockin = @clockin WHERE id = @attid;";
+
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@clockin", clockin);
+                command.Parameters.AddWithValue("@attid", attid);
+                command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public void ModifyClockOutAttendance(int attid, string clockout, int minutes)
+        {
+            string sql = "UPDATE employee_attendance SET clockout = @clockout, minutesworked = @minutes WHERE id = @attid;";
+
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@clockout", clockout);
+                command.Parameters.AddWithValue("@attid", attid);
+                command.Parameters.AddWithValue("@minutes", minutes);
+                command.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public int CheckAttendance(int userid, int shiftId)
+        {
+            int appearance = 0;
+            try
+            {
+                string sql = "SELECT id FROM employee_attendance WHERE employeeid = @employeeId AND shiftid = @shiftId;";
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@employeeId", userid);
+                command.Parameters.AddWithValue("@shiftId", shiftId);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    appearance = Convert.ToInt32(reader[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return appearance;
+        }
+
+        public string GetClockInAttendance (int id)
+        {
+            string date = "";
+            try
+            {
+                string sql = "SELECT clockin FROM employee_attendance WHERE id = @id;";
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    date = reader[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return date;
+        }
+        public string GetClockOutAttendance(int id)
+        {
+            string date = "";
+            try
+            {
+                string sql = "SELECT clockout FROM employee_attendance WHERE id = @id;";
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@id", id);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader[0]!=null) date = reader[0].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return date;
+        }
+
+        public List<int> GetAllShiftIds()
+        {
+            List<int> shiftIds = new List<int>();
+
+            String query = "SELECT id FROM shifts";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    shiftIds.Add(Convert.ToInt32(reader[0]));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return shiftIds;
+        }
+
+        /// <summary>
+        /// Clears the specified shift identifier from the database to prevent duplicate shifts.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <returns>Whether or not the clear action was successfully carried out.</returns>
+        public bool ClearDept(int shiftId, int departmentId)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "DELETE FROM working_employees WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
             return success;
         }
     }

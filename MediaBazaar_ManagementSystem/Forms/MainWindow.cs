@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
+using System.Linq;
+using System.Threading;
 using Microsoft.VisualBasic;
 using MediaBazaar_ManagementSystem.Forms;
 
@@ -20,12 +22,16 @@ namespace MediaBazaar_ManagementSystem
         List<Employee> allEmployees = new List<Employee>();
         List<Shift> allWeekShifts = new List<Shift>();
         ProductDetailsWindow pdw;
+        ClockInOutWindow ciow;
         Employee loggedInUser;
         ProductRestockDetailsWindow prdw;
         WeekShiftsCapacityEditor wsce;
+        PermissionSelectionWindow psw;
+        int year = DateTime.Now.Year, maxWeekCount;
 
         public MainWindow(Employee loggedInUser)
         {
+            maxWeekCount = GetWeeksInYear(year);
             this.loggedInUser = loggedInUser;
             InitializeComponent();
             numericUpDownSchedulingWeek.Value = GetWeekOfYear(DateTime.Now);
@@ -33,18 +39,9 @@ namespace MediaBazaar_ManagementSystem
             labelWelcomeText.Text = "Welcome, " + loggedInUser.FirstName;
             toolTipReloadDb.SetToolTip(buttonReloadDatabaseEntries, "Reload Data");
 
+            CheckPermissions();
             HideInactiveEmployees(true);
             HideInactiveItems(true);
-
-            // Removes statistics tab until implementation is finished in the future.
-            tabControl1.TabPages.Remove(tabPage3);
-
-            // Removes certain tabs for the user in case they have a function that may not access those features.
-            if (loggedInUser.Function == 1)
-            {
-                tabControl1.TabPages.Remove(tabPage1);
-                tabControl1.TabPages.Remove(tabPage4);
-            }
 
             this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
 
@@ -58,6 +55,99 @@ namespace MediaBazaar_ManagementSystem
 
             
         }
+
+        #region Access Control        
+        /// <summary>
+        /// Checks the permissions of the loggedInUser and disables functions accordingly.
+        /// </summary>
+        private void CheckPermissions()
+        {
+            // Employee tab
+            if (loggedInUser.Permissions.Contains("employee_view"))
+            {
+                if (!loggedInUser.Permissions.Contains("employee_edit"))
+                    buttonEmployeeModify.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("employee_add"))
+                    buttonEmployeesAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("function_edit") || !loggedInUser.Permissions.Contains("function_add"))
+                    buttonEditFunctionPermissions.Visible = false;
+
+                if (!loggedInUser.Permissions.Contains("department_view"))
+                {
+                    foreach (Control c in splitContainerEmployeesSecondary.Panel1.Controls)
+                    {
+                        c.Enabled = false;
+                    }
+                }
+
+                if (!loggedInUser.Permissions.Contains("department_add"))
+                    buttonEmployeesDepartmentAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("department_change_active"))
+                {
+                    buttonEmployeesDepartmentRemove.Enabled = false;
+                }
+
+                // department_edit currently has no corresponding function.
+            }
+            else
+            {
+                // Removes the tab as the user doesn't have permission to view employee data.
+                tabControl1.TabPages.Remove(tabPage1);
+            }
+
+            // Stock tab
+            if (loggedInUser.Permissions.Contains("product_view"))
+            {
+                if (!loggedInUser.Permissions.Contains("product_edit"))
+                    buttonStockEditProduct.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("product_add"))
+                    buttonStockAdd.Enabled = false;
+
+                if (!loggedInUser.Permissions.Contains("product_restock_file"))
+                    pnlSalesRepresentative.Visible = false;
+                else pnlSalesRepresentative.Visible = true;
+                if (!loggedInUser.Permissions.Contains("product_restock_accept"))
+                    pnlDepotWorker.Visible = false;
+                else pnlDepotWorker.Visible = true;
+                // We need something for the categories, still. No permissions for it and the controls are disabled by default.
+            }
+            else
+            {
+                // Removes the stock tab as the user has no permission to view product data.
+                tabControl1.TabPages.Remove(tabPage2);
+            }
+
+            // Statistics tab
+            if (loggedInUser.Permissions.Contains("statistics_view"))
+            {
+                // We need to add more functions/permissions for statistics.
+            }
+            else
+            {
+                // Removes the statistics tab as the user has no permission to view statistics.
+                tabControl1.TabPages.Remove(tabPage3);
+            }
+
+            // Scheduling tab
+            if (loggedInUser.Permissions.Contains("schedule_employee_add") ||
+                loggedInUser.Permissions.Contains("schedule_employee_remove") ||
+                loggedInUser.Permissions.Contains("schedule_capacity_set"))
+            {
+                if (!loggedInUser.Permissions.Contains("schedule_capacity_set"))
+                    buttonSetWeekShiftsCapacity.Enabled = false;
+            }
+            else
+            {
+                // Removes the scheduling tab as the user has no access to scheduling functions whatsoever.
+                tabControl1.TabPages.Remove(tabPage4);
+            }
+
+        }
+        #endregion
 
         #region Logic
         #region Preparation
@@ -73,36 +163,6 @@ namespace MediaBazaar_ManagementSystem
             PopulateItemsTable();
             LoadAllDepartments();
             SetupCorrectWeekData();
-            CheckForSalesRepresentative();
-            CheckForDepotWorker();
-        }
-
-        /// <summary>
-        /// Function to check if the current user is a sales representative.
-        /// </summary>
-        private void CheckForSalesRepresentative()
-        {
-            if (loggedInUser.Function == 2)
-            {
-                btnSendRestockRequest.Visible = true;
-                pnlSalesRepresentative.Visible = true;
-                pnlSalesRepresentative.Enabled = true;
-            }
-            else pnlSalesRepresentative.Visible = false;
-        }
-
-        /// <summary>
-        /// Function to check if the current user is a depot worker.
-        /// </summary>
-        private void CheckForDepotWorker()
-        {
-            if (loggedInUser.Function == 1)
-            {
-                btnAcceptRestockRequest.Visible = true;
-                pnlDepotWorker.Visible = true;
-                pnlDepotWorker.Enabled = true;
-            }
-            else pnlDepotWorker.Visible = false;
         }
 
         /// <summary>
@@ -120,6 +180,10 @@ namespace MediaBazaar_ManagementSystem
                 comboBoxAllDepartments.DisplayMember = "Text";
                 comboBoxAllDepartments.ValueMember = "Department";
                 comboBoxAllDepartments.Items.Add(new { Text = d.Name, Department = d });
+
+                comboBoxSchedulingDepartment.DisplayMember = "Text";
+                comboBoxSchedulingDepartment.ValueMember = "Department";
+                comboBoxSchedulingDepartment.Items.Add(new { Text = d.Name, Department = d });
             }
         }
 
@@ -141,7 +205,7 @@ namespace MediaBazaar_ManagementSystem
                     DataGridViewRow row = dataGridViewEmployees.Rows[rowId];
 
                     row.Cells["id"].Value = e.Id;
-                    row.Cells["active"].Value = e.Active;
+                    row.Cells["active"].Value = e.Active ? "✓" : "✕";
                     row.Cells["firstName"].Value = e.FirstName;
                     row.Cells["surName"].Value = e.SurName;
                     row.Cells["username"].Value = e.UserName;
@@ -222,7 +286,7 @@ namespace MediaBazaar_ManagementSystem
             int weekNumber = Convert.ToInt32(numericUpDownSchedulingWeek.Value);
 
             // Gets the first date of the week with the aforementioned week number
-            weekDays = FirstDateOfWeekISO8601(2020, weekNumber);
+            weekDays = FirstDateOfWeekISO8601(year, weekNumber);
 
             // Gets all shifts from the shiftStorage between the start and end date of the week
             allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
@@ -231,13 +295,13 @@ namespace MediaBazaar_ManagementSystem
             allEmployees = employeeStorage.GetHoursWorked(employeeStorage.GetAll(true), weekDays[0], weekDays[6]);
 
             // Sets the correct data on the CalendarDayControl elements
-            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts);
-            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts);
-            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts);
-            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts);
-            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts);
-            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts);
-            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts);
+            calendarDayControlMonday.DisplayCorrectDate(weekDays[0], "Monday", allWeekShifts, loggedInUser);
+            calendarDayControlTuesday.DisplayCorrectDate(weekDays[1], "Tuesday", allWeekShifts, loggedInUser);
+            calendarDayControlWednesday.DisplayCorrectDate(weekDays[2], "Wednesday", allWeekShifts, loggedInUser);
+            calendarDayControlThursday.DisplayCorrectDate(weekDays[3], "Thursday", allWeekShifts, loggedInUser);
+            calendarDayControlFriday.DisplayCorrectDate(weekDays[4], "Friday", allWeekShifts, loggedInUser);
+            calendarDayControlSaturday.DisplayCorrectDate(weekDays[5], "Saturday", allWeekShifts, loggedInUser);
+            calendarDayControlSunday.DisplayCorrectDate(weekDays[6], "Sunday", allWeekShifts, loggedInUser);
 
             SetupCorrectEmployees();
         }
@@ -252,57 +316,6 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.SetupEmployees(allEmployees);
             calendarDayControlSunday.SetupEmployees(allEmployees);
         }
-
-        /// <summary>
-        /// Function to get the current week number
-        /// </summary>
-        /// <param name="currentDate"></param>
-        /// <returns></returns>
-        private int GetWeekOfYear(DateTime currentDate)
-        {
-            CultureInfo ci = CultureInfo.CurrentCulture;
-            int weekNumber = ci.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-            return weekNumber;
-        }
-
-        /// <summary>
-        /// Gets the first date of the week with a specified week number.
-        /// <para>Uses the ISO 8601 standard</para>
-        /// </summary>
-        /// <param name="year"></param>
-        /// <param name="weekOfYear"></param>
-        /// <returns></returns>
-        public static List<DateTime> FirstDateOfWeekISO8601(int year, int weekOfYear)
-        {
-            List<DateTime> daysBasedOnWeekNumber = new List<DateTime>();
-            DateTime jan1 = new DateTime(year, 1, 1);
-            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
-
-            // Use first Thursday in January to get first week of the year as
-            // it will never be in Week 52/53
-            DateTime firstThursday = jan1.AddDays(daysOffset);
-            var cal = CultureInfo.CurrentCulture.Calendar;
-            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
-
-            var weekNum = weekOfYear;
-            // As we're adding days to a date in Week 1,
-            // we need to subtract 1 in order to get the right date for week #1
-            if (firstWeek == 1)
-            {
-                weekNum -= 1;
-            }
-
-            // Using the first Thursday as starting week ensures that we are starting in the right year
-            // then we add number of weeks multiplied with days
-            var result = firstThursday.AddDays(weekNum * 7);
-
-            // Subtract 3 days from Thursday to get Monday, which is the first weekday in ISO8601
-            for (int i = 0; i < 7; i++)
-            {
-                daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
-            }
-            return daysBasedOnWeekNumber;
-        }
         #endregion
 
         #region Visuals
@@ -316,7 +329,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
                 {
-                    if (!(bool)row.Cells["active"].Value)
+                    if (row.Cells["active"].Value == "✕")
                     {
                         row.Visible = false;
                     }
@@ -326,7 +339,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 foreach (DataGridViewRow row in dataGridViewEmployees.Rows)
                 {
-                    if (!(bool)row.Cells["active"].Value)
+                    if (row.Cells["active"].Value == "✕")
                     {
                         row.Visible = true;
                     }
@@ -369,7 +382,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void EmployeeAdd()
         {
-            edw = new EmployeeDetailsWindow(loggedInUser.Id);
+            edw = new EmployeeDetailsWindow(loggedInUser);
             if (edw.ShowDialog() == DialogResult.OK)
             {
                 PopulateEmployeesTable();
@@ -385,7 +398,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
                 Employee toEdit = employeeStorage.Get(id);
-                edw = new EmployeeDetailsWindow(loggedInUser.Id);
+                edw = new EmployeeDetailsWindow(loggedInUser);
                 edw.AddEmployeeData(toEdit);
                 if (edw.ShowDialog() == DialogResult.OK)
                 {
@@ -393,6 +406,17 @@ namespace MediaBazaar_ManagementSystem
                     HideInactiveEmployees(!checkBoxShowInactive.Checked);
                 }
             }
+        }
+
+        /// <summary>
+        /// Opens a new ClockInOutWindow so the user can clock in or out an employee
+        /// </summary>
+        private void ClockInOutAnEmployee()
+        {
+            int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+            ciow = new ClockInOutWindow(id);
+            ciow.Show();
+            
         }
 
         /// <summary>
@@ -434,7 +458,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void StockAdd()
         {
-            pdw = new ProductDetailsWindow();
+            pdw = new ProductDetailsWindow(loggedInUser);
             if (pdw.ShowDialog() == DialogResult.OK)
             {
                 PopulateItemsTable();
@@ -450,7 +474,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 int id = Convert.ToInt32(dataGridViewStock.SelectedCells[0].Value);
                 Item toEdit = itemStorage.Get(id);
-                pdw = new ProductDetailsWindow();
+                pdw = new ProductDetailsWindow(loggedInUser);
                 pdw.AddItemData(toEdit);
                 if (pdw.ShowDialog() == DialogResult.OK)
                 {
@@ -501,9 +525,11 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SchedulingNext()
         {
-            if (numericUpDownSchedulingWeek.Value == 52)
+            if (numericUpDownSchedulingWeek.Value == maxWeekCount)
             {
                 numericUpDownSchedulingWeek.Value = 1;
+                year += 1;
+                maxWeekCount = GetWeeksInYear(year);
             }
             else
             {
@@ -519,7 +545,9 @@ namespace MediaBazaar_ManagementSystem
         {
             if (numericUpDownSchedulingWeek.Value == 1)
             {
-                numericUpDownSchedulingWeek.Value = 52;
+                year -= 1;
+                maxWeekCount = GetWeeksInYear(year);
+                numericUpDownSchedulingWeek.Value = maxWeekCount;
             }
             else
             {
@@ -533,11 +561,223 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void SetCapacityWholeWeek()
         {
-            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays);
+            int selectedId = -1;
+            CreateMissingShifts();
+
+            if (comboBoxSchedulingDepartment.SelectedIndex > -1)
+            {
+                dynamic selectedDynamic = comboBoxSchedulingDepartment.SelectedItem;
+                Department selectedDepartment = selectedDynamic.Department;
+                selectedId = selectedDepartment.Id;
+            }
+            
+            wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays, selectedId);
             if (wsce.ShowDialog() == DialogResult.OK)
             {
                 SetupCorrectWeekData();                
             }
+        }
+
+        private void CreateMissingShifts()
+        {
+            shiftStorage = new ShiftMySQL();
+            List<Shift> tempNewShifts = new List<Shift>();
+
+            foreach (DateTime date in weekDays)
+            {
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Morning) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Morning, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Evening, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
+                    tempNewShifts.Add(s2);
+                }
+            }
+
+            foreach (Shift s in tempNewShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSchedulingDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+
+                    shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
+                }
+                allWeekShifts.Add(s);
+            }
+        }
+
+        /// <summary>
+        /// Starts the automated scheduling.
+        /// </summary>
+        private void StartAutomaticScheduling()
+        {
+            employeeStorage = new EmployeeMySQL();
+            CreateMissingShifts();
+            List<Employee> allEmployees = employeeStorage.GetAll(true);
+            List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
+            List<int> allShiftIds = shiftStorage.GetAllShiftIds();
+            List<Department> allDepartments = departmentStorage.GetAll();
+
+            foreach(Employee e in allEmployees)
+            {
+                foreach((int employeeId, DateTime absentDate) absentList in absentDays)
+                {
+                    if(e.Id == absentList.employeeId)
+                    {
+                        e.NotWorkingDays.Add(absentList.absentDate);
+                    }
+                }
+            }
+
+            foreach(Shift s in allWeekShifts)
+            {
+                List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
+                foreach (Department d in allDepartments)
+                {
+                    List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees());
+                    d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
+                    Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d);
+                }
+            }
+        }
+
+        private List<Employee> Filter(Shift shift, int departmentId, List<Shift> shifts, List<WorkingEmployee> we, List<Employee> e)
+        {
+            List<Employee> filteredEmployees = new List<Employee>(e);
+            List<WorkingEmployee> workingEmployees = new List<WorkingEmployee>(we);
+
+            IFilter alreadyScheduled = new FilterAlreadyScheduled();
+            IFilter sickOrDayOff = new FilterSickOrDayOff();
+            IFilter scheduledTwice = new FilterScheduledTwiceAlready();
+            IFilter notAllowedInDepartment = new FilterNotAllowedInDepartment();
+            IFilter otherDepartment = new FilterWorkingInOtherDepartmentToday();
+            IFilter contractHours = new FilterContractHoursViolation();
+            IFilter preferredHours = new FilterPreferredHours();
+
+            filteredEmployees = alreadyScheduled.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = sickOrDayOff.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = scheduledTwice.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = notAllowedInDepartment.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = otherDepartment.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = contractHours.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+            filteredEmployees = preferredHours.Filter(shift, departmentId, shifts, workingEmployees, filteredEmployees);
+
+            return filteredEmployees;
+        }
+
+        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
+        {
+            // Makes sure everything is set up correctly.
+            shiftStorage = new ShiftMySQL();
+            int capacityNew = 3; //Temporary hardcoded because lack of data
+
+            // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+            shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
+
+            if (currentDepartment.Capacity <= 0)
+            {
+                shiftStorage.UpdateCapacityPerDepartment(toSchedule.Id, currentDepartment.Id, capacityNew);
+                currentDepartment.Capacity = capacityNew;
+            }
+
+            for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
+            {
+                shiftStorage.Assign(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id);
+            }
+        }
+
+        public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
+        {
+            Random rng = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            List<Employee> toReturn = toShuffle;
+            int n = toShuffle.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Employee temp = toReturn[k];
+                toReturn[k] = toReturn[n];
+                toReturn[n] = temp;
+            }
+
+            return toReturn;
+        }
+        #endregion
+
+        #region Calendar data
+        /// <summary>
+        /// Function to get the current week number
+        /// </summary>
+        /// <param name="currentDate"></param>
+        /// <returns></returns>
+        private int GetWeekOfYear(DateTime currentDate)
+        {
+            CultureInfo ci = CultureInfo.CurrentCulture;
+            int weekNumber = ci.Calendar.GetWeekOfYear(currentDate, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            return weekNumber;
+        }
+
+        private int GetWeeksInYear(int givenYear)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            DateTime date1 = new DateTime(givenYear, 12, 31);
+            Calendar cal = dfi.Calendar;
+            return cal.GetWeekOfYear(date1, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+        }
+
+        /// <summary>
+        /// Gets the first date of the week with a specified week number.
+        /// <para>Uses the ISO 8601 standard</para>
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="weekOfYear"></param>
+        /// <returns></returns>
+        public static List<DateTime> FirstDateOfWeekISO8601(int year, int weekOfYear)
+        {
+            List<DateTime> daysBasedOnWeekNumber = new List<DateTime>();
+            DateTime jan1 = new DateTime(year, 1, 1);
+            int daysOffset = DayOfWeek.Thursday - jan1.DayOfWeek;
+
+            // Use first Thursday in January to get first week of the year as
+            // it will never be in Week 52/53
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var cal = CultureInfo.CurrentCulture.Calendar;
+            int firstWeek = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+
+            var weekNum = weekOfYear;
+            // As we're adding days to a date in Week 1,
+            // we need to subtract 1 in order to get the right date for week #1
+            if (firstWeek == 1)
+            {
+                weekNum -= 1;
+            }
+
+            // Using the first Thursday as starting week ensures that we are starting in the right year
+            // then we add number of weeks multiplied with days
+            var result = firstThursday.AddDays(weekNum * 7);
+
+            // Subtract 3 days from Thursday to get Monday, which is the first weekday in ISO8601
+            for (int i = 0; i < 7; i++)
+            {
+                daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
+            }
+            return daysBasedOnWeekNumber;
         }
         #endregion
 
@@ -613,6 +853,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void numericUpDownSchedulingWeek_ValueChanged(Object sender, EventArgs e)
         {
+            if (numericUpDownSchedulingWeek.Value > maxWeekCount)
+                numericUpDownSchedulingWeek.Value = 1;
             SetupCorrectWeekData();
         }
 
@@ -659,6 +901,65 @@ namespace MediaBazaar_ManagementSystem
         {
             SetCapacityWholeWeek();
         }
-    } 
-    #endregion
+
+        private void comboBoxSchedulingDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dynamic depDynamic = comboBoxSchedulingDepartment.SelectedItem;
+            Department selected = (depDynamic).Department;
+
+            calendarDayControlMonday.CurrentSelectedDepartment = selected;
+            calendarDayControlTuesday.CurrentSelectedDepartment = selected;
+            calendarDayControlWednesday.CurrentSelectedDepartment = selected;
+            calendarDayControlThursday.CurrentSelectedDepartment = selected;
+            calendarDayControlFriday.CurrentSelectedDepartment = selected;
+            calendarDayControlSaturday.CurrentSelectedDepartment = selected;
+            calendarDayControlSunday.CurrentSelectedDepartment = selected;
+        }
+
+        private void btnClockinOut_Click(object sender, EventArgs e)
+        {
+            ClockInOutAnEmployee();
+        }
+
+        private void buttonAutomaticScheduling_Click(object sender, EventArgs e)
+        {
+            new Thread(() =>
+            {
+                ToggleSchedulingElements(false);
+                StartAutomaticScheduling();
+                ToggleSchedulingElements(true);
+            }).Start();
+        }
+
+        private void buttonEditFunctionPermissions_Click(object sender, EventArgs e)
+        {
+            psw = new PermissionSelectionWindow();
+            psw.Show();
+        }
+        #endregion
+
+        #region element enabling/disabling
+        private void ToggleSchedulingElements(bool newValue)
+        {
+            tabControl1.BeginInvoke((Action)delegate ()
+            {
+                buttonSchedulingPrevious.Enabled = newValue;
+                buttonSchedulingNext.Enabled = newValue;
+                buttonSetWeekShiftsCapacity.Enabled = newValue;
+                numericUpDownSchedulingWeek.Enabled = newValue;
+                comboBoxSchedulingDepartment.Enabled = newValue;
+                buttonAutomaticScheduling.Enabled = newValue;
+
+                calendarDayControlMonday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlTuesday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlWednesday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlThursday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlFriday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlSaturday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlSunday.ToggleCalendarDayControlButtons(newValue);
+            });
+        }
+
+        #endregion
+    }
 }
