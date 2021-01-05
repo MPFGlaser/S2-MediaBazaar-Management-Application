@@ -54,6 +54,7 @@
             this.buttonSetWeekShiftsCapacity = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
+            this.buttonAutomaticScheduling = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -124,7 +125,6 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).BeginInit();
             this.splitContainerScheduling1.Panel1.SuspendLayout();
@@ -223,7 +223,6 @@
             // splitContainerScheduling1.Panel1
             // 
             this.splitContainerScheduling1.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainerScheduling1.Panel1.Controls.Add(this.button1);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.label2);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.comboBoxSchedulingDepartment);
             this.splitContainerScheduling1.Panel1.Controls.Add(this.buttonSchedulingNext);
@@ -233,6 +232,7 @@
             // splitContainerScheduling1.Panel2
             // 
             this.splitContainerScheduling1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerScheduling1.Panel2.Controls.Add(this.buttonAutomaticScheduling);
             this.splitContainerScheduling1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainerScheduling1.Size = new System.Drawing.Size(1131, 411);
             this.splitContainerScheduling1.SplitterDistance = 106;
@@ -341,6 +341,17 @@
             0,
             0,
             0});
+            // 
+            // buttonAutomaticScheduling
+            // 
+            this.buttonAutomaticScheduling.Location = new System.Drawing.Point(486, 263);
+            this.buttonAutomaticScheduling.Name = "buttonAutomaticScheduling";
+            this.buttonAutomaticScheduling.Size = new System.Drawing.Size(155, 23);
+            this.buttonAutomaticScheduling.TabIndex = 7;
+            this.buttonAutomaticScheduling.Text = "Schedule Automatically";
+            this.buttonAutomaticScheduling.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonAutomaticScheduling.UseVisualStyleBackColor = true;
+            this.buttonAutomaticScheduling.Click += new System.EventHandler(this.buttonAutomaticScheduling_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -1145,16 +1156,6 @@
             this.tabControl1.Size = new System.Drawing.Size(1139, 437);
             this.tabControl1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(45, 34);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1309,7 +1310,7 @@
         private System.Windows.Forms.Button buttonEmployeesRemove;
         private System.Windows.Forms.Button buttonEmployeeModify;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAutomaticScheduling;
     }
 }
 
