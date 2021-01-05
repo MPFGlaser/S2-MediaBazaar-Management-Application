@@ -11,13 +11,14 @@ namespace MediaBazaar_ManagementSystem
             List<Employee> output = new List<Employee>();
 
             // Removes all irrelevant entries (i.e. anything not related to this shift) from workingEmployees
-            workingEmployees.RemoveAll(workingEmployee => workingEmployee.ShiftId != shift.Id);
+            List<WorkingEmployee> relevantWorkingEmployees = new List<WorkingEmployee>(workingEmployees);
+            relevantWorkingEmployees.RemoveAll(workingEmployee => workingEmployee.ShiftId != shift.Id);
 
             // Loops through each employee
             foreach (Employee employee in employees)
             {
                 // If an employeeId/shiftId combination doesn't exist, add the employee to output.
-                if(!workingEmployees.Any(WorkingEmployee => WorkingEmployee.EmployeeId == employee.Id))
+                if(!relevantWorkingEmployees.Any(WorkingEmployee => WorkingEmployee.EmployeeId == employee.Id))
                 {
                     output.Add(employee);
                 }

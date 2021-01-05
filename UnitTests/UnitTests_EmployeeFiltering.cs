@@ -130,11 +130,13 @@ namespace UnitTests
             // Can work all days except for Mondays & Saturdays
             employees.Add(new Employee(6, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "000111111111111000111", "9,5,7,2,6,3,1,8,4", 40));
 
-            // May not work in department 7 & 9
-            employees.Add(new Employee(7, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "5,2,6,3,1,8,4", 40));
+            // May not work in department 3 & 7 & 9
+            employees.Add(new Employee(7, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "5,2,6,1,8,4", 40));
             employees.Add(new Employee(8, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(9, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(10, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
+            employees[9].NotWorkingDays.Add(DateTime.Parse("04/01/2021"));
+
             employees.Add(new Employee(11, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(12, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
             employees.Add(new Employee(13, true, "Test", "Employee", "employee.t", "pw", "em", "p", "a", DateTime.Today, 123456789, "sn", "sp", 3, "pc", "c", "111111111111111111111", "9,5,7,2,6,3,1,8,4", 40));
@@ -426,6 +428,55 @@ namespace UnitTests
             controlEmployees.RemoveAll(employee => employee.Id == 17);
 
             List<Employee> availableEmployees = notAllowedInDepartment.Filter(shifts[7], 9, shifts, workingEmployees, employees);
+
+            CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
+        }
+
+        [TestMethod, TestCategory("All filters simultaniously")]
+        public void AllFiltersMondayTest()
+        {
+            IFilter alreadyScheduled = new FilterAlreadyScheduled();
+            IFilter sickOrDayOff = new FilterSickOrDayOff();
+            IFilter scheduledTwice = new FilterScheduledTwiceAlready();
+            IFilter notAllowedInDepartment = new FilterNotAllowedInDepartment();
+            IFilter otherDepartment = new FilterWorkingInOtherDepartmentToday();
+            IFilter contractHours = new FilterContractHoursViolation();
+            IFilter preferredHours = new FilterPreferredHours();
+
+
+            List<Employee> employees = GenerateEmployeeList();
+            List<Shift> shifts = GenerateShiftList();
+            List<WorkingEmployee> workingEmployees = GenerateWorkingEmployeeList();
+            List<Employee> availableEmployees = new List<Employee>(employees);
+            Shift shift = shifts[2];
+            int departmentId = 3;
+
+            List<Employee> controlEmployees = new List<Employee>(employees);
+
+            availableEmployees = alreadyScheduled.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 2);
+
+            availableEmployees = sickOrDayOff.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 10);
+
+            availableEmployees = scheduledTwice.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 1);
+
+            availableEmployees = notAllowedInDepartment.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 7);
+
+            availableEmployees = otherDepartment.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 15);
+
+            availableEmployees = contractHours.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 20);
+            controlEmployees.RemoveAll(employee => employee.Id == 21);
+
+            availableEmployees = preferredHours.Filter(shift, departmentId, shifts, workingEmployees, availableEmployees);
+            controlEmployees.RemoveAll(employee => employee.Id == 3);
+            controlEmployees.RemoveAll(employee => employee.Id == 4);
+            controlEmployees.RemoveAll(employee => employee.Id == 5);
+            controlEmployees.RemoveAll(employee => employee.Id == 6);
 
             CollectionAssert.AreEquivalent(controlEmployees, availableEmployees);
         }
