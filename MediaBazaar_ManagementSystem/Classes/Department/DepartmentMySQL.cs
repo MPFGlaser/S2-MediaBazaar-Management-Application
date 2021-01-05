@@ -96,5 +96,29 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
         }
+
+        public int GetCapacityForDepartmentInShift(int departmentId, int shiftId)
+        {
+            int toReturn = -1;
+            String query = "SELECT capacity FROM capacity_per_department WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+
+            try
+            {
+                connection.Open();
+                toReturn = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return toReturn;
+        }
     }
 }

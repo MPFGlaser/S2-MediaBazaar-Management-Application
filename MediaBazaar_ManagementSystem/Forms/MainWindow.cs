@@ -627,12 +627,12 @@ namespace MediaBazaar_ManagementSystem
         private void StartAutomaticScheduling()
         {
             employeeStorage = new EmployeeMySQL();
+            CreateMissingShifts();
             List<Employee> allEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
             List<WorkingEmployee> currentWorkingEmployees = employeeStorage.GetWorkingEmployees();
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
-            CreateMissingShifts();
-            bool isEditing;
+            List<Department> allDepartments = departmentStorage.GetAll();
 
             foreach(Employee e in allEmployees)
             {
@@ -645,26 +645,20 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            //List<Employee> availableEmployees = FILTER(allEmployees);
-            List<Employee> availableEmployees = allEmployees;
-
             foreach(Shift s in allWeekShifts)
             {
-
-                if (allShiftIds.Contains(s.Id))
+                foreach(Department d in allDepartments)
                 {
-                    isEditing = true;
-                }
-                else
-                {
-                    isEditing = false;
+                    //List<Employee> availableEmployees = FILTER(allEmployees);
+                    List<Employee> availableEmployees = allEmployees;
+                    d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
+                    Schedule(s, availableEmployees, d);
                 }
                 
-                Schedule(s, availableEmployees, isEditing, shiftStorage.GetCapacityPerDepartment(s.Id), departmentStorage.GetAll());
             }
         }
 
-        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, bool isEditing, Dictionary<int, int> allDepartmentCapacity, List<Department> allDepartments)
+        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
         {
             // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
@@ -672,62 +666,51 @@ namespace MediaBazaar_ManagementSystem
             int capacityNew = 5; //Temporary hardcoded because lack of data
             int shiftId = 0;
             Shift currentShift;
+            List<Employee> randomEmployeeList = ShuffleEmployeeList(availableEmployees);
 
-            // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
-            if (isEditing)
+            // Creates a new shift object and sets the list of employeeIds to the one we just created.
+            currentShift = new Shift(toSchedule.Id, toSchedule.Date, toSchedule.ShiftTime, capacityNew);
+            // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+            shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
+            shiftId = toSchedule.Id;
+
+            if (currentDepartment.Capacity == -1 || currentDepartment.Capacity == 0)
             {
-                // Creates a new shift object and sets the list of employeeIds to the one we just created.
-                currentShift = new Shift(toSchedule.Id, toSchedule.Date, toSchedule.ShiftTime, capacityNew);
-                // Removes all information about the shift in the shiftStorage to prevent duplication of entries
-                shiftStorage.Clear(toSchedule.Id);
-                shiftId = toSchedule.Id;
-
-                foreach (Department d in allDepartments)
-                {
-                    if (!allDepartmentCapacity.ContainsKey(d.Id))
-                    {
-                        shiftStorage.AddCapacityForDepartment(shiftId, d.Id, capacityNew);
-                        d.Capacity = capacityNew;
-                    }
-                }
-            }
-            else
-            {
-                // Creates a new shift object and sets the list of employeeIds to the one we just created.
-                currentShift = new Shift(0, toSchedule.Date, toSchedule.ShiftTime, capacityNew);
-                shiftId = shiftStorage.Create(currentShift);
-
-                foreach (Department d in allDepartments)
-                {
-                    if (!allDepartmentCapacity.ContainsKey(d.Id))
-                    {
-                        shiftStorage.AddCapacityForDepartment(shiftId, d.Id, capacityNew);
-                        d.Capacity = capacityNew;
-                    }
-                }
+                shiftStorage.UpdateCapacityPerDepartment(shiftId, currentDepartment.Id, capacityNew);
+                currentDepartment.Capacity = capacityNew;
             }
 
             //Check if is allowed to work in this department
-            foreach (Department d in allDepartments)
+            foreach(Employee e in randomEmployeeList)
             {
-                foreach(Employee e in availableEmployees)
+                if (currentDepartment.Employees.Count < currentDepartment.Capacity)
                 {
-                    List<int> workingDepartmentsList = e.WorkingDepartments.Split(',').Select(int.Parse).ToList();
-                    if (workingDepartmentsList.Contains(d.Id) && d.Employees.Count < d.Capacity)
-                    {
-                        d.Employees.Add(e);
-                    }
+                    currentDepartment.Employees.Add(e);
                 }
             }
 
-            foreach (Department d in allDepartments)
+            // Makes a list of all ids of the employees scheduled for that shift
+            foreach (Employee emp in currentDepartment.Employees)
             {
-                // Makes a list of all ids of the employees scheduled for that shift
-                foreach (Employee emp in d.Employees)
-                {
-                    shiftStorage.Assign(shiftId, emp.Id, d.Id);
-                }
+                shiftStorage.Assign(shiftId, emp.Id, currentDepartment.Id);
             }
+        }
+
+        public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
+        {
+            Random rng = new Random();
+            List<Employee> toReturn = toShuffle;
+            int n = toShuffle.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Employee temp = toReturn[k];
+                toReturn[k] = toReturn[n];
+                toReturn[n] = temp;
+            }
+
+            return toReturn;
         }
         #endregion
 
@@ -930,6 +913,18 @@ namespace MediaBazaar_ManagementSystem
         private void btnClockinOut_Click(object sender, EventArgs e)
         {
             ClockInOutAnEmployee();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Set cursor as hourglass
+            this.UseWaitCursor = true;
+
+            // Execute your time-intensive hashing code here...
+            StartAutomaticScheduling();
+
+            // Set cursor as default arrow
+            this.UseWaitCursor = false;
         }
 
         private void buttonEditFunctionPermissions_Click(object sender, EventArgs e)

@@ -46,5 +46,7 @@ namespace MediaBazaar_ManagementSystem
         string GetClockInAttendance(int id);
 
         string GetClockOutAttendance(int id);
+
+        bool ClearDept(int shiftId, int departmentId);
     }
 }

@@ -789,5 +789,46 @@ namespace MediaBazaar_ManagementSystem
             }
             return shiftIds;
         }
+
+        /// <summary>
+        /// Clears the specified shift identifier from the database to prevent duplicate shifts.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <returns>Whether or not the clear action was successfully carried out.</returns>
+        public bool ClearDept(int shiftId, int departmentId)
+        {
+            bool success = false;
+            int rowsAffected = 0;
+
+            String query = "DELETE FROM working_employees WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+
+            try
+            {
+                connection.Open();
+                rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    success = true;
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return success;
+        }
     }
 }
