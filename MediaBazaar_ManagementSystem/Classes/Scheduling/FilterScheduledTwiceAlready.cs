@@ -18,23 +18,39 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
+            // Removes all entries from workingEmployees that don't relate to today.
+            List<WorkingEmployee> relevantWorkingEmployees = new List<WorkingEmployee>(workingEmployees);
+            relevantWorkingEmployees.RemoveAll(workingEmployee =>
+            workingEmployee.ShiftId != shiftsToday[0].Id &&
+            workingEmployee.ShiftId != shiftsToday[1].Id &&
+            workingEmployee.ShiftId != shiftsToday[2].Id);
+
+
             // Loops through every employee
-            foreach(Employee employee in employees)
+            foreach (Employee employee in employees)
             {
                 int scheduledToday = 0;
 
-                // Loops through all shifts for today
-                foreach(Shift shiftToday in shiftsToday)
+                //// Loops through all shifts for today
+                //foreach(Shift shiftToday in shiftsToday)
+                //{
+                //    // Loops through all entries in workingEmployees
+                //    foreach(WorkingEmployee workingEmployeeToday in workingEmployees)
+                //    {
+                //        // Checks if the employeeID and shiftID exist in workingExployees as an entry (i.e. employee is scheduled for that shift)
+                //        if(workingEmployeeToday.EmployeeId == employee.Id && workingEmployeeToday.ShiftId == shiftToday.Id)
+                //        {
+                //            // If they are scheduled, add 1 to the amount of shifts they're scheduled that day
+                //            scheduledToday++;
+                //        }
+                //    }
+                //}
+
+                foreach(WorkingEmployee workingEmployee in relevantWorkingEmployees)
                 {
-                    // Loops through all entries in workingEmployees
-                    foreach(WorkingEmployee workingEmployeeToday in workingEmployees)
+                    if(workingEmployee.EmployeeId == employee.Id)
                     {
-                        // Checks if the employeeID and shiftID exist in workingExployees as an entry (i.e. employee is scheduled for that shift)
-                        if(workingEmployeeToday.EmployeeId == employee.Id && workingEmployeeToday.ShiftId == shiftToday.Id)
-                        {
-                            // If they are scheduled, add 1 to the amount of shifts they're scheduled that day
-                            scheduledToday++;
-                        }
+                        scheduledToday++;
                     }
                 }
 
