@@ -53,7 +53,6 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
-            this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
 
