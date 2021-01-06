@@ -181,5 +181,14 @@ namespace MediaBazaar_ManagementSystem
             ShowShift(ShiftTime.Evening);
         }
         #endregion
+
+        #region element enabling/disabling
+        public void ToggleCalendarDayControlButtons(bool newValue)
+        {
+            buttonMorning.Enabled = newValue;
+            buttonAfternoon.Enabled = newValue;
+            buttonEvening.Enabled = newValue;
+        }
+        #endregion
     }
 }

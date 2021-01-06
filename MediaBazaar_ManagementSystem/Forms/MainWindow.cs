@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Microsoft.VisualBasic;
 using MediaBazaar_ManagementSystem.Forms;
 
@@ -922,14 +923,12 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonAutomaticScheduling_Click(object sender, EventArgs e)
         {
-            // Set cursor as hourglass
-            this.UseWaitCursor = true;
-
-            // Execute your time-intensive hashing code here...
-            StartAutomaticScheduling();
-
-            // Set cursor as default arrow
-            this.UseWaitCursor = false;
+            new Thread(() =>
+            {
+                ToggleSchedulingElements(false);
+                StartAutomaticScheduling();
+                ToggleSchedulingElements(true);
+            }).Start();
         }
 
         private void buttonEditFunctionPermissions_Click(object sender, EventArgs e)
@@ -937,6 +936,30 @@ namespace MediaBazaar_ManagementSystem
             psw = new PermissionSelectionWindow();
             psw.Show();
         }
-    } 
-    #endregion
+        #endregion
+
+        #region element enabling/disabling
+        private void ToggleSchedulingElements(bool newValue)
+        {
+            tabControl1.BeginInvoke((Action)delegate ()
+            {
+                buttonSchedulingPrevious.Enabled = newValue;
+                buttonSchedulingNext.Enabled = newValue;
+                buttonSetWeekShiftsCapacity.Enabled = newValue;
+                numericUpDownSchedulingWeek.Enabled = newValue;
+                comboBoxSchedulingDepartment.Enabled = newValue;
+                buttonAutomaticScheduling.Enabled = newValue;
+
+                calendarDayControlMonday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlTuesday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlWednesday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlThursday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlFriday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlSaturday.ToggleCalendarDayControlButtons(newValue);
+                calendarDayControlSunday.ToggleCalendarDayControlButtons(newValue);
+            });
+        }
+
+        #endregion
+    }
 }
