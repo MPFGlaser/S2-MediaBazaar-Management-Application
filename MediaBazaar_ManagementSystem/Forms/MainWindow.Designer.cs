@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint19 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint20 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint21 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint22 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint23 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint24 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -118,6 +118,7 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -125,6 +126,7 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.progressBarSchedulingTime = new System.Windows.Forms.ProgressBar();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).BeginInit();
             this.splitContainerScheduling1.Panel1.SuspendLayout();
@@ -232,6 +234,7 @@
             // splitContainerScheduling1.Panel2
             // 
             this.splitContainerScheduling1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerScheduling1.Panel2.Controls.Add(this.progressBarSchedulingTime);
             this.splitContainerScheduling1.Panel2.Controls.Add(this.buttonAutomaticScheduling);
             this.splitContainerScheduling1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainerScheduling1.Size = new System.Drawing.Size(1131, 411);
@@ -344,7 +347,7 @@
             // 
             // buttonAutomaticScheduling
             // 
-            this.buttonAutomaticScheduling.Location = new System.Drawing.Point(486, 263);
+            this.buttonAutomaticScheduling.Location = new System.Drawing.Point(486, 246);
             this.buttonAutomaticScheduling.Name = "buttonAutomaticScheduling";
             this.buttonAutomaticScheduling.Size = new System.Drawing.Size(155, 23);
             this.buttonAutomaticScheduling.TabIndex = 7;
@@ -411,23 +414,23 @@
             // 
             // StatisticChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea1);
+            chartArea4.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea4);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend1);
+            legend4.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend4);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "TestData";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
-            series1.Points.Add(dataPoint6);
-            this.StatisticChart.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "TestData";
+            series4.Points.Add(dataPoint19);
+            series4.Points.Add(dataPoint20);
+            series4.Points.Add(dataPoint21);
+            series4.Points.Add(dataPoint22);
+            series4.Points.Add(dataPoint23);
+            series4.Points.Add(dataPoint24);
+            this.StatisticChart.Series.Add(series4);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -1086,6 +1089,15 @@
             this.tabControl1.Size = new System.Drawing.Size(1139, 437);
             this.tabControl1.TabIndex = 0;
             // 
+            // progressBarSchedulingTime
+            // 
+            this.progressBarSchedulingTime.Location = new System.Drawing.Point(486, 275);
+            this.progressBarSchedulingTime.Name = "progressBarSchedulingTime";
+            this.progressBarSchedulingTime.Size = new System.Drawing.Size(155, 23);
+            this.progressBarSchedulingTime.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarSchedulingTime.TabIndex = 8;
+            this.progressBarSchedulingTime.Visible = false;
+            // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
@@ -1311,6 +1323,7 @@
         private System.Windows.Forms.Button buttonEmployeeModify;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button buttonAutomaticScheduling;
+        private System.Windows.Forms.ProgressBar progressBarSchedulingTime;
     }
 }
 
