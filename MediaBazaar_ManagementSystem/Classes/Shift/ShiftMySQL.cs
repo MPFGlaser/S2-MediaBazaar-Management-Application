@@ -862,5 +862,36 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
         }
+
+        public List<WorkingEmployee> GetEmployeesInDepartmentInShift(int shiftId, int departmentId)
+        {
+            List<WorkingEmployee> toReturn = new List<WorkingEmployee>();
+
+            String query = "SELECT employeeId FROM working_employees WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@shiftId", shiftId);
+            command.Parameters.AddWithValue("@departmentId", departmentId);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    toReturn.Add(new WorkingEmployee(shiftId, Convert.ToInt32(reader[0]), departmentId));
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return toReturn;
+        }
     }
 }

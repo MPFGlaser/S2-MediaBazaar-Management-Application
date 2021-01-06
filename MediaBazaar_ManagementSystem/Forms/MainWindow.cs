@@ -772,6 +772,15 @@ namespace MediaBazaar_ManagementSystem
         {
             shiftStorage = new ShiftMySQL();
             List<WorkingEmployee> scheduledEmployees= new List<WorkingEmployee>();
+            List<WorkingEmployee> temp = new List<WorkingEmployee>();
+
+            // Sets all of the employees currently working this shift into the "to be scheduled" list.
+            temp = shiftStorage.GetEmployeesInDepartmentInShift(toSchedule.Id, currentDepartment.Id);
+
+            foreach(WorkingEmployee we in temp)
+            {
+                scheduledEmployees.Add(we);
+            }
 
             // Removes all information about the employees working this shift & department in the shiftStorage to prevent duplication of entries.
             shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
@@ -783,10 +792,26 @@ namespace MediaBazaar_ManagementSystem
                 currentDepartment.Capacity = capacityNew;
             }
 
-            // Adds the selected employees to the list of employees to be scheduled.
-            for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
+            if(scheduledEmployees.Count < currentDepartment.Capacity)
             {
-                scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
+                // Adds the selected employees to the list of employees to be scheduled.
+                for (int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
+                {
+                    if(scheduledEmployees.Count < currentDepartment.Capacity)
+                    {
+                        scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
+                    }else
+                    {
+                        i = currentDepartment.Capacity;
+                    }
+                }
+            }else if(scheduledEmployees.Count > currentDepartment.Capacity)
+            {
+                // Removes employees if there are too many scheduled.
+                while(scheduledEmployees.Count > currentDepartment.Capacity)
+                {
+                    scheduledEmployees.RemoveAt(scheduledEmployees.Count - 1);
+                }
             }
 
             return scheduledEmployees;
