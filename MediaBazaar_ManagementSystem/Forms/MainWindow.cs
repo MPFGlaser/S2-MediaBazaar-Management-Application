@@ -147,6 +147,15 @@ namespace MediaBazaar_ManagementSystem
             }
 
         }
+
+        /// <summary>
+        /// Function to log the current user out of the application and show a new login window.
+        /// </summary>
+        private void Logout()
+        {
+            Application.Restart();
+            Environment.Exit(0);
+        }
         #endregion
 
         #region Logic
@@ -719,6 +728,7 @@ namespace MediaBazaar_ManagementSystem
             return toReturn;
         }
         #endregion
+        #endregion
 
         #region Calendar data
         /// <summary>
@@ -778,16 +788,6 @@ namespace MediaBazaar_ManagementSystem
                 daysBasedOnWeekNumber.Add(result.AddDays(-3 + i));
             }
             return daysBasedOnWeekNumber;
-        }
-        #endregion
-
-        /// <summary>
-        /// Function to log the current user out of the application and show a new login window.
-        /// </summary>
-        private void Logout()
-        {
-            Application.Restart();
-            Environment.Exit(0);
         }
         #endregion
 
