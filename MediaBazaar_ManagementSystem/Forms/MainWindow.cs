@@ -957,6 +957,8 @@ namespace MediaBazaar_ManagementSystem
                 calendarDayControlFriday.ToggleCalendarDayControlButtons(newValue);
                 calendarDayControlSaturday.ToggleCalendarDayControlButtons(newValue);
                 calendarDayControlSunday.ToggleCalendarDayControlButtons(newValue);
+
+                progressBarSchedulingTime.Visible = !newValue;
             });
         }
 
