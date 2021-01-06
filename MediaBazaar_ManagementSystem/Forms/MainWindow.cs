@@ -53,7 +53,8 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
-            
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
 
         #region Access Control        
@@ -95,7 +96,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the tab as the user doesn't have permission to view employee data.
-                tabControl1.TabPages.Remove(tabPage1);
+                tabControl1.TabPages.Remove(tabPageEmployees);
             }
 
             // Stock tab
@@ -118,7 +119,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the stock tab as the user has no permission to view product data.
-                tabControl1.TabPages.Remove(tabPage2);
+                tabControl1.TabPages.Remove(tabPageStock);
             }
 
             // Statistics tab
@@ -129,7 +130,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the statistics tab as the user has no permission to view statistics.
-                tabControl1.TabPages.Remove(tabPage3);
+                tabControl1.TabPages.Remove(tabPageStatistics);
             }
 
             // Scheduling tab
@@ -143,7 +144,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the scheduling tab as the user has no access to scheduling functions whatsoever.
-                tabControl1.TabPages.Remove(tabPage4);
+                tabControl1.TabPages.Remove(tabPageScheduling);
             }
 
         }
@@ -1020,6 +1021,45 @@ namespace MediaBazaar_ManagementSystem
         {
             psw = new PermissionSelectionWindow();
             psw.Show();
+        }
+
+        private void MainWindow_KeyDown(Object o, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    //Go to Employees
+                    tabControl1.SelectedTab = tabPageEmployees;
+                    break;
+                case Keys.F2:
+                    //Go to Stock
+                    tabControl1.SelectedTab = tabPageStock;
+                    break;
+                case Keys.F3:
+                    //Go to Statistics
+                    tabControl1.SelectedTab = tabPageStatistics;
+                    break;
+                case Keys.F4:
+                    //Go to Schedule
+                    tabControl1.SelectedTab = tabPageScheduling;
+                    break;
+                case Keys.F5:
+                    //Add new employee
+                    EmployeeAdd();
+                    break;
+                case Keys.F6:
+                    //Add new item
+                    StockAdd();
+                    break;
+                case Keys.F7:
+                    //Export statistics? Currently generates random statistic data
+                    StatisticsRandomData();
+                    break;
+                case Keys.F8:
+                    //Edit capacities
+                    SetCapacityWholeWeek();
+                    break;
+            }
         }
         #endregion
 
