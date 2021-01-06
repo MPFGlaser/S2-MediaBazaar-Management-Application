@@ -643,6 +643,7 @@ namespace MediaBazaar_ManagementSystem
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
             List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
+            int capacityNew = 0;
 
             foreach (Employee e in allEmployees)
             {
@@ -661,7 +662,7 @@ namespace MediaBazaar_ManagementSystem
                 foreach (Department d in allDepartments)
                 {
                     d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
-                    foreach(WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d))
+                    foreach(WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d, capacityNew))
                     {
                         currentWorkingEmployees.Add(we);
                         employeesToSchedule.Add(we);
@@ -672,6 +673,15 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage.ScheduleAllEmployeesInList(employeesToSchedule);
         }
 
+        /// <summary>
+        /// Filters out all of the employees not fit for the shift and department which are currently beeing scheduled.
+        /// </summary>
+        /// <param name="shift"></param>
+        /// <param name="departmentId"></param>
+        /// <param name="shifts"></param>
+        /// <param name="we"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private List<Employee> Filter(Shift shift, int departmentId, List<Shift> shifts, List<WorkingEmployee> we, List<Employee> e)
         {
             List<Employee> filteredEmployees = new List<Employee>(e);
@@ -696,22 +706,30 @@ namespace MediaBazaar_ManagementSystem
             return filteredEmployees;
         }
 
-        private List<WorkingEmployee> Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
+        /// <summary>
+        /// Creates the list of employees which are going to be scheduled.
+        /// </summary>
+        /// <param name="toSchedule"></param>
+        /// <param name="availableEmployees"></param>
+        /// <param name="currentDepartment"></param>
+        /// <param name="capacityNew"></param>
+        /// <returns></returns>
+        private List<WorkingEmployee> Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment, int capacityNew)
         {
-            // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
-            int capacityNew = 3; //Temporary hardcoded because lack of data
             List<WorkingEmployee> scheduledEmployees= new List<WorkingEmployee>();
 
-            // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+            // Removes all information about the employees working this shift & department in the shiftStorage to prevent duplication of entries.
             shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
 
+            // Updates the capacity of departments where no capacity has been set yet (if necessary).
             if (currentDepartment.Capacity <= 0)
             {
                 shiftStorage.UpdateCapacityPerDepartment(toSchedule.Id, currentDepartment.Id, capacityNew);
                 currentDepartment.Capacity = capacityNew;
             }
 
+            // Adds the selected employees to the list of employees to be scheduled.
             for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
             {
                 scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
@@ -720,6 +738,11 @@ namespace MediaBazaar_ManagementSystem
             return scheduledEmployees;
         }
 
+        /// <summary>
+        /// Randomizes the list of employees in order to not always pick the same ones.
+        /// </summary>
+        /// <param name="toShuffle"></param>
+        /// <returns></returns>
         public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
         {
             Random rng = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
