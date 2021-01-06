@@ -830,5 +830,37 @@ namespace MediaBazaar_ManagementSystem
 
             return success;
         }
+
+        public void ScheduleAllEmployeesInList(List<WorkingEmployee> employeesToSchedule)
+        {
+            List<MySqlCommand> allCommands = new List<MySqlCommand>();
+
+            foreach(WorkingEmployee we in employeesToSchedule)
+            {
+                String query = "INSERT INTO working_employees VALUES (@shiftId, @employeeId, @departmentId);";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@shiftId", we.ShiftId);
+                command.Parameters.AddWithValue("@employeeId", we.EmployeeId);
+                command.Parameters.AddWithValue("@departmentId", we.DepartmentId);
+
+                allCommands.Add(command);
+            }
+            try
+            {
+                connection.Open();
+                foreach(MySqlCommand command in allCommands)
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

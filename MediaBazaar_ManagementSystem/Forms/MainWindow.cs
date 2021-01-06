@@ -642,8 +642,9 @@ namespace MediaBazaar_ManagementSystem
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
+            List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
 
-            foreach(Employee e in allEmployees)
+            foreach (Employee e in allEmployees)
             {
                 foreach((int employeeId, DateTime absentDate) absentList in absentDays)
                 {
@@ -659,11 +660,16 @@ namespace MediaBazaar_ManagementSystem
                 List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
                 foreach (Department d in allDepartments)
                 {
-                    List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees());
                     d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
-                    Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d);
+                    foreach(WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d))
+                    {
+                        currentWorkingEmployees.Add(we);
+                        employeesToSchedule.Add(we);
+                    }
                 }
             }
+
+            shiftStorage.ScheduleAllEmployeesInList(employeesToSchedule);
         }
 
         private List<Employee> Filter(Shift shift, int departmentId, List<Shift> shifts, List<WorkingEmployee> we, List<Employee> e)
@@ -690,11 +696,12 @@ namespace MediaBazaar_ManagementSystem
             return filteredEmployees;
         }
 
-        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
+        private List<WorkingEmployee> Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
         {
             // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
             int capacityNew = 3; //Temporary hardcoded because lack of data
+            List<WorkingEmployee> scheduledEmployees= new List<WorkingEmployee>();
 
             // Removes all information about the shift in the shiftStorage to prevent duplication of entries
             shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
@@ -707,8 +714,10 @@ namespace MediaBazaar_ManagementSystem
 
             for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
             {
-                shiftStorage.Assign(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id);
+                scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
             }
+
+            return scheduledEmployees;
         }
 
         public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
