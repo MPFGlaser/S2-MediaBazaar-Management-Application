@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint19 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint20 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint21 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint22 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint23 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint24 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.buttonReloadDatabaseEntries = new System.Windows.Forms.Button();
             this.toolTipReloadDb = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPageScheduling = new System.Windows.Forms.TabPage();
             this.splitContainerScheduling1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxSchedulingDepartment = new System.Windows.Forms.ComboBox();
@@ -54,9 +54,10 @@
             this.buttonSetWeekShiftsCapacity = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDownSchedulingWeek = new System.Windows.Forms.NumericUpDown();
+            this.progressBarSchedulingTime = new System.Windows.Forms.ProgressBar();
             this.buttonAutomaticScheduling = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageStatistics = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,7 +67,7 @@
             this.buttonStatisticsDepartment = new System.Windows.Forms.Button();
             this.comboBoxStatisticsDepartment = new System.Windows.Forms.ComboBox();
             this.DataButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageStock = new System.Windows.Forms.TabPage();
             this.splitContainerStockPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
             this.productId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,7 +93,7 @@
             this.checkBoxShowInactiveItems = new System.Windows.Forms.CheckBox();
             this.buttonStockEditProduct = new System.Windows.Forms.Button();
             this.buttonStockAdd = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageEmployees = new System.Windows.Forms.TabPage();
             this.splitContainerEmployeesPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewEmployees = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,7 +119,6 @@
             this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -126,8 +126,7 @@
             this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.progressBarSchedulingTime = new System.Windows.Forms.ProgressBar();
-            this.tabPage4.SuspendLayout();
+            this.tabPageScheduling.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).BeginInit();
             this.splitContainerScheduling1.Panel1.SuspendLayout();
             this.splitContainerScheduling1.Panel2.SuspendLayout();
@@ -135,13 +134,13 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabPageStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).BeginInit();
             this.splitContainerStatistics1.Panel1.SuspendLayout();
             this.splitContainerStatistics1.Panel2.SuspendLayout();
             this.splitContainerStatistics1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.tabPageStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockPrimary)).BeginInit();
             this.splitContainerStockPrimary.Panel1.SuspendLayout();
             this.splitContainerStockPrimary.Panel2.SuspendLayout();
@@ -153,7 +152,7 @@
             this.splitContainerStockSecondary.SuspendLayout();
             this.pnlDepotWorker.SuspendLayout();
             this.pnlSalesRepresentative.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageEmployees.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).BeginInit();
             this.splitContainerEmployeesPrimary.Panel1.SuspendLayout();
             this.splitContainerEmployeesPrimary.Panel2.SuspendLayout();
@@ -202,15 +201,15 @@
             this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
             this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
             // 
-            // tabPage4
+            // tabPageScheduling
             // 
-            this.tabPage4.Controls.Add(this.splitContainerScheduling1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1131, 411);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Scheduling";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPageScheduling.Controls.Add(this.splitContainerScheduling1);
+            this.tabPageScheduling.Location = new System.Drawing.Point(4, 22);
+            this.tabPageScheduling.Name = "tabPageScheduling";
+            this.tabPageScheduling.Size = new System.Drawing.Size(1131, 411);
+            this.tabPageScheduling.TabIndex = 3;
+            this.tabPageScheduling.Text = "Scheduling";
+            this.tabPageScheduling.UseVisualStyleBackColor = true;
             // 
             // splitContainerScheduling1
             // 
@@ -345,6 +344,15 @@
             0,
             0});
             // 
+            // progressBarSchedulingTime
+            // 
+            this.progressBarSchedulingTime.Location = new System.Drawing.Point(486, 275);
+            this.progressBarSchedulingTime.Name = "progressBarSchedulingTime";
+            this.progressBarSchedulingTime.Size = new System.Drawing.Size(155, 23);
+            this.progressBarSchedulingTime.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBarSchedulingTime.TabIndex = 8;
+            this.progressBarSchedulingTime.Visible = false;
+            // 
             // buttonAutomaticScheduling
             // 
             this.buttonAutomaticScheduling.Location = new System.Drawing.Point(486, 246);
@@ -375,15 +383,15 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // tabPage3
+            // tabPageStatistics
             // 
-            this.tabPage3.Controls.Add(this.splitContainerStatistics1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1131, 411);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Statistics";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageStatistics.Controls.Add(this.splitContainerStatistics1);
+            this.tabPageStatistics.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStatistics.Name = "tabPageStatistics";
+            this.tabPageStatistics.Size = new System.Drawing.Size(1131, 411);
+            this.tabPageStatistics.TabIndex = 2;
+            this.tabPageStatistics.Text = "Statistics";
+            this.tabPageStatistics.UseVisualStyleBackColor = true;
             // 
             // splitContainerStatistics1
             // 
@@ -414,23 +422,23 @@
             // 
             // StatisticChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea4);
+            chartArea2.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea2);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend4);
+            legend2.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend2);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "TestData";
-            series4.Points.Add(dataPoint19);
-            series4.Points.Add(dataPoint20);
-            series4.Points.Add(dataPoint21);
-            series4.Points.Add(dataPoint22);
-            series4.Points.Add(dataPoint23);
-            series4.Points.Add(dataPoint24);
-            this.StatisticChart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "TestData";
+            series2.Points.Add(dataPoint7);
+            series2.Points.Add(dataPoint8);
+            series2.Points.Add(dataPoint9);
+            series2.Points.Add(dataPoint10);
+            series2.Points.Add(dataPoint11);
+            series2.Points.Add(dataPoint12);
+            this.StatisticChart.Series.Add(series2);
             this.StatisticChart.Size = new System.Drawing.Size(1002, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -510,16 +518,16 @@
             this.DataButton.UseVisualStyleBackColor = true;
             this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
-            // tabPage2
+            // tabPageStock
             // 
-            this.tabPage2.Controls.Add(this.splitContainerStockPrimary);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1131, 411);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Stock";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageStock.Controls.Add(this.splitContainerStockPrimary);
+            this.tabPageStock.Location = new System.Drawing.Point(4, 22);
+            this.tabPageStock.Name = "tabPageStock";
+            this.tabPageStock.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStock.Size = new System.Drawing.Size(1131, 411);
+            this.tabPageStock.TabIndex = 1;
+            this.tabPageStock.Text = "Stock";
+            this.tabPageStock.UseVisualStyleBackColor = true;
             // 
             // splitContainerStockPrimary
             // 
@@ -791,16 +799,16 @@
             this.buttonStockAdd.UseVisualStyleBackColor = true;
             this.buttonStockAdd.Click += new System.EventHandler(this.buttonStockAdd_Click);
             // 
-            // tabPage1
+            // tabPageEmployees
             // 
-            this.tabPage1.Controls.Add(this.splitContainerEmployeesPrimary);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1131, 411);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Employees";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageEmployees.Controls.Add(this.splitContainerEmployeesPrimary);
+            this.tabPageEmployees.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEmployees.Name = "tabPageEmployees";
+            this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEmployees.Size = new System.Drawing.Size(1131, 411);
+            this.tabPageEmployees.TabIndex = 0;
+            this.tabPageEmployees.Text = "Employees";
+            this.tabPageEmployees.UseVisualStyleBackColor = true;
             // 
             // splitContainerEmployeesPrimary
             // 
@@ -1079,24 +1087,15 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPageEmployees);
+            this.tabControl1.Controls.Add(this.tabPageStock);
+            this.tabControl1.Controls.Add(this.tabPageStatistics);
+            this.tabControl1.Controls.Add(this.tabPageScheduling);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1139, 437);
             this.tabControl1.TabIndex = 0;
-            // 
-            // progressBarSchedulingTime
-            // 
-            this.progressBarSchedulingTime.Location = new System.Drawing.Point(486, 275);
-            this.progressBarSchedulingTime.Name = "progressBarSchedulingTime";
-            this.progressBarSchedulingTime.Size = new System.Drawing.Size(155, 23);
-            this.progressBarSchedulingTime.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBarSchedulingTime.TabIndex = 8;
-            this.progressBarSchedulingTime.Visible = false;
             // 
             // calendarDayControlMonday
             // 
@@ -1177,10 +1176,12 @@
             this.Controls.Add(this.labelWelcomeText);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Bazaar Management System";
-            this.tabPage4.ResumeLayout(false);
+            this.tabPageScheduling.ResumeLayout(false);
             this.splitContainerScheduling1.Panel1.ResumeLayout(false);
             this.splitContainerScheduling1.Panel1.PerformLayout();
             this.splitContainerScheduling1.Panel2.ResumeLayout(false);
@@ -1190,14 +1191,14 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSchedulingWeek)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tabPageStatistics.ResumeLayout(false);
             this.splitContainerStatistics1.Panel1.ResumeLayout(false);
             this.splitContainerStatistics1.Panel2.ResumeLayout(false);
             this.splitContainerStatistics1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).EndInit();
             this.splitContainerStatistics1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).EndInit();
-            this.tabPage2.ResumeLayout(false);
+            this.tabPageStock.ResumeLayout(false);
             this.splitContainerStockPrimary.Panel1.ResumeLayout(false);
             this.splitContainerStockPrimary.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockPrimary)).EndInit();
@@ -1211,7 +1212,7 @@
             this.splitContainerStockSecondary.ResumeLayout(false);
             this.pnlDepotWorker.ResumeLayout(false);
             this.pnlSalesRepresentative.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabPageEmployees.ResumeLayout(false);
             this.splitContainerEmployeesPrimary.Panel1.ResumeLayout(false);
             this.splitContainerEmployeesPrimary.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesPrimary)).EndInit();
@@ -1242,7 +1243,7 @@
         private System.ServiceProcess.ServiceController serviceController1;
         private System.Windows.Forms.Button buttonReloadDatabaseEntries;
         private System.Windows.Forms.ToolTip toolTipReloadDb;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageScheduling;
         private System.Windows.Forms.SplitContainer splitContainerScheduling1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxSchedulingDepartment;
@@ -1260,7 +1261,7 @@
         private CalendarDayControl calendarDayControlFriday;
         private CalendarDayControl calendarDayControlSaturday;
         private CalendarDayControl calendarDayControlSunday;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageStatistics;
         private System.Windows.Forms.SplitContainer splitContainerStatistics1;
         private System.Windows.Forms.DataVisualization.Charting.Chart StatisticChart;
         private System.Windows.Forms.Label label4;
@@ -1270,7 +1271,7 @@
         private System.Windows.Forms.Button buttonStatisticsDepartment;
         private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
         private System.Windows.Forms.Button DataButton;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageStock;
         private System.Windows.Forms.SplitContainer splitContainerStockPrimary;
         private System.Windows.Forms.DataGridView dataGridViewStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn productId;
@@ -1296,7 +1297,7 @@
         private System.Windows.Forms.CheckBox checkBoxShowInactiveItems;
         private System.Windows.Forms.Button buttonStockEditProduct;
         private System.Windows.Forms.Button buttonStockAdd;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPageEmployees;
         private System.Windows.Forms.SplitContainer splitContainerEmployeesPrimary;
         private System.Windows.Forms.DataGridView dataGridViewEmployees;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
