@@ -645,7 +645,7 @@ namespace MediaBazaar_ManagementSystem
             List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
             List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = departmentStorage.GetCapacityForAllDepartments();
             int capacityNew = 0;
-            bool showPopup = false, stopScheduling = false, a = false;
+            bool showPopup = false, stopScheduling = false;
 
             foreach (Employee e in allEmployees)
             {
@@ -664,13 +664,9 @@ namespace MediaBazaar_ManagementSystem
                 {
                     foreach((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
                     {
-                        if(element.shiftId == s.Id && element.departmentId == d.Id)
+                        if(!showPopup && element.capacity == 0)
                         {
-                            d.Capacity = element.capacity;
-                            if(!showPopup && element.capacity == 0)
-                            {
-                                showPopup = true;
-                            }
+                            showPopup = true;
                         }
                     }
                 }
@@ -682,7 +678,19 @@ namespace MediaBazaar_ManagementSystem
 
                 if(notAllCapacitySet == DialogResult.Yes)
                 {
-                    Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                    string enteredValue = Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                    if(enteredValue.Length > 0)
+                    {
+                        while (!int.TryParse(enteredValue, out capacityNew))
+                        {
+                            enteredValue = Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                            if (enteredValue.Length == 0)
+                            {
+                                stopScheduling = true;
+                                break;
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -690,13 +698,22 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            if (!stopScheduling && a)
+            if (!stopScheduling)
             {
                 foreach (Shift s in allWeekShifts)
                 {
                     List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
                     foreach (Department d in allDepartments)
                     {
+                        foreach ((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
+                        {
+                            if (element.shiftId == s.Id && element.departmentId == d.Id)
+                            {
+                                d.Capacity = element.capacity;
+                                break;
+                            }
+                        }
+
                         foreach (WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d, capacityNew))
                         {
                             currentWorkingEmployees.Add(we);
