@@ -97,18 +97,21 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        public int GetCapacityForDepartmentInShift(int departmentId, int shiftId)
+        public List<(int shiftId, int departmentId, int capacity)> GetCapacityForAllDepartments()
         {
-            int toReturn = -1;
-            String query = "SELECT capacity FROM capacity_per_department WHERE shiftId = @shiftId AND departmentId = @departmentId";
+            List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = new List<(int shiftId, int departmentId, int capacity)>();
+            String query = "SELECT * FROM capacity_per_department";
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@shiftId", shiftId);
-            command.Parameters.AddWithValue("@departmentId", departmentId);
 
             try
             {
                 connection.Open();
-                toReturn = Convert.ToInt32(command.ExecuteScalar());
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    allDepartmentCapacities.Add((Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2])));
+                }
             }
             catch (Exception ex)
             {
@@ -118,7 +121,8 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-            return toReturn;
+
+            return allDepartmentCapacities;
         }
     }
 }

@@ -643,7 +643,9 @@ namespace MediaBazaar_ManagementSystem
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
             List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
+            List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = departmentStorage.GetCapacityForAllDepartments();
             int capacityNew = 0;
+            bool showPopup = false, stopScheduling = false, a = false;
 
             foreach (Employee e in allEmployees)
             {
@@ -658,19 +660,53 @@ namespace MediaBazaar_ManagementSystem
 
             foreach(Shift s in allWeekShifts)
             {
-                List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
                 foreach (Department d in allDepartments)
                 {
-                    d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
-                    foreach(WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d, capacityNew))
+                    foreach((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
                     {
-                        currentWorkingEmployees.Add(we);
-                        employeesToSchedule.Add(we);
+                        if(element.shiftId == s.Id && element.departmentId == d.Id)
+                        {
+                            d.Capacity = element.capacity;
+                            if(!showPopup && element.capacity == 0)
+                            {
+                                showPopup = true;
+                            }
+                        }
                     }
                 }
             }
 
-            shiftStorage.ScheduleAllEmployeesInList(employeesToSchedule);
+            if (showPopup)
+            {
+                DialogResult notAllCapacitySet = MessageBox.Show("A capacity has not been set for each department, do you want to set one manually and continue?", "Warning", MessageBoxButtons.YesNo);
+
+                if(notAllCapacitySet == DialogResult.Yes)
+                {
+                    Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                }
+                else
+                {
+                    stopScheduling = true;
+                }
+            }
+
+            if (!stopScheduling && a)
+            {
+                foreach (Shift s in allWeekShifts)
+                {
+                    List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
+                    foreach (Department d in allDepartments)
+                    {
+                        foreach (WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d, capacityNew))
+                        {
+                            currentWorkingEmployees.Add(we);
+                            employeesToSchedule.Add(we);
+                        }
+                    }
+                }
+
+                shiftStorage.ScheduleAllEmployeesInList(employeesToSchedule);
+            }
         }
 
         /// <summary>
