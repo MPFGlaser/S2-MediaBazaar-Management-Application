@@ -53,7 +53,6 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
-            this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
 
@@ -592,6 +591,8 @@ namespace MediaBazaar_ManagementSystem
         {
             shiftStorage = new ShiftMySQL();
             List<Shift> tempNewShifts = new List<Shift>();
+
+            allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
 
             foreach (DateTime date in weekDays)
             {
