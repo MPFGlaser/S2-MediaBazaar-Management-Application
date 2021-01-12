@@ -124,5 +124,36 @@ namespace MediaBazaar_ManagementSystem
 
             return allDepartmentCapacities;
         }
+
+        public List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartmentsInCertainShifts(List<int> shiftIds)
+        {
+            List<(int shiftId, int departmentId, int capacity)> departmentInfo = new List<(int shiftId, int departmentId, int capacity)>();
+            String query = "SELECT * FROM capacity_per_department";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (shiftIds.Contains(Convert.ToInt32(reader[0]))){
+                        departmentInfo.Add((Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2])));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return departmentInfo;
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace MediaBazaar_ManagementSystem
         List<Department> GetAll();
 
         List<(int shiftId, int departmentId, int capacity)> GetCapacityForAllDepartments();
+
+        List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartmentsInCertainShifts(List<int> shiftIds);
     }
 }

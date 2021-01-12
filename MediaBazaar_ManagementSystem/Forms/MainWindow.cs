@@ -592,6 +592,8 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             List<Shift> tempNewShifts = new List<Shift>();
 
+            allWeekShifts = shiftStorage.GetWeek(weekDays[0], weekDays[6]);
+
             foreach (DateTime date in weekDays)
             {
                 if (allWeekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Morning) == null)
