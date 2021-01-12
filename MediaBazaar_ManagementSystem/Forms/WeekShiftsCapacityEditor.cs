@@ -268,6 +268,34 @@ namespace MediaBazaar_ManagementSystem.Forms
             return output;
         }
 
+        private List<(int shiftId, int departmentId, int capacity)> CreateInheritedCapacitiesList(List<Shift> shiftsPreviousWeek, List<(int shiftId, int departmentId, int capacity)> departmentInfoPreviousWeek)
+        {
+            List<(int shiftId, int departmentId, int capacity)> output = new List<(int shiftId, int departmentId, int capacity)>();
+            int previousShiftId = 0;
+
+            foreach (Shift s in weekShifts)
+            {
+                foreach(Shift sp in shiftsPreviousWeek)
+                {
+                    if(sp.Date == s.Date.AddDays(-7) && sp.ShiftTime == s.ShiftTime)
+                    {
+                        previousShiftId = sp.Id;
+                    }
+                }
+
+                foreach((int shiftId, int departmentId, int capacity) data in departmentInfoPreviousWeek)
+                {
+                    if(data.shiftId == previousShiftId)
+                    {
+                        output.Add((s.Id, data.departmentId, data.capacity));
+                    }
+                }
+            }
+
+
+            return output;
+        }
+
         #region control handlers
         /// <summary>
         /// Saves the set number of capacity in the database.
@@ -328,6 +356,8 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void buttonInheritCapacity_Click(object sender, EventArgs e)
         {
+            List<(int shiftId, int departmentId, int capacity)> inheritedShifts = new List<(int shiftId, int departmentId, int capacity)>();
+
             List<Shift> shiftsPreviousWeek = shiftStorage.GetWeek(weekdays[0].AddDays(-7), weekdays[6].AddDays(-7));
 
             List<int> shiftIdsPreviousWeek = new List<int>();
@@ -339,9 +369,13 @@ namespace MediaBazaar_ManagementSystem.Forms
 
             List<(int shiftId, int departmentId, int capacity)> departmentInfo = departmentStorage.GetCapacityForDepartmentsInCertainShifts(shiftIdsPreviousWeek);
 
-            if(departmentInfo.Count == (63 * allDepartments.Count))
+            if(departmentInfo.Count == (21 * allDepartments.Count))
             {
-                //Capacities set, so use them
+                inheritedShifts = CreateInheritedCapacitiesList(shiftsPreviousWeek, departmentInfo);
+
+                departmentStorage.UpdateCapacityForDepartmentList(inheritedShifts);
+                MessageBox.Show("The capacities of the previous week have been set for this week");
+                this.DialogResult = DialogResult.OK;
             }
             else
             {

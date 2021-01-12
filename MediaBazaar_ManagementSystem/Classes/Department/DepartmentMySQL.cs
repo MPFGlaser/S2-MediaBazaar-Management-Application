@@ -155,5 +155,30 @@ namespace MediaBazaar_ManagementSystem
 
             return departmentInfo;
         }
+
+        public void UpdateCapacityForDepartmentList(List<(int shiftId, int departmentId, int capacity)> toUpdate)
+        {
+            try
+            {
+                connection.Open();
+                foreach((int shiftId, int departmentId, int capacity) data in toUpdate)
+                {
+                    String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@shiftId", data.shiftId);
+                    command.Parameters.AddWithValue("@departmentId", data.departmentId);
+                    command.Parameters.AddWithValue("@capacity", data.capacity);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
