@@ -235,8 +235,6 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="employee"></param>
         public void AddEmployeeData(Employee employee)
         {
-            int index = 0;
-
             // Changes the form title to reflect which employee is being edited.
             Text = "Viewing/editing " + employee.FirstName + "'s details";
 

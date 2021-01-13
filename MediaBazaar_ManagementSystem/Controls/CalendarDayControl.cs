@@ -60,7 +60,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 if (s.Date == date)
                 {
-                    int numberScheduled = s.EmployeeIds.Count();
+                    int numberScheduled = s.EmployeeIds.Count;
                     SetShiftOccupation(s.ShiftTime, numberScheduled, s.Capacity);
                 }
             }

@@ -642,7 +642,6 @@ namespace MediaBazaar_ManagementSystem
             CreateMissingShifts();
             List<Employee> allEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
-            List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
             List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
             List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = departmentStorage.GetCapacityForAllDepartments();

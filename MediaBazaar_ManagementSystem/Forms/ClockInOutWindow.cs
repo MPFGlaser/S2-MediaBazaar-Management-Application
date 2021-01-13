@@ -131,7 +131,6 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void btnClockOut_Click(object sender, EventArgs e)
         {
-            string date = dtpDate.Value.ToString("yyyy-MM-dd");
             if (cmbShift.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a shift!");

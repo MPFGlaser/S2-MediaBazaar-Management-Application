@@ -10,7 +10,6 @@ namespace MediaBazaar_ManagementSystem
     {
         MySqlConnection connection;
         string connectionString;
-        Stock stock;
         List<Stock> stocks = new List<Stock>();
         List<Request> requests = new List<Request>();
 

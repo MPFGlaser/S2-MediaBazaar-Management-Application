@@ -160,18 +160,6 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        // Updates the items in the select departments combobox so they have the correct data.
-        private void UpdateDepartmentsComboBox(List<Department> allDepartments)
-        {
-            comboBoxSelectDepartments.Items.Clear();
-            foreach (Department d in allDepartments)
-            {
-                comboBoxSelectDepartments.DisplayMember = "Text";
-                comboBoxSelectDepartments.ValueMember = "Department";
-                comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
-            }
-        }
-
         // Pre-fills the combobox for the shift time with all defined shift times. (Morning, afternoon, evening at the time of writing)
         private void InitializeComboBoxShiftTime()
         {
@@ -323,12 +311,9 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void RemoveEmployeeFromShift()
         {
-            int index = dataGridViewScheduling.CurrentRow.Index;
             // Checks if there's actually an employee selected to be removed
             if (dataGridViewScheduling.SelectedRows.Count == 1)
             {
-                List<Department> allDepartments = GetDepartmentListFromComboBox();
-
                 // Ensures the right employee object is used
                 DataGridViewRow row = dataGridViewScheduling.SelectedRows[0];
 
@@ -381,17 +366,6 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private dynamic GetComboBoxEmployee(Employee selectedEmployee)
-        {
-            Employee emp = null;
-            foreach (dynamic empDynamic in comboBoxSelectEmployees.Items)
-            {
-                emp = (empDynamic).Employee;
-                if (emp.Id == selectedEmployee.Id) return empDynamic;
-            }
-            return emp;
-        }
-
         /// <summary>
         /// Returns all of the departments within the select department combobox.
         /// </summary>
@@ -429,8 +403,6 @@ namespace MediaBazaar_ManagementSystem
                     bool allowed = true;
                     foreach (Department d in allDepartmentInfo)
                     {
-                        List<Employee> employeesInDepartment = d.Employees;
-
                         foreach (Employee emp in d.Employees)
                         {
                             if (e.Id == emp.Id)
