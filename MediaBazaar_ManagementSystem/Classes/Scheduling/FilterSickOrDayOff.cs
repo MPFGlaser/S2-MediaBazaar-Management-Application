@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -9,7 +8,7 @@ namespace MediaBazaar_ManagementSystem
         {
             List<Employee> output = new List<Employee>();
 
-            foreach(Employee employee in employees)
+            foreach (Employee employee in employees)
             {
                 if (!employee.NotWorkingDays.Contains(shift.Date))
                 {

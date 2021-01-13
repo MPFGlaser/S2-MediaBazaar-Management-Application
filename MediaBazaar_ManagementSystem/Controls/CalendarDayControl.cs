@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-using System.Globalization;
-using System.Drawing;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -104,22 +104,22 @@ namespace MediaBazaar_ManagementSystem
         {
             Color output = Color.Transparent;
 
-            if(numberScheduled < capacity)
+            if (numberScheduled < capacity)
             {
                 output = Color.Red;
             }
 
-            if(numberScheduled == capacity)
+            if (numberScheduled == capacity)
             {
                 output = Color.Lime;
             }
 
-            if(numberScheduled > capacity)
+            if (numberScheduled > capacity)
             {
                 output = Color.DarkOrange;
             }
 
-            if(numberScheduled == 0 || capacity == 0)
+            if (numberScheduled == 0 || capacity == 0)
             {
                 output = Color.Red;
             }
@@ -163,7 +163,7 @@ namespace MediaBazaar_ManagementSystem
         #region Button-related functions
         public Department CurrentSelectedDepartment
         {
-            set { this.currentSelectedDepartment = value; }
+            set { currentSelectedDepartment = value; }
         }
 
         private void buttonMorning_Click(object sender, EventArgs e)

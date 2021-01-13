@@ -258,7 +258,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
 
-            foreach(EmployeeShift es in employeeShifts)
+            foreach (EmployeeShift es in employeeShifts)
             {
                 if (weekShiftIds.Contains(es.ShiftId))
                 {

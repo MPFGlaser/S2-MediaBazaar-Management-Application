@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -26,7 +25,7 @@ namespace MediaBazaar_ManagementSystem
             employeeStorage = new EmployeeMySQL();
             departmentStorage = new DepartmentMySQL();
             functionStorage = new FunctionMySQL();
-            this.currentUser = loggedInUser.Id;
+            currentUser = loggedInUser.Id;
             this.loggedInUser = loggedInUser;
             LoadDepartments();
             CheckPermissions();
@@ -34,7 +33,7 @@ namespace MediaBazaar_ManagementSystem
 
         public Employee Employee
         {
-            get { return this.employee; }
+            get { return employee; }
         }
 
         /// <summary>
@@ -200,7 +199,7 @@ namespace MediaBazaar_ManagementSystem
             if (allCorrect)
             {
                 bool success;
-                
+
                 // This conversion seems sketchy, but because it was checked by the regex before, it should not pose a problem.
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
                 int contractHours = Convert.ToInt32(numericUpDownEmployeeHours.Value);
@@ -225,7 +224,7 @@ namespace MediaBazaar_ManagementSystem
                 // This is so that the user doesn't have to re-enter all the data in case something (temporarily) went wrong with the CreateEmployee command.
                 if (success)
                 {
-                    this.DialogResult = DialogResult.OK;
+                    DialogResult = DialogResult.OK;
                 }
             }
         }
@@ -239,7 +238,7 @@ namespace MediaBazaar_ManagementSystem
             int index = 0;
 
             // Changes the form title to reflect which employee is being edited.
-            this.Text = "Viewing/editing " + employee.FirstName + "'s details";
+            Text = "Viewing/editing " + employee.FirstName + "'s details";
 
             // Sets some editing-specific variables to their correct values. This aides with sending the employeeStorage the right details later on.
             editing = true;
@@ -342,8 +341,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonEDWCancel_Click(object sender, System.EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void buttonPreferredShifts_Click(object sender, EventArgs e)
@@ -360,7 +359,7 @@ namespace MediaBazaar_ManagementSystem
         {
             //Creates and shows the WorkingDepartments form so the user can select the department on which the employee will be working.
             wd = new WorkingDepartments(workingDepartments, allDepartments);
-            if(wd.ShowDialog() == DialogResult.OK)
+            if (wd.ShowDialog() == DialogResult.OK)
             {
                 workingDepartments = wd.WorkingDepartmentsString;
             }

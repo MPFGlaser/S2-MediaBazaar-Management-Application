@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
@@ -34,19 +28,19 @@ namespace MediaBazaar_ManagementSystem
                 // Does a conversion to lowercase, so capitalisation doesn't matter.
                 foreach (KeyValuePair<int, string> i in currentFunctions)
                 {
-                    if(i.Value.ToLower() == Title.ToLower())
+                    if (i.Value.ToLower() == Title.ToLower())
                     {
                         valid = false;
                         ErrorMessages.InformationInvalid();
                     }
                 }
-                
-                if(valid == true)
+
+                if (valid == true)
                 {
                     if (functionStorage.Create(Title))
                     {
-                        this.Close();
-                        this.DialogResult = DialogResult.OK;
+                        Close();
+                        DialogResult = DialogResult.OK;
                     }
                 }
             }
@@ -58,7 +52,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

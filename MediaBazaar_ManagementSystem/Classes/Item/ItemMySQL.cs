@@ -203,7 +203,7 @@ namespace MediaBazaar_ManagementSystem
         {
             int pid = id;
             int quantity = 0;
-            this.requests = new List<Request>();
+            requests = new List<Request>();
             try
             {
                 string sql = "SELECT `quantity` FROM `stock_request` WHERE productid = @pId AND status = 'Pending';";
@@ -227,7 +227,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         public List<Stock> ReadStock()
         {
-            this.stocks = new List<Stock>();
+            stocks = new List<Stock>();
             try
             {
                 string sql = "SELECT `id`, `quantity` FROM `items`";
@@ -286,14 +286,14 @@ namespace MediaBazaar_ManagementSystem
             {
                 int qtoadd = ReadRequest(productId);
                 string sql = "UPDATE items SET quantity = @Quantity WHERE id = @Id;";
-                
+
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
 
-                cmd.Parameters.AddWithValue("@Quantity", quantity+qtoadd);
+                cmd.Parameters.AddWithValue("@Quantity", quantity + qtoadd);
                 cmd.Parameters.AddWithValue("@Id", productId);
                 connection.Open();
                 cmd.ExecuteNonQuery();
-                
+
                 string Status = "Done";
                 DateTime dateAccepted = DateTime.Now;
                 sql = "UPDATE stock_request SET status = @Status, dateAccepted = @dateAccepted WHERE productid = @pId;";
@@ -301,7 +301,7 @@ namespace MediaBazaar_ManagementSystem
 
                 cmd.Parameters.AddWithValue("@Status", Status);
                 cmd.Parameters.AddWithValue("@pId", productId);
-                cmd.Parameters.AddWithValue("dateAccepted",dateAccepted);
+                cmd.Parameters.AddWithValue("dateAccepted", dateAccepted);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Restock request accepted!");
             }

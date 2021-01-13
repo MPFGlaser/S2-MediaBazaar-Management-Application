@@ -17,7 +17,7 @@ namespace MediaBazaar_ManagementSystem
         public WorkingDepartments(string input, List<Department> allDepartments)
         {
             List<int> selectedDepartments = new List<int>();
-            if(input != String.Empty)
+            if (input != String.Empty)
                 selectedDepartments = input.Split(',').Select(int.Parse).ToList();
             InitializeComponent();
             InitializeDepartments(allDepartments, selectedDepartments);
@@ -71,7 +71,7 @@ namespace MediaBazaar_ManagementSystem
                     workingDepartments += "," + dep.Id.ToString();
                 }
             }
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         /// <summary>

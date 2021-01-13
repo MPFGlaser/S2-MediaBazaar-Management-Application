@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -10,9 +9,9 @@ namespace MediaBazaar_ManagementSystem
             List<Employee> output = new List<Employee>();
             List<Shift> shiftsToday = new List<Shift>();
 
-            foreach(Shift shiftInWeek in weekShifts)
+            foreach (Shift shiftInWeek in weekShifts)
             {
-                if(shiftInWeek.Date == shift.Date)
+                if (shiftInWeek.Date == shift.Date)
                 {
                     shiftsToday.Add(shiftInWeek);
                 }
@@ -46,16 +45,16 @@ namespace MediaBazaar_ManagementSystem
                 //    }
                 //}
 
-                foreach(WorkingEmployee workingEmployee in relevantWorkingEmployees)
+                foreach (WorkingEmployee workingEmployee in relevantWorkingEmployees)
                 {
-                    if(workingEmployee.EmployeeId == employee.Id)
+                    if (workingEmployee.EmployeeId == employee.Id)
                     {
                         scheduledToday++;
                     }
                 }
 
                 // As long as they're scheduled less than twice, they're available to be scheduled again. 
-                if(scheduledToday < 2)
+                if (scheduledToday < 2)
                 {
                     output.Add(employee);
                 }

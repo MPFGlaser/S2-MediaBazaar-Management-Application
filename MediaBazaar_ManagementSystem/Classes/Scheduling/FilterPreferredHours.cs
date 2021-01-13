@@ -11,10 +11,10 @@ namespace MediaBazaar_ManagementSystem
             DayOfWeek day = shift.Date.DayOfWeek;
             ShiftTime shiftTime = shift.ShiftTime;
 
-            foreach(Employee employee in employees)
+            foreach (Employee employee in employees)
             {
                 List<String> employeePreferredHours = SplitPreferredHours(employee.PreferredHours);
-                if(WantsToWorkShift(day, shiftTime, employeePreferredHours))
+                if (WantsToWorkShift(day, shiftTime, employeePreferredHours))
                 {
                     output.Add(employee);
                 }
@@ -84,7 +84,7 @@ namespace MediaBazaar_ManagementSystem
             switch (shiftTime)
             {
                 case ShiftTime.Morning:
-                    if(preferredHours[0].ToString() == "1")
+                    if (preferredHours[0].ToString() == "1")
                     {
                         return true;
                     }

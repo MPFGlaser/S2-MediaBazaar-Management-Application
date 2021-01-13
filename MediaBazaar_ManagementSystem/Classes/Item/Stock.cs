@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaBazaar_ManagementSystem.Classes.Item
+﻿namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Stock
     {
@@ -38,23 +32,23 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
         {
             get
             {
-                return this.quantity;
+                return quantity;
             }
             set
             {
-                this.quantity = value;
+                quantity = value;
             }
         }
         public int ProductId
         {
             get
             {
-                return this.productId;
+                return productId;
             }
             set
             {
-                this.productId = value;
+                productId = value;
             }
         }
-     }
+    }
 }

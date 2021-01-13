@@ -26,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
 
         public string PreferredHoursString
         {
-            get { return this.preferredHours; }
+            get { return preferredHours; }
         }
 
         #region Logic
@@ -109,13 +109,13 @@ namespace MediaBazaar_ManagementSystem
             checkBoxSaturdayMorning.Checked = input[15] == '1' ? true : false;
             checkBoxSaturdayAfternoon.Checked = input[16] == '1' ? true : false;
             checkBoxSaturdayEvening.Checked = input[17] == '1' ? true : false;
-            
+
             // Sunday
             checkBoxSundayMorning.Checked = input[18] == '1' ? true : false;
             checkBoxSundayAfternoon.Checked = input[19] == '1' ? true : false;
             checkBoxSundayEvening.Checked = input[20] == '1' ? true : false;
 
-        } 
+        }
         #endregion
 
         private void buttonConfirm_Click(object sender, EventArgs e)

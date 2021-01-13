@@ -54,7 +54,7 @@ namespace MediaBazaar_ManagementSystem
         {
             Show(retrieveItemError, e);
         }
-        
+
         public static void Shift(Exception e)
         {
             Show(loadShiftError, e);

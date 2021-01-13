@@ -210,7 +210,7 @@ namespace MediaBazaar_ManagementSystem
         {
             int maxHeightFound = 0;
 
-            foreach (Control c in this.flowLayoutPanel.Controls)
+            foreach (Control c in flowLayoutPanel.Controls)
             {
                 if (c is GroupBox)
                 {
@@ -223,7 +223,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (maxHeightFound != 0)
             {
-                foreach (Control c in this.flowLayoutPanel.Controls)
+                foreach (Control c in flowLayoutPanel.Controls)
                 {
                     if (c is GroupBox)
                     {
@@ -253,9 +253,9 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="e">The <see cref="PaintEventArgs"/> instance containing the event data.</param>
         private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
-            if (this.flowLayoutPanel.Width <= 478)
+            if (flowLayoutPanel.Width <= 478)
             {
-                foreach (Control c in this.flowLayoutPanel.Controls)
+                foreach (Control c in flowLayoutPanel.Controls)
                 {
                     if (c is GroupBox)
                     {
@@ -265,7 +265,7 @@ namespace MediaBazaar_ManagementSystem
             }
             else
             {
-                foreach (Control c in this.flowLayoutPanel.Controls)
+                foreach (Control c in flowLayoutPanel.Controls)
                 {
                     if (c is GroupBox)
                     {
@@ -334,7 +334,7 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            this.Text = "Currently editing permissions for: " + comboBoxCurrentFunction.SelectedItem.ToString();
+            Text = "Currently editing permissions for: " + comboBoxCurrentFunction.SelectedItem.ToString();
             LoadPermissions(selectedFunctionId);
             FillCheckboxes();
 
@@ -373,7 +373,7 @@ namespace MediaBazaar_ManagementSystem
             Save();
             if (checkBoxCloseOnSave.Checked == true)
             {
-                this.Close();
+                Close();
             }
         }
 
@@ -387,7 +387,7 @@ namespace MediaBazaar_ManagementSystem
                     Save();
                 }
             }
-            this.Close();
-        }      
+            Close();
+        }
     }
 }

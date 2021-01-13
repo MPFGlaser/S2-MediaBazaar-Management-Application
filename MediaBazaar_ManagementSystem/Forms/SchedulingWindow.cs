@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -43,11 +43,11 @@ namespace MediaBazaar_ManagementSystem
             LoadEmployees(working, allEmployees);
             this.date = date;
             this.shiftTime = shiftTime;
-            this.comboBoxShiftTime.SelectedItem = shiftTime;
+            comboBoxShiftTime.SelectedItem = shiftTime;
             textBoxWeekDay.Text = weekDay;
             textBoxCalendarDate.Text = dateAndMonth;
-            this.isEditing = editing;
-            this.oldId = oldShiftId;
+            isEditing = editing;
+            oldId = oldShiftId;
             this.capacity = capacity;
             this.previousSelectedDepartment = previousSelectedDepartment;
             this.loggedInUser = loggedInUser;
@@ -124,7 +124,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (isEditing)
             {
-                this.departmentCapacity = shiftStorage.GetCapacityPerDepartment(oldId);
+                departmentCapacity = shiftStorage.GetCapacityPerDepartment(oldId);
             }
 
             foreach (Department d in allDepartments)
@@ -147,12 +147,12 @@ namespace MediaBazaar_ManagementSystem
                 comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
             }
 
-            if(previousSelectedDepartment != null)
+            if (previousSelectedDepartment != null)
             {
-                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
                 {
                     Department d = (depDynamic).Department;
-                    if(d.Name == previousSelectedDepartment.Name)
+                    if (d.Name == previousSelectedDepartment.Name)
                     {
                         comboBoxSelectDepartments.SelectedItem = depDynamic;
                         numericUpDownCapacity.Value = d.Capacity;
@@ -177,8 +177,8 @@ namespace MediaBazaar_ManagementSystem
         // Pre-fills the combobox for the shift time with all defined shift times. (Morning, afternoon, evening at the time of writing)
         private void InitializeComboBoxShiftTime()
         {
-            this.comboBoxShiftTime.SelectedIndexChanged += new System.EventHandler(comboBoxShiftTime_SelectedIndexChanged);
-            this.comboBoxShiftTime.DataSource = Enum.GetValues(typeof(ShiftTime));
+            comboBoxShiftTime.SelectedIndexChanged += new System.EventHandler(comboBoxShiftTime_SelectedIndexChanged);
+            comboBoxShiftTime.DataSource = Enum.GetValues(typeof(ShiftTime));
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="toAddToShift"></param>
         private void AddEmployeeListToShift(List<Employee> toAddToShift)
         {
-            dataGridViewScheduling.Rows.Clear(); 
+            dataGridViewScheduling.Rows.Clear();
             dataGridViewScheduling.Refresh();
             foreach (Employee e in toAddToShift)
             {
@@ -200,7 +200,7 @@ namespace MediaBazaar_ManagementSystem
             foreach (DataGridViewRow row in dataGridViewScheduling.Rows)
             {
                 int employeeid = Convert.ToInt32(row.Cells["id"].Value);
-                int nrofshifts = employeeStorage.CheckNrOfShifts(employeeid, this.date.Date.ToString("yyyy-MM-dd"));
+                int nrofshifts = employeeStorage.CheckNrOfShifts(employeeid, date.Date.ToString("yyyy-MM-dd"));
                 if (nrofshifts > 2)
                 {
                     row.DefaultCellStyle.BackColor = Color.Red;
@@ -228,7 +228,7 @@ namespace MediaBazaar_ManagementSystem
                 shiftStorage.Clear(oldId);
                 shiftId = oldId;
 
-                foreach(dynamic depDynamic in comboBoxSelectDepartments.Items)
+                foreach (dynamic depDynamic in comboBoxSelectDepartments.Items)
                 {
                     Department dep = (depDynamic).Department;
                     if (departmentCapacity.ContainsKey(dep.Id))
@@ -267,7 +267,7 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            this.DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
         /// <summary>
@@ -310,13 +310,13 @@ namespace MediaBazaar_ManagementSystem
                 row.Cells["firstName"].Value = selectedEmployee.FirstName;
                 row.Cells["surName"].Value = selectedEmployee.SurName;
 
-                    int nrofshifts = employeeStorage.CheckNrOfShifts(selectedEmployee.Id, this.date.Date.ToString("yyyy-MM-dd"));
-                    
-                    if (nrofshifts > 2)
-                    {
-                        row.DefaultCellStyle.BackColor = Color.Red;
-                    }
-                
+                int nrofshifts = employeeStorage.CheckNrOfShifts(selectedEmployee.Id, date.Date.ToString("yyyy-MM-dd"));
+
+                if (nrofshifts > 2)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
+
 
                 // Removes the employee from the list of available employees and resets the selection index.
                 comboBoxSelectEmployees.Items.Remove(comboBoxSelectEmployees.SelectedItem);
@@ -338,7 +338,7 @@ namespace MediaBazaar_ManagementSystem
                 // Ensures the right employee object is used
                 //Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
                 DataGridViewRow row = dataGridViewScheduling.SelectedRows[0];
-                
+
                 int employeeID = Convert.ToInt32(row.Cells["ID"].Value);
 
                 Employee selectedEmployee = employeeStorage.Get(employeeID);
@@ -351,7 +351,7 @@ namespace MediaBazaar_ManagementSystem
                     // Selects the correct index from the combobox
                     Department dep = (comboBoxSelectDepartments.SelectedItem as dynamic).Department;
                     int selectedIndex = dep.Id - 1;
-                    
+
                     RemoveSelectedEmployee(selectedEmployee, selectedIndex);
                 }
                 else
@@ -371,11 +371,11 @@ namespace MediaBazaar_ManagementSystem
             comboBoxSelectEmployees.ValueMember = "Employee";
             comboBoxSelectEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
 
-            Employee tempemp=null;
+            Employee tempemp = null;
             foreach (Employee e in allDepartments[selectedIndex].Employees)
                 if (e.Id == selectedEmployee.Id) tempemp = e;
-            if (tempemp!=null) allDepartments[selectedIndex].Employees.Remove(tempemp);
-            
+            if (tempemp != null) allDepartments[selectedIndex].Employees.Remove(tempemp);
+
 
             // Removes the employee from the listbox of currently scheduled employee.
             //listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
@@ -456,7 +456,7 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
 
-            if(comboBoxSelectEmployees.Items.Count > 0)
+            if (comboBoxSelectEmployees.Items.Count > 0)
                 comboBoxSelectEmployees.SelectedIndex = 0;
         }
         #endregion
@@ -464,7 +464,7 @@ namespace MediaBazaar_ManagementSystem
         #region Control event handlers
         private void comboBoxShiftTime_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            this.shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
+            shiftTime = (ShiftTime)comboBoxShiftTime.SelectedItem;
         }
 
         private void buttonAddEmployeeToShift_Click(object sender, EventArgs e)
@@ -484,8 +484,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonScheduleCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void buttonNextDay_Click(object sender, EventArgs e)
