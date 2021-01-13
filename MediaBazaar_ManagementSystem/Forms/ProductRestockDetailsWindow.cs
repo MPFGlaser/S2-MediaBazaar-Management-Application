@@ -5,7 +5,6 @@ namespace MediaBazaar_ManagementSystem.Forms
 {
     public partial class ProductRestockDetailsWindow : Form
     {
-        private bool editing = false;
         private int editId;
         private int quantity;
         private int userid;
@@ -23,7 +22,6 @@ namespace MediaBazaar_ManagementSystem.Forms
             Text = "Viewing/editing " + item.Brand + " " + item.Name;
 
             // Sets some editing-specific variables to the right values
-            editing = true;
             editId = item.Id;
             quantity = Convert.ToInt32(nudqRestockQuantity.Value);
             userid = userId;

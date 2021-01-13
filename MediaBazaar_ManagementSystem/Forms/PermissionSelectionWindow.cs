@@ -234,7 +234,7 @@ namespace MediaBazaar_ManagementSystem
         /// <summary>
         /// Indicates the successful save to the user.
         /// </summary>
-        private async void IndicateSuccessfulSave()
+        private async Task IndicateSuccessfulSave()
         {
             labelSaveSuccessful.Visible = true;
             await Task.Delay(1500);

@@ -43,7 +43,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             foreach (Shift s in weekShifts)
             {
                 Dictionary<int, int> temp = shiftStorage.GetCapacityPerDepartment(s.Id);
-                if (temp.Count() > 0)
+                if (temp.Any())
                 {
                     weekDepartments.Add(s.Id, temp);
                     initialShiftIds.Add(s.Id);
@@ -351,7 +351,7 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void buttonInheritCapacity_Click(object sender, EventArgs e)
         {
-            List<(int shiftId, int departmentId, int capacity)> inheritedShifts = new List<(int shiftId, int departmentId, int capacity)>();
+            List<(int shiftId, int departmentId, int capacity)> inheritedShifts;
 
             List<Shift> shiftsPreviousWeek = shiftStorage.GetWeek(weekdays[0].AddDays(-7), weekdays[6].AddDays(-7));
 

@@ -21,7 +21,7 @@ namespace MediaBazaar_ManagementSystem
         List<Department> allDepartments = new List<Department>();
         List<Employee> allActiveEmployees = new List<Employee>();
         private bool isEditing;
-        private int oldId, capacity;
+        private int oldId;
         private Department previousSelectedDepartment;
         private Dictionary<int, int> departmentCapacity = new Dictionary<int, int>();
         private Employee loggedInUser;
@@ -48,7 +48,6 @@ namespace MediaBazaar_ManagementSystem
             textBoxCalendarDate.Text = dateAndMonth;
             isEditing = editing;
             oldId = oldShiftId;
-            this.capacity = capacity;
             this.previousSelectedDepartment = previousSelectedDepartment;
             this.loggedInUser = loggedInUser;
             employeeStorage = new EmployeeMySQL();
@@ -203,7 +202,7 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             workingEmployeeIds = new List<int>();
             int capacityNew = Convert.ToInt32(numericUpDownCapacity.Value);
-            int shiftId = 0;
+            int shiftId;
 
             // Checks if the shift is in editing mode and chooses whether to edit or create a shift in the shiftStorage
             if (isEditing)

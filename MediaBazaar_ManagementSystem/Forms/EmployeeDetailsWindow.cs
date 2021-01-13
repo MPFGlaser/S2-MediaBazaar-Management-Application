@@ -269,8 +269,7 @@ namespace MediaBazaar_ManagementSystem
             workingDepartments = employee.WorkingDepartments;
             ComboboxItem x = new ComboboxItem();
             int cid = 0;
-            Dictionary<int, string> items = new Dictionary<int, string>();
-            items = functionStorage.GetFunctions();
+            Dictionary<int, string> items = functionStorage.GetFunctions();
             foreach (int cindex in items.Keys)
             {
                 ComboboxItem item = new ComboboxItem();

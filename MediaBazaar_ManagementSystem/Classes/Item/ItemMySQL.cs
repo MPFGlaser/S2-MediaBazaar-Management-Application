@@ -11,7 +11,6 @@ namespace MediaBazaar_ManagementSystem
         MySqlConnection connection;
         string connectionString;
         List<Stock> stocks = new List<Stock>();
-        List<Request> requests = new List<Request>();
 
         public ItemMySQL()
         {
@@ -27,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Create(Item item)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -202,7 +201,6 @@ namespace MediaBazaar_ManagementSystem
         {
             int pid = id;
             int quantity = 0;
-            requests = new List<Request>();
             try
             {
                 string sql = "SELECT `quantity` FROM `stock_request` WHERE productid = @pId AND status = 'Pending';";

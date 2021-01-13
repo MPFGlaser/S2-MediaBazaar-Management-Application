@@ -176,8 +176,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 if (!string.IsNullOrEmpty(employee.WorkingDepartments))
                     selectedDepartments = employee.WorkingDepartments.Split(',').Select(int.Parse).ToList();
 
-                List<Department> departments = new List<Department>();
-                departments = departmentStorage.GetAll();
+                List<Department> departments = departmentStorage.GetAll();
                 foreach (Department d in departments)
                 {
                     if (selectedDepartments.Contains(d.Id))

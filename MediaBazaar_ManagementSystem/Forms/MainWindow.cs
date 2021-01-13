@@ -772,7 +772,7 @@ namespace MediaBazaar_ManagementSystem
         {
             shiftStorage = new ShiftMySQL();
             List<WorkingEmployee> scheduledEmployees = new List<WorkingEmployee>();
-            List<WorkingEmployee> temp = new List<WorkingEmployee>();
+            List<WorkingEmployee> temp;
 
             // Sets all of the employees currently working this shift into the "to be scheduled" list.
             temp = shiftStorage.GetEmployeesInDepartmentInShift(toSchedule.Id, currentDepartment.Id);

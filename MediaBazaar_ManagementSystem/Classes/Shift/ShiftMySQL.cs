@@ -27,7 +27,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Assign(int shiftId, int employeeId, int departmentId)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -68,7 +68,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Clear(int shiftId)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "DELETE FROM working_employees WHERE shiftId = @shiftId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -421,7 +421,7 @@ namespace MediaBazaar_ManagementSystem
         public bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "INSERT INTO capacity_per_department VALUES (@shiftId, @departmentId, @capacity)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -452,7 +452,7 @@ namespace MediaBazaar_ManagementSystem
         public bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -576,7 +576,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Update(Shift input)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             string dateSql = input.Date.ToString("yyyy-MM-dd");
 
@@ -797,7 +797,7 @@ namespace MediaBazaar_ManagementSystem
         public bool ClearDept(int shiftId, int departmentId)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "DELETE FROM working_employees WHERE shiftId = @shiftId AND departmentId = @departmentId";
             MySqlCommand command = new MySqlCommand(query, connection);
