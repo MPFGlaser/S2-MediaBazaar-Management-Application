@@ -157,11 +157,6 @@ namespace MediaBazaar_ManagementSystem
             // Resets the warning colour of all input controls
             ResetBoxColors();
 
-            // All the regex expressions used in this form
-            Regex checkStandardInput = new Regex(@"^[^\s].*");
-            Regex checkCategory = new Regex(@"^[a-zA-Z\s]+$");
-            Regex checkCode = new Regex(@"^[0-9]*\d{4,15}$");
-
             // The department selected by the user
             dynamic departmentDynamic = comboBoxSelectDepartment.SelectedItem;
             Department selectedDepartment = (departmentDynamic).Department;
@@ -179,22 +174,22 @@ namespace MediaBazaar_ManagementSystem
 
             // In this wall of if statements all regex expressions are checked
             // When a check fails, the background of that specific input control is changed to red to inform the user something's wrong
-            if (!checkStandardInput.IsMatch(name))
+            if (!CheckValidity.StandardInput(name))
             {
                 allCorrect = false;
                 textBoxName.BackColor = Color.LightCoral;
             }
-            if (!checkStandardInput.IsMatch(brand))
+            if (!CheckValidity.StandardInput(brand))
             {
                 allCorrect = false;
                 textBoxBrand.BackColor = Color.LightCoral;
             }
-            if (!checkCategory.IsMatch(category))
+            if (!CheckValidity.Category(category))
             {
                 allCorrect = false;
                 textBoxCategory.BackColor = Color.LightCoral;
             }
-            if (!checkCode.IsMatch(textBoxCode.Text))
+            if (!CheckValidity.ProductCode(textBoxCode.Text))
             {
                 allCorrect = false;
                 textBoxCode.BackColor = Color.LightCoral;
