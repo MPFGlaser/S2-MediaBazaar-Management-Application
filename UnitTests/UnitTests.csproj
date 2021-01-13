@@ -49,7 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTests_Classes_And_Functions.cs" />
+    <Compile Include="UnitTests_Logic.cs" />
     <Compile Include="UnitTests_EmployeeFiltering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
