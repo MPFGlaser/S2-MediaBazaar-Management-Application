@@ -30,21 +30,6 @@ namespace MediaBazaar_ManagementSystem
             {
                 int scheduledToday = 0;
 
-                //// Loops through all shifts for today
-                //foreach(Shift shiftToday in shiftsToday)
-                //{
-                //    // Loops through all entries in workingEmployees
-                //    foreach(WorkingEmployee workingEmployeeToday in workingEmployees)
-                //    {
-                //        // Checks if the employeeID and shiftID exist in workingExployees as an entry (i.e. employee is scheduled for that shift)
-                //        if(workingEmployeeToday.EmployeeId == employee.Id && workingEmployeeToday.ShiftId == shiftToday.Id)
-                //        {
-                //            // If they are scheduled, add 1 to the amount of shifts they're scheduled that day
-                //            scheduledToday++;
-                //        }
-                //    }
-                //}
-
                 foreach (WorkingEmployee workingEmployee in relevantWorkingEmployees)
                 {
                     if (workingEmployee.EmployeeId == employee.Id)

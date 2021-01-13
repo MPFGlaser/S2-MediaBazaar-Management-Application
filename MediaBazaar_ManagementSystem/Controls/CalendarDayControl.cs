@@ -138,8 +138,6 @@ namespace MediaBazaar_ManagementSystem
             shiftStorage = new ShiftMySQL();
             newShift = shiftStorage.Get(date, time);
 
-            //Department currentSelectedDepartment = currentSelectedDepartment();
-
             // If a shift exists, show it. Else create a new one
             if (newShift != null)
             {

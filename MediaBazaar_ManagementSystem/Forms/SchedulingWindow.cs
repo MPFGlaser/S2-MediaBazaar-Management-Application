@@ -95,8 +95,6 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="working"></param>
         private void LoadEmployees(List<Employee> working, List<Employee> allEmployees)
         {
-            //employeeStorage = new EmployeeMySQL();
-            //allActiveEmployees = employeeStorage.GetAll(true);
             allActiveEmployees = allEmployees;
 
             foreach (Employee e in working)
@@ -262,7 +260,6 @@ namespace MediaBazaar_ManagementSystem
                 // Makes a list of all ids of the employees scheduled for that shift
                 foreach (Employee emp in dep.Employees)
                 {
-                    //workingEmployeeIds.Add(emp.Id);
                     shiftStorage.Assign(shiftId, emp.Id, dep.Id);
                 }
             }
@@ -301,9 +298,6 @@ namespace MediaBazaar_ManagementSystem
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
 
                 // Adds the selected employee to the listbox with currently scheduled employees.
-                //listBoxCurrentEmployees.DisplayMember = "Text";
-                //listBoxCurrentEmployees.ValueMember = "Employee";
-                //listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
                 int rowId = dataGridViewScheduling.Rows.Add();
                 DataGridViewRow row = dataGridViewScheduling.Rows[rowId];
                 row.Cells["id"].Value = selectedEmployee.Id;
@@ -336,7 +330,6 @@ namespace MediaBazaar_ManagementSystem
                 List<Department> allDepartments = GetDepartmentListFromComboBox();
 
                 // Ensures the right employee object is used
-                //Employee selectedEmployee = (listBoxCurrentEmployees.SelectedItem as dynamic).Employee;
                 DataGridViewRow row = dataGridViewScheduling.SelectedRows[0];
 
                 int employeeID = Convert.ToInt32(row.Cells["ID"].Value);
@@ -378,7 +371,6 @@ namespace MediaBazaar_ManagementSystem
 
 
             // Removes the employee from the listbox of currently scheduled employee.
-            //listBoxCurrentEmployees.Items.Remove(listBoxCurrentEmployees.SelectedItem);
             int selectedRowCount = dataGridViewScheduling.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
@@ -513,7 +505,6 @@ namespace MediaBazaar_ManagementSystem
             if (selectedIndex < 0)
             {
                 numericUpDownCapacity.Value = 0;
-                //MessageBox.Show("Please select a department!2");
             }
             else allDepartments[selectedIndex].Capacity = Convert.ToInt32(numericUpDownCapacity.Value);
         }
