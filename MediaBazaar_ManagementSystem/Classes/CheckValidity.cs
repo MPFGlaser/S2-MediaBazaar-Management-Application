@@ -48,7 +48,7 @@ namespace MediaBazaar_ManagementSystem
 
         public static bool BSN(string input)
         {
-            Regex regex = new Regex(@"^[0-9]*\d{9}$");
+            Regex regex = new Regex(@"^\d{9}$");
             return regex.IsMatch(input);
         }
 
