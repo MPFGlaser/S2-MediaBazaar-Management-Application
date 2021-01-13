@@ -12,25 +12,13 @@
 
         public int Quantity
         {
-            get
-            {
-                return quantity;
-            }
-            set
-            {
-                quantity = value;
-            }
+            get { return quantity; }
+            set { quantity = value; }
         }
         public int ProductId
         {
-            get
-            {
-                return productId;
-            }
-            set
-            {
-                productId = value;
-            }
+            get { return productId; }
+            set { productId = value; }
         }
     }
 }
