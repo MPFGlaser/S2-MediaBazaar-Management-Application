@@ -81,39 +81,39 @@ namespace MediaBazaar_ManagementSystem
         private void PrefillCheckboxes(string input)
         {
             // Monday
-            checkBoxMondayMorning.Checked = input[0] == '1' ? true : false;
-            checkBoxMondayAfternoon.Checked = input[1] == '1' ? true : false;
-            checkBoxMondayEvening.Checked = input[2] == '1' ? true : false;
+            checkBoxMondayMorning.Checked = input[0] == '1';
+            checkBoxMondayAfternoon.Checked = input[1] == '1';
+            checkBoxMondayEvening.Checked = input[2] == '1';
 
             // Tuesday
-            checkBoxTuesdayMorning.Checked = input[3] == '1' ? true : false;
-            checkBoxTuesdayAfternoon.Checked = input[4] == '1' ? true : false;
-            checkBoxTuesdayEvening.Checked = input[5] == '1' ? true : false;
+            checkBoxTuesdayMorning.Checked = input[3] == '1';
+            checkBoxTuesdayAfternoon.Checked = input[4] == '1';
+            checkBoxTuesdayEvening.Checked = input[5] == '1';
 
             // Wednesday
-            checkBoxWednesdayMorning.Checked = input[6] == '1' ? true : false;
-            checkBoxWednesdayAfternoon.Checked = input[7] == '1' ? true : false;
-            checkBoxWednesdayEvening.Checked = input[8] == '1' ? true : false;
+            checkBoxWednesdayMorning.Checked = input[6] == '1';
+            checkBoxWednesdayAfternoon.Checked = input[7] == '1';
+            checkBoxWednesdayEvening.Checked = input[8] == '1';
 
             // Thursday
-            checkBoxThursdayMorning.Checked = input[9] == '1' ? true : false;
-            checkBoxThursdayAfternoon.Checked = input[10] == '1' ? true : false;
-            checkBoxThursdayEvening.Checked = input[11] == '1' ? true : false;
+            checkBoxThursdayMorning.Checked = input[9] == '1';
+            checkBoxThursdayAfternoon.Checked = input[10] == '1';
+            checkBoxThursdayEvening.Checked = input[11] == '1';
 
             // Friday
-            checkBoxFridayMorning.Checked = input[12] == '1' ? true : false;
-            checkBoxFridayAfternoon.Checked = input[13] == '1' ? true : false;
-            checkBoxFridayEvening.Checked = input[14] == '1' ? true : false;
+            checkBoxFridayMorning.Checked = input[12] == '1';
+            checkBoxFridayAfternoon.Checked = input[13] == '1';
+            checkBoxFridayEvening.Checked = input[14] == '1';
 
             // Saturday
-            checkBoxSaturdayMorning.Checked = input[15] == '1' ? true : false;
-            checkBoxSaturdayAfternoon.Checked = input[16] == '1' ? true : false;
-            checkBoxSaturdayEvening.Checked = input[17] == '1' ? true : false;
+            checkBoxSaturdayMorning.Checked = input[15] == '1';
+            checkBoxSaturdayAfternoon.Checked = input[16] == '1';
+            checkBoxSaturdayEvening.Checked = input[17] == '1';
 
             // Sunday
-            checkBoxSundayMorning.Checked = input[18] == '1' ? true : false;
-            checkBoxSundayAfternoon.Checked = input[19] == '1' ? true : false;
-            checkBoxSundayEvening.Checked = input[20] == '1' ? true : false;
+            checkBoxSundayMorning.Checked = input[18] == '1';
+            checkBoxSundayAfternoon.Checked = input[19] == '1';
+            checkBoxSundayEvening.Checked = input[20] == '1';
 
         }
         #endregion

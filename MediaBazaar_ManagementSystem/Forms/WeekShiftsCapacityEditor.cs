@@ -312,7 +312,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                         {
                             int capacity = temp[dep.Id];
                             bool shiftUpdateSucceeded = false;
-                            while (shiftUpdateSucceeded == false)
+                            while (!shiftUpdateSucceeded)
                             {
                                 shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, dep.Id, capacity);
                             }

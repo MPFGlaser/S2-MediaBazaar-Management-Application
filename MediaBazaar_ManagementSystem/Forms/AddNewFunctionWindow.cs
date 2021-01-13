@@ -35,13 +35,10 @@ namespace MediaBazaar_ManagementSystem
                     }
                 }
 
-                if (valid == true)
+                if (valid && functionStorage.Create(Title))
                 {
-                    if (functionStorage.Create(Title))
-                    {
-                        Close();
-                        DialogResult = DialogResult.OK;
-                    }
+                    Close();
+                    DialogResult = DialogResult.OK;
                 }
             }
             else
