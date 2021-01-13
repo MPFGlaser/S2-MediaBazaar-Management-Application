@@ -173,7 +173,7 @@ namespace MediaBazaar_ManagementSystem.Forms
 
                 Employee employee = employeeStorage.Get(userid);
                 List<int> selectedDepartments = new List<int>();
-                if (employee.WorkingDepartments != String.Empty)
+                if (!string.IsNullOrEmpty(employee.WorkingDepartments))
                     selectedDepartments = employee.WorkingDepartments.Split(',').Select(int.Parse).ToList();
 
                 List<Department> departments = new List<Department>();

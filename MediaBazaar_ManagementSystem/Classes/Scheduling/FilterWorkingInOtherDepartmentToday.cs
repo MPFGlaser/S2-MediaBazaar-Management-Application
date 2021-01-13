@@ -34,13 +34,10 @@ namespace MediaBazaar_ManagementSystem
                 foreach (WorkingEmployee workingEmployee in relevantWorkingEmployees)
                 {
                     // Looks for workingEmployee entry with the same employeeId as the employee.
-                    if (workingEmployee.EmployeeId == employee.Id)
+                    // Checks if a departmentId shows up that's different from the one supplied to the filter.
+                    if (workingEmployee.EmployeeId == employee.Id && workingEmployee.DepartmentId != departmentId)
                     {
-                        // Checks if a departmentId shows up that's different from the one supplied to the filter.
-                        if (workingEmployee.DepartmentId != departmentId)
-                        {
-                            scheduledInOtherDepartment = true;
-                        }
+                        scheduledInOtherDepartment = true;
                     }
                 }
 

@@ -435,7 +435,7 @@ namespace MediaBazaar_ManagementSystem
         {
             string newDepartmentName = Interaction.InputBox("Department name:", "Create a new department");
 
-            if (newDepartmentName != string.Empty)
+            if (!string.IsNullOrEmpty(newDepartmentName))
             {
                 departmentStorage = new DepartmentMySQL();
                 departmentStorage.Create(newDepartmentName);

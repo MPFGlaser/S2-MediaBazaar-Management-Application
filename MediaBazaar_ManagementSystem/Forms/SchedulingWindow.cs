@@ -393,7 +393,7 @@ namespace MediaBazaar_ManagementSystem
             foreach (Employee e in allActiveEmployees)
             {
                 List<int> allowedDepartments = new List<int>();
-                if (e.WorkingDepartments != string.Empty)
+                if (!string.IsNullOrEmpty(e.WorkingDepartments))
                 {
                     allowedDepartments = e.WorkingDepartments.Split(',').Select(int.Parse).ToList();
                 }

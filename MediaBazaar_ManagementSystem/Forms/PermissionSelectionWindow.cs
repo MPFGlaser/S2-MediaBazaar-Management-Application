@@ -85,7 +85,7 @@ namespace MediaBazaar_ManagementSystem
             checkBoxSchedulingShiftCapacity.Checked = permissionsGranted.Contains("schedule_capacity_set");
 
             // Swapping
-            checkBoxSwappingAccept.Checked = permissionsGranted.Contains("swapping_accept") ;
+            checkBoxSwappingAccept.Checked = permissionsGranted.Contains("swapping_accept");
             checkBoxSwappingRequest.Checked = permissionsGranted.Contains("swapping_request");
             checkBoxSwappingApprove.Checked = permissionsGranted.Contains("swapping_approve");
 
@@ -212,12 +212,9 @@ namespace MediaBazaar_ManagementSystem
 
             foreach (Control c in flowLayoutPanel.Controls)
             {
-                if (c is GroupBox)
+                if (c is GroupBox && c.Height > maxHeightFound)
                 {
-                    if (c.Height > maxHeightFound)
-                    {
-                        maxHeightFound = c.Height;
-                    }
+                    maxHeightFound = c.Height;
                 }
             }
 
