@@ -25,13 +25,13 @@ namespace MediaBazaar_ManagementSystem
             //Asks the loginStorage to check if the entered details match those we have stored.
             userId = loginStorage.Check(textBoxLoginUsername.Text, textBoxLoginPassword.Text);
 
-            if(userId > 0)
+            if (userId > 0)
             {
-                this.loggedInUser = employeeStorage.Get(userId);
-                this.loggedInUser.Permissions = functionStorage.GetPermissions(loggedInUser.Function);
-                this.DialogResult = DialogResult.OK;
+                loggedInUser = employeeStorage.Get(userId);
+                loggedInUser.Permissions = functionStorage.GetPermissions(loggedInUser.Function);
+                DialogResult = DialogResult.OK;
             }
-            else if(userId < 0)
+            else if (userId < 0)
             {
                 MessageBox.Show("Invalid Credentials");
             }

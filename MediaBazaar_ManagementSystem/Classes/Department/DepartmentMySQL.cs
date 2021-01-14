@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -138,7 +137,8 @@ namespace MediaBazaar_ManagementSystem
 
                 while (reader.Read())
                 {
-                    if (shiftIds.Contains(Convert.ToInt32(reader[0]))){
+                    if (shiftIds.Contains(Convert.ToInt32(reader[0])))
+                    {
                         departmentInfo.Add((Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2])));
                     }
                 }
@@ -161,7 +161,7 @@ namespace MediaBazaar_ManagementSystem
             try
             {
                 connection.Open();
-                foreach((int shiftId, int departmentId, int capacity) data in toUpdate)
+                foreach ((int shiftId, int departmentId, int capacity) data in toUpdate)
                 {
                     String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
                     MySqlCommand command = new MySqlCommand(query, connection);

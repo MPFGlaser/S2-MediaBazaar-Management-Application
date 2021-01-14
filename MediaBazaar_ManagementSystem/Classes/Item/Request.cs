@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaBazaar_ManagementSystem.Classes.Item
+﻿namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Request
     {
@@ -29,66 +23,66 @@ namespace MediaBazaar_ManagementSystem.Classes.Item
         {
             get
             {
-                return this.id;
+                return id;
             }
             private set
             {
-                this.id = value;
+                id = value;
             }
         }
         public int ProductId
         {
             get
             {
-                return this.productId;
+                return productId;
             }
             private set
             {
-                this.productId = value;
+                productId = value;
             }
         }
         public int Quantity
         {
             get
             {
-                return this.quantity;
+                return quantity;
             }
             private set
             {
-                this.quantity = value;
+                quantity = value;
             }
         }
         public int RequestedBy
         {
             get
             {
-                return this.requestedBy;
+                return requestedBy;
             }
             private set
             {
-                this.requestedBy = value;
+                requestedBy = value;
             }
         }
         public string Status
         {
             get
             {
-                return this.status;
+                return status;
             }
             private set
             {
-                this.status = value;
+                status = value;
             }
         }
         public string DatE
         {
             get
             {
-                return this.Date;
+                return Date;
             }
             private set
             {
-                this.Date = value;
+                Date = value;
             }
         }
     }

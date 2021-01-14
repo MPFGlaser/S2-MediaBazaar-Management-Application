@@ -1,12 +1,12 @@
+using MediaBazaar_ManagementSystem.Forms;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using Microsoft.VisualBasic;
-using MediaBazaar_ManagementSystem.Forms;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -43,7 +43,7 @@ namespace MediaBazaar_ManagementSystem
             HideInactiveEmployees(true);
             HideInactiveItems(true);
 
-            this.numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
+            numericUpDownSchedulingWeek.ValueChanged += new System.EventHandler(numericUpDownSchedulingWeek_ValueChanged);
 
             calendarDayControlMonday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlTuesday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
@@ -53,7 +53,7 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
-            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
+            KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
 
         #region Access Control        
@@ -425,7 +425,7 @@ namespace MediaBazaar_ManagementSystem
             int id = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
             ciow = new ClockInOutWindow(id);
             ciow.Show();
-            
+
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace MediaBazaar_ManagementSystem
         {
             string newDepartmentName = Interaction.InputBox("Department name:", "Create a new department");
 
-            if (newDepartmentName != string.Empty)
+            if (!string.IsNullOrEmpty(newDepartmentName))
             {
                 departmentStorage = new DepartmentMySQL();
                 departmentStorage.Create(newDepartmentName);
@@ -579,11 +579,11 @@ namespace MediaBazaar_ManagementSystem
                 Department selectedDepartment = selectedDynamic.Department;
                 selectedId = selectedDepartment.Id;
             }
-            
+
             wsce = new WeekShiftsCapacityEditor(allWeekShifts, weekDays, selectedId);
             if (wsce.ShowDialog() == DialogResult.OK)
             {
-                SetupCorrectWeekData();                
+                SetupCorrectWeekData();
             }
         }
 
@@ -642,7 +642,6 @@ namespace MediaBazaar_ManagementSystem
             CreateMissingShifts();
             List<Employee> allEmployees = employeeStorage.GetAll(true);
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
-            List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
             List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
             List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = departmentStorage.GetCapacityForAllDepartments();
@@ -651,22 +650,22 @@ namespace MediaBazaar_ManagementSystem
 
             foreach (Employee e in allEmployees)
             {
-                foreach((int employeeId, DateTime absentDate) absentList in absentDays)
+                foreach ((int employeeId, DateTime absentDate) absentList in absentDays)
                 {
-                    if(e.Id == absentList.employeeId)
+                    if (e.Id == absentList.employeeId)
                     {
                         e.NotWorkingDays.Add(absentList.absentDate);
                     }
                 }
             }
 
-            foreach(Shift s in allWeekShifts)
+            foreach (Shift s in allWeekShifts)
             {
                 foreach (Department d in allDepartments)
                 {
-                    foreach((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
+                    foreach ((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
                     {
-                        if(!showPopup && element.capacity == 0)
+                        if (!showPopup && element.capacity == 0)
                         {
                             showPopup = true;
                         }
@@ -678,10 +677,10 @@ namespace MediaBazaar_ManagementSystem
             {
                 DialogResult notAllCapacitySet = MessageBox.Show("A capacity has not been set for each department, do you want to set one manually and continue?", "Warning", MessageBoxButtons.YesNo);
 
-                if(notAllCapacitySet == DialogResult.Yes)
+                if (notAllCapacitySet == DialogResult.Yes)
                 {
                     string enteredValue = Interaction.InputBox("Set your desired capacity", "Set Capacity");
-                    if(enteredValue.Length > 0)
+                    if (enteredValue.Length > 0)
                     {
                         while (!int.TryParse(enteredValue, out capacityNew))
                         {
@@ -772,13 +771,13 @@ namespace MediaBazaar_ManagementSystem
         private List<WorkingEmployee> Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment, int capacityNew)
         {
             shiftStorage = new ShiftMySQL();
-            List<WorkingEmployee> scheduledEmployees= new List<WorkingEmployee>();
-            List<WorkingEmployee> temp = new List<WorkingEmployee>();
+            List<WorkingEmployee> scheduledEmployees = new List<WorkingEmployee>();
+            List<WorkingEmployee> temp;
 
             // Sets all of the employees currently working this shift into the "to be scheduled" list.
             temp = shiftStorage.GetEmployeesInDepartmentInShift(toSchedule.Id, currentDepartment.Id);
 
-            foreach(WorkingEmployee we in temp)
+            foreach (WorkingEmployee we in temp)
             {
                 scheduledEmployees.Add(we);
             }
@@ -793,23 +792,25 @@ namespace MediaBazaar_ManagementSystem
                 currentDepartment.Capacity = capacityNew;
             }
 
-            if(scheduledEmployees.Count < currentDepartment.Capacity)
+            if (scheduledEmployees.Count < currentDepartment.Capacity)
             {
                 // Adds the selected employees to the list of employees to be scheduled.
                 for (int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
                 {
-                    if(scheduledEmployees.Count < currentDepartment.Capacity)
+                    if (scheduledEmployees.Count < currentDepartment.Capacity)
                     {
                         scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
-                    }else
+                    }
+                    else
                     {
                         i = currentDepartment.Capacity;
                     }
                 }
-            }else if(scheduledEmployees.Count > currentDepartment.Capacity)
+            }
+            else if (scheduledEmployees.Count > currentDepartment.Capacity)
             {
                 // Removes employees if there are too many scheduled.
-                while(scheduledEmployees.Count > currentDepartment.Capacity)
+                while (scheduledEmployees.Count > currentDepartment.Capacity)
                 {
                     scheduledEmployees.RemoveAt(scheduledEmployees.Count - 1);
                 }

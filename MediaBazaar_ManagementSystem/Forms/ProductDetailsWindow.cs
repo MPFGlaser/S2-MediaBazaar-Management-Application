@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -32,7 +31,7 @@ namespace MediaBazaar_ManagementSystem
 
         public Item Item
         {
-            get { return this.item; }
+            get { return item; }
         }
 
         /// <summary>
@@ -112,7 +111,7 @@ namespace MediaBazaar_ManagementSystem
         public void AddItemData(Item item)
         {
             // Sets the form title to indicate which item is being edited
-            this.Text = "Viewing/editing " + item.Brand + " " + item.Name;
+            Text = "Viewing/editing " + item.Brand + " " + item.Name;
 
             // Sets some editing-specific variables to the right values
             editing = true;
@@ -136,10 +135,10 @@ namespace MediaBazaar_ManagementSystem
         public int GetDepartmentIndex(int departmentId)
         {
             int index = -1, count = 0;
-            foreach(dynamic dynamicDepartment in comboBoxSelectDepartment.Items)
+            foreach (dynamic dynamicDepartment in comboBoxSelectDepartment.Items)
             {
                 Department dep = (dynamicDepartment).Department;
-                if(dep.Id == departmentId)
+                if (dep.Id == departmentId)
                 {
                     index = count;
                 }
@@ -222,7 +221,7 @@ namespace MediaBazaar_ManagementSystem
 
                 if (success)
                 {
-                    this.DialogResult = DialogResult.OK;
+                    DialogResult = DialogResult.OK;
                 }
             }
         }
@@ -250,7 +249,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonPDWCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
         #endregion
     }

@@ -10,9 +10,7 @@ namespace MediaBazaar_ManagementSystem
     {
         MySqlConnection connection;
         string connectionString;
-        Stock stock;
         List<Stock> stocks = new List<Stock>();
-        List<Request> requests = new List<Request>();
 
         public ItemMySQL()
         {
@@ -28,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Create(Item item)
         {
             bool success = false;
-            int rowsAffected = 0;
+            int rowsAffected;
 
             String query = "INSERT INTO items VALUES (@id, @name, @brand, @code, @category, @quantity, @price, @active, @description, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -203,7 +201,6 @@ namespace MediaBazaar_ManagementSystem
         {
             int pid = id;
             int quantity = 0;
-            this.requests = new List<Request>();
             try
             {
                 string sql = "SELECT `quantity` FROM `stock_request` WHERE productid = @pId AND status = 'Pending';";
@@ -227,7 +224,7 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         public List<Stock> ReadStock()
         {
-            this.stocks = new List<Stock>();
+            stocks = new List<Stock>();
             try
             {
                 string sql = "SELECT `id`, `quantity` FROM `items`";
@@ -286,14 +283,14 @@ namespace MediaBazaar_ManagementSystem
             {
                 int qtoadd = ReadRequest(productId);
                 string sql = "UPDATE items SET quantity = @Quantity WHERE id = @Id;";
-                
+
                 MySqlCommand cmd = new MySqlCommand(sql, connection);
 
-                cmd.Parameters.AddWithValue("@Quantity", quantity+qtoadd);
+                cmd.Parameters.AddWithValue("@Quantity", quantity + qtoadd);
                 cmd.Parameters.AddWithValue("@Id", productId);
                 connection.Open();
                 cmd.ExecuteNonQuery();
-                
+
                 string Status = "Done";
                 DateTime dateAccepted = DateTime.Now;
                 sql = "UPDATE stock_request SET status = @Status, dateAccepted = @dateAccepted WHERE productid = @pId;";
@@ -301,7 +298,7 @@ namespace MediaBazaar_ManagementSystem
 
                 cmd.Parameters.AddWithValue("@Status", Status);
                 cmd.Parameters.AddWithValue("@pId", productId);
-                cmd.Parameters.AddWithValue("dateAccepted",dateAccepted);
+                cmd.Parameters.AddWithValue("dateAccepted", dateAccepted);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Restock request accepted!");
             }

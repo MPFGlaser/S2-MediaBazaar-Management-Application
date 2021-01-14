@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using MediaBazaar_ManagementSystem;
-using System.Text;
+﻿using MediaBazaar_ManagementSystem;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
 {
@@ -51,7 +48,7 @@ namespace UnitTests
             string fail = "0612345";
 
             Assert.IsTrue(CheckValidity.PhoneNumber(pass));
-            Assert.IsTrue(CheckValidity.PhoneNumber(pass));
+            Assert.IsTrue(CheckValidity.PhoneNumber(pass2));
             Assert.IsFalse(CheckValidity.PhoneNumber(fail));
         }
 

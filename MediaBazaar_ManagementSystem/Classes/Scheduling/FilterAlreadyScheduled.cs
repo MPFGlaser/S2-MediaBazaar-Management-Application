@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace MediaBazaar_ManagementSystem
@@ -18,7 +17,7 @@ namespace MediaBazaar_ManagementSystem
             foreach (Employee employee in employees)
             {
                 // If an employeeId/shiftId combination doesn't exist, add the employee to output.
-                if(!relevantWorkingEmployees.Any(WorkingEmployee => WorkingEmployee.EmployeeId == employee.Id))
+                if (!relevantWorkingEmployees.Any(WorkingEmployee => WorkingEmployee.EmployeeId == employee.Id))
                 {
                     output.Add(employee);
                 }

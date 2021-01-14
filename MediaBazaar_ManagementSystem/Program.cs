@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
@@ -16,8 +13,6 @@ namespace MediaBazaar_ManagementSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //IEmployeeStorage esqlhandler = new EmployeeMySQL();
-            //esqlhandler.CheckFunctions();
 
             createLogin();
         }
