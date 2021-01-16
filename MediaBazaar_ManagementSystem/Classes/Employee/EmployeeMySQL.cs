@@ -364,6 +364,35 @@ namespace MediaBazaar_ManagementSystem
             return allAbsentDays;
         }
 
+        public List<string> GetAbsentDaysForEmployee(int employeeid)
+        {
+            List<string> allAbsentDays = new List<string>();
+            string query = "SELECT date FROM reports WHERE employeeId = @employeeId;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@employeeId", employeeid);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    allAbsentDays.Add(Convert.ToDateTime(reader[0]).ToString("yyyy-MM-dd"));
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return allAbsentDays;
+        }
+
+
         public List<WorkingEmployee> GetWorkingEmployees()
         {
             List<WorkingEmployee> allWorkingEmployees = new List<WorkingEmployee>();
@@ -390,5 +419,36 @@ namespace MediaBazaar_ManagementSystem
             }
             return allWorkingEmployees;
         }
+        
+        public int GetMinutesWorked(DateTime date, int employeeid)
+        {
+            int minutes = 0;
+            string dateformat = date.Date.ToString("yyyy-MM-dd") + "%";
+            string query = "SELECT minutesworked FROM employee_attendance WHERE (employeeid = @employeeid AND clockin LIKE '"+dateformat+"');";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            //command.Parameters.AddWithValue("@date", dateformat);
+            command.Parameters.AddWithValue("@employeeid", employeeid);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    minutes+=Convert.ToInt32(reader[0]);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Shift(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return minutes;
+        }
+
     }
 }
