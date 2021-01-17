@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
@@ -26,5 +27,7 @@ namespace MediaBazaar_ManagementSystem
         List<WorkingEmployee> GetWorkingEmployees();
 
         int GetMinutesWorked(DateTime date, int employeeid);
+
+        ArrayList GetEmployeeStatistics(int employeeid);
     }
 }

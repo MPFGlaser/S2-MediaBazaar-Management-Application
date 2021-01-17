@@ -1,5 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -125,7 +126,29 @@ namespace MediaBazaar_ManagementSystem
             return allDepartmentCapacities;
         }
 
-        public List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartmentsInCertainShifts(List<int> shiftIds)
+        public ArrayList GetDepartmentStatistics(int departmentid)
+        {
+            ArrayList statistics = new ArrayList();
+            string query = "SELECT i.name, i.quantity AS numberOfItems FROM items AS i INNER JOIN departments d ON d.id = i.departmentId WHERE i.departmentId = @departmentid;";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@departmentid", departmentid);
+            try
+            {
+                connection.Open();
+                statistics = GatherStatisticData(cmd);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return statistics;
+        }
+
+public List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartmentsInCertainShifts(List<int> shiftIds)
         {
             List<(int shiftId, int departmentId, int capacity)> departmentInfo = new List<(int shiftId, int departmentId, int capacity)>();
             String query = "SELECT * FROM capacity_per_department";
@@ -152,7 +175,6 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-
 
             return departmentInfo;
         }
@@ -182,5 +204,20 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
+        private ArrayList GatherStatisticData(MySqlCommand cmd)
+        {
+            ArrayList statistics = new ArrayList();
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                object[] values = new object[dr.FieldCount];
+                dr.GetValues(values);
+                statistics.Add(values);
+            }
+
+            return statistics;
+        }
+>>>>>>> MediaBazaar_ManagementSystem/Classes/Department/DepartmentMySQL.cs
     }
 }
