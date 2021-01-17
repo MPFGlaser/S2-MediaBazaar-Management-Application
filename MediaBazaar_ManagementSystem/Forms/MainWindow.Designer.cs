@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -60,6 +60,11 @@
             this.tabPageStatistics = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBoxExportData = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbxWeekNumber = new System.Windows.Forms.ComboBox();
+            this.btnExportData = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonStatisticsEmployee = new System.Windows.Forms.Button();
             this.comboBoxStatisticsEmployee = new System.Windows.Forms.ComboBox();
@@ -109,24 +114,18 @@
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
             this.gbManagement = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
+            this.buttonEditFunctionPermissions = new System.Windows.Forms.Button();
             this.btnClockinOut = new System.Windows.Forms.Button();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
             this.buttonEmployeesAdd = new System.Windows.Forms.Button();
-            this.buttonEmployeesRemove = new System.Windows.Forms.Button();
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRequests = new System.Windows.Forms.TabPage();
             this.btnPermit = new System.Windows.Forms.Button();
             this.btnTurnDown = new System.Windows.Forms.Button();
             this.lbxRequests = new System.Windows.Forms.ListBox();
-            this.buttonEditFunctionPermissions = new System.Windows.Forms.Button();
-            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBoxExportData = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cmbxWeekNumber = new System.Windows.Forms.ComboBox();
-            this.btnExportData = new System.Windows.Forms.Button();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -148,6 +147,8 @@
             this.splitContainerStatistics1.Panel2.SuspendLayout();
             this.splitContainerStatistics1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).BeginInit();
+            this.groupBoxExportData.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.tabPageStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStockPrimary)).BeginInit();
             this.splitContainerStockPrimary.Panel1.SuspendLayout();
@@ -171,11 +172,9 @@
             this.splitContainerEmployeesSecondary.Panel2.SuspendLayout();
             this.splitContainerEmployeesSecondary.SuspendLayout();
             this.gbManagement.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageRequests.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.groupBoxExportData.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogin
@@ -433,27 +432,79 @@
             // 
             // StatisticChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea3);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatisticChart.Enabled = false;
-            legend1.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend1);
+            legend3.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend3);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "TestData";
-            series1.Points.Add(dataPoint1);
-            series1.Points.Add(dataPoint2);
-            series1.Points.Add(dataPoint3);
-            series1.Points.Add(dataPoint4);
-            series1.Points.Add(dataPoint5);
-            series1.Points.Add(dataPoint6);
-            this.StatisticChart.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "TestData";
+            series3.Points.Add(dataPoint13);
+            series3.Points.Add(dataPoint14);
+            series3.Points.Add(dataPoint15);
+            series3.Points.Add(dataPoint16);
+            series3.Points.Add(dataPoint17);
+            series3.Points.Add(dataPoint18);
+            this.StatisticChart.Series.Add(series3);
             this.StatisticChart.Size = new System.Drawing.Size(937, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
+            // 
+            // groupBoxExportData
+            // 
+            this.groupBoxExportData.Controls.Add(this.flowLayoutPanel3);
+            this.groupBoxExportData.Location = new System.Drawing.Point(5, 193);
+            this.groupBoxExportData.Name = "groupBoxExportData";
+            this.groupBoxExportData.Size = new System.Drawing.Size(178, 81);
+            this.groupBoxExportData.TabIndex = 15;
+            this.groupBoxExportData.TabStop = false;
+            this.groupBoxExportData.Text = "Export Data";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.label7);
+            this.flowLayoutPanel3.Controls.Add(this.cmbxWeekNumber);
+            this.flowLayoutPanel3.Controls.Add(this.btnExportData);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(172, 62);
+            this.flowLayoutPanel3.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 4);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Select week number:";
+            // 
+            // cmbxWeekNumber
+            // 
+            this.cmbxWeekNumber.FormattingEnabled = true;
+            this.cmbxWeekNumber.Location = new System.Drawing.Point(117, 6);
+            this.cmbxWeekNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbxWeekNumber.Name = "cmbxWeekNumber";
+            this.cmbxWeekNumber.Size = new System.Drawing.Size(38, 21);
+            this.cmbxWeekNumber.TabIndex = 10;
+            // 
+            // btnExportData
+            // 
+            this.btnExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportData.Location = new System.Drawing.Point(6, 31);
+            this.btnExportData.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExportData.Name = "btnExportData";
+            this.btnExportData.Size = new System.Drawing.Size(71, 20);
+            this.btnExportData.TabIndex = 9;
+            this.btnExportData.Text = "Export data";
+            this.btnExportData.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -524,7 +575,7 @@
             this.tabPageStock.Controls.Add(this.splitContainerStockPrimary);
             this.tabPageStock.Location = new System.Drawing.Point(4, 22);
             this.tabPageStock.Name = "tabPageStock";
-            this.tabPageStock.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageStock.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageStock.Size = new System.Drawing.Size(1131, 411);
             this.tabPageStock.TabIndex = 1;
             this.tabPageStock.Text = "Stock";
@@ -815,7 +866,7 @@
             this.tabPageEmployees.Controls.Add(this.splitContainerEmployeesPrimary);
             this.tabPageEmployees.Location = new System.Drawing.Point(4, 22);
             this.tabPageEmployees.Name = "tabPageEmployees";
-            this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageEmployees.Size = new System.Drawing.Size(1131, 411);
             this.tabPageEmployees.TabIndex = 0;
             this.tabPageEmployees.Text = "Employees";
@@ -960,7 +1011,6 @@
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.btnClockinOut);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
             this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(299, 405);
             this.splitContainerEmployeesSecondary.SplitterDistance = 85;
@@ -1017,6 +1067,38 @@
             this.gbManagement.TabStop = false;
             this.gbManagement.Text = "Management";
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel2.Controls.Add(this.checkBoxShowInactive);
+            this.flowLayoutPanel2.Controls.Add(this.buttonEditFunctionPermissions);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(6, 19);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(1);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(159, 68);
+            this.flowLayoutPanel2.TabIndex = 7;
+            // 
+            // checkBoxShowInactive
+            // 
+            this.checkBoxShowInactive.AutoSize = true;
+            this.checkBoxShowInactive.Location = new System.Drawing.Point(4, 4);
+            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
+            this.checkBoxShowInactive.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxShowInactive.TabIndex = 4;
+            this.checkBoxShowInactive.Text = "Show inactive employees";
+            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
+            // 
+            // buttonEditFunctionPermissions
+            // 
+            this.buttonEditFunctionPermissions.Location = new System.Drawing.Point(4, 27);
+            this.buttonEditFunctionPermissions.Name = "buttonEditFunctionPermissions";
+            this.buttonEditFunctionPermissions.Size = new System.Drawing.Size(141, 23);
+            this.buttonEditFunctionPermissions.TabIndex = 5;
+            this.buttonEditFunctionPermissions.Text = "Edit function permissions";
+            this.buttonEditFunctionPermissions.UseVisualStyleBackColor = true;
+            this.buttonEditFunctionPermissions.Click += new System.EventHandler(this.buttonEditFunctionPermissions_Click);
+            // 
             // btnClockinOut
             // 
             this.btnClockinOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1047,17 +1129,6 @@
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
             this.buttonEmployeesAdd.Click += new System.EventHandler(this.buttonEmployeesAdd_Click);
-            // 
-            // buttonEmployeesRemove
-            // 
-            this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 309);
-            this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(290, 23);
-            this.buttonEmployeesRemove.TabIndex = 1;
-            this.buttonEmployeesRemove.Text = "Remove selected employee";
-            this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
             // 
             // buttonEmployeeModify
             // 
@@ -1091,9 +1162,9 @@
             this.tabPageRequests.Controls.Add(this.btnTurnDown);
             this.tabPageRequests.Controls.Add(this.lbxRequests);
             this.tabPageRequests.Location = new System.Drawing.Point(4, 22);
-            this.tabPageRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageRequests.Margin = new System.Windows.Forms.Padding(2);
             this.tabPageRequests.Name = "tabPageRequests";
-            this.tabPageRequests.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageRequests.Padding = new System.Windows.Forms.Padding(2);
             this.tabPageRequests.Size = new System.Drawing.Size(1131, 411);
             this.tabPageRequests.TabIndex = 4;
             this.tabPageRequests.Text = "Requests";
@@ -1103,7 +1174,7 @@
             // 
             this.btnPermit.BackColor = System.Drawing.SystemColors.Control;
             this.btnPermit.Location = new System.Drawing.Point(933, 65);
-            this.btnPermit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPermit.Margin = new System.Windows.Forms.Padding(2);
             this.btnPermit.Name = "btnPermit";
             this.btnPermit.Size = new System.Drawing.Size(82, 29);
             this.btnPermit.TabIndex = 0;
@@ -1116,7 +1187,7 @@
             this.btnTurnDown.BackColor = System.Drawing.SystemColors.Control;
             this.btnTurnDown.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnTurnDown.Location = new System.Drawing.Point(933, 161);
-            this.btnTurnDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTurnDown.Margin = new System.Windows.Forms.Padding(2);
             this.btnTurnDown.Name = "btnTurnDown";
             this.btnTurnDown.Size = new System.Drawing.Size(82, 29);
             this.btnTurnDown.TabIndex = 0;
@@ -1130,94 +1201,10 @@
             this.lbxRequests.FormattingEnabled = true;
             this.lbxRequests.ItemHeight = 18;
             this.lbxRequests.Location = new System.Drawing.Point(3, 3);
-            this.lbxRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbxRequests.Margin = new System.Windows.Forms.Padding(2);
             this.lbxRequests.Name = "lbxRequests";
             this.lbxRequests.Size = new System.Drawing.Size(825, 400);
             this.lbxRequests.TabIndex = 0;
-            // 
-            // buttonEditFunctionPermissions
-            // 
-            this.buttonEditFunctionPermissions.Location = new System.Drawing.Point(4, 27);
-            this.buttonEditFunctionPermissions.Name = "buttonEditFunctionPermissions";
-            this.buttonEditFunctionPermissions.Size = new System.Drawing.Size(141, 23);
-            this.buttonEditFunctionPermissions.TabIndex = 5;
-            this.buttonEditFunctionPermissions.Text = "Edit function permissions";
-            this.buttonEditFunctionPermissions.UseVisualStyleBackColor = true;
-            this.buttonEditFunctionPermissions.Click += new System.EventHandler(this.buttonEditFunctionPermissions_Click);
-            // 
-            // checkBoxShowInactive
-            // 
-            this.checkBoxShowInactive.AutoSize = true;
-            this.checkBoxShowInactive.Location = new System.Drawing.Point(4, 4);
-            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
-            this.checkBoxShowInactive.Size = new System.Drawing.Size(146, 17);
-            this.checkBoxShowInactive.TabIndex = 4;
-            this.checkBoxShowInactive.Text = "Show inactive employees";
-            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
-            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.checkBoxShowInactive);
-            this.flowLayoutPanel2.Controls.Add(this.buttonEditFunctionPermissions);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(6, 19);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(159, 68);
-            this.flowLayoutPanel2.TabIndex = 7;
-            // 
-            // groupBoxExportData
-            // 
-            this.groupBoxExportData.Controls.Add(this.flowLayoutPanel3);
-            this.groupBoxExportData.Location = new System.Drawing.Point(5, 193);
-            this.groupBoxExportData.Name = "groupBoxExportData";
-            this.groupBoxExportData.Size = new System.Drawing.Size(178, 81);
-            this.groupBoxExportData.TabIndex = 15;
-            this.groupBoxExportData.TabStop = false;
-            this.groupBoxExportData.Text = "Export Data";
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.label7);
-            this.flowLayoutPanel3.Controls.Add(this.cmbxWeekNumber);
-            this.flowLayoutPanel3.Controls.Add(this.btnExportData);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(172, 62);
-            this.flowLayoutPanel3.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 4);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Select week number:";
-            // 
-            // cmbxWeekNumber
-            // 
-            this.cmbxWeekNumber.FormattingEnabled = true;
-            this.cmbxWeekNumber.Location = new System.Drawing.Point(117, 6);
-            this.cmbxWeekNumber.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbxWeekNumber.Name = "cmbxWeekNumber";
-            this.cmbxWeekNumber.Size = new System.Drawing.Size(38, 21);
-            this.cmbxWeekNumber.TabIndex = 10;
-            // 
-            // btnExportData
-            // 
-            this.btnExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportData.Location = new System.Drawing.Point(6, 31);
-            this.btnExportData.Margin = new System.Windows.Forms.Padding(2);
-            this.btnExportData.Name = "btnExportData";
-            this.btnExportData.Size = new System.Drawing.Size(71, 20);
-            this.btnExportData.TabIndex = 9;
-            this.btnExportData.Text = "Export data";
-            this.btnExportData.UseVisualStyleBackColor = true;
             // 
             // calendarDayControlMonday
             // 
@@ -1321,6 +1308,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerStatistics1)).EndInit();
             this.splitContainerStatistics1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StatisticChart)).EndInit();
+            this.groupBoxExportData.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
             this.tabPageStock.ResumeLayout(false);
             this.splitContainerStockPrimary.Panel1.ResumeLayout(false);
             this.splitContainerStockPrimary.Panel2.ResumeLayout(false);
@@ -1348,13 +1338,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).EndInit();
             this.splitContainerEmployeesSecondary.ResumeLayout(false);
             this.gbManagement.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPageRequests.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.groupBoxExportData.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageRequests.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1435,7 +1422,6 @@
         private System.Windows.Forms.Button btnClockinOut;
         private System.Windows.Forms.Label labelEmployeesSelected;
         private System.Windows.Forms.Button buttonEmployeesAdd;
-        private System.Windows.Forms.Button buttonEmployeesRemove;
         private System.Windows.Forms.Button buttonEmployeeModify;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button buttonAutomaticScheduling;
