@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="UnitTests_EmployeeFiltering.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest_Logic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
