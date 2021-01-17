@@ -124,5 +124,63 @@ namespace MediaBazaar_ManagementSystem
 
             return allDepartmentCapacities;
         }
+
+        public List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartmentsInCertainShifts(List<int> shiftIds)
+        {
+            List<(int shiftId, int departmentId, int capacity)> departmentInfo = new List<(int shiftId, int departmentId, int capacity)>();
+            String query = "SELECT * FROM capacity_per_department";
+            MySqlCommand command = new MySqlCommand(query, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (shiftIds.Contains(Convert.ToInt32(reader[0])))
+                    {
+                        departmentInfo.Add((Convert.ToInt32(reader[0]), Convert.ToInt32(reader[1]), Convert.ToInt32(reader[2])));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+
+            return departmentInfo;
+        }
+
+        public void UpdateCapacityForDepartmentList(List<(int shiftId, int departmentId, int capacity)> toUpdate)
+        {
+            try
+            {
+                connection.Open();
+                foreach ((int shiftId, int departmentId, int capacity) data in toUpdate)
+                {
+                    String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@shiftId", data.shiftId);
+                    command.Parameters.AddWithValue("@departmentId", data.departmentId);
+                    command.Parameters.AddWithValue("@capacity", data.capacity);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }
