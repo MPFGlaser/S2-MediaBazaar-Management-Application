@@ -21,6 +21,10 @@ namespace MediaBazaar_ManagementSystem
 
         List<(int, DateTime)> GetAbsentDays();
 
+        List<string> GetAbsentDaysForEmployee(int employeeid);
+
         List<WorkingEmployee> GetWorkingEmployees();
+
+        int GetMinutesWorked(DateTime date, int employeeid);
     }
 }
