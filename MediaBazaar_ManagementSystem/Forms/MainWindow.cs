@@ -100,7 +100,7 @@ namespace MediaBazaar_ManagementSystem
 
                 if(loggedInUser.Function != 4)
                 {
-                    pnlExportData.Visible = false;
+                    groupBoxExportData.Visible = false;
                 }
 
                 // department_edit currently has no corresponding function.
@@ -225,7 +225,7 @@ namespace MediaBazaar_ManagementSystem
             try
             {
                 requests = requestStorage.GetAll();
-                if (requests.Count != -1)
+                if (requests.Count > 0)
                 {
                     foreach (Request r in requests)
                     {
@@ -236,7 +236,7 @@ namespace MediaBazaar_ManagementSystem
                         string date = r.ShiftDate.ToString("MMMM dd, yyyy");
                         string shift = r.ShiftType;
 
-                        lbxRequests.Items.Add(senderFirstName + " " + senderSurName + " requested " + receiverFirstName + " " + receiverSurName + " take over their shift on " + date + " in the " + shift);
+                        lbxRequests.Items.Add(senderFirstName + " " + senderSurName + " requested " + receiverFirstName + " " + receiverSurName + " to take over their shift on " + date + " in the " + shift);
                     }
                 }
                 else
@@ -470,7 +470,7 @@ namespace MediaBazaar_ManagementSystem
 
             if (turnDown == true)
             {
-                MessageBox.Show("The takeover request has been turned down!");
+                MessageBox.Show("The takeover request has been denied");
                 PopulateRequestsListbox();
             }
             else
@@ -488,12 +488,12 @@ namespace MediaBazaar_ManagementSystem
 
             if (permit == true)
             {
-                MessageBox.Show("The takeover request has been permitted!");
+                MessageBox.Show("The takeover request has been approved");
                 PopulateRequestsListbox();
             }
             else
             {
-                MessageBox.Show("Error\r\n\r\nThis shift has already been taken over or doesn't exist");
+                MessageBox.Show("This shift has already been taken over or doesn't exist");
             }
         }
     //}

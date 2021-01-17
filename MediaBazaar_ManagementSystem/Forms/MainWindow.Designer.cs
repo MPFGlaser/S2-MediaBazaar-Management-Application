@@ -57,13 +57,6 @@
             this.progressBarSchedulingTime = new System.Windows.Forms.ProgressBar();
             this.buttonAutomaticScheduling = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.tabPageStatistics = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -73,7 +66,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonStatisticsDepartment = new System.Windows.Forms.Button();
             this.comboBoxStatisticsDepartment = new System.Windows.Forms.ComboBox();
-            this.DataButton = new System.Windows.Forms.Button();
             this.tabPageStock = new System.Windows.Forms.TabPage();
             this.splitContainerStockPrimary = new System.Windows.Forms.SplitContainer();
             this.dataGridViewStock = new System.Windows.Forms.DataGridView();
@@ -116,15 +108,7 @@
             this.buttonEmployeesDepartmentRemove = new System.Windows.Forms.Button();
             this.buttonEmployeesDepartmentAdd = new System.Windows.Forms.Button();
             this.labelEmployeesDepartmentName = new System.Windows.Forms.Label();
-            this.lblExportData = new System.Windows.Forms.Label();
-            this.pnlExportData = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnExportData = new System.Windows.Forms.Button();
-            this.cmbxWeekNumber = new System.Windows.Forms.ComboBox();
             this.gbManagement = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
-            this.buttonEditFunctionPermissions = new System.Windows.Forms.Button();
             this.btnClockinOut = new System.Windows.Forms.Button();
             this.labelEmployeesSelected = new System.Windows.Forms.Label();
             this.buttonEmployeesAdd = new System.Windows.Forms.Button();
@@ -132,11 +116,17 @@
             this.buttonEmployeeModify = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRequests = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPermit = new System.Windows.Forms.Button();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnTurnDown = new System.Windows.Forms.Button();
             this.lbxRequests = new System.Windows.Forms.ListBox();
+            this.buttonEditFunctionPermissions = new System.Windows.Forms.Button();
+            this.checkBoxShowInactive = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBoxExportData = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbxWeekNumber = new System.Windows.Forms.ComboBox();
+            this.btnExportData = new System.Windows.Forms.Button();
             this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
@@ -180,22 +170,20 @@
             this.splitContainerEmployeesSecondary.Panel1.SuspendLayout();
             this.splitContainerEmployeesSecondary.Panel2.SuspendLayout();
             this.splitContainerEmployeesSecondary.SuspendLayout();
-            this.pnlExportData.SuspendLayout();
             this.gbManagement.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageRequests.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.groupBoxExportData.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLogin
             // 
             this.buttonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLogin.Location = new System.Drawing.Point(1428, 6);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLogin.Location = new System.Drawing.Point(1071, 5);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(100, 28);
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLogin.TabIndex = 1;
             this.buttonLogin.Text = "Log out";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -204,10 +192,9 @@
             // labelWelcomeText
             // 
             this.labelWelcomeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWelcomeText.Location = new System.Drawing.Point(1259, 12);
-            this.labelWelcomeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelWelcomeText.Location = new System.Drawing.Point(944, 10);
             this.labelWelcomeText.Name = "labelWelcomeText";
-            this.labelWelcomeText.Size = new System.Drawing.Size(167, 16);
+            this.labelWelcomeText.Size = new System.Drawing.Size(125, 13);
             this.labelWelcomeText.TabIndex = 2;
             this.labelWelcomeText.Text = "Welcome";
             this.labelWelcomeText.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -218,10 +205,9 @@
             this.buttonReloadDatabaseEntries.BackgroundImage = global::MediaBazaar_ManagementSystem.Properties.Resources.reload1;
             this.buttonReloadDatabaseEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonReloadDatabaseEntries.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(1207, 5);
-            this.buttonReloadDatabaseEntries.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonReloadDatabaseEntries.Location = new System.Drawing.Point(905, 4);
             this.buttonReloadDatabaseEntries.Name = "buttonReloadDatabaseEntries";
-            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(33, 31);
+            this.buttonReloadDatabaseEntries.Size = new System.Drawing.Size(25, 25);
             this.buttonReloadDatabaseEntries.TabIndex = 5;
             this.buttonReloadDatabaseEntries.UseVisualStyleBackColor = true;
             this.buttonReloadDatabaseEntries.Click += new System.EventHandler(this.buttonReloadDatabaseEntries_Click);
@@ -229,10 +215,9 @@
             // tabPageScheduling
             // 
             this.tabPageScheduling.Controls.Add(this.splitContainerScheduling1);
-            this.tabPageScheduling.Location = new System.Drawing.Point(4, 25);
-            this.tabPageScheduling.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageScheduling.Location = new System.Drawing.Point(4, 22);
             this.tabPageScheduling.Name = "tabPageScheduling";
-            this.tabPageScheduling.Size = new System.Drawing.Size(1511, 509);
+            this.tabPageScheduling.Size = new System.Drawing.Size(1131, 411);
             this.tabPageScheduling.TabIndex = 3;
             this.tabPageScheduling.Text = "Scheduling";
             this.tabPageScheduling.UseVisualStyleBackColor = true;
@@ -244,7 +229,6 @@
             this.splitContainerScheduling1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerScheduling1.IsSplitterFixed = true;
             this.splitContainerScheduling1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerScheduling1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainerScheduling1.Name = "splitContainerScheduling1";
             this.splitContainerScheduling1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -263,19 +247,17 @@
             this.splitContainerScheduling1.Panel2.Controls.Add(this.progressBarSchedulingTime);
             this.splitContainerScheduling1.Panel2.Controls.Add(this.buttonAutomaticScheduling);
             this.splitContainerScheduling1.Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainerScheduling1.Size = new System.Drawing.Size(1511, 509);
+            this.splitContainerScheduling1.Size = new System.Drawing.Size(1131, 411);
             this.splitContainerScheduling1.SplitterDistance = 106;
-            this.splitContainerScheduling1.SplitterWidth = 5;
             this.splitContainerScheduling1.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1244, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(931, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 17);
+            this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Department:";
             // 
@@ -283,10 +265,9 @@
             // 
             this.comboBoxSchedulingDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSchedulingDepartment.FormattingEnabled = true;
-            this.comboBoxSchedulingDepartment.Location = new System.Drawing.Point(1339, 5);
-            this.comboBoxSchedulingDepartment.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxSchedulingDepartment.Location = new System.Drawing.Point(1002, 4);
             this.comboBoxSchedulingDepartment.Name = "comboBoxSchedulingDepartment";
-            this.comboBoxSchedulingDepartment.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxSchedulingDepartment.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSchedulingDepartment.TabIndex = 5;
             this.comboBoxSchedulingDepartment.SelectedIndexChanged += new System.EventHandler(this.comboBoxSchedulingDepartment_SelectedIndexChanged);
             // 
@@ -294,10 +275,9 @@
             // 
             this.buttonSchedulingNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonSchedulingNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
-            this.buttonSchedulingNext.Location = new System.Drawing.Point(982, 5);
-            this.buttonSchedulingNext.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSchedulingNext.Location = new System.Drawing.Point(735, 4);
             this.buttonSchedulingNext.Name = "buttonSchedulingNext";
-            this.buttonSchedulingNext.Size = new System.Drawing.Size(133, 99);
+            this.buttonSchedulingNext.Size = new System.Drawing.Size(100, 100);
             this.buttonSchedulingNext.TabIndex = 4;
             this.buttonSchedulingNext.Text = ">";
             this.buttonSchedulingNext.UseVisualStyleBackColor = true;
@@ -307,10 +287,9 @@
             // 
             this.buttonSchedulingPrevious.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.buttonSchedulingPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
-            this.buttonSchedulingPrevious.Location = new System.Drawing.Point(393, 4);
-            this.buttonSchedulingPrevious.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSchedulingPrevious.Location = new System.Drawing.Point(294, 3);
             this.buttonSchedulingPrevious.Name = "buttonSchedulingPrevious";
-            this.buttonSchedulingPrevious.Size = new System.Drawing.Size(133, 99);
+            this.buttonSchedulingPrevious.Size = new System.Drawing.Size(100, 100);
             this.buttonSchedulingPrevious.TabIndex = 3;
             this.buttonSchedulingPrevious.Text = "<";
             this.buttonSchedulingPrevious.UseVisualStyleBackColor = true;
@@ -322,23 +301,20 @@
             this.groupBox1.Controls.Add(this.buttonSetWeekShiftsCapacity);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.numericUpDownSchedulingWeek);
-            this.groupBox1.Location = new System.Drawing.Point(534, 4);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.MaximumSize = new System.Drawing.Size(440, 123);
-            this.groupBox1.MinimumSize = new System.Drawing.Size(440, 123);
+            this.groupBox1.Location = new System.Drawing.Point(399, 3);
+            this.groupBox1.MaximumSize = new System.Drawing.Size(330, 100);
+            this.groupBox1.MinimumSize = new System.Drawing.Size(330, 100);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(440, 123);
+            this.groupBox1.Size = new System.Drawing.Size(330, 100);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // buttonSetWeekShiftsCapacity
             // 
             this.buttonSetWeekShiftsCapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonSetWeekShiftsCapacity.Location = new System.Drawing.Point(8, 82);
-            this.buttonSetWeekShiftsCapacity.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSetWeekShiftsCapacity.Location = new System.Drawing.Point(6, 67);
             this.buttonSetWeekShiftsCapacity.Name = "buttonSetWeekShiftsCapacity";
-            this.buttonSetWeekShiftsCapacity.Size = new System.Drawing.Size(424, 33);
+            this.buttonSetWeekShiftsCapacity.Size = new System.Drawing.Size(318, 27);
             this.buttonSetWeekShiftsCapacity.TabIndex = 7;
             this.buttonSetWeekShiftsCapacity.Text = "Edit capacity for all shifts this week";
             this.buttonSetWeekShiftsCapacity.UseVisualStyleBackColor = true;
@@ -349,10 +325,9 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.label1.Location = new System.Drawing.Point(8, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(291, 48);
+            this.label1.Size = new System.Drawing.Size(237, 39);
             this.label1.TabIndex = 1;
             this.label1.Text = "Week number:";
             // 
@@ -360,8 +335,7 @@
             // 
             this.numericUpDownSchedulingWeek.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.numericUpDownSchedulingWeek.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.numericUpDownSchedulingWeek.Location = new System.Drawing.Point(348, 20);
-            this.numericUpDownSchedulingWeek.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDownSchedulingWeek.Location = new System.Drawing.Point(261, 16);
             this.numericUpDownSchedulingWeek.Maximum = new decimal(new int[] {
             54,
             0,
@@ -373,7 +347,7 @@
             0,
             0});
             this.numericUpDownSchedulingWeek.Name = "numericUpDownSchedulingWeek";
-            this.numericUpDownSchedulingWeek.Size = new System.Drawing.Size(84, 55);
+            this.numericUpDownSchedulingWeek.Size = new System.Drawing.Size(63, 45);
             this.numericUpDownSchedulingWeek.TabIndex = 0;
             this.numericUpDownSchedulingWeek.Value = new decimal(new int[] {
             1,
@@ -383,20 +357,18 @@
             // 
             // progressBarSchedulingTime
             // 
-            this.progressBarSchedulingTime.Location = new System.Drawing.Point(648, 338);
-            this.progressBarSchedulingTime.Margin = new System.Windows.Forms.Padding(4);
+            this.progressBarSchedulingTime.Location = new System.Drawing.Point(486, 275);
             this.progressBarSchedulingTime.Name = "progressBarSchedulingTime";
-            this.progressBarSchedulingTime.Size = new System.Drawing.Size(207, 28);
+            this.progressBarSchedulingTime.Size = new System.Drawing.Size(155, 23);
             this.progressBarSchedulingTime.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBarSchedulingTime.TabIndex = 8;
             this.progressBarSchedulingTime.Visible = false;
             // 
             // buttonAutomaticScheduling
             // 
-            this.buttonAutomaticScheduling.Location = new System.Drawing.Point(648, 303);
-            this.buttonAutomaticScheduling.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonAutomaticScheduling.Location = new System.Drawing.Point(486, 246);
             this.buttonAutomaticScheduling.Name = "buttonAutomaticScheduling";
-            this.buttonAutomaticScheduling.Size = new System.Drawing.Size(207, 28);
+            this.buttonAutomaticScheduling.Size = new System.Drawing.Size(155, 23);
             this.buttonAutomaticScheduling.TabIndex = 7;
             this.buttonAutomaticScheduling.Text = "Schedule Automatically";
             this.buttonAutomaticScheduling.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -417,89 +389,17 @@
             this.flowLayoutPanel1.Controls.Add(this.calendarDayControlSaturday);
             this.flowLayoutPanel1.Controls.Add(this.calendarDayControlSunday);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1511, 325);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1131, 289);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // calendarDayControlMonday
-            // 
-            this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlMonday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlMonday.Location = new System.Drawing.Point(3, 3);
-            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.Name = "calendarDayControlMonday";
-            this.calendarDayControlMonday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.TabIndex = 0;
-            // 
-            // calendarDayControlTuesday
-            // 
-            this.calendarDayControlTuesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlTuesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlTuesday.Location = new System.Drawing.Point(164, 3);
-            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.Name = "calendarDayControlTuesday";
-            this.calendarDayControlTuesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.TabIndex = 1;
-            // 
-            // calendarDayControlWednesday
-            // 
-            this.calendarDayControlWednesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlWednesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlWednesday.Location = new System.Drawing.Point(325, 3);
-            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.Name = "calendarDayControlWednesday";
-            this.calendarDayControlWednesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.TabIndex = 2;
-            // 
-            // calendarDayControlThursday
-            // 
-            this.calendarDayControlThursday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlThursday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlThursday.Location = new System.Drawing.Point(486, 3);
-            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.Name = "calendarDayControlThursday";
-            this.calendarDayControlThursday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.TabIndex = 3;
-            // 
-            // calendarDayControlFriday
-            // 
-            this.calendarDayControlFriday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlFriday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlFriday.Location = new System.Drawing.Point(647, 3);
-            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.Name = "calendarDayControlFriday";
-            this.calendarDayControlFriday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.TabIndex = 4;
-            // 
-            // calendarDayControlSaturday
-            // 
-            this.calendarDayControlSaturday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSaturday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSaturday.Location = new System.Drawing.Point(808, 3);
-            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.Name = "calendarDayControlSaturday";
-            this.calendarDayControlSaturday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.TabIndex = 5;
-            // 
-            // calendarDayControlSunday
-            // 
-            this.calendarDayControlSunday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSunday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSunday.Location = new System.Drawing.Point(969, 3);
-            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.Name = "calendarDayControlSunday";
-            this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.TabIndex = 6;
             // 
             // tabPageStatistics
             // 
             this.tabPageStatistics.Controls.Add(this.splitContainerStatistics1);
-            this.tabPageStatistics.Location = new System.Drawing.Point(4, 25);
-            this.tabPageStatistics.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageStatistics.Location = new System.Drawing.Point(4, 22);
             this.tabPageStatistics.Name = "tabPageStatistics";
-            this.tabPageStatistics.Size = new System.Drawing.Size(1511, 509);
+            this.tabPageStatistics.Size = new System.Drawing.Size(1131, 411);
             this.tabPageStatistics.TabIndex = 2;
             this.tabPageStatistics.Text = "Statistics";
             this.tabPageStatistics.UseVisualStyleBackColor = true;
@@ -509,7 +409,6 @@
             this.splitContainerStatistics1.BackColor = System.Drawing.Color.LightGray;
             this.splitContainerStatistics1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerStatistics1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerStatistics1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainerStatistics1.Name = "splitContainerStatistics1";
             // 
             // splitContainerStatistics1.Panel1
@@ -520,17 +419,16 @@
             // splitContainerStatistics1.Panel2
             // 
             this.splitContainerStatistics1.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainerStatistics1.Panel2.Controls.Add(this.groupBoxExportData);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.label4);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.buttonStatisticsEmployee);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.comboBoxStatisticsEmployee);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.label3);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.buttonStatisticsDepartment);
             this.splitContainerStatistics1.Panel2.Controls.Add(this.comboBoxStatisticsDepartment);
-            this.splitContainerStatistics1.Panel2.Controls.Add(this.DataButton);
             this.splitContainerStatistics1.Panel2MinSize = 125;
-            this.splitContainerStatistics1.Size = new System.Drawing.Size(1511, 509);
-            this.splitContainerStatistics1.SplitterDistance = 1338;
-            this.splitContainerStatistics1.SplitterWidth = 5;
+            this.splitContainerStatistics1.Size = new System.Drawing.Size(1131, 411);
+            this.splitContainerStatistics1.SplitterDistance = 937;
             this.splitContainerStatistics1.TabIndex = 2;
             // 
             // StatisticChart
@@ -538,10 +436,10 @@
             chartArea1.Name = "ChartArea1";
             this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatisticChart.Enabled = false;
             legend1.Name = "Legend1";
             this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
-            this.StatisticChart.Margin = new System.Windows.Forms.Padding(4);
             this.StatisticChart.Name = "StatisticChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -553,7 +451,7 @@
             series1.Points.Add(dataPoint5);
             series1.Points.Add(dataPoint6);
             this.StatisticChart.Series.Add(series1);
-            this.StatisticChart.Size = new System.Drawing.Size(1338, 509);
+            this.StatisticChart.Size = new System.Drawing.Size(937, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
             // 
@@ -562,10 +460,9 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 121);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(5, 98);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 17);
+            this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Select an employee";
             // 
@@ -573,10 +470,9 @@
             // 
             this.buttonStatisticsEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStatisticsEmployee.Location = new System.Drawing.Point(7, 178);
-            this.buttonStatisticsEmployee.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStatisticsEmployee.Location = new System.Drawing.Point(5, 145);
             this.buttonStatisticsEmployee.Name = "buttonStatisticsEmployee";
-            this.buttonStatisticsEmployee.Size = new System.Drawing.Size(154, 28);
+            this.buttonStatisticsEmployee.Size = new System.Drawing.Size(179, 23);
             this.buttonStatisticsEmployee.TabIndex = 7;
             this.buttonStatisticsEmployee.Text = "Get statistics";
             this.buttonStatisticsEmployee.UseVisualStyleBackColor = true;
@@ -586,10 +482,9 @@
             this.comboBoxStatisticsEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxStatisticsEmployee.FormattingEnabled = true;
-            this.comboBoxStatisticsEmployee.Location = new System.Drawing.Point(7, 144);
-            this.comboBoxStatisticsEmployee.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxStatisticsEmployee.Location = new System.Drawing.Point(5, 117);
             this.comboBoxStatisticsEmployee.Name = "comboBoxStatisticsEmployee";
-            this.comboBoxStatisticsEmployee.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxStatisticsEmployee.Size = new System.Drawing.Size(179, 21);
             this.comboBoxStatisticsEmployee.TabIndex = 6;
             // 
             // label3
@@ -597,10 +492,9 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 11);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(5, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 17);
+            this.label3.Size = new System.Drawing.Size(102, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Select a department";
             // 
@@ -608,10 +502,9 @@
             // 
             this.buttonStatisticsDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStatisticsDepartment.Location = new System.Drawing.Point(7, 69);
-            this.buttonStatisticsDepartment.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStatisticsDepartment.Location = new System.Drawing.Point(5, 56);
             this.buttonStatisticsDepartment.Name = "buttonStatisticsDepartment";
-            this.buttonStatisticsDepartment.Size = new System.Drawing.Size(154, 28);
+            this.buttonStatisticsDepartment.Size = new System.Drawing.Size(179, 23);
             this.buttonStatisticsDepartment.TabIndex = 4;
             this.buttonStatisticsDepartment.Text = "Get statistics";
             this.buttonStatisticsDepartment.UseVisualStyleBackColor = true;
@@ -621,32 +514,18 @@
             this.comboBoxStatisticsDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxStatisticsDepartment.FormattingEnabled = true;
-            this.comboBoxStatisticsDepartment.Location = new System.Drawing.Point(7, 34);
-            this.comboBoxStatisticsDepartment.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxStatisticsDepartment.Location = new System.Drawing.Point(5, 28);
             this.comboBoxStatisticsDepartment.Name = "comboBoxStatisticsDepartment";
-            this.comboBoxStatisticsDepartment.Size = new System.Drawing.Size(153, 24);
+            this.comboBoxStatisticsDepartment.Size = new System.Drawing.Size(179, 21);
             this.comboBoxStatisticsDepartment.TabIndex = 2;
-            // 
-            // DataButton
-            // 
-            this.DataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataButton.Location = new System.Drawing.Point(61, 453);
-            this.DataButton.Margin = new System.Windows.Forms.Padding(4);
-            this.DataButton.Name = "DataButton";
-            this.DataButton.Size = new System.Drawing.Size(100, 49);
-            this.DataButton.TabIndex = 1;
-            this.DataButton.Text = "Generate Some Data";
-            this.DataButton.UseVisualStyleBackColor = true;
-            this.DataButton.Click += new System.EventHandler(this.DataButton_Click);
             // 
             // tabPageStock
             // 
             this.tabPageStock.Controls.Add(this.splitContainerStockPrimary);
-            this.tabPageStock.Location = new System.Drawing.Point(4, 25);
-            this.tabPageStock.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageStock.Location = new System.Drawing.Point(4, 22);
             this.tabPageStock.Name = "tabPageStock";
-            this.tabPageStock.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageStock.Size = new System.Drawing.Size(1511, 509);
+            this.tabPageStock.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageStock.Size = new System.Drawing.Size(1131, 411);
             this.tabPageStock.TabIndex = 1;
             this.tabPageStock.Text = "Stock";
             this.tabPageStock.UseVisualStyleBackColor = true;
@@ -655,8 +534,7 @@
             // 
             this.splitContainerStockPrimary.BackColor = System.Drawing.Color.LightGray;
             this.splitContainerStockPrimary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerStockPrimary.Location = new System.Drawing.Point(4, 4);
-            this.splitContainerStockPrimary.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainerStockPrimary.Location = new System.Drawing.Point(3, 3);
             this.splitContainerStockPrimary.Name = "splitContainerStockPrimary";
             // 
             // splitContainerStockPrimary.Panel1
@@ -669,9 +547,8 @@
             this.splitContainerStockPrimary.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainerStockPrimary.Panel2.Controls.Add(this.splitContainerStockSecondary);
             this.splitContainerStockPrimary.Panel2MinSize = 298;
-            this.splitContainerStockPrimary.Size = new System.Drawing.Size(1503, 501);
-            this.splitContainerStockPrimary.SplitterDistance = 1099;
-            this.splitContainerStockPrimary.SplitterWidth = 5;
+            this.splitContainerStockPrimary.Size = new System.Drawing.Size(1125, 405);
+            this.splitContainerStockPrimary.SplitterDistance = 822;
             this.splitContainerStockPrimary.TabIndex = 6;
             // 
             // dataGridViewStock
@@ -692,14 +569,13 @@
             this.description});
             this.dataGridViewStock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewStock.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewStock.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewStock.MultiSelect = false;
             this.dataGridViewStock.Name = "dataGridViewStock";
             this.dataGridViewStock.ReadOnly = true;
             this.dataGridViewStock.RowHeadersVisible = false;
             this.dataGridViewStock.RowHeadersWidth = 21;
             this.dataGridViewStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewStock.Size = new System.Drawing.Size(1099, 501);
+            this.dataGridViewStock.Size = new System.Drawing.Size(822, 405);
             this.dataGridViewStock.TabIndex = 0;
             // 
             // productId
@@ -787,7 +663,6 @@
             this.splitContainerStockSecondary.BackColor = System.Drawing.Color.Snow;
             this.splitContainerStockSecondary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerStockSecondary.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerStockSecondary.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainerStockSecondary.Name = "splitContainerStockSecondary";
             this.splitContainerStockSecondary.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -809,9 +684,8 @@
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.checkBoxShowInactiveItems);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockEditProduct);
             this.splitContainerStockSecondary.Panel2.Controls.Add(this.buttonStockAdd);
-            this.splitContainerStockSecondary.Size = new System.Drawing.Size(399, 501);
-            this.splitContainerStockSecondary.SplitterDistance = 105;
-            this.splitContainerStockSecondary.SplitterWidth = 5;
+            this.splitContainerStockSecondary.Size = new System.Drawing.Size(299, 405);
+            this.splitContainerStockSecondary.SplitterDistance = 85;
             this.splitContainerStockSecondary.TabIndex = 0;
             // 
             // comboBoxStockCategory
@@ -821,20 +695,18 @@
             this.comboBoxStockCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxStockCategory.Enabled = false;
             this.comboBoxStockCategory.FormattingEnabled = true;
-            this.comboBoxStockCategory.Location = new System.Drawing.Point(8, 23);
-            this.comboBoxStockCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxStockCategory.Location = new System.Drawing.Point(6, 19);
             this.comboBoxStockCategory.Name = "comboBoxStockCategory";
-            this.comboBoxStockCategory.Size = new System.Drawing.Size(382, 24);
+            this.comboBoxStockCategory.Size = new System.Drawing.Size(288, 21);
             this.comboBoxStockCategory.TabIndex = 9;
             // 
             // buttonStockCategoryRemove
             // 
             this.buttonStockCategoryRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStockCategoryRemove.Enabled = false;
-            this.buttonStockCategoryRemove.Location = new System.Drawing.Point(291, 55);
-            this.buttonStockCategoryRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStockCategoryRemove.Location = new System.Drawing.Point(218, 45);
             this.buttonStockCategoryRemove.Name = "buttonStockCategoryRemove";
-            this.buttonStockCategoryRemove.Size = new System.Drawing.Size(100, 28);
+            this.buttonStockCategoryRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonStockCategoryRemove.TabIndex = 8;
             this.buttonStockCategoryRemove.Text = "Remove";
             this.buttonStockCategoryRemove.UseVisualStyleBackColor = true;
@@ -842,10 +714,9 @@
             // buttonStockCategoryAdd
             // 
             this.buttonStockCategoryAdd.Enabled = false;
-            this.buttonStockCategoryAdd.Location = new System.Drawing.Point(8, 55);
-            this.buttonStockCategoryAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStockCategoryAdd.Location = new System.Drawing.Point(6, 45);
             this.buttonStockCategoryAdd.Name = "buttonStockCategoryAdd";
-            this.buttonStockCategoryAdd.Size = new System.Drawing.Size(100, 28);
+            this.buttonStockCategoryAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonStockCategoryAdd.TabIndex = 7;
             this.buttonStockCategoryAdd.Text = "Add";
             this.buttonStockCategoryAdd.UseVisualStyleBackColor = true;
@@ -854,29 +725,26 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Enabled = false;
-            this.label6.Location = new System.Drawing.Point(8, 4);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(6, 3);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 17);
+            this.label6.Size = new System.Drawing.Size(78, 13);
             this.label6.TabIndex = 6;
             this.label6.Text = "Category name";
             // 
             // pnlDepotWorker
             // 
             this.pnlDepotWorker.Controls.Add(this.btnAcceptRestockRequest);
-            this.pnlDepotWorker.Location = new System.Drawing.Point(199, 105);
-            this.pnlDepotWorker.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlDepotWorker.Location = new System.Drawing.Point(149, 85);
             this.pnlDepotWorker.Name = "pnlDepotWorker";
-            this.pnlDepotWorker.Size = new System.Drawing.Size(199, 54);
+            this.pnlDepotWorker.Size = new System.Drawing.Size(149, 44);
             this.pnlDepotWorker.TabIndex = 9;
             this.pnlDepotWorker.Visible = false;
             // 
             // btnAcceptRestockRequest
             // 
-            this.btnAcceptRestockRequest.Location = new System.Drawing.Point(9, 9);
-            this.btnAcceptRestockRequest.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAcceptRestockRequest.Location = new System.Drawing.Point(7, 7);
             this.btnAcceptRestockRequest.Name = "btnAcceptRestockRequest";
-            this.btnAcceptRestockRequest.Size = new System.Drawing.Size(185, 30);
+            this.btnAcceptRestockRequest.Size = new System.Drawing.Size(139, 24);
             this.btnAcceptRestockRequest.TabIndex = 0;
             this.btnAcceptRestockRequest.Text = "Accept restock request";
             this.btnAcceptRestockRequest.UseVisualStyleBackColor = true;
@@ -885,19 +753,17 @@
             // pnlSalesRepresentative
             // 
             this.pnlSalesRepresentative.Controls.Add(this.btnSendRestockRequest);
-            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 105);
-            this.pnlSalesRepresentative.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlSalesRepresentative.Location = new System.Drawing.Point(0, 85);
             this.pnlSalesRepresentative.Name = "pnlSalesRepresentative";
-            this.pnlSalesRepresentative.Size = new System.Drawing.Size(196, 54);
+            this.pnlSalesRepresentative.Size = new System.Drawing.Size(147, 44);
             this.pnlSalesRepresentative.TabIndex = 8;
             this.pnlSalesRepresentative.Visible = false;
             // 
             // btnSendRestockRequest
             // 
-            this.btnSendRestockRequest.Location = new System.Drawing.Point(3, 9);
-            this.btnSendRestockRequest.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSendRestockRequest.Location = new System.Drawing.Point(2, 7);
             this.btnSendRestockRequest.Name = "btnSendRestockRequest";
-            this.btnSendRestockRequest.Size = new System.Drawing.Size(188, 30);
+            this.btnSendRestockRequest.Size = new System.Drawing.Size(141, 24);
             this.btnSendRestockRequest.TabIndex = 0;
             this.btnSendRestockRequest.Text = "File restock request";
             this.btnSendRestockRequest.UseVisualStyleBackColor = true;
@@ -906,20 +772,18 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 6);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(6, 5);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 17);
+            this.label5.Size = new System.Drawing.Size(89, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Selected Product";
             // 
             // checkBoxShowInactiveItems
             // 
             this.checkBoxShowInactiveItems.AutoSize = true;
-            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(8, 62);
-            this.checkBoxShowInactiveItems.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBoxShowInactiveItems.Location = new System.Drawing.Point(6, 50);
             this.checkBoxShowInactiveItems.Name = "checkBoxShowInactiveItems";
-            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(175, 21);
+            this.checkBoxShowInactiveItems.Size = new System.Drawing.Size(137, 17);
             this.checkBoxShowInactiveItems.TabIndex = 5;
             this.checkBoxShowInactiveItems.Text = "Show inactive products";
             this.checkBoxShowInactiveItems.UseVisualStyleBackColor = true;
@@ -927,10 +791,9 @@
             // 
             // buttonStockEditProduct
             // 
-            this.buttonStockEditProduct.Location = new System.Drawing.Point(3, 26);
-            this.buttonStockEditProduct.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStockEditProduct.Location = new System.Drawing.Point(2, 21);
             this.buttonStockEditProduct.Name = "buttonStockEditProduct";
-            this.buttonStockEditProduct.Size = new System.Drawing.Size(188, 28);
+            this.buttonStockEditProduct.Size = new System.Drawing.Size(141, 23);
             this.buttonStockEditProduct.TabIndex = 1;
             this.buttonStockEditProduct.Text = "View/Edit selected";
             this.buttonStockEditProduct.UseVisualStyleBackColor = true;
@@ -939,10 +802,9 @@
             // buttonStockAdd
             // 
             this.buttonStockAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStockAdd.Location = new System.Drawing.Point(206, 26);
-            this.buttonStockAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonStockAdd.Location = new System.Drawing.Point(154, 21);
             this.buttonStockAdd.Name = "buttonStockAdd";
-            this.buttonStockAdd.Size = new System.Drawing.Size(189, 28);
+            this.buttonStockAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonStockAdd.TabIndex = 2;
             this.buttonStockAdd.Text = "Add Product";
             this.buttonStockAdd.UseVisualStyleBackColor = true;
@@ -951,11 +813,10 @@
             // tabPageEmployees
             // 
             this.tabPageEmployees.Controls.Add(this.splitContainerEmployeesPrimary);
-            this.tabPageEmployees.Location = new System.Drawing.Point(4, 25);
-            this.tabPageEmployees.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageEmployees.Location = new System.Drawing.Point(4, 22);
             this.tabPageEmployees.Name = "tabPageEmployees";
-            this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageEmployees.Size = new System.Drawing.Size(1511, 509);
+            this.tabPageEmployees.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageEmployees.Size = new System.Drawing.Size(1131, 411);
             this.tabPageEmployees.TabIndex = 0;
             this.tabPageEmployees.Text = "Employees";
             this.tabPageEmployees.UseVisualStyleBackColor = true;
@@ -964,8 +825,7 @@
             // 
             this.splitContainerEmployeesPrimary.BackColor = System.Drawing.Color.LightGray;
             this.splitContainerEmployeesPrimary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerEmployeesPrimary.Location = new System.Drawing.Point(4, 4);
-            this.splitContainerEmployeesPrimary.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainerEmployeesPrimary.Location = new System.Drawing.Point(3, 3);
             this.splitContainerEmployeesPrimary.Name = "splitContainerEmployeesPrimary";
             // 
             // splitContainerEmployeesPrimary.Panel1
@@ -978,9 +838,8 @@
             this.splitContainerEmployeesPrimary.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainerEmployeesPrimary.Panel2.Controls.Add(this.splitContainerEmployeesSecondary);
             this.splitContainerEmployeesPrimary.Panel2MinSize = 298;
-            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(1503, 501);
-            this.splitContainerEmployeesPrimary.SplitterDistance = 1099;
-            this.splitContainerEmployeesPrimary.SplitterWidth = 5;
+            this.splitContainerEmployeesPrimary.Size = new System.Drawing.Size(1125, 405);
+            this.splitContainerEmployeesPrimary.SplitterDistance = 822;
             this.splitContainerEmployeesPrimary.TabIndex = 0;
             // 
             // dataGridViewEmployees
@@ -999,7 +858,6 @@
             this.emailAddress});
             this.dataGridViewEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewEmployees.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewEmployees.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewEmployees.MultiSelect = false;
             this.dataGridViewEmployees.Name = "dataGridViewEmployees";
             this.dataGridViewEmployees.ReadOnly = true;
@@ -1007,7 +865,7 @@
             this.dataGridViewEmployees.RowHeadersWidth = 21;
             this.dataGridViewEmployees.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridViewEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewEmployees.Size = new System.Drawing.Size(1099, 501);
+            this.dataGridViewEmployees.Size = new System.Drawing.Size(822, 405);
             this.dataGridViewEmployees.TabIndex = 0;
             // 
             // id
@@ -1017,7 +875,7 @@
             this.id.MinimumWidth = 6;
             this.id.Name = "id";
             this.id.ReadOnly = true;
-            this.id.Width = 50;
+            this.id.Width = 43;
             // 
             // active
             // 
@@ -1083,7 +941,6 @@
             this.splitContainerEmployeesSecondary.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerEmployeesSecondary.IsSplitterFixed = true;
             this.splitContainerEmployeesSecondary.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerEmployeesSecondary.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainerEmployeesSecondary.Name = "splitContainerEmployeesSecondary";
             this.splitContainerEmployeesSecondary.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -1099,17 +956,14 @@
             // splitContainerEmployeesSecondary.Panel2
             // 
             this.splitContainerEmployeesSecondary.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.lblExportData);
-            this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.pnlExportData);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.gbManagement);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.btnClockinOut);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.labelEmployeesSelected);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesAdd);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeesRemove);
             this.splitContainerEmployeesSecondary.Panel2.Controls.Add(this.buttonEmployeeModify);
-            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(399, 501);
+            this.splitContainerEmployeesSecondary.Size = new System.Drawing.Size(299, 405);
             this.splitContainerEmployeesSecondary.SplitterDistance = 85;
-            this.splitContainerEmployeesSecondary.SplitterWidth = 5;
             this.splitContainerEmployeesSecondary.TabIndex = 0;
             // 
             // comboBoxAllDepartments
@@ -1118,19 +972,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxAllDepartments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAllDepartments.FormattingEnabled = true;
-            this.comboBoxAllDepartments.Location = new System.Drawing.Point(8, 23);
-            this.comboBoxAllDepartments.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxAllDepartments.Location = new System.Drawing.Point(6, 19);
             this.comboBoxAllDepartments.Name = "comboBoxAllDepartments";
-            this.comboBoxAllDepartments.Size = new System.Drawing.Size(382, 24);
+            this.comboBoxAllDepartments.Size = new System.Drawing.Size(288, 21);
             this.comboBoxAllDepartments.TabIndex = 5;
             // 
             // buttonEmployeesDepartmentRemove
             // 
             this.buttonEmployeesDepartmentRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(291, 55);
-            this.buttonEmployeesDepartmentRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEmployeesDepartmentRemove.Location = new System.Drawing.Point(218, 45);
             this.buttonEmployeesDepartmentRemove.Name = "buttonEmployeesDepartmentRemove";
-            this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(100, 28);
+            this.buttonEmployeesDepartmentRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentRemove.TabIndex = 3;
             this.buttonEmployeesDepartmentRemove.Text = "Remove";
             this.buttonEmployeesDepartmentRemove.UseVisualStyleBackColor = true;
@@ -1138,10 +990,9 @@
             // 
             // buttonEmployeesDepartmentAdd
             // 
-            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(8, 55);
-            this.buttonEmployeesDepartmentAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEmployeesDepartmentAdd.Location = new System.Drawing.Point(6, 45);
             this.buttonEmployeesDepartmentAdd.Name = "buttonEmployeesDepartmentAdd";
-            this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(100, 28);
+            this.buttonEmployeesDepartmentAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonEmployeesDepartmentAdd.TabIndex = 2;
             this.buttonEmployeesDepartmentAdd.Text = "Add";
             this.buttonEmployeesDepartmentAdd.UseVisualStyleBackColor = true;
@@ -1150,116 +1001,28 @@
             // labelEmployeesDepartmentName
             // 
             this.labelEmployeesDepartmentName.AutoSize = true;
-            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(8, 4);
-            this.labelEmployeesDepartmentName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelEmployeesDepartmentName.Location = new System.Drawing.Point(6, 3);
             this.labelEmployeesDepartmentName.Name = "labelEmployeesDepartmentName";
-            this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(121, 17);
+            this.labelEmployeesDepartmentName.Size = new System.Drawing.Size(91, 13);
             this.labelEmployeesDepartmentName.TabIndex = 0;
             this.labelEmployeesDepartmentName.Text = "Department name";
-            // 
-            // lblExportData
-            // 
-            this.lblExportData.AutoSize = true;
-            this.lblExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExportData.Location = new System.Drawing.Point(25, 212);
-            this.lblExportData.Name = "lblExportData";
-            this.lblExportData.Size = new System.Drawing.Size(61, 13);
-            this.lblExportData.TabIndex = 13;
-            this.lblExportData.Text = "Export data";
-            // 
-            // pnlExportData
-            // 
-            this.pnlExportData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlExportData.Controls.Add(this.label7);
-            this.pnlExportData.Controls.Add(this.btnExportData);
-            this.pnlExportData.Controls.Add(this.cmbxWeekNumber);
-            this.pnlExportData.Location = new System.Drawing.Point(19, 221);
-            this.pnlExportData.Name = "pnlExportData";
-            this.pnlExportData.Size = new System.Drawing.Size(174, 74);
-            this.pnlExportData.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 17);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Select week number:";
-            // 
-            // btnExportData
-            // 
-            this.btnExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportData.Location = new System.Drawing.Point(30, 44);
-            this.btnExportData.Name = "btnExportData";
-            this.btnExportData.Size = new System.Drawing.Size(95, 24);
-            this.btnExportData.TabIndex = 9;
-            this.btnExportData.Text = "Export data";
-            this.btnExportData.UseVisualStyleBackColor = true;
-            this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click);
-            // 
-            // cmbxWeekNumber
-            // 
-            this.cmbxWeekNumber.FormattingEnabled = true;
-            this.cmbxWeekNumber.Location = new System.Drawing.Point(118, 14);
-            this.cmbxWeekNumber.Name = "cmbxWeekNumber";
-            this.cmbxWeekNumber.Size = new System.Drawing.Size(50, 21);
-            this.cmbxWeekNumber.TabIndex = 10;
             // 
             // gbManagement
             // 
             this.gbManagement.Controls.Add(this.flowLayoutPanel2);
-            this.gbManagement.Location = new System.Drawing.Point(12, 121);
-            this.gbManagement.Margin = new System.Windows.Forms.Padding(4);
+            this.gbManagement.Location = new System.Drawing.Point(9, 98);
             this.gbManagement.Name = "gbManagement";
-            this.gbManagement.Padding = new System.Windows.Forms.Padding(4);
-            this.gbManagement.Size = new System.Drawing.Size(237, 118);
+            this.gbManagement.Size = new System.Drawing.Size(178, 96);
             this.gbManagement.TabIndex = 8;
             this.gbManagement.TabStop = false;
             this.gbManagement.Text = "Management";
             // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.checkBoxShowInactive);
-            this.flowLayoutPanel2.Controls.Add(this.buttonEditFunctionPermissions);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(8, 23);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(212, 84);
-            this.flowLayoutPanel2.TabIndex = 7;
-            // 
-            // checkBoxShowInactive
-            // 
-            this.checkBoxShowInactive.AutoSize = true;
-            this.checkBoxShowInactive.Location = new System.Drawing.Point(5, 5);
-            this.checkBoxShowInactive.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
-            this.checkBoxShowInactive.Size = new System.Drawing.Size(188, 21);
-            this.checkBoxShowInactive.TabIndex = 4;
-            this.checkBoxShowInactive.Text = "Show inactive employees";
-            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
-            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
-            // 
-            // buttonEditFunctionPermissions
-            // 
-            this.buttonEditFunctionPermissions.Location = new System.Drawing.Point(5, 34);
-            this.buttonEditFunctionPermissions.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonEditFunctionPermissions.Name = "buttonEditFunctionPermissions";
-            this.buttonEditFunctionPermissions.Size = new System.Drawing.Size(188, 28);
-            this.buttonEditFunctionPermissions.TabIndex = 5;
-            this.buttonEditFunctionPermissions.Text = "Edit function permissions";
-            this.buttonEditFunctionPermissions.UseVisualStyleBackColor = true;
-            this.buttonEditFunctionPermissions.Click += new System.EventHandler(this.buttonEditFunctionPermissions_Click);
-            // 
             // btnClockinOut
             // 
             this.btnClockinOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClockinOut.Location = new System.Drawing.Point(12, 62);
-            this.btnClockinOut.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClockinOut.Location = new System.Drawing.Point(9, 50);
             this.btnClockinOut.Name = "btnClockinOut";
-            this.btnClockinOut.Size = new System.Drawing.Size(127, 30);
+            this.btnClockinOut.Size = new System.Drawing.Size(95, 24);
             this.btnClockinOut.TabIndex = 6;
             this.btnClockinOut.Text = "Clock in/out";
             this.btnClockinOut.UseVisualStyleBackColor = true;
@@ -1268,20 +1031,18 @@
             // labelEmployeesSelected
             // 
             this.labelEmployeesSelected.AutoSize = true;
-            this.labelEmployeesSelected.Location = new System.Drawing.Point(8, 6);
-            this.labelEmployeesSelected.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelEmployeesSelected.Location = new System.Drawing.Point(6, 5);
             this.labelEmployeesSelected.Name = "labelEmployeesSelected";
-            this.labelEmployeesSelected.Size = new System.Drawing.Size(129, 17);
+            this.labelEmployeesSelected.Size = new System.Drawing.Size(98, 13);
             this.labelEmployeesSelected.TabIndex = 3;
             this.labelEmployeesSelected.Text = "Selected Employee";
             // 
             // buttonEmployeesAdd
             // 
             this.buttonEmployeesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesAdd.Location = new System.Drawing.Point(206, 26);
-            this.buttonEmployeesAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEmployeesAdd.Location = new System.Drawing.Point(154, 21);
             this.buttonEmployeesAdd.Name = "buttonEmployeesAdd";
-            this.buttonEmployeesAdd.Size = new System.Drawing.Size(189, 28);
+            this.buttonEmployeesAdd.Size = new System.Drawing.Size(142, 23);
             this.buttonEmployeesAdd.TabIndex = 2;
             this.buttonEmployeesAdd.Text = "Add new employee";
             this.buttonEmployeesAdd.UseVisualStyleBackColor = true;
@@ -1291,20 +1052,18 @@
             // 
             this.buttonEmployeesRemove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEmployeesRemove.Location = new System.Drawing.Point(4, 404);
-            this.buttonEmployeesRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEmployeesRemove.Location = new System.Drawing.Point(3, 309);
             this.buttonEmployeesRemove.Name = "buttonEmployeesRemove";
-            this.buttonEmployeesRemove.Size = new System.Drawing.Size(387, 28);
+            this.buttonEmployeesRemove.Size = new System.Drawing.Size(290, 23);
             this.buttonEmployeesRemove.TabIndex = 1;
             this.buttonEmployeesRemove.Text = "Remove selected employee";
             this.buttonEmployeesRemove.UseVisualStyleBackColor = true;
             // 
             // buttonEmployeeModify
             // 
-            this.buttonEmployeeModify.Location = new System.Drawing.Point(11, 26);
-            this.buttonEmployeeModify.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonEmployeeModify.Location = new System.Drawing.Point(8, 21);
             this.buttonEmployeeModify.Name = "buttonEmployeeModify";
-            this.buttonEmployeeModify.Size = new System.Drawing.Size(188, 28);
+            this.buttonEmployeeModify.Size = new System.Drawing.Size(141, 23);
             this.buttonEmployeeModify.TabIndex = 0;
             this.buttonEmployeeModify.Text = "View/Edit selected employee";
             this.buttonEmployeeModify.UseVisualStyleBackColor = true;
@@ -1315,168 +1074,233 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPageRequests);
             this.tabControl1.Controls.Add(this.tabPageEmployees);
             this.tabControl1.Controls.Add(this.tabPageStock);
             this.tabControl1.Controls.Add(this.tabPageStatistics);
             this.tabControl1.Controls.Add(this.tabPageScheduling);
-            this.tabControl1.Location = new System.Drawing.Point(13, 16);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabControl1.Controls.Add(this.tabPageRequests);
+            this.tabControl1.Location = new System.Drawing.Point(10, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1519, 538);
+            this.tabControl1.Size = new System.Drawing.Size(1139, 437);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageRequests
             // 
-            this.tabPageRequests.Controls.Add(this.flowLayoutPanel4);
-            this.tabPageRequests.Controls.Add(this.flowLayoutPanel3);
+            this.tabPageRequests.Controls.Add(this.btnPermit);
+            this.tabPageRequests.Controls.Add(this.btnTurnDown);
             this.tabPageRequests.Controls.Add(this.lbxRequests);
-            this.tabPageRequests.Location = new System.Drawing.Point(4, 25);
+            this.tabPageRequests.Location = new System.Drawing.Point(4, 22);
+            this.tabPageRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPageRequests.Name = "tabPageRequests";
-            this.tabPageRequests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRequests.Size = new System.Drawing.Size(1511, 509);
+            this.tabPageRequests.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPageRequests.Size = new System.Drawing.Size(1131, 411);
             this.tabPageRequests.TabIndex = 4;
             this.tabPageRequests.Text = "Requests";
             this.tabPageRequests.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.btnPermit);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(1190, 32);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(115, 43);
-            this.flowLayoutPanel4.TabIndex = 2;
-            // 
             // btnPermit
             // 
-            this.btnPermit.BackColor = System.Drawing.Color.Turquoise;
-            this.btnPermit.Location = new System.Drawing.Point(3, 3);
+            this.btnPermit.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPermit.Location = new System.Drawing.Point(933, 65);
+            this.btnPermit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPermit.Name = "btnPermit";
-            this.btnPermit.Size = new System.Drawing.Size(110, 36);
+            this.btnPermit.Size = new System.Drawing.Size(82, 29);
             this.btnPermit.TabIndex = 0;
-            this.btnPermit.Text = "Permit";
+            this.btnPermit.Text = "Approve";
             this.btnPermit.UseVisualStyleBackColor = false;
             this.btnPermit.Click += new System.EventHandler(this.btnPermit_Click);
             // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.btnTurnDown);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1324, 32);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(115, 43);
-            this.flowLayoutPanel3.TabIndex = 1;
-            // 
             // btnTurnDown
             // 
-            this.btnTurnDown.BackColor = System.Drawing.Color.Red;
-            this.btnTurnDown.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnTurnDown.Location = new System.Drawing.Point(3, 3);
+            this.btnTurnDown.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTurnDown.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnTurnDown.Location = new System.Drawing.Point(933, 161);
+            this.btnTurnDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnTurnDown.Name = "btnTurnDown";
-            this.btnTurnDown.Size = new System.Drawing.Size(110, 36);
+            this.btnTurnDown.Size = new System.Drawing.Size(82, 29);
             this.btnTurnDown.TabIndex = 0;
-            this.btnTurnDown.Text = "Turn Down";
+            this.btnTurnDown.Text = "Deny";
             this.btnTurnDown.UseVisualStyleBackColor = false;
             this.btnTurnDown.Click += new System.EventHandler(this.btnTurnDown_Click);
             // 
             // lbxRequests
             // 
+            this.lbxRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxRequests.FormattingEnabled = true;
-            this.lbxRequests.ItemHeight = 16;
-            this.lbxRequests.Location = new System.Drawing.Point(4, 4);
+            this.lbxRequests.ItemHeight = 18;
+            this.lbxRequests.Location = new System.Drawing.Point(3, 3);
+            this.lbxRequests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbxRequests.Name = "lbxRequests";
-            this.lbxRequests.Size = new System.Drawing.Size(1099, 500);
+            this.lbxRequests.Size = new System.Drawing.Size(825, 400);
             this.lbxRequests.TabIndex = 0;
+            // 
+            // buttonEditFunctionPermissions
+            // 
+            this.buttonEditFunctionPermissions.Location = new System.Drawing.Point(4, 27);
+            this.buttonEditFunctionPermissions.Name = "buttonEditFunctionPermissions";
+            this.buttonEditFunctionPermissions.Size = new System.Drawing.Size(141, 23);
+            this.buttonEditFunctionPermissions.TabIndex = 5;
+            this.buttonEditFunctionPermissions.Text = "Edit function permissions";
+            this.buttonEditFunctionPermissions.UseVisualStyleBackColor = true;
+            this.buttonEditFunctionPermissions.Click += new System.EventHandler(this.buttonEditFunctionPermissions_Click);
+            // 
+            // checkBoxShowInactive
+            // 
+            this.checkBoxShowInactive.AutoSize = true;
+            this.checkBoxShowInactive.Location = new System.Drawing.Point(4, 4);
+            this.checkBoxShowInactive.Name = "checkBoxShowInactive";
+            this.checkBoxShowInactive.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxShowInactive.TabIndex = 4;
+            this.checkBoxShowInactive.Text = "Show inactive employees";
+            this.checkBoxShowInactive.UseVisualStyleBackColor = true;
+            this.checkBoxShowInactive.CheckedChanged += new System.EventHandler(this.checkBoxShowInactive_CheckedChanged);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel2.Controls.Add(this.checkBoxShowInactive);
+            this.flowLayoutPanel2.Controls.Add(this.buttonEditFunctionPermissions);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(6, 19);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(1);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(159, 68);
+            this.flowLayoutPanel2.TabIndex = 7;
+            // 
+            // groupBoxExportData
+            // 
+            this.groupBoxExportData.Controls.Add(this.flowLayoutPanel3);
+            this.groupBoxExportData.Location = new System.Drawing.Point(5, 193);
+            this.groupBoxExportData.Name = "groupBoxExportData";
+            this.groupBoxExportData.Size = new System.Drawing.Size(178, 81);
+            this.groupBoxExportData.TabIndex = 15;
+            this.groupBoxExportData.TabStop = false;
+            this.groupBoxExportData.Text = "Export Data";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.label7);
+            this.flowLayoutPanel3.Controls.Add(this.cmbxWeekNumber);
+            this.flowLayoutPanel3.Controls.Add(this.btnExportData);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(172, 62);
+            this.flowLayoutPanel3.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 4);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Select week number:";
+            // 
+            // cmbxWeekNumber
+            // 
+            this.cmbxWeekNumber.FormattingEnabled = true;
+            this.cmbxWeekNumber.Location = new System.Drawing.Point(117, 6);
+            this.cmbxWeekNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbxWeekNumber.Name = "cmbxWeekNumber";
+            this.cmbxWeekNumber.Size = new System.Drawing.Size(38, 21);
+            this.cmbxWeekNumber.TabIndex = 10;
+            // 
+            // btnExportData
+            // 
+            this.btnExportData.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportData.Location = new System.Drawing.Point(6, 31);
+            this.btnExportData.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExportData.Name = "btnExportData";
+            this.btnExportData.Size = new System.Drawing.Size(71, 20);
+            this.btnExportData.TabIndex = 9;
+            this.btnExportData.Text = "Export data";
+            this.btnExportData.UseVisualStyleBackColor = true;
             // 
             // calendarDayControlMonday
             // 
             this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlMonday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlMonday.Location = new System.Drawing.Point(5, 5);
-            this.calendarDayControlMonday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlMonday.Location = new System.Drawing.Point(3, 3);
+            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlMonday.Name = "calendarDayControlMonday";
-            this.calendarDayControlMonday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlMonday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlMonday.TabIndex = 0;
             // 
             // calendarDayControlTuesday
             // 
             this.calendarDayControlTuesday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlTuesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlTuesday.Location = new System.Drawing.Point(221, 5);
-            this.calendarDayControlTuesday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlTuesday.Location = new System.Drawing.Point(164, 3);
+            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlTuesday.Name = "calendarDayControlTuesday";
-            this.calendarDayControlTuesday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlTuesday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlTuesday.TabIndex = 1;
             // 
             // calendarDayControlWednesday
             // 
             this.calendarDayControlWednesday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlWednesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlWednesday.Location = new System.Drawing.Point(437, 5);
-            this.calendarDayControlWednesday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlWednesday.Location = new System.Drawing.Point(325, 3);
+            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlWednesday.Name = "calendarDayControlWednesday";
-            this.calendarDayControlWednesday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlWednesday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlWednesday.TabIndex = 2;
             // 
             // calendarDayControlThursday
             // 
             this.calendarDayControlThursday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlThursday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlThursday.Location = new System.Drawing.Point(653, 5);
-            this.calendarDayControlThursday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlThursday.Location = new System.Drawing.Point(486, 3);
+            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlThursday.Name = "calendarDayControlThursday";
-            this.calendarDayControlThursday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlThursday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlThursday.TabIndex = 3;
             // 
             // calendarDayControlFriday
             // 
             this.calendarDayControlFriday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlFriday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlFriday.Location = new System.Drawing.Point(869, 5);
-            this.calendarDayControlFriday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlFriday.Location = new System.Drawing.Point(647, 3);
+            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlFriday.Name = "calendarDayControlFriday";
-            this.calendarDayControlFriday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlFriday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlFriday.TabIndex = 4;
             // 
             // calendarDayControlSaturday
             // 
             this.calendarDayControlSaturday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlSaturday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSaturday.Location = new System.Drawing.Point(1085, 5);
-            this.calendarDayControlSaturday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlSaturday.Location = new System.Drawing.Point(808, 3);
+            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlSaturday.Name = "calendarDayControlSaturday";
-            this.calendarDayControlSaturday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlSaturday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSaturday.TabIndex = 5;
             // 
             // calendarDayControlSunday
             // 
             this.calendarDayControlSunday.BackColor = System.Drawing.SystemColors.Window;
             this.calendarDayControlSunday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSunday.Location = new System.Drawing.Point(1301, 5);
-            this.calendarDayControlSunday.Margin = new System.Windows.Forms.Padding(5);
-            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(206, 283);
+            this.calendarDayControlSunday.Location = new System.Drawing.Point(969, 3);
+            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.Name = "calendarDayControlSunday";
-            this.calendarDayControlSunday.Size = new System.Drawing.Size(206, 283);
+            this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
             this.calendarDayControlSunday.TabIndex = 6;
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1545, 567);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1159, 461);
             this.Controls.Add(this.buttonReloadDatabaseEntries);
             this.Controls.Add(this.labelWelcomeText);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.tabControl1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(794, 481);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Media Bazaar Management System";
@@ -1523,15 +1347,14 @@
             this.splitContainerEmployeesSecondary.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerEmployeesSecondary)).EndInit();
             this.splitContainerEmployeesSecondary.ResumeLayout(false);
-            this.pnlExportData.ResumeLayout(false);
-            this.pnlExportData.PerformLayout();
             this.gbManagement.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPageRequests.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
+            this.groupBoxExportData.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1574,7 +1397,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonStatisticsDepartment;
         private System.Windows.Forms.ComboBox comboBoxStatisticsDepartment;
-        private System.Windows.Forms.Button DataButton;
         private System.Windows.Forms.TabPage tabPageStock;
         private System.Windows.Forms.SplitContainer splitContainerStockPrimary;
         private System.Windows.Forms.DataGridView dataGridViewStock;
@@ -1610,9 +1432,6 @@
         private System.Windows.Forms.Button buttonEmployeesDepartmentAdd;
         private System.Windows.Forms.Label labelEmployeesDepartmentName;
         private System.Windows.Forms.GroupBox gbManagement;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.CheckBox checkBoxShowInactive;
-        private System.Windows.Forms.Button buttonEditFunctionPermissions;
         private System.Windows.Forms.Button btnClockinOut;
         private System.Windows.Forms.Label labelEmployeesSelected;
         private System.Windows.Forms.Button buttonEmployeesAdd;
@@ -1621,11 +1440,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button buttonAutomaticScheduling;
         private System.Windows.Forms.ProgressBar progressBarSchedulingTime;
-        private System.Windows.Forms.Button btnExportData;
-        private System.Windows.Forms.Label lblExportData;
-        private System.Windows.Forms.Panel pnlExportData;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cmbxWeekNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn active;
         private System.Windows.Forms.DataGridViewTextBoxColumn Function;
@@ -1636,10 +1450,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn emailAddress;
         private System.Windows.Forms.TabPage tabPageRequests;
         private System.Windows.Forms.ListBox lbxRequests;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Button btnTurnDown;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.Button btnPermit;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.CheckBox checkBoxShowInactive;
+        private System.Windows.Forms.Button buttonEditFunctionPermissions;
+        private System.Windows.Forms.GroupBox groupBoxExportData;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbxWeekNumber;
+        private System.Windows.Forms.Button btnExportData;
     }
 }
 
