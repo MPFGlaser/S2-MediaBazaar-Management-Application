@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem.Forms
 {
     public partial class ProductRestockDetailsWindow : Form
     {
+        private bool editing = false;
         private int editId;
         private int quantity;
         private int userid;
@@ -19,9 +27,10 @@ namespace MediaBazaar_ManagementSystem.Forms
         public void AddItemData(Item item, int userId)
         {
             // Sets the form title to indicate which item is being edited
-            Text = "Viewing/editing " + item.Brand + " " + item.Name;
+            this.Text = "Viewing/editing " + item.Brand + " " + item.Name;
 
             // Sets some editing-specific variables to the right values
+            editing = true;
             editId = item.Id;
             quantity = Convert.ToInt32(nudqRestockQuantity.Value);
             userid = userId;
@@ -38,7 +47,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         {
             quantity = Convert.ToInt32(nudqRestockQuantity.Value);
             itemStorage.SendStockRequest(userid, editId, quantity);
-            Close();
+            this.Close();
         }
     }
 }

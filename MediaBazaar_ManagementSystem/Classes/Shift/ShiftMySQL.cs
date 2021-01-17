@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -27,7 +28,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Assign(int shiftId, int employeeId, int departmentId)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             String query = "INSERT INTO working_employees VALUES ((SELECT id FROM shifts where id = @shiftId), @employeeId, @departmentId)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -68,7 +69,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Clear(int shiftId)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             String query = "DELETE FROM working_employees WHERE shiftId = @shiftId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -271,41 +272,41 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-            if (allshifts.Count > 0)
-                foreach (Shift s in allshifts)
-                {
-                    string sql = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId=@shiftId;";
-                    try
+            if (allshifts.Count>0)
+            foreach (Shift s in allshifts)
+            {
+                string sql = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId=@shiftId;";
+                try
+                { 
+                    connection.Open();
+                    MySqlCommand cmd2 = new MySqlCommand(sql, connection);
+                    cmd2.Parameters.AddWithValue("@id", id);
+                    cmd2.Parameters.AddWithValue("@shiftId", s.Id);
+                    MySqlDataReader reader2 = cmd2.ExecuteReader();
+                    while (reader2.Read())
                     {
-                        connection.Open();
-                        MySqlCommand cmd2 = new MySqlCommand(sql, connection);
-                        cmd2.Parameters.AddWithValue("@id", id);
-                        cmd2.Parameters.AddWithValue("@shiftId", s.Id);
-                        MySqlDataReader reader2 = cmd2.ExecuteReader();
-                        while (reader2.Read())
-                        {
-                            outputs.Add(s);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ErrorMessages.Shift(ex);
-                    }
-                    finally
-                    {
-                        connection.Close();
+                        outputs.Add(s);
                     }
                 }
+                catch (Exception ex)
+                {
+                    ErrorMessages.Shift(ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
             return outputs;
         }
 
-        /// <summary>
-        /// Gets a list of employees within a specified department working the specified shift.
-        /// </summary>
-        /// <param name="shiftId">The shift identifier.</param>
-        /// <param name="departmentId">The department identifier.</param>
-        /// <returns>A list of employees within one department that works the specified shift.</returns>
-        public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
+            /// <summary>
+            /// Gets a list of employees within a specified department working the specified shift.
+            /// </summary>
+            /// <param name="shiftId">The shift identifier.</param>
+            /// <param name="departmentId">The department identifier.</param>
+            /// <returns>A list of employees within one department that works the specified shift.</returns>
+            public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
         {
             List<int> employeeIds = new List<int>();
             List<Employee> output = new List<Employee>();
@@ -421,7 +422,7 @@ namespace MediaBazaar_ManagementSystem
         public bool AddCapacityForDepartment(int shiftId, int departmentId, int capacity)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             String query = "INSERT INTO capacity_per_department VALUES (@shiftId, @departmentId, @capacity)";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -452,7 +453,7 @@ namespace MediaBazaar_ManagementSystem
         public bool UpdateCapacityPerDepartment(int shiftId, int departmentId, int capacity)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             String query = "UPDATE capacity_per_department SET capacity = @capacity WHERE shiftId = @shiftId AND departmentId = @departmentId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -576,7 +577,7 @@ namespace MediaBazaar_ManagementSystem
         public bool Update(Shift input)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             string dateSql = input.Date.ToString("yyyy-MM-dd");
 
@@ -592,7 +593,7 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Open();
                 rowsAffected = command.ExecuteNonQuery();
-                if (rowsAffected > 0)
+                if(rowsAffected > 0)
                 {
                     success = true;
                 }
@@ -617,7 +618,7 @@ namespace MediaBazaar_ManagementSystem
         public void CreateAttendance(int employeeId, int shiftId, string clockin)
         {
             string sql = "INSERT INTO employee_attendance (employeeid, shiftid, clockin) VALUES (@employeeId, @shiftId, @clockin);";
-
+            
             try
             {
                 connection.Open();
@@ -709,7 +710,7 @@ namespace MediaBazaar_ManagementSystem
             return appearance;
         }
 
-        public string GetClockInAttendance(int id)
+        public string GetClockInAttendance (int id)
         {
             string date = "";
             try
@@ -746,7 +747,7 @@ namespace MediaBazaar_ManagementSystem
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader[0] != null) date = reader[0].ToString();
+                    if (reader[0]!=null) date = reader[0].ToString();
                 }
             }
             catch (Exception ex)
@@ -797,7 +798,7 @@ namespace MediaBazaar_ManagementSystem
         public bool ClearDept(int shiftId, int departmentId)
         {
             bool success = false;
-            int rowsAffected;
+            int rowsAffected = 0;
 
             String query = "DELETE FROM working_employees WHERE shiftId = @shiftId AND departmentId = @departmentId";
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -834,7 +835,7 @@ namespace MediaBazaar_ManagementSystem
         {
             List<MySqlCommand> allCommands = new List<MySqlCommand>();
 
-            foreach (WorkingEmployee we in employeesToSchedule)
+            foreach(WorkingEmployee we in employeesToSchedule)
             {
                 String query = "INSERT INTO working_employees VALUES (@shiftId, @employeeId, @departmentId);";
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -847,7 +848,7 @@ namespace MediaBazaar_ManagementSystem
             try
             {
                 connection.Open();
-                foreach (MySqlCommand command in allCommands)
+                foreach(MySqlCommand command in allCommands)
                 {
                     command.ExecuteNonQuery();
                 }

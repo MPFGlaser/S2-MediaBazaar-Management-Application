@@ -110,7 +110,7 @@ namespace MediaBazaar_ManagementSystem
                         if (name != "id" && name != "function")
                         {
                             bool value = Convert.ToBoolean(reader.GetValue(i));
-                            if (value)
+                            if (value == true)
                             {
                                 output.Add(name);
                             }

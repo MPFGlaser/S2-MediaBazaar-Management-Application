@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -31,7 +32,7 @@ namespace MediaBazaar_ManagementSystem
 
         public Item Item
         {
-            get { return item; }
+            get { return this.item; }
         }
 
         /// <summary>
@@ -111,7 +112,7 @@ namespace MediaBazaar_ManagementSystem
         public void AddItemData(Item item)
         {
             // Sets the form title to indicate which item is being edited
-            Text = "Viewing/editing " + item.Brand + " " + item.Name;
+            this.Text = "Viewing/editing " + item.Brand + " " + item.Name;
 
             // Sets some editing-specific variables to the right values
             editing = true;
@@ -135,10 +136,10 @@ namespace MediaBazaar_ManagementSystem
         public int GetDepartmentIndex(int departmentId)
         {
             int index = -1, count = 0;
-            foreach (dynamic dynamicDepartment in comboBoxSelectDepartment.Items)
+            foreach(dynamic dynamicDepartment in comboBoxSelectDepartment.Items)
             {
                 Department dep = (dynamicDepartment).Department;
-                if (dep.Id == departmentId)
+                if(dep.Id == departmentId)
                 {
                     index = count;
                 }
@@ -155,6 +156,11 @@ namespace MediaBazaar_ManagementSystem
         {
             // Resets the warning colour of all input controls
             ResetBoxColors();
+
+            // All the regex expressions used in this form
+            Regex checkStandardInput = new Regex(@"^[^\s].*");
+            Regex checkCategory = new Regex(@"^[a-zA-Z\s]+$");
+            Regex checkCode = new Regex(@"^[0-9]*\d{4,15}$");
 
             // The department selected by the user
             dynamic departmentDynamic = comboBoxSelectDepartment.SelectedItem;
@@ -173,22 +179,22 @@ namespace MediaBazaar_ManagementSystem
 
             // In this wall of if statements all regex expressions are checked
             // When a check fails, the background of that specific input control is changed to red to inform the user something's wrong
-            if (!CheckValidity.StandardInput(name))
+            if (!checkStandardInput.IsMatch(name))
             {
                 allCorrect = false;
                 textBoxName.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.StandardInput(brand))
+            if (!checkStandardInput.IsMatch(brand))
             {
                 allCorrect = false;
                 textBoxBrand.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Category(category))
+            if (!checkCategory.IsMatch(category))
             {
                 allCorrect = false;
                 textBoxCategory.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.ProductCode(textBoxCode.Text))
+            if (!checkCode.IsMatch(textBoxCode.Text))
             {
                 allCorrect = false;
                 textBoxCode.BackColor = Color.LightCoral;
@@ -221,7 +227,7 @@ namespace MediaBazaar_ManagementSystem
 
                 if (success)
                 {
-                    DialogResult = DialogResult.OK;
+                    this.DialogResult = DialogResult.OK;
                 }
             }
         }
@@ -249,7 +255,7 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonPDWCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
         #endregion
     }

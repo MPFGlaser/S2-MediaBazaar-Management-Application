@@ -5,15 +5,15 @@ namespace MediaBazaar_ManagementSystem
 {
     public static class ErrorMessages
     {
-        private static readonly string fileNotFound = Properties.Resources.fileNotFound;
-        private static readonly string readError = Properties.Resources.readError;
-        private static readonly string createError = Properties.Resources.createError;
-        private static readonly string genericError = Properties.Resources.genericError;
-        private static readonly string retrieveEmployeeError = Properties.Resources.retrieveEmployeeError;
-        private static readonly string retrieveItemError = Properties.Resources.retrieveItemError;
-        private static readonly string loadShiftError = Properties.Resources.loadShiftError;
-        private static readonly string informationInvalidError = Properties.Resources.informationInvalidError;
-        private static readonly string databaseSaveError = Properties.Resources.databaseSaveError;
+        private static string fileNotFound = Properties.Resources.fileNotFound;
+        private static string readError = Properties.Resources.readError;
+        private static string createError = Properties.Resources.createError;
+        private static string genericError = Properties.Resources.genericError;
+        private static string retrieveEmployeeError = Properties.Resources.retrieveEmployeeError;
+        private static string retrieveItemError = Properties.Resources.retrieveItemError;
+        private static string loadShiftError = Properties.Resources.loadShiftError;
+        private static string informationInvalidError = Properties.Resources.informationInvalidError;
+        private static string databaseSaveError = Properties.Resources.databaseSaveError;
 
         private static void Show(string errorMessage)
         {
@@ -54,7 +54,7 @@ namespace MediaBazaar_ManagementSystem
         {
             Show(retrieveItemError, e);
         }
-
+        
         public static void Shift(Exception e)
         {
             Show(loadShiftError, e);

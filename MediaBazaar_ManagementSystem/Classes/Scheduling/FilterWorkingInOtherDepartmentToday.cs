@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -19,7 +21,7 @@ namespace MediaBazaar_ManagementSystem
 
             // Removes all entries from workingEmployees that don't relate to today.
             List<WorkingEmployee> relevantWorkingEmployees = new List<WorkingEmployee>(workingEmployees);
-            relevantWorkingEmployees.RemoveAll(workingEmployee =>
+            relevantWorkingEmployees.RemoveAll(workingEmployee => 
             workingEmployee.ShiftId != shiftsToday[0].Id &&
             workingEmployee.ShiftId != shiftsToday[1].Id &&
             workingEmployee.ShiftId != shiftsToday[2].Id);
@@ -31,13 +33,16 @@ namespace MediaBazaar_ManagementSystem
                 bool scheduledInOtherDepartment = false;
 
                 // Goes through each workingEmployee entry.
-                foreach (WorkingEmployee workingEmployee in relevantWorkingEmployees)
+                foreach(WorkingEmployee workingEmployee in relevantWorkingEmployees)
                 {
                     // Looks for workingEmployee entry with the same employeeId as the employee.
-                    // Checks if a departmentId shows up that's different from the one supplied to the filter.
-                    if (workingEmployee.EmployeeId == employee.Id && workingEmployee.DepartmentId != departmentId)
+                    if(workingEmployee.EmployeeId == employee.Id)
                     {
-                        scheduledInOtherDepartment = true;
+                        // Checks if a departmentId shows up that's different from the one supplied to the filter.
+                        if(workingEmployee.DepartmentId != departmentId)
+                        {
+                            scheduledInOtherDepartment = true;
+                        }
                     }
                 }
 

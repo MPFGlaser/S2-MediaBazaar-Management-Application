@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem.Forms
@@ -14,7 +19,6 @@ namespace MediaBazaar_ManagementSystem.Forms
         List<int> initialShiftIds = new List<int>();
         int currentDepartmentId;
         bool changesMade = false, autoChanged = false;
-        List<Department> allDepartments = new List<Department>();
         private Dictionary<int, Dictionary<int, int>> allDepartmentCapacityInWeek = new Dictionary<int, Dictionary<int, int>>(), valuesToSave = new Dictionary<int, Dictionary<int, int>>();
 
         public WeekShiftsCapacityEditor(List<Shift> weekShifts, List<DateTime> weekdays, int currentDepartmentId)
@@ -27,8 +31,9 @@ namespace MediaBazaar_ManagementSystem.Forms
             LoadAllDepartments(currentDepartmentId);
             SetupGroupboxTitles();
             SetupNumericUpDowns();
+            CreateMissingShifts();
 
-            Text = $"Changing capacity of shifts in the week of Monday { weekdays[1].ToString("d") }";
+            this.Text = $"Changing capacity of shifts in the week of Monday { weekdays[1].ToString("d") }";
         }
 
         /// <summary>
@@ -40,17 +45,17 @@ namespace MediaBazaar_ManagementSystem.Forms
             shiftStorage = new ShiftMySQL();
             Dictionary<int, Dictionary<int, int>> weekDepartments = new Dictionary<int, Dictionary<int, int>>();
 
-            foreach (Shift s in weekShifts)
+            foreach(Shift s in weekShifts)
             {
                 Dictionary<int, int> temp = shiftStorage.GetCapacityPerDepartment(s.Id);
-                if (temp.Any())
+                if(temp.Count() > 0)
                 {
                     weekDepartments.Add(s.Id, temp);
-                    initialShiftIds.Add(s.Id);
+                    this.initialShiftIds.Add(s.Id);
                 }
             }
 
-            allDepartmentCapacityInWeek = weekDepartments;
+            this.allDepartmentCapacityInWeek = weekDepartments;
         }
 
         /// <summary>
@@ -60,19 +65,19 @@ namespace MediaBazaar_ManagementSystem.Forms
         private void LoadAllDepartments(int departmentId)
         {
             departmentStorage = new DepartmentMySQL();
-            allDepartments = departmentStorage.GetAll();
+            List<Department> allDepartments = departmentStorage.GetAll();
 
-            foreach (Department d in allDepartments)
+            foreach(Department d in allDepartments)
             {
                 comboBoxSelectDepartment.DisplayMember = "Text";
                 comboBoxSelectDepartment.ValueMember = "Department";
                 comboBoxSelectDepartment.Items.Add(new { Text = d.Name, Department = d });
             }
 
-            foreach (dynamic dynamicDep in comboBoxSelectDepartment.Items)
+            foreach(dynamic dynamicDep in comboBoxSelectDepartment.Items)
             {
                 Department dep = dynamicDep.Department;
-                if (dep.Id == departmentId)
+                if(dep.Id == departmentId)
                 {
                     comboBoxSelectDepartment.SelectedItem = dynamicDep;
                 }
@@ -91,6 +96,53 @@ namespace MediaBazaar_ManagementSystem.Forms
             groupBoxFriday.Text = "Friday " + weekdays[4].ToString("dd/MM/yyyy");
             groupBoxSaturday.Text = "Saturday " + weekdays[5].ToString("dd/MM/yyyy");
             groupBoxSunday.Text = "Sunday " + weekdays[6].ToString("dd/MM/yyyy");
+        }
+
+        /// <summary>
+        /// Creates the missing shifts and sets shift capacity for each department to 0 for these new shifts.
+        /// </summary>
+        private void CreateMissingShifts()
+        {
+            /*shiftStorage = new ShiftMySQL();
+            List<Shift> tempNewShifts = new List<Shift>();
+
+            foreach(DateTime date in weekdays)
+            {
+                if(weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Morning) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Morning, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Morning, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Afternoon) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Afternoon, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Afternoon, 0);
+                    tempNewShifts.Add(s2);
+                }
+
+                if (weekShifts.FirstOrDefault(x => x.Date == date && x.ShiftTime == ShiftTime.Evening) == null)
+                {
+                    Shift s = new Shift(0, date, ShiftTime.Evening, 0);
+                    int newId = shiftStorage.Create(s);
+                    Shift s2 = new Shift(newId, date, ShiftTime.Evening, 0);
+                    tempNewShifts.Add(s2);
+                }
+            }
+
+            foreach (Shift s in tempNewShifts)
+            {
+                foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
+                {
+                    Department dep = depDynamic.Department;
+                
+                        shiftStorage.AddCapacityForDepartment(s.Id, dep.Id, 0);
+                }
+                weekShifts.Add(s);
+            }*/
         }
 
         /// <summary>
@@ -118,9 +170,9 @@ namespace MediaBazaar_ManagementSystem.Forms
                             {
                                 Dictionary<int, int> temp = new Dictionary<int, int>();
                                 temp.Add(currentDepartmentId, valuesToSave[s.Id][currentDepartmentId]);
-                                allDepartmentCapacityInWeek.Add(s.Id, temp);
+                                allDepartmentCapacityInWeek.Add(s.Id,temp);
                             }
-
+                            
                         }
                     }
                 }
@@ -140,7 +192,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 foreach (dynamic depDynamic in comboBoxSelectDepartment.Items)
                 {
                     Department dep = depDynamic.Department;
-                    if (dep.Id == currentDepartmentId)
+                    if(dep.Id == currentDepartmentId)
                     {
                         departmentCapacity = new Dictionary<int, int>();
                         if (s.Date == weekdays[0])
@@ -257,36 +309,8 @@ namespace MediaBazaar_ManagementSystem.Forms
                         output.Add(s.Id, departmentCapacity);
                     }
                 }
-
+                
             }
-
-            return output;
-        }
-
-        private List<(int shiftId, int departmentId, int capacity)> CreateInheritedCapacitiesList(List<Shift> shiftsPreviousWeek, List<(int shiftId, int departmentId, int capacity)> departmentInfoPreviousWeek)
-        {
-            List<(int shiftId, int departmentId, int capacity)> output = new List<(int shiftId, int departmentId, int capacity)>();
-            int previousShiftId = 0;
-
-            foreach (Shift s in weekShifts)
-            {
-                foreach (Shift sp in shiftsPreviousWeek)
-                {
-                    if (sp.Date == s.Date.AddDays(-7) && sp.ShiftTime == s.ShiftTime)
-                    {
-                        previousShiftId = sp.Id;
-                    }
-                }
-
-                foreach ((int shiftId, int departmentId, int capacity) data in departmentInfoPreviousWeek)
-                {
-                    if (data.shiftId == previousShiftId)
-                    {
-                        output.Add((s.Id, data.departmentId, data.capacity));
-                    }
-                }
-            }
-
 
             return output;
         }
@@ -312,7 +336,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                         {
                             int capacity = temp[dep.Id];
                             bool shiftUpdateSucceeded = false;
-                            while (!shiftUpdateSucceeded)
+                            while (shiftUpdateSucceeded == false)
                             {
                                 shiftUpdateSucceeded = shiftStorage.UpdateCapacityPerDepartment(s.Id, dep.Id, capacity);
                             }
@@ -320,13 +344,13 @@ namespace MediaBazaar_ManagementSystem.Forms
                     }
                 }
             }
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         /// <summary>
@@ -347,35 +371,6 @@ namespace MediaBazaar_ManagementSystem.Forms
             SetAllUpdownsToZero();
             SetupNumericUpDowns();
             autoChanged = false;
-        }
-
-        private void buttonInheritCapacity_Click(object sender, EventArgs e)
-        {
-            List<(int shiftId, int departmentId, int capacity)> inheritedShifts;
-
-            List<Shift> shiftsPreviousWeek = shiftStorage.GetWeek(weekdays[0].AddDays(-7), weekdays[6].AddDays(-7));
-
-            List<int> shiftIdsPreviousWeek = new List<int>();
-
-            foreach (Shift s in shiftsPreviousWeek)
-            {
-                shiftIdsPreviousWeek.Add(s.Id);
-            }
-
-            List<(int shiftId, int departmentId, int capacity)> departmentInfo = departmentStorage.GetCapacityForDepartmentsInCertainShifts(shiftIdsPreviousWeek);
-
-            if (departmentInfo.Count == (21 * allDepartments.Count))
-            {
-                inheritedShifts = CreateInheritedCapacitiesList(shiftsPreviousWeek, departmentInfo);
-
-                departmentStorage.UpdateCapacityForDepartmentList(inheritedShifts);
-                MessageBox.Show("The capacities of the previous week have been set for this week");
-                DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Not all capacities were set, therefore none are set now");
-            }
         }
         #endregion
 
@@ -702,7 +697,7 @@ namespace MediaBazaar_ManagementSystem.Forms
         /// </summary>
         private void numericUpDownMondayMorning_ValueChanged(object sender, EventArgs e)
         {
-            if (!autoChanged)
+            if(!autoChanged)
                 changesMade = true;
         }
 
