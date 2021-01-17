@@ -724,6 +724,7 @@ namespace MediaBazaar_ManagementSystem
 
                 Refresh();
             }
+
             comboBoxStatisticsEmployee.SelectedIndex = -1;
         }
         private void GenerateStaticsForDepartment()
@@ -771,6 +772,7 @@ namespace MediaBazaar_ManagementSystem
 
                 Refresh();
             }
+
             comboBoxStatisticsDepartment.SelectedIndex = -1;
         }
         #endregion
