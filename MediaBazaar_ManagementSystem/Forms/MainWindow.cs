@@ -1,3 +1,6 @@
+using MediaBazaar_ManagementSystem.Classes;
+using MediaBazaar_ManagementSystem.Forms;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -23,6 +26,8 @@ namespace MediaBazaar_ManagementSystem
         List<DateTime> weekDays = new List<DateTime>();
         List<Employee> allEmployees = new List<Employee>();
         List<Shift> allWeekShifts = new List<Shift>();
+        List<DateTime> weekDaysForExport = new List<DateTime>();
+        List<Shift> allWeekShiftsForExport = new List<Shift>();
         ProductDetailsWindow pdw;
         ClockInOutWindow ciow;
         Employee loggedInUser;
@@ -91,6 +96,11 @@ namespace MediaBazaar_ManagementSystem
                 if (!loggedInUser.Permissions.Contains("department_change_active"))
                 {
                     buttonEmployeesDepartmentRemove.Enabled = false;
+                }
+
+                if(loggedInUser.Function != 4)
+                {
+                    pnlExportData.Visible = false;
                 }
 
                 // department_edit currently has no corresponding function.
@@ -177,6 +187,7 @@ namespace MediaBazaar_ManagementSystem
             PopulateItemsTable();
             LoadAllDepartments();
             SetupCorrectWeekData();
+            AddWeekNumbers();
         }
 
         /// <summary>
@@ -258,6 +269,27 @@ namespace MediaBazaar_ManagementSystem
 
                     row.Cells["id"].Value = e.Id;
                     row.Cells["active"].Value = e.Active ? "✓" : "✕";
+                    if (e.Function == 1)
+                    {
+                        row.Cells["function"].Value = "New employee";
+                    }
+                    else if (e.Function == 2)
+                    {
+                        row.Cells["function"].Value = "Depot worker";
+                    }
+                    else if (e.Function == 3)
+                    {
+                        row.Cells["function"].Value = "Sales representative";
+                    }
+                    else if (e.Function == 4)
+                    {
+                        row.Cells["function"].Value = "Manager";
+                    }
+                    else if (e.Function == 5)
+                    {
+                        row.Cells["function"].Value = "Cashier";
+                    }
+                    else row.Cells["function"].Value = "Human resources";
                     row.Cells["firstName"].Value = e.FirstName;
                     row.Cells["surName"].Value = e.SurName;
                     row.Cells["username"].Value = e.UserName;
@@ -464,6 +496,20 @@ namespace MediaBazaar_ManagementSystem
                 MessageBox.Show("Error\r\n\r\nThis shift has already been taken over or doesn't exist");
             }
         }
+    //}
+
+        /// <summary>
+        /// Adds weeks numbers to the combobox of selecting the week number
+        /// </summary>
+        /// <param name="visible"></param>
+        private void AddWeekNumbers()
+        {
+            for (int i = 1; i <= 52; i++)
+            {
+                cmbxWeekNumber.Items.Add(i);
+            }
+        }
+            
         #endregion
 
         #region Employees
@@ -1189,6 +1235,45 @@ namespace MediaBazaar_ManagementSystem
                     SetCapacityWholeWeek();
                     break;
             }
+        }
+
+        private void btnExportData_Click(object sender, EventArgs e)
+        {
+            int index = dataGridViewEmployees.CurrentRow.Index;
+            if (index >= 0)
+            {
+                int employeeID = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+                string employeename = employeeStorage.Get(employeeID).FirstName + " " + employeeStorage.Get(employeeID).SurName;
+                if (cmbxWeekNumber.SelectedIndex != -1)
+                {
+                    // Gets the week number from the combobox
+                    int weekNumber = Convert.ToInt32(cmbxWeekNumber.SelectedItem);
+
+                    // Gets the first date of the week with the aforementioned week number
+                    weekDaysForExport = FirstDateOfWeekISO8601(year, weekNumber);
+                    List<int> minutesworkedperday = new List<int>();
+                    int nrofshifstperday = 0;
+                    int absentminutes = 0;
+                    
+                    foreach (DateTime date in weekDaysForExport)
+                    {
+                        minutesworkedperday.Add(employeeStorage.GetMinutesWorked(date, employeeID));
+                        nrofshifstperday = employeeStorage.CheckNrOfShifts(employeeID, date.Date.ToString("yyyy-MM-dd"));
+
+                        foreach (string subs in employeeStorage.GetAbsentDaysForEmployee(employeeID))
+                            if (subs==date.Date.ToString("yyyy-MM-dd"))
+                                 absentminutes += nrofshifstperday * 240;
+                    }
+                    
+
+                    ExcelUtlity obj = new ExcelUtlity();
+                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", "D:\\dataForHQ",employeeID , employeename,weekNumber, weekDaysForExport[0],absentminutes);
+
+                    MessageBox.Show("Excel created in D: disk");
+                }
+                else MessageBox.Show("Please select a week number!");
+            }
+            else MessageBox.Show("Please select an employee!");
         }
         #endregion
 
