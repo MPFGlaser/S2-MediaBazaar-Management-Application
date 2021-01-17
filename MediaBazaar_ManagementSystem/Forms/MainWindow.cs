@@ -222,31 +222,28 @@ namespace MediaBazaar_ManagementSystem
             requests.Clear();
 
             // Gathers all requests from the requestStorage and adds them to the list
-            try
+            requests = requestStorage.GetAll();
+            if (requests.Count > 0)
             {
-                requests = requestStorage.GetAll();
-                if (requests.Count > 0)
+                btnTurnDown.Enabled = true;
+                btnPermit.Enabled = true;
+                foreach (Request r in requests)
                 {
-                    foreach (Request r in requests)
-                    {
-                        string senderFirstName = r.SenderFirstName;
-                        string senderSurName = r.SenderSurName;
-                        string receiverFirstName = r.ReceiverFirstName;
-                        string receiverSurName = r.ReceiverSurName;
-                        string date = r.ShiftDate.ToString("MMMM dd, yyyy");
-                        string shift = r.ShiftType;
+                    string senderFirstName = r.SenderFirstName;
+                    string senderSurName = r.SenderSurName;
+                    string receiverFirstName = r.ReceiverFirstName;
+                    string receiverSurName = r.ReceiverSurName;
+                    string date = r.ShiftDate.ToString("MMMM dd, yyyy");
+                    string shift = r.ShiftType;
 
-                        lbxRequests.Items.Add(senderFirstName + " " + senderSurName + " requested " + receiverFirstName + " " + receiverSurName + " to take over their shift on " + date + " in the " + shift);
-                    }
-                }
-                else
-                {
-                    lbxRequests.Items.Add("There are currently no requests");
+                    lbxRequests.Items.Add(senderFirstName + " " + senderSurName + " requested " + receiverFirstName + " " + receiverSurName + " to take over their shift on " + date + " in the " + shift);
                 }
             }
-            catch
+            else
             {
-                lbxRequests.Items.Add("Error");
+                lbxRequests.Items.Add("There are currently no requests");
+                btnTurnDown.Enabled = false;
+                btnPermit.Enabled = false;
             }
         }
 
