@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
@@ -26,12 +27,11 @@ namespace MediaBazaar_ManagementSystem
             int rowsAffected = 0;
             String query = "INSERT INTO employees (active, firstName, surName, username, picture, password, phoneNumber, address, city, postalcode, emailAddress, dateOfBirth, spouseName, spousePhoneNumber, bsn, preferredShift, workingDepartments, contractHours, functions) VALUES (@active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @preferredShift, @workingDepartments, @contractHours, @functions)";
             MySqlCommand command = new MySqlCommand(query, connection);
-            //command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
             command.Parameters.AddWithValue("@username", employee.UserName);
-            command.Parameters.AddWithValue("@picture", "TempPicture"); //TEMP HAS TO CHANGE
+            command.Parameters.AddWithValue("@picture", "TempPicture");
             command.Parameters.AddWithValue("@password", Encrypt.Run(employee.Password));
             command.Parameters.AddWithValue("@phoneNumber", employee.PhoneNumber);
             command.Parameters.AddWithValue("@address", employee.Address);
@@ -449,6 +449,43 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
             return minutes;
+        }
+
+        public ArrayList GetEmployeeStatistics(int employeeid)
+        {
+            ArrayList statistics = new ArrayList();
+            string query = "SELECT sr.userid, sr.productid, p.name, SUM(sr.quantity) AS totalQuantity FROM stock_request AS sr INNER JOIN items AS p ON p.id = sr.productId WHERE sr.userid = @employeeid GROUP BY sr.productid ORDER BY totalQuantity DESC LIMIT 5";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@employeeid", employeeid);
+            try
+            {
+                connection.Open();
+                statistics = GatherStatisticData(cmd);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return statistics;
+        }
+
+        private ArrayList GatherStatisticData(MySqlCommand cmd)
+        {
+            ArrayList statistics = new ArrayList();
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                object[] values = new object[dr.FieldCount];
+                dr.GetValues(values);
+                statistics.Add(values);
+            }
+
+            return statistics;
         }
 
     }

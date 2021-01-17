@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using Microsoft.VisualBasic;
 using MediaBazaar_ManagementSystem.Forms;
+using System.Collections;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -188,6 +189,8 @@ namespace MediaBazaar_ManagementSystem
             LoadAllDepartments();
             SetupCorrectWeekData();
             AddWeekNumbers();
+            AddEmployees();
+            AddDepartments();
         }
 
         /// <summary>
@@ -506,7 +509,34 @@ namespace MediaBazaar_ManagementSystem
                 cmbxWeekNumber.Items.Add(i);
             }
         }
-            
+
+        /// <summary>
+        /// Adds employees for selecting an employee statistics
+        /// </summary>
+        private void AddEmployees()
+        {
+            foreach (Employee employee in employeeStorage.GetAll(true))
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = employee.Id.ToString() + " - " + employee.FirstName + " " + employee.SurName;
+                item.Value = employee.Id;
+                comboBoxStatisticsEmployee.Items.Add(item);
+            }
+        }
+
+        /// <summary>
+        /// Adds departments for selecting an employee statistics
+        /// </summary>
+        private void AddDepartments()
+        {
+            foreach (Department department in departmentStorage.GetAll())
+            {
+                ComboboxItem item = new ComboboxItem();
+                item.Text = department.Id.ToString() + " - " + department.Name;
+                item.Value = department.Id;
+                comboBoxStatisticsDepartment.Items.Add(item);
+            }
+        }
         #endregion
 
         #region Employees
@@ -649,6 +679,101 @@ namespace MediaBazaar_ManagementSystem
                 int data = rand.Next(1, 101);
                 TestDataPoints.Points.Add(data, i);
             }
+        }
+
+        private void GenerateStaticsForEmployee()
+        {
+            int employeeid = 0;
+            Employee employee = null;
+            if (comboBoxStatisticsEmployee.SelectedIndex != -1)
+            {
+                employeeid = Convert.ToInt32((comboBoxStatisticsEmployee.SelectedItem as ComboboxItem).Value.ToString());
+                employee = employeeStorage.Get(employeeid);
+            }
+            else
+            {
+                MessageBox.Show("Please select an employee!");
+                return;
+            }
+
+            StatisticChart.Series.Clear();
+            StatisticChart.Titles.Clear();
+
+            StatisticChart.Series.Add("Total stock requests");
+
+
+            StatisticChart.Series[0].ChartType = SeriesChartType.Spline;
+
+            StatisticChart.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = false;
+
+            // Make line thicker
+            StatisticChart.Series[0].BorderWidth = 4;
+
+
+
+            // Title
+            StatisticChart.Titles.Add($"Total stock requests for employee: ID: {employeeid} - {employee.FirstName} {employee.SurName}");
+
+            StatisticChart.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            ArrayList statistics = employeeStorage.GetEmployeeStatistics(employeeid);
+
+            foreach (object[] statistic in statistics)
+            {
+                StatisticChart.Series["Total stock requests"].Points.AddXY("ID: " + statistic[1].ToString() + " - " + statistic[2].ToString(), statistic[3]);
+
+                Refresh();
+            }
+
+            comboBoxStatisticsEmployee.SelectedIndex = -1;
+        }
+        private void GenerateStaticsForDepartment()
+        {
+            int departmentid = 0;
+            List<Department> departments = departmentStorage.GetAll();
+            string departmentname = "";
+            if (comboBoxStatisticsDepartment.SelectedIndex != -1)
+            {
+                departmentid = Convert.ToInt32((comboBoxStatisticsDepartment.SelectedItem as ComboboxItem).Value.ToString());
+                foreach (Department department in departments)
+                {
+                    if (departmentid == department.Id)
+                    {
+                        departmentname = department.Name;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a department!");
+                return;
+            }
+
+            StatisticChart.Series.Clear();
+            StatisticChart.Titles.Clear();
+
+            StatisticChart.Series.Add("Number of items per department");
+
+            StatisticChart.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;
+
+            // Make line thicker
+            StatisticChart.Series[0].BorderWidth = 3;
+
+            // Title
+            StatisticChart.Titles.Add($"Number of items per department: ID: {departmentid} - {departmentname}");
+
+            StatisticChart.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+
+            ArrayList statistics = departmentStorage.GetDepartmentStatistics(departmentid);
+
+            foreach (object[] statistic in statistics)
+            {
+                StatisticChart.Series["Number of items per department"].Points.AddXY(statistic[0].ToString(), statistic[1]);
+
+                Refresh();
+            }
+
+            comboBoxStatisticsDepartment.SelectedIndex = -1;
         }
         #endregion
 
@@ -1234,45 +1359,6 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        private void btnExportData_Click(object sender, EventArgs e)
-        {
-            int index = dataGridViewEmployees.CurrentRow.Index;
-            if (index >= 0)
-            {
-                int employeeID = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
-                string employeename = employeeStorage.Get(employeeID).FirstName + " " + employeeStorage.Get(employeeID).SurName;
-                if (cmbxWeekNumber.SelectedIndex != -1)
-                {
-                    // Gets the week number from the combobox
-                    int weekNumber = Convert.ToInt32(cmbxWeekNumber.SelectedItem);
-
-                    // Gets the first date of the week with the aforementioned week number
-                    weekDaysForExport = FirstDateOfWeekISO8601(year, weekNumber);
-                    List<int> minutesworkedperday = new List<int>();
-                    int nrofshifstperday = 0;
-                    int absentminutes = 0;
-                    
-                    foreach (DateTime date in weekDaysForExport)
-                    {
-                        minutesworkedperday.Add(employeeStorage.GetMinutesWorked(date, employeeID));
-                        nrofshifstperday = employeeStorage.CheckNrOfShifts(employeeID, date.Date.ToString("yyyy-MM-dd"));
-
-                        foreach (string subs in employeeStorage.GetAbsentDaysForEmployee(employeeID))
-                            if (subs==date.Date.ToString("yyyy-MM-dd"))
-                                 absentminutes += nrofshifstperday * 240;
-                    }
-                    
-
-                    ExcelUtlity obj = new ExcelUtlity();
-                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", "D:\\dataForHQ",employeeID , employeename,weekNumber, weekDaysForExport[0],absentminutes);
-
-                    MessageBox.Show("Excel created in D: disk");
-                }
-                else MessageBox.Show("Please select a week number!");
-            }
-            else MessageBox.Show("Please select an employee!");
-        }
-
         private void btnExportData_Click_1(object sender, EventArgs e)
         {
             int index = dataGridViewEmployees.CurrentRow.Index;
@@ -1304,14 +1390,24 @@ namespace MediaBazaar_ManagementSystem
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                     ExcelUtlity obj = new ExcelUtlity();
-                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", path + "\\Mediabazaar data\\", employeeID, employeename, weekNumber, weekDaysForExport[0], absentminutes);
+                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", path + "MediabazaarData", employeeID, employeename, weekNumber, weekDaysForExport[0], absentminutes);
 
-                    MessageBox.Show("Excel created in documents folder");
+                    MessageBox.Show("Excel created in your documents folder with the name MediabazaarData");
                 }
                 else MessageBox.Show("Please select a week number!");
             }
             else MessageBox.Show("Please select an employee!");
 
+        }
+
+        private void buttonStatisticsDepartment_Click(object sender, EventArgs e)
+        {
+            GenerateStaticsForDepartment();
+        }
+
+        private void buttonStatisticsEmployee_Click(object sender, EventArgs e)
+        {
+            GenerateStaticsForEmployee();
         }
         #endregion
 

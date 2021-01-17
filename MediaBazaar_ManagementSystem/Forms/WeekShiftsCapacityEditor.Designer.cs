@@ -82,6 +82,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.label21 = new System.Windows.Forms.Label();
             this.comboBoxSelectDepartment = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
+            this.buttonInheritCapacity = new System.Windows.Forms.Button();
             this.groupBoxMonday.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayEvening)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMondayAfternoon)).BeginInit();
@@ -718,6 +719,16 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.label22.TabIndex = 25;
             this.label22.Text = "Department";
             // 
+            // buttonInheritCapacity
+            // 
+            this.buttonInheritCapacity.Location = new System.Drawing.Point(480, 12);
+            this.buttonInheritCapacity.Name = "buttonInheritCapacity";
+            this.buttonInheritCapacity.Size = new System.Drawing.Size(147, 23);
+            this.buttonInheritCapacity.TabIndex = 26;
+            this.buttonInheritCapacity.Text = "Use last week\'s capacity";
+            this.buttonInheritCapacity.UseVisualStyleBackColor = true;
+            this.buttonInheritCapacity.Click += new System.EventHandler(this.buttonInheritCapacity_Click);
+            // 
             // WeekShiftsCapacityEditor
             // 
             this.AcceptButton = this.buttonConfirm;
@@ -725,6 +736,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(1104, 181);
+            this.Controls.Add(this.buttonInheritCapacity);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.comboBoxSelectDepartment);
             this.Controls.Add(this.groupBoxSunday);
@@ -832,5 +844,6 @@ namespace MediaBazaar_ManagementSystem.Forms
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox comboBoxSelectDepartment;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button buttonInheritCapacity;
     }
 }

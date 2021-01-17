@@ -108,17 +108,6 @@ namespace MediaBazaar_ManagementSystem
             // Resets the visual indicator for when a regex expression turns out not to pass.
             ResetBoxColors();
 
-            // All the regex expressions used in this function.
-            Regex checkName = new Regex(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
-            Regex checkEmail = new Regex(@"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
-            Regex checkPhoneNumber = new Regex(@"^((?=.{10}$)(\d{10}))|((?=.{12}$)([+316]{4}\d{8}))");
-            Regex checkUserName = new Regex(@"^(?=.{1,64}$)[a-zA-Z0-9._]+$");
-            Regex checkPassword = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-            Regex checkAddress = new Regex(@"^[A-Za-z]+(?:\s[A-Za-z0-9'_-]+)+$");
-            Regex checkBSN = new Regex(@"^[0-9]*\d{9}$");
-            Regex checkNumbers = new Regex(@"^[0-9]+$");
-            Regex checkPostalCode = new Regex(@"^[0-9]{4}[ ]?[a-zA-Z]{2}$");
-
             // Assigns the values entered by the user to their respective variables.
             string firstName = textBoxFirstName.Text;
             string lastName = textBoxLastName.Text;
@@ -139,84 +128,74 @@ namespace MediaBazaar_ManagementSystem
 
             // This wall of if statements checks each input against its regex expression (where applicable)
             //If something's wrong, makes sure to highlight the input & prevents the incorrect data from being passed to the employeeStorage.
-            if (!checkName.IsMatch(firstName))
+            if (!CheckValidity.Name(firstName))
             {
                 allCorrect = false;
                 textBoxFirstName.BackColor = Color.LightCoral;
             }
-            if (!checkName.IsMatch(lastName))
+            if (!CheckValidity.Name(lastName))
             {
                 allCorrect = false;
                 textBoxLastName.BackColor = Color.LightCoral;
             }
-            if (!checkUserName.IsMatch(username))
+            if (!CheckValidity.Username(username))
             {
                 allCorrect = false;
                 textBoxUsername.BackColor = Color.LightCoral;
             }
-            if (!checkPassword.IsMatch(password) && !editing)
+            if (!CheckValidity.Password(password) && !editing)
             {
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
             }
-            if ((password != passwordConfirm || passwordConfirm == "") && !editing)
+            if ((password != passwordConfirm || string.IsNullOrEmpty(passwordConfirm)) && !editing)
             {
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
                 textBoxPasswordConfirm.BackColor = Color.LightCoral;
             }
-            if (!checkPhoneNumber.IsMatch(textBoxPhoneNumber.Text))
+            if (!CheckValidity.PhoneNumber(textBoxPhoneNumber.Text))
             {
                 allCorrect = false;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
             }
-            if (!checkAddress.IsMatch(address))
+            if (!CheckValidity.Address(address))
             {
                 allCorrect = false;
                 textBoxAddress.BackColor = Color.LightCoral;
             }
-            if (!checkEmail.IsMatch(email))
+            if (!CheckValidity.Email(email))
             {
                 allCorrect = false;
                 textBoxEmail.BackColor = Color.LightCoral;
             }
-            if (!checkBSN.IsMatch(textBoxBsn.Text))
+            if (!CheckValidity.BSN(textBoxBsn.Text))
             {
                 allCorrect = false;
                 textBoxBsn.BackColor = Color.LightCoral;
             }
-            if (!checkName.IsMatch(spouseName))
+            if (!CheckValidity.Name(spouseName))
             {
                 allCorrect = false;
                 textBoxSpouseName.BackColor = Color.LightCoral;
             }
-            if (!checkPhoneNumber.IsMatch(textBoxSpousePhone.Text))
+            if (!CheckValidity.PhoneNumber(textBoxSpousePhone.Text))
             {
                 allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
-            //if (!checkNumbers.IsMatch(textBoxFunctions.Text) && editing)
-            //{
-            //    allCorrect = false;
-            //    textBoxFunctions.BackColor = Color.LightCoral;
-            //}
             if (cmbFunctions.SelectedIndex > -1)
                 function = Convert.ToInt32((cmbFunctions.SelectedItem as ComboboxItem).Value.ToString());
-            if (!checkName.IsMatch(textBoxCity.Text))
+            if (!CheckValidity.Name(textBoxCity.Text))
             {
                 allCorrect = false;
                 textBoxCity.BackColor = Color.LightCoral;
             }
-            if (!checkPostalCode.IsMatch(textBoxPostalCode.Text))
+            if (!CheckValidity.PostalCode(textBoxPostalCode.Text))
             {
                 allCorrect = false;
                 textBoxPostalCode.BackColor = Color.LightCoral;
             }
-            //if(comboBoxEmployeeHours.SelectedIndex == -1)
-            //{
-            //    allCorrect = false;
-            //    comboBoxEmployeeHours.BackColor = Color.LightCoral;
-            //}
 
             // If all regex expressions have successfully passed, this runs
             if (allCorrect)
@@ -309,16 +288,6 @@ namespace MediaBazaar_ManagementSystem
             }
             if (cid >= 0) cmbFunctions.SelectedItem = x;
             else cmbFunctions.SelectedItem = -1;
-            //foreach (string value in comboBoxEmployeeHours.Items)
-            //{
-            //    int hours = Convert.ToInt32(value);
-
-            //    if(employee.ContractHours == hours || (hours == 0 && employee.ContractHours == 200))
-            //    {
-            //        comboBoxEmployeeHours.SelectedIndex = index;
-            //    }
-            //    index++;
-            //}
             if (employee.ContractHours == Globals.zeroHourContract)
             {
                 numericUpDownEmployeeHours.Value = 0;
