@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaBazaar_ManagementSystem.Forms
@@ -21,7 +25,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             cmbxDepartment.Visible = false;
             dtpClockIn.Value = DateTime.Now;
             dtpClockOut.Value = DateTime.Now;
-            userid = id;
+            this.userid = id;
             employeeStorage = new EmployeeMySQL();
             shiftStorage = new ShiftMySQL();
             departmentStorage = new DepartmentMySQL();
@@ -38,7 +42,7 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void cmbxEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            userid = Convert.ToInt32((cmbxEmployee.SelectedItem as ComboboxItem).Value.ToString());
+            this.userid = Convert.ToInt32((cmbxEmployee.SelectedItem as ComboboxItem).Value.ToString());
             refresh_shift();
         }
 
@@ -54,19 +58,19 @@ namespace MediaBazaar_ManagementSystem.Forms
             cmbShift.SelectedIndex = -1;
             cmbShift.Items.Clear();
             string date = dtpDate.Value.Date.ToString("yyyy-MM-dd");
-            foreach (Shift s in shiftStorage.GetShiftsByEmployee(userid, date))
+            foreach (Shift s in shiftStorage.GetShiftsByEmployee(this.userid, date))
             {
                 ComboboxItem ci = new ComboboxItem();
                 ci.Text = s.Id.ToString() + " - " + s.ShiftTime.ToString();
                 ci.Value = s.Id;
                 cmbShift.Items.Add(ci);
             }
-            chbxForceShift.Checked = false;
+            chbxForceShift.Checked = false;  
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void btnClockIn_Click(object sender, EventArgs e)
@@ -80,7 +84,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 switch (shifttype)
                 {
                     case 0:
-                        shifttime = ShiftTime.Morning;
+                        shifttime = ShiftTime.Morning; 
                         break;
                     case 1:
                         shifttime = ShiftTime.Afternoon;
@@ -90,14 +94,14 @@ namespace MediaBazaar_ManagementSystem.Forms
                         break;
                 }
 
-                Shift shift = shiftStorage.Get(date, shifttime);
+                Shift shift=shiftStorage.Get(date, shifttime);
 
                 if (shift == null)
                 {
                     // shift does not exist
                     shift = new Shift(0, date, shifttime, 1);
                     shiftStorage.Create(shift);
-                    shift = shiftStorage.Get(date, shifttime);
+                    shift = shiftStorage.Get(date,shifttime);
                 }
                 // check if a department is selected
                 if (cmbxDepartment.SelectedIndex == -1)
@@ -106,9 +110,9 @@ namespace MediaBazaar_ManagementSystem.Forms
                     return;
                 }
                 int depid = (cmbxDepartment.SelectedItem as ComboboxItem).Value;
-                shiftStorage.Assign(shift.Id, userid, depid);
+                shiftStorage.Assign(shift.Id, this.userid, depid);
                 string dateclockin = dtpClockIn.Value.ToString("yyyy-MM-dd hh:mm:ss");
-                shiftStorage.CreateAttendance(userid, shift.Id, dateclockin);
+                shiftStorage.CreateAttendance(this.userid, shift.Id, dateclockin);
                 MessageBox.Show("Succesfully clocked in! Tip: in order to have minutes worked you have to clock out");
             }
             else
@@ -116,10 +120,10 @@ namespace MediaBazaar_ManagementSystem.Forms
                 // modify an existing shift
                 int shiftid = (cmbShift.SelectedItem as ComboboxItem).Value;
                 string dateclockin = dtpClockIn.Value.ToString("yyyy-MM-dd hh:mm:ss");
-                int attendenceid = shiftStorage.CheckAttendance(userid, shiftid);
-
+                int attendenceid = shiftStorage.CheckAttendance(this.userid, shiftid);
+                
                 if (attendenceid != 0) shiftStorage.ModifyClockInAttendance(attendenceid, dateclockin);
-                else shiftStorage.CreateAttendance(userid, shiftid, dateclockin);
+                else shiftStorage.CreateAttendance(this.userid, shiftid, dateclockin);
                 MessageBox.Show("Succesfully clocked in! Tip: in order to have minutes worked you have to clock out");
             }
 
@@ -131,6 +135,7 @@ namespace MediaBazaar_ManagementSystem.Forms
 
         private void btnClockOut_Click(object sender, EventArgs e)
         {
+            string date = dtpDate.Value.ToString("yyyy-MM-dd");
             if (cmbShift.SelectedIndex == -1)
             {
                 MessageBox.Show("Please select a shift!");
@@ -143,7 +148,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 return;
             }
             string dateclockout = dtpClockOut.Value.ToString("yyyy-MM-dd hh:mm:ss");
-            int attendenceid = shiftStorage.CheckAttendance(userid, shiftid);
+            int attendenceid = shiftStorage.CheckAttendance(this.userid, shiftid);
             if (attendenceid != 0)
             {
                 string clockintime = shiftStorage.GetClockInAttendance(attendenceid);
@@ -151,13 +156,13 @@ namespace MediaBazaar_ManagementSystem.Forms
                 DateTime clockout = DateTime.Parse(dateclockout);
                 TimeSpan ts = clockout - clockin;
                 int minutes = Convert.ToInt32(ts.TotalMinutes);
-
-                if (minutes < 0)
+ 
+                if (minutes<0)
                 {
                     MessageBox.Show("Can not clockout before clock in! Please check date and time!!");
                     return;
                 }
-                shiftStorage.ModifyClockOutAttendance(attendenceid, dateclockout, minutes);
+                shiftStorage.ModifyClockOutAttendance(attendenceid, dateclockout,minutes);
                 MessageBox.Show("Succesfully clocked out!");
             }
             else MessageBox.Show("Must clock in, in order to clock out!");
@@ -171,12 +176,13 @@ namespace MediaBazaar_ManagementSystem.Forms
                 lblDepartment.Visible = true;
                 cmbxDepartment.Visible = true;
 
-                Employee employee = employeeStorage.Get(userid);
+                Employee employee = employeeStorage.Get(this.userid);
                 List<int> selectedDepartments = new List<int>();
-                if (!string.IsNullOrEmpty(employee.WorkingDepartments))
+                if (employee.WorkingDepartments != String.Empty)
                     selectedDepartments = employee.WorkingDepartments.Split(',').Select(int.Parse).ToList();
 
-                List<Department> departments = departmentStorage.GetAll();
+                List<Department> departments = new List<Department>();
+                departments = departmentStorage.GetAll();
                 foreach (Department d in departments)
                 {
                     if (selectedDepartments.Contains(d.Id))
@@ -189,7 +195,7 @@ namespace MediaBazaar_ManagementSystem.Forms
                 }
 
                 string date = dtpDate.Value.Date.ToString("yyyy-MM-dd");
-                List<Shift> shifts = shiftStorage.GetShiftsByEmployee(userid, date);
+                List<Shift> shifts = shiftStorage.GetShiftsByEmployee(this.userid, date);
                 List<int> shifttypes = new List<int>();
                 foreach (Shift s in shifts)
                 {
@@ -246,7 +252,7 @@ namespace MediaBazaar_ManagementSystem.Forms
             {
                 string dateclockin = "";
                 string dateclockout = "";
-                int attendenceid = shiftStorage.CheckAttendance(userid, shiftid);
+                int attendenceid = shiftStorage.CheckAttendance(this.userid, shiftid);
                 if (attendenceid == 0) dateclockin = dtpDate.Value.ToString("yyyy-MM-dd hh:mm:ss");
                 else
                 {

@@ -95,7 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CheckValidity.cs" />
     <Compile Include="Classes\ConnectionString.cs" />
     <Compile Include="Classes\Department\Department.cs" />
     <Compile Include="Classes\Department\DepartmentMySQL.cs" />
@@ -114,6 +113,9 @@
     <Compile Include="Classes\Item\Stock.cs" />
     <Compile Include="Classes\Login\ILoginStorage.cs" />
     <Compile Include="Classes\Login\LoginMySQL.cs" />
+    <Compile Include="Classes\Request\IRequestStorage.cs" />
+    <Compile Include="Classes\Request\Request.cs" />
+    <Compile Include="Classes\Request\RequestMySQL.cs" />
     <Compile Include="Classes\Scheduling\FilterAlreadyScheduled.cs" />
     <Compile Include="Classes\Scheduling\FilterContractHoursViolation.cs" />
     <Compile Include="Classes\Scheduling\FilterNotAllowedInDepartment.cs" />

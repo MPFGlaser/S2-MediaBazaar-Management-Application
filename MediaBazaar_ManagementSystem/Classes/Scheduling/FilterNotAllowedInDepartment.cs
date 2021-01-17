@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -10,7 +12,7 @@ namespace MediaBazaar_ManagementSystem
         {
             List<Employee> output = new List<Employee>();
 
-            foreach (Employee employee in employees)
+            foreach(Employee employee in employees)
             {
                 string[] workingDepartments = employee.WorkingDepartments.Split(',');
 

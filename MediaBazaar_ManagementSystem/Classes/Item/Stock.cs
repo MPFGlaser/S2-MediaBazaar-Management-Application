@@ -1,24 +1,60 @@
-﻿namespace MediaBazaar_ManagementSystem.Classes.Item
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Stock
     {
-        private int productId, quantity;
+        //private int id;
+        private int productId;
 
-        public Stock(int givenQuantity, int givenPId)
+        private int quantity;
+
+        public Stock(/*int givenId,*/ int givenQuantity, int givenPId)
         {
+            //id = givenId;
             Quantity = givenQuantity;
             ProductId = givenPId;
         }
 
+        /*public int Id
+        {
+            get
+            {
+                return this.id;
+            }
+            private set
+            {
+                this.id = value;
+            }
+        }*/
+
+
+
         public int Quantity
         {
-            get { return quantity; }
-            set { quantity = value; }
+            get
+            {
+                return this.quantity;
+            }
+            set
+            {
+                this.quantity = value;
+            }
         }
         public int ProductId
         {
-            get { return productId; }
-            set { productId = value; }
+            get
+            {
+                return this.productId;
+            }
+            set
+            {
+                this.productId = value;
+            }
         }
-    }
+     }
 }

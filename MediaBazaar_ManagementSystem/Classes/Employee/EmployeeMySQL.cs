@@ -26,6 +26,7 @@ namespace MediaBazaar_ManagementSystem
             int rowsAffected = 0;
             String query = "INSERT INTO employees (active, firstName, surName, username, picture, password, phoneNumber, address, city, postalcode, emailAddress, dateOfBirth, spouseName, spousePhoneNumber, bsn, preferredShift, workingDepartments, contractHours, functions) VALUES (@active, @firstName, @surName, @username, @picture, @password, @phoneNumber, @address, @city, @postalcode, @emailAddress, @dateOfBirth, @spouseName, @spousePhoneNumber, @bsn, @preferredShift, @workingDepartments, @contractHours, @functions)";
             MySqlCommand command = new MySqlCommand(query, connection);
+            //command.Parameters.AddWithValue("@id", employee.Id);
             command.Parameters.AddWithValue("@active", employee.Active);
             command.Parameters.AddWithValue("@firstName", employee.FirstName);
             command.Parameters.AddWithValue("@surName", employee.SurName);
@@ -257,7 +258,7 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
 
-            foreach (EmployeeShift es in employeeShifts)
+            foreach(EmployeeShift es in employeeShifts)
             {
                 if (weekShiftIds.Contains(es.ShiftId))
                 {

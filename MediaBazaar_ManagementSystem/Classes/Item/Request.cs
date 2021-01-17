@@ -1,4 +1,10 @@
-﻿namespace MediaBazaar_ManagementSystem.Classes.Item
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MediaBazaar_ManagementSystem.Classes.Item
 {
     public class Request
     {
@@ -23,66 +29,66 @@
         {
             get
             {
-                return id;
+                return this.id;
             }
             private set
             {
-                id = value;
+                this.id = value;
             }
         }
         public int ProductId
         {
             get
             {
-                return productId;
+                return this.productId;
             }
             private set
             {
-                productId = value;
+                this.productId = value;
             }
         }
         public int Quantity
         {
             get
             {
-                return quantity;
+                return this.quantity;
             }
             private set
             {
-                quantity = value;
+                this.quantity = value;
             }
         }
         public int RequestedBy
         {
             get
             {
-                return requestedBy;
+                return this.requestedBy;
             }
             private set
             {
-                requestedBy = value;
+                this.requestedBy = value;
             }
         }
         public string Status
         {
             get
             {
-                return status;
+                return this.status;
             }
             private set
             {
-                status = value;
+                this.status = value;
             }
         }
         public string DatE
         {
             get
             {
-                return Date;
+                return this.Date;
             }
             private set
             {
-                Date = value;
+                this.Date = value;
             }
         }
     }

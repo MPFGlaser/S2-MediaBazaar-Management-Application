@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -25,7 +26,7 @@ namespace MediaBazaar_ManagementSystem
             employeeStorage = new EmployeeMySQL();
             departmentStorage = new DepartmentMySQL();
             functionStorage = new FunctionMySQL();
-            currentUser = loggedInUser.Id;
+            this.currentUser = loggedInUser.Id;
             this.loggedInUser = loggedInUser;
             LoadDepartments();
             CheckPermissions();
@@ -33,7 +34,7 @@ namespace MediaBazaar_ManagementSystem
 
         public Employee Employee
         {
-            get { return employee; }
+            get { return this.employee; }
         }
 
         /// <summary>
@@ -107,6 +108,17 @@ namespace MediaBazaar_ManagementSystem
             // Resets the visual indicator for when a regex expression turns out not to pass.
             ResetBoxColors();
 
+            // All the regex expressions used in this function.
+            Regex checkName = new Regex(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
+            Regex checkEmail = new Regex(@"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+            Regex checkPhoneNumber = new Regex(@"^((?=.{10}$)(\d{10}))|((?=.{12}$)([+316]{4}\d{8}))");
+            Regex checkUserName = new Regex(@"^(?=.{1,64}$)[a-zA-Z0-9._]+$");
+            Regex checkPassword = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+            Regex checkAddress = new Regex(@"^[A-Za-z]+(?:\s[A-Za-z0-9'_-]+)+$");
+            Regex checkBSN = new Regex(@"^[0-9]*\d{9}$");
+            Regex checkNumbers = new Regex(@"^[0-9]+$");
+            Regex checkPostalCode = new Regex(@"^[0-9]{4}[ ]?[a-zA-Z]{2}$");
+
             // Assigns the values entered by the user to their respective variables.
             string firstName = textBoxFirstName.Text;
             string lastName = textBoxLastName.Text;
@@ -127,81 +139,93 @@ namespace MediaBazaar_ManagementSystem
 
             // This wall of if statements checks each input against its regex expression (where applicable)
             //If something's wrong, makes sure to highlight the input & prevents the incorrect data from being passed to the employeeStorage.
-            if (!CheckValidity.Name(firstName))
+            if (!checkName.IsMatch(firstName))
             {
                 allCorrect = false;
                 textBoxFirstName.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Name(lastName))
+            if (!checkName.IsMatch(lastName))
             {
                 allCorrect = false;
                 textBoxLastName.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Username(username))
+            if (!checkUserName.IsMatch(username))
             {
                 allCorrect = false;
                 textBoxUsername.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Password(password) && !editing)
+            if (!checkPassword.IsMatch(password) && !editing)
             {
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
             }
-            if ((password != passwordConfirm || string.IsNullOrEmpty(passwordConfirm)) && !editing)
+            if ((password != passwordConfirm || passwordConfirm == "") && !editing)
             {
                 allCorrect = false;
                 textBoxPassword.BackColor = Color.LightCoral;
                 textBoxPasswordConfirm.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.PhoneNumber(textBoxPhoneNumber.Text))
+            if (!checkPhoneNumber.IsMatch(textBoxPhoneNumber.Text))
             {
                 allCorrect = false;
                 textBoxPhoneNumber.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Address(address))
+            if (!checkAddress.IsMatch(address))
             {
                 allCorrect = false;
                 textBoxAddress.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Email(email))
+            if (!checkEmail.IsMatch(email))
             {
                 allCorrect = false;
                 textBoxEmail.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.BSN(textBoxBsn.Text))
+            if (!checkBSN.IsMatch(textBoxBsn.Text))
             {
                 allCorrect = false;
                 textBoxBsn.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.Name(spouseName))
+            if (!checkName.IsMatch(spouseName))
             {
                 allCorrect = false;
                 textBoxSpouseName.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.PhoneNumber(textBoxSpousePhone.Text))
+            if (!checkPhoneNumber.IsMatch(textBoxSpousePhone.Text))
             {
                 allCorrect = false;
                 textBoxSpousePhone.BackColor = Color.LightCoral;
             }
+            //if (!checkNumbers.IsMatch(textBoxFunctions.Text) && editing)
+            //{
+            //    allCorrect = false;
+            //    textBoxFunctions.BackColor = Color.LightCoral;
+            //}
             if (cmbFunctions.SelectedIndex > -1)
                 function = Convert.ToInt32((cmbFunctions.SelectedItem as ComboboxItem).Value.ToString());
-            if (!CheckValidity.Name(textBoxCity.Text))
+            if (!checkName.IsMatch(textBoxCity.Text))
             {
                 allCorrect = false;
                 textBoxCity.BackColor = Color.LightCoral;
             }
-            if (!CheckValidity.PostalCode(textBoxPostalCode.Text))
+            if (!checkPostalCode.IsMatch(textBoxPostalCode.Text))
             {
                 allCorrect = false;
                 textBoxPostalCode.BackColor = Color.LightCoral;
             }
+            //if(comboBoxEmployeeHours.SelectedIndex == -1)
+            //{
+            //    allCorrect = false;
+            //    comboBoxEmployeeHours.BackColor = Color.LightCoral;
+            //}
+
             // If all regex expressions have successfully passed, this runs
             if (allCorrect)
             {
                 bool success;
-
+                
                 // This conversion seems sketchy, but because it was checked by the regex before, it should not pose a problem.
                 int bsn = Convert.ToInt32(textBoxBsn.Text);
+                //int contractHours = Convert.ToInt32(comboBoxEmployeeHours.SelectedItem.ToString());
                 int contractHours = Convert.ToInt32(numericUpDownEmployeeHours.Value);
                 if (contractHours == 0)
                 {
@@ -211,6 +235,7 @@ namespace MediaBazaar_ManagementSystem
                 // Checks whether the form was opened in editing mode or not. If it was, it updates the employee. If not, it creates a new one.
                 if (editing)
                 {
+                    //int function = Convert.ToInt32(textBoxFunctions.Text);
                     // Update to use new stuff
                     success = UpdateEmployee(editId, active, firstName, lastName, username, email, phonenumber, address, dateOfBirth, bsn, spouseName, spousePhone, function, postalCode, city, preferredHours, workingDepartments, contractHours);
                 }
@@ -224,7 +249,7 @@ namespace MediaBazaar_ManagementSystem
                 // This is so that the user doesn't have to re-enter all the data in case something (temporarily) went wrong with the CreateEmployee command.
                 if (success)
                 {
-                    DialogResult = DialogResult.OK;
+                    this.DialogResult = DialogResult.OK;
                 }
             }
         }
@@ -235,8 +260,10 @@ namespace MediaBazaar_ManagementSystem
         /// <param name="employee"></param>
         public void AddEmployeeData(Employee employee)
         {
+            int index = 0;
+
             // Changes the form title to reflect which employee is being edited.
-            Text = "Viewing/editing " + employee.FirstName + "'s details";
+            this.Text = "Viewing/editing " + employee.FirstName + "'s details";
 
             // Sets some editing-specific variables to their correct values. This aides with sending the employeeStorage the right details later on.
             editing = true;
@@ -263,13 +290,15 @@ namespace MediaBazaar_ManagementSystem
             textBoxSpousePhone.Text = employee.SpousePhone;
             textBoxBsn.Text = employee.Bsn.ToString();
             checkBoxActive.Checked = employee.Active;
+            //textBoxFunctions.Text = employee.Function.ToString();
             textBoxPostalCode.Text = employee.PostalCode;
             textBoxCity.Text = employee.City;
             preferredHours = employee.PreferredHours;
             workingDepartments = employee.WorkingDepartments;
             ComboboxItem x = new ComboboxItem();
             int cid = 0;
-            Dictionary<int, string> items = functionStorage.GetFunctions();
+            Dictionary<int, string> items = new Dictionary<int, string>();
+            items = functionStorage.GetFunctions();
             foreach (int cindex in items.Keys)
             {
                 ComboboxItem item = new ComboboxItem();
@@ -280,6 +309,16 @@ namespace MediaBazaar_ManagementSystem
             }
             if (cid >= 0) cmbFunctions.SelectedItem = x;
             else cmbFunctions.SelectedItem = -1;
+            //foreach (string value in comboBoxEmployeeHours.Items)
+            //{
+            //    int hours = Convert.ToInt32(value);
+
+            //    if(employee.ContractHours == hours || (hours == 0 && employee.ContractHours == 200))
+            //    {
+            //        comboBoxEmployeeHours.SelectedIndex = index;
+            //    }
+            //    index++;
+            //}
             if (employee.ContractHours == Globals.zeroHourContract)
             {
                 numericUpDownEmployeeHours.Value = 0;
@@ -338,8 +377,8 @@ namespace MediaBazaar_ManagementSystem
 
         private void buttonEDWCancel_Click(object sender, System.EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void buttonPreferredShifts_Click(object sender, EventArgs e)
@@ -356,7 +395,7 @@ namespace MediaBazaar_ManagementSystem
         {
             //Creates and shows the WorkingDepartments form so the user can select the department on which the employee will be working.
             wd = new WorkingDepartments(workingDepartments, allDepartments);
-            if (wd.ShowDialog() == DialogResult.OK)
+            if(wd.ShowDialog() == DialogResult.OK)
             {
                 workingDepartments = wd.WorkingDepartmentsString;
             }
