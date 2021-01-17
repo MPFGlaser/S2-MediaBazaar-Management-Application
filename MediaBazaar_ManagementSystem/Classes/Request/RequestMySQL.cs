@@ -22,11 +22,7 @@ namespace MediaBazaar_ManagementSystem
         public List<Request> GetAll()
         {
             allRequests = new List<Request>();
-            String query = "SELECT requests.id, requests.senderId, requests.receiverId, requests.shiftId, requests.status, shifts.date, shifts.shiftType, shifts.id " +
-                "FROM requests, shifts " +
-                "WHERE requests.shiftId = shifts.id " +
-                "AND status = 2 " +
-                "ORDER BY shifts.date;";
+            String query = "SELECT requests.id, requests.senderId, requests.receiverId, requests.shiftId, requests.status, shifts.date, shifts.shiftType, shifts.id FROM requests, shifts WHERE requests.shiftId = shifts.id AND requests.status = 2 ORDER BY shifts.date;";
             MySqlCommand command = new MySqlCommand(query, connection);
 
             try
