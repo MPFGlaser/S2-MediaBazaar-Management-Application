@@ -162,18 +162,6 @@ namespace MediaBazaar_ManagementSystem
             }
         }
 
-        // Updates the items in the select departments combobox so they have the correct data.
-        private void UpdateDepartmentsComboBox(List<Department> allDepartments)
-        {
-            comboBoxSelectDepartments.Items.Clear();
-            foreach (Department d in allDepartments)
-            {
-                comboBoxSelectDepartments.DisplayMember = "Text";
-                comboBoxSelectDepartments.ValueMember = "Department";
-                comboBoxSelectDepartments.Items.Add(new { Text = d.Name, Department = d });
-            }
-        }
-
         // Pre-fills the combobox for the shift time with all defined shift times. (Morning, afternoon, evening at the time of writing)
         private void InitializeComboBoxShiftTime()
         {
@@ -301,21 +289,18 @@ namespace MediaBazaar_ManagementSystem
                 allDepartments[selectedIndex].Employees.Add(selectedEmployee);
 
                 // Adds the selected employee to the listbox with currently scheduled employees.
-                //listBoxCurrentEmployees.DisplayMember = "Text";
-                //listBoxCurrentEmployees.ValueMember = "Employee";
-                //listBoxCurrentEmployees.Items.Add(new { Text = selectedEmployee.FirstName + " " + selectedEmployee.SurName, Employee = selectedEmployee });
                 int rowId = dataGridViewScheduling.Rows.Add();
                 DataGridViewRow row = dataGridViewScheduling.Rows[rowId];
                 row.Cells["id"].Value = selectedEmployee.Id;
                 row.Cells["firstName"].Value = selectedEmployee.FirstName;
                 row.Cells["surName"].Value = selectedEmployee.SurName;
 
-                    int nrofshifts = employeeStorage.CheckNrOfShifts(selectedEmployee.Id, this.date.Date.ToString("yyyy-MM-dd"));
+                int nrofshifts = employeeStorage.CheckNrOfShifts(selectedEmployee.Id, this.date.Date.ToString("yyyy-MM-dd"));
                     
-                    if (nrofshifts > 2)
-                    {
-                        row.DefaultCellStyle.BackColor = Color.Red;
-                    }
+                if (nrofshifts > 2)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
                 
 
                 // Removes the employee from the list of available employees and resets the selection index.
@@ -387,17 +372,6 @@ namespace MediaBazaar_ManagementSystem
                     dataGridViewScheduling.Rows.RemoveAt(dataGridViewScheduling.SelectedRows[0].Index);
                 }
             }
-        }
-
-        private dynamic GetComboBoxEmployee(Employee selectedEmployee)
-        {
-            Employee emp = null;
-            foreach (dynamic empDynamic in comboBoxSelectEmployees.Items)
-            {
-                emp = (empDynamic).Employee;
-                if (emp.Id == selectedEmployee.Id) return empDynamic;
-            }
-            return emp;
         }
 
         /// <summary>

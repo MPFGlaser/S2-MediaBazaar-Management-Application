@@ -272,41 +272,44 @@ namespace MediaBazaar_ManagementSystem
             {
                 connection.Close();
             }
-            if (allshifts.Count>0)
-            foreach (Shift s in allshifts)
+            if (allshifts.Count > 0)
             {
-                string sql = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId=@shiftId;";
-                try
-                { 
-                    connection.Open();
-                    MySqlCommand cmd2 = new MySqlCommand(sql, connection);
-                    cmd2.Parameters.AddWithValue("@id", id);
-                    cmd2.Parameters.AddWithValue("@shiftId", s.Id);
-                    MySqlDataReader reader2 = cmd2.ExecuteReader();
-                    while (reader2.Read())
+                foreach (Shift s in allshifts)
+                {
+                    string sql = "SELECT * FROM working_employees WHERE employeeId = @id AND shiftId=@shiftId;";
+                    try
                     {
-                        outputs.Add(s);
+                        connection.Open();
+                        MySqlCommand cmd2 = new MySqlCommand(sql, connection);
+                        cmd2.Parameters.AddWithValue("@id", id);
+                        cmd2.Parameters.AddWithValue("@shiftId", s.Id);
+                        MySqlDataReader reader2 = cmd2.ExecuteReader();
+                        while (reader2.Read())
+                        {
+                            outputs.Add(s);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorMessages.Shift(ex);
+                    }
+                    finally
+                    {
+                        connection.Close();
                     }
                 }
-                catch (Exception ex)
-                {
-                    ErrorMessages.Shift(ex);
-                }
-                finally
-                {
-                    connection.Close();
-                }
             }
+            
             return outputs;
         }
 
-            /// <summary>
-            /// Gets a list of employees within a specified department working the specified shift.
-            /// </summary>
-            /// <param name="shiftId">The shift identifier.</param>
-            /// <param name="departmentId">The department identifier.</param>
-            /// <returns>A list of employees within one department that works the specified shift.</returns>
-            public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
+        /// <summary>
+        /// Gets a list of employees within a specified department working the specified shift.
+        /// </summary>
+        /// <param name="shiftId">The shift identifier.</param>
+        /// <param name="departmentId">The department identifier.</param>
+        /// <returns>A list of employees within one department that works the specified shift.</returns>
+        public List<Employee> GetDepartmentEmployees(int shiftId, int departmentId)
         {
             List<int> employeeIds = new List<int>();
             List<Employee> output = new List<Employee>();
