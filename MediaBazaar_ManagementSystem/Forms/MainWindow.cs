@@ -1390,7 +1390,7 @@ namespace MediaBazaar_ManagementSystem
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                     ExcelUtlity obj = new ExcelUtlity();
-                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", path + "MediabazaarData", employeeID, employeename, weekNumber, weekDaysForExport[0], absentminutes);
+                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", path + "\\MediabazaarData", employeeID, employeename, weekNumber, weekDaysForExport[0], absentminutes);
 
                     MessageBox.Show("Excel created in your documents folder with the name MediabazaarData");
                 }
