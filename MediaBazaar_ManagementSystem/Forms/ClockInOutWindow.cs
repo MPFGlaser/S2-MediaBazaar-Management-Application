@@ -147,8 +147,8 @@ namespace MediaBazaar_ManagementSystem.Forms
                 MessageBox.Show("Cannot force a shift on clock out!");
                 return;
             }
-            string dateclockout = dtpClockOut.Value.ToString("yyyy-MM-dd hh:mm:ss");
-            int attendenceid = shiftStorage.CheckAttendance(this.userid, shiftid);
+            string dateclockout = dtpClockOut.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            int attendenceid = shiftStorage.CheckAttendance(userid, shiftid);
             if (attendenceid != 0)
             {
                 string clockintime = shiftStorage.GetClockInAttendance(attendenceid);
@@ -252,8 +252,8 @@ namespace MediaBazaar_ManagementSystem.Forms
             {
                 string dateclockin = "";
                 string dateclockout = "";
-                int attendenceid = shiftStorage.CheckAttendance(this.userid, shiftid);
-                if (attendenceid == 0) dateclockin = dtpDate.Value.ToString("yyyy-MM-dd hh:mm:ss");
+                int attendenceid = shiftStorage.CheckAttendance(userid, shiftid);
+                if (attendenceid == 0) dateclockin = dtpDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
                 else
                 {
                     dateclockin = shiftStorage.GetClockInAttendance(attendenceid);

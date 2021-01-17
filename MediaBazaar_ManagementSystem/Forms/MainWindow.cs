@@ -1,3 +1,6 @@
+using MediaBazaar_ManagementSystem.Classes;
+using MediaBazaar_ManagementSystem.Forms;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,15 +15,19 @@ namespace MediaBazaar_ManagementSystem
 {
     public partial class MainWindow : Form
     {
+        IRequestStorage requestStorage;
         IEmployeeStorage employeeStorage;
         IItemStorage itemStorage;
         IDepartmentStorage departmentStorage;
         IShiftStorage shiftStorage;
 
         EmployeeDetailsWindow edw;
+        List<Request> requests = new List<Request>();
         List<DateTime> weekDays = new List<DateTime>();
         List<Employee> allEmployees = new List<Employee>();
         List<Shift> allWeekShifts = new List<Shift>();
+        List<DateTime> weekDaysForExport = new List<DateTime>();
+        List<Shift> allWeekShiftsForExport = new List<Shift>();
         ProductDetailsWindow pdw;
         ClockInOutWindow ciow;
         Employee loggedInUser;
@@ -53,7 +60,8 @@ namespace MediaBazaar_ManagementSystem
             calendarDayControlSaturday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
             calendarDayControlSunday.ReloadCalendarDayEvent += new CalendarDayControl.ReloadCalendarDayHelper(SetupCorrectWeekData);
 
-            
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
         }
 
         #region Access Control        
@@ -90,12 +98,17 @@ namespace MediaBazaar_ManagementSystem
                     buttonEmployeesDepartmentRemove.Enabled = false;
                 }
 
+                if(loggedInUser.Function != 4)
+                {
+                    groupBoxExportData.Visible = false;
+                }
+
                 // department_edit currently has no corresponding function.
             }
             else
             {
                 // Removes the tab as the user doesn't have permission to view employee data.
-                tabControl1.TabPages.Remove(tabPage1);
+                tabControl1.TabPages.Remove(tabPageEmployees);
             }
 
             // Stock tab
@@ -118,7 +131,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the stock tab as the user has no permission to view product data.
-                tabControl1.TabPages.Remove(tabPage2);
+                tabControl1.TabPages.Remove(tabPageStock);
             }
 
             // Statistics tab
@@ -129,7 +142,7 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the statistics tab as the user has no permission to view statistics.
-                tabControl1.TabPages.Remove(tabPage3);
+                tabControl1.TabPages.Remove(tabPageStatistics);
             }
 
             // Scheduling tab
@@ -143,9 +156,18 @@ namespace MediaBazaar_ManagementSystem
             else
             {
                 // Removes the scheduling tab as the user has no access to scheduling functions whatsoever.
-                tabControl1.TabPages.Remove(tabPage4);
+                tabControl1.TabPages.Remove(tabPageScheduling);
             }
 
+        }
+
+        /// <summary>
+        /// Function to log the current user out of the application and show a new login window.
+        /// </summary>
+        private void Logout()
+        {
+            Application.Restart();
+            Environment.Exit(0);
         }
         #endregion
 
@@ -156,13 +178,16 @@ namespace MediaBazaar_ManagementSystem
         /// </summary>
         private void DisplayInformation()
         {
+            requestStorage = new RequestMySQL();
             employeeStorage = new EmployeeMySQL();
             itemStorage = new ItemMySQL();
 
+            PopulateRequestsListbox();
             PopulateEmployeesTable();
             PopulateItemsTable();
             LoadAllDepartments();
             SetupCorrectWeekData();
+            AddWeekNumbers();
         }
 
         /// <summary>
@@ -188,6 +213,41 @@ namespace MediaBazaar_ManagementSystem
         }
 
         /// <summary>
+        /// Function to populate the requests list with all requests stored in the request list.
+        /// </summary>
+        private void PopulateRequestsListbox()
+        {
+            // clear the requests listbox
+            lbxRequests.Items.Clear();
+            requests.Clear();
+
+            // Gathers all requests from the requestStorage and adds them to the list
+            requests = requestStorage.GetAll();
+            if (requests.Count > 0)
+            {
+                btnTurnDown.Enabled = true;
+                btnPermit.Enabled = true;
+                foreach (Request r in requests)
+                {
+                    string senderFirstName = r.SenderFirstName;
+                    string senderSurName = r.SenderSurName;
+                    string receiverFirstName = r.ReceiverFirstName;
+                    string receiverSurName = r.ReceiverSurName;
+                    string date = r.ShiftDate.ToString("MMMM dd, yyyy");
+                    string shift = r.ShiftType;
+
+                    lbxRequests.Items.Add(senderFirstName + " " + senderSurName + " requested " + receiverFirstName + " " + receiverSurName + " to take over their shift on " + date + " in the " + shift);
+                }
+            }
+            else
+            {
+                lbxRequests.Items.Add("There are currently no requests");
+                btnTurnDown.Enabled = false;
+                btnPermit.Enabled = false;
+            }
+        }
+
+        /// <summary>
         /// Function to populate the employee table with all employees stored in the employeeStorage.
         /// </summary>
         private void PopulateEmployeesTable()
@@ -206,6 +266,27 @@ namespace MediaBazaar_ManagementSystem
 
                     row.Cells["id"].Value = e.Id;
                     row.Cells["active"].Value = e.Active ? "✓" : "✕";
+                    if (e.Function == 1)
+                    {
+                        row.Cells["function"].Value = "New employee";
+                    }
+                    else if (e.Function == 2)
+                    {
+                        row.Cells["function"].Value = "Depot worker";
+                    }
+                    else if (e.Function == 3)
+                    {
+                        row.Cells["function"].Value = "Sales representative";
+                    }
+                    else if (e.Function == 4)
+                    {
+                        row.Cells["function"].Value = "Manager";
+                    }
+                    else if (e.Function == 5)
+                    {
+                        row.Cells["function"].Value = "Cashier";
+                    }
+                    else row.Cells["function"].Value = "Human resources";
                     row.Cells["firstName"].Value = e.FirstName;
                     row.Cells["surName"].Value = e.SurName;
                     row.Cells["username"].Value = e.UserName;
@@ -374,6 +455,58 @@ namespace MediaBazaar_ManagementSystem
                 }
             }
         }
+        #endregion
+
+        #region Requests
+        /// <summary>
+        /// Function to turn down a submitted take over request
+        /// </summary>
+        private void TurnDownRequest()
+        {
+            bool turnDown = requestStorage.TurnDown(lbxRequests.SelectedIndex);
+
+            if (turnDown == true)
+            {
+                MessageBox.Show("The takeover request has been denied");
+                PopulateRequestsListbox();
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        /// <summary>
+        /// Function to turn down a submitted take over request
+        /// </summary>
+        private void PermitRequest()
+        {
+            bool permit = requestStorage.Permit(lbxRequests.SelectedIndex);
+
+            if (permit == true)
+            {
+                MessageBox.Show("The takeover request has been approved");
+                PopulateRequestsListbox();
+            }
+            else
+            {
+                MessageBox.Show("This shift has already been taken over or doesn't exist");
+            }
+        }
+    //}
+
+        /// <summary>
+        /// Adds weeks numbers to the combobox of selecting the week number
+        /// </summary>
+        /// <param name="visible"></param>
+        private void AddWeekNumbers()
+        {
+            for (int i = 1; i <= 52; i++)
+            {
+                cmbxWeekNumber.Items.Add(i);
+            }
+        }
+            
         #endregion
 
         #region Employees
@@ -633,8 +766,12 @@ namespace MediaBazaar_ManagementSystem
             List<(int employeeId, DateTime absentDate)> absentDays = employeeStorage.GetAbsentDays();
             List<int> allShiftIds = shiftStorage.GetAllShiftIds();
             List<Department> allDepartments = departmentStorage.GetAll();
+            List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees()), employeesToSchedule = new List<WorkingEmployee>();
+            List<(int shiftId, int departmentId, int capacity)> allDepartmentCapacities = departmentStorage.GetCapacityForAllDepartments();
+            int capacityNew = 0;
+            bool showPopup = false, stopScheduling = false;
 
-            foreach(Employee e in allEmployees)
+            foreach (Employee e in allEmployees)
             {
                 foreach((int employeeId, DateTime absentDate) absentList in absentDays)
                 {
@@ -647,16 +784,81 @@ namespace MediaBazaar_ManagementSystem
 
             foreach(Shift s in allWeekShifts)
             {
-                List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
                 foreach (Department d in allDepartments)
                 {
-                    List<WorkingEmployee> currentWorkingEmployees = new List<WorkingEmployee>(employeeStorage.GetWorkingEmployees());
-                    d.Capacity = departmentStorage.GetCapacityForDepartmentInShift(d.Id, s.Id);
-                    Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d);
+                    foreach((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
+                    {
+                        if(!showPopup && element.capacity == 0)
+                        {
+                            showPopup = true;
+                        }
+                    }
                 }
+            }
+
+            if (showPopup)
+            {
+                DialogResult notAllCapacitySet = MessageBox.Show("A capacity has not been set for each department, do you want to set one manually and continue?", "Warning", MessageBoxButtons.YesNo);
+
+                if(notAllCapacitySet == DialogResult.Yes)
+                {
+                    string enteredValue = Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                    if(enteredValue.Length > 0)
+                    {
+                        while (!int.TryParse(enteredValue, out capacityNew))
+                        {
+                            enteredValue = Interaction.InputBox("Set your desired capacity", "Set Capacity");
+                            if (enteredValue.Length == 0)
+                            {
+                                stopScheduling = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    stopScheduling = true;
+                }
+            }
+
+            if (!stopScheduling)
+            {
+                foreach (Shift s in allWeekShifts)
+                {
+                    List<Employee> randomEmployeeList = ShuffleEmployeeList(allEmployees);
+                    foreach (Department d in allDepartments)
+                    {
+                        foreach ((int shiftId, int departmentId, int capacity) element in allDepartmentCapacities)
+                        {
+                            if (element.shiftId == s.Id && element.departmentId == d.Id)
+                            {
+                                d.Capacity = element.capacity;
+                                break;
+                            }
+                        }
+
+                        foreach (WorkingEmployee we in Schedule(s, Filter(s, d.Id, allWeekShifts, currentWorkingEmployees, randomEmployeeList), d, capacityNew))
+                        {
+                            currentWorkingEmployees.Add(we);
+                            employeesToSchedule.Add(we);
+                        }
+                    }
+                }
+
+                shiftStorage.ScheduleAllEmployeesInList(employeesToSchedule);
             }
         }
 
+        /// <summary>
+        /// Filters out all of the employees not fit for the shift and department which are currently beeing scheduled.
+        /// </summary>
+        /// <param name="shift"></param>
+        /// <param name="departmentId"></param>
+        /// <param name="shifts"></param>
+        /// <param name="we"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private List<Employee> Filter(Shift shift, int departmentId, List<Shift> shifts, List<WorkingEmployee> we, List<Employee> e)
         {
             List<Employee> filteredEmployees = new List<Employee>(e);
@@ -681,27 +883,68 @@ namespace MediaBazaar_ManagementSystem
             return filteredEmployees;
         }
 
-        private void Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment)
+        /// <summary>
+        /// Creates the list of employees which are going to be scheduled.
+        /// </summary>
+        /// <param name="toSchedule"></param>
+        /// <param name="availableEmployees"></param>
+        /// <param name="currentDepartment"></param>
+        /// <param name="capacityNew"></param>
+        /// <returns></returns>
+        private List<WorkingEmployee> Schedule(Shift toSchedule, List<Employee> availableEmployees, Department currentDepartment, int capacityNew)
         {
-            // Makes sure everything is set up correctly.
             shiftStorage = new ShiftMySQL();
-            int capacityNew = 3; //Temporary hardcoded because lack of data
+            List<WorkingEmployee> scheduledEmployees= new List<WorkingEmployee>();
+            List<WorkingEmployee> temp = new List<WorkingEmployee>();
 
-            // Removes all information about the shift in the shiftStorage to prevent duplication of entries
+            // Sets all of the employees currently working this shift into the "to be scheduled" list.
+            temp = shiftStorage.GetEmployeesInDepartmentInShift(toSchedule.Id, currentDepartment.Id);
+
+            foreach(WorkingEmployee we in temp)
+            {
+                scheduledEmployees.Add(we);
+            }
+
+            // Removes all information about the employees working this shift & department in the shiftStorage to prevent duplication of entries.
             shiftStorage.ClearDept(toSchedule.Id, currentDepartment.Id);
 
+            // Updates the capacity of departments where no capacity has been set yet (if necessary).
             if (currentDepartment.Capacity <= 0)
             {
                 shiftStorage.UpdateCapacityPerDepartment(toSchedule.Id, currentDepartment.Id, capacityNew);
                 currentDepartment.Capacity = capacityNew;
             }
 
-            for(int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
+            if(scheduledEmployees.Count < currentDepartment.Capacity)
             {
-                shiftStorage.Assign(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id);
+                // Adds the selected employees to the list of employees to be scheduled.
+                for (int i = 0; (i < currentDepartment.Capacity && i < availableEmployees.Count); i++)
+                {
+                    if(scheduledEmployees.Count < currentDepartment.Capacity)
+                    {
+                        scheduledEmployees.Add(new WorkingEmployee(toSchedule.Id, availableEmployees[i].Id, currentDepartment.Id));
+                    }else
+                    {
+                        i = currentDepartment.Capacity;
+                    }
+                }
+            }else if(scheduledEmployees.Count > currentDepartment.Capacity)
+            {
+                // Removes employees if there are too many scheduled.
+                while(scheduledEmployees.Count > currentDepartment.Capacity)
+                {
+                    scheduledEmployees.RemoveAt(scheduledEmployees.Count - 1);
+                }
             }
+
+            return scheduledEmployees;
         }
 
+        /// <summary>
+        /// Randomizes the list of employees in order to not always pick the same ones.
+        /// </summary>
+        /// <param name="toShuffle"></param>
+        /// <returns></returns>
         public List<Employee> ShuffleEmployeeList(List<Employee> toShuffle)
         {
             Random rng = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
@@ -718,6 +961,7 @@ namespace MediaBazaar_ManagementSystem
 
             return toReturn;
         }
+        #endregion
         #endregion
 
         #region Calendar data
@@ -781,17 +1025,31 @@ namespace MediaBazaar_ManagementSystem
         }
         #endregion
 
-        /// <summary>
-        /// Function to log the current user out of the application and show a new login window.
-        /// </summary>
-        private void Logout()
-        {
-            Application.Restart();
-            Environment.Exit(0);
-        }
-        #endregion
-
         #region User control handlers
+        private void btnTurnDown_Click(object sender, EventArgs e)
+        {
+            if (lbxRequests.SelectedIndex != -1)
+            {
+                TurnDownRequest();
+            }
+            else
+            {
+                MessageBox.Show("Please select a takeover request");
+            }
+        }
+
+        private void btnPermit_Click(object sender, EventArgs e)
+        {
+            if (lbxRequests.SelectedIndex != -1)
+            {
+                PermitRequest();
+            }
+            else
+            {
+                MessageBox.Show("Please select a takeover request");
+            }
+        }
+
         private void DataButton_Click(object sender, EventArgs e)
         {
             StatisticsRandomData();
@@ -936,6 +1194,84 @@ namespace MediaBazaar_ManagementSystem
             psw = new PermissionSelectionWindow();
             psw.Show();
         }
+
+        private void MainWindow_KeyDown(Object o, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    //Go to Employees
+                    tabControl1.SelectedTab = tabPageEmployees;
+                    break;
+                case Keys.F2:
+                    //Go to Stock
+                    tabControl1.SelectedTab = tabPageStock;
+                    break;
+                case Keys.F3:
+                    //Go to Statistics
+                    tabControl1.SelectedTab = tabPageStatistics;
+                    break;
+                case Keys.F4:
+                    //Go to Schedule
+                    tabControl1.SelectedTab = tabPageScheduling;
+                    break;
+                case Keys.F5:
+                    //Add new employee
+                    EmployeeAdd();
+                    break;
+                case Keys.F6:
+                    //Add new item
+                    StockAdd();
+                    break;
+                case Keys.F7:
+                    //Export statistics? Currently generates random statistic data
+                    StatisticsRandomData();
+                    break;
+                case Keys.F8:
+                    //Edit capacities
+                    SetCapacityWholeWeek();
+                    break;
+            }
+        }
+
+        private void btnExportData_Click(object sender, EventArgs e)
+        {
+            int index = dataGridViewEmployees.CurrentRow.Index;
+            if (index >= 0)
+            {
+                int employeeID = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+                string employeename = employeeStorage.Get(employeeID).FirstName + " " + employeeStorage.Get(employeeID).SurName;
+                if (cmbxWeekNumber.SelectedIndex != -1)
+                {
+                    // Gets the week number from the combobox
+                    int weekNumber = Convert.ToInt32(cmbxWeekNumber.SelectedItem);
+
+                    // Gets the first date of the week with the aforementioned week number
+                    weekDaysForExport = FirstDateOfWeekISO8601(year, weekNumber);
+                    List<int> minutesworkedperday = new List<int>();
+                    int nrofshifstperday = 0;
+                    int absentminutes = 0;
+                    
+                    foreach (DateTime date in weekDaysForExport)
+                    {
+                        minutesworkedperday.Add(employeeStorage.GetMinutesWorked(date, employeeID));
+                        nrofshifstperday = employeeStorage.CheckNrOfShifts(employeeID, date.Date.ToString("yyyy-MM-dd"));
+
+                        foreach (string subs in employeeStorage.GetAbsentDaysForEmployee(employeeID))
+                            if (subs==date.Date.ToString("yyyy-MM-dd"))
+                                 absentminutes += nrofshifstperday * 240;
+                    }
+                    
+
+                    ExcelUtlity obj = new ExcelUtlity();
+                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", "D:\\dataForHQ",employeeID , employeename,weekNumber, weekDaysForExport[0],absentminutes);
+
+                    MessageBox.Show("Excel created in D: disk");
+                }
+                else MessageBox.Show("Please select a week number!");
+            }
+            else MessageBox.Show("Please select an employee!");
+        }
         #endregion
 
         #region element enabling/disabling
@@ -957,6 +1293,8 @@ namespace MediaBazaar_ManagementSystem
                 calendarDayControlFriday.ToggleCalendarDayControlButtons(newValue);
                 calendarDayControlSaturday.ToggleCalendarDayControlButtons(newValue);
                 calendarDayControlSunday.ToggleCalendarDayControlButtons(newValue);
+
+                progressBarSchedulingTime.Visible = !newValue;
             });
         }
 

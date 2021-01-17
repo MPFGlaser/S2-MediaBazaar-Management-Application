@@ -48,5 +48,9 @@ namespace MediaBazaar_ManagementSystem
         string GetClockOutAttendance(int id);
 
         bool ClearDept(int shiftId, int departmentId);
+
+        void ScheduleAllEmployeesInList(List<WorkingEmployee> employeesToSchedule);
+
+        List<WorkingEmployee> GetEmployeesInDepartmentInShift(int shiftId, int departmentId);
     }
 }
