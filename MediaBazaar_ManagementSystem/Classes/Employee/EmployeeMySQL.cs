@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
@@ -449,6 +450,43 @@ namespace MediaBazaar_ManagementSystem
                 connection.Close();
             }
             return minutes;
+        }
+
+        public ArrayList GetEmployeeStatistics(int employeeid)
+        {
+            ArrayList statistics = new ArrayList();
+            string query = "SELECT sr.userid, sr.productid, p.name, SUM(sr.quantity) AS totalQuantity FROM stock_request AS sr INNER JOIN items AS p ON p.id = sr.productId WHERE sr.userid = @employeeid GROUP BY sr.productid ORDER BY totalQuantity DESC LIMIT 5";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@employeeid", employeeid);
+            try
+            {
+                connection.Open();
+                statistics = GatherStatisticData(cmd);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessages.Generic(ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return statistics;
+        }
+
+        private ArrayList GatherStatisticData(MySqlCommand cmd)
+        {
+            ArrayList statistics = new ArrayList();
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                object[] values = new object[dr.FieldCount];
+                dr.GetValues(values);
+                statistics.Add(values);
+            }
+
+            return statistics;
         }
 
     }

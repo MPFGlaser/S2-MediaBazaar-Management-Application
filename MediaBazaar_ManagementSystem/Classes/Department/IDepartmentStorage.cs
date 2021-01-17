@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace MediaBazaar_ManagementSystem
 {
@@ -11,5 +12,7 @@ namespace MediaBazaar_ManagementSystem
         List<Department> GetAll();
 
         List<(int shiftId, int departmentId, int capacity)> GetCapacityForAllDepartments();
+
+        ArrayList GetDepartmentStatistics(int departmentid);
     }
 }
