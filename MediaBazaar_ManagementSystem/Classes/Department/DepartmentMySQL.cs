@@ -218,6 +218,5 @@ public List<(int shiftId, int departmentId, int capacity)> GetCapacityForDepartm
 
             return statistics;
         }
->>>>>>> MediaBazaar_ManagementSystem/Classes/Department/DepartmentMySQL.cs
     }
 }
