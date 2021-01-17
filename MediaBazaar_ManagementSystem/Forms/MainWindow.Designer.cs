@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint17 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint18 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 100D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 25D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 66D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 85D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 45D);
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 58D);
             this.buttonLogin = new System.Windows.Forms.Button();
             this.labelWelcomeText = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -57,6 +57,13 @@
             this.progressBarSchedulingTime = new System.Windows.Forms.ProgressBar();
             this.buttonAutomaticScheduling = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
+            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.tabPageStatistics = new System.Windows.Forms.TabPage();
             this.splitContainerStatistics1 = new System.Windows.Forms.SplitContainer();
             this.StatisticChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -126,13 +133,6 @@
             this.btnPermit = new System.Windows.Forms.Button();
             this.btnTurnDown = new System.Windows.Forms.Button();
             this.lbxRequests = new System.Windows.Forms.ListBox();
-            this.calendarDayControlMonday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlTuesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlWednesday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlThursday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlFriday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSaturday = new MediaBazaar_ManagementSystem.CalendarDayControl();
-            this.calendarDayControlSunday = new MediaBazaar_ManagementSystem.CalendarDayControl();
             this.tabPageScheduling.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerScheduling1)).BeginInit();
             this.splitContainerScheduling1.Panel1.SuspendLayout();
@@ -393,6 +393,76 @@
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // calendarDayControlMonday
+            // 
+            this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlMonday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlMonday.Location = new System.Drawing.Point(3, 3);
+            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlMonday.Name = "calendarDayControlMonday";
+            this.calendarDayControlMonday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlMonday.TabIndex = 0;
+            // 
+            // calendarDayControlTuesday
+            // 
+            this.calendarDayControlTuesday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlTuesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlTuesday.Location = new System.Drawing.Point(164, 3);
+            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlTuesday.Name = "calendarDayControlTuesday";
+            this.calendarDayControlTuesday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlTuesday.TabIndex = 1;
+            // 
+            // calendarDayControlWednesday
+            // 
+            this.calendarDayControlWednesday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlWednesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlWednesday.Location = new System.Drawing.Point(325, 3);
+            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlWednesday.Name = "calendarDayControlWednesday";
+            this.calendarDayControlWednesday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlWednesday.TabIndex = 2;
+            // 
+            // calendarDayControlThursday
+            // 
+            this.calendarDayControlThursday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlThursday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlThursday.Location = new System.Drawing.Point(486, 3);
+            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlThursday.Name = "calendarDayControlThursday";
+            this.calendarDayControlThursday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlThursday.TabIndex = 3;
+            // 
+            // calendarDayControlFriday
+            // 
+            this.calendarDayControlFriday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlFriday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlFriday.Location = new System.Drawing.Point(647, 3);
+            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlFriday.Name = "calendarDayControlFriday";
+            this.calendarDayControlFriday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlFriday.TabIndex = 4;
+            // 
+            // calendarDayControlSaturday
+            // 
+            this.calendarDayControlSaturday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlSaturday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlSaturday.Location = new System.Drawing.Point(808, 3);
+            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlSaturday.Name = "calendarDayControlSaturday";
+            this.calendarDayControlSaturday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlSaturday.TabIndex = 5;
+            // 
+            // calendarDayControlSunday
+            // 
+            this.calendarDayControlSunday.BackColor = System.Drawing.SystemColors.Window;
+            this.calendarDayControlSunday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.calendarDayControlSunday.Location = new System.Drawing.Point(969, 3);
+            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(155, 230);
+            this.calendarDayControlSunday.Name = "calendarDayControlSunday";
+            this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
+            this.calendarDayControlSunday.TabIndex = 6;
+            // 
             // tabPageStatistics
             // 
             this.tabPageStatistics.Controls.Add(this.splitContainerStatistics1);
@@ -432,24 +502,24 @@
             // 
             // StatisticChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.StatisticChart.ChartAreas.Add(chartArea3);
+            chartArea1.Name = "ChartArea1";
+            this.StatisticChart.ChartAreas.Add(chartArea1);
             this.StatisticChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StatisticChart.Enabled = false;
-            legend3.Name = "Legend1";
-            this.StatisticChart.Legends.Add(legend3);
+            legend1.Name = "Legend1";
+            this.StatisticChart.Legends.Add(legend1);
             this.StatisticChart.Location = new System.Drawing.Point(0, 0);
             this.StatisticChart.Name = "StatisticChart";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "TestData";
-            series3.Points.Add(dataPoint13);
-            series3.Points.Add(dataPoint14);
-            series3.Points.Add(dataPoint15);
-            series3.Points.Add(dataPoint16);
-            series3.Points.Add(dataPoint17);
-            series3.Points.Add(dataPoint18);
-            this.StatisticChart.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "TestData";
+            series1.Points.Add(dataPoint1);
+            series1.Points.Add(dataPoint2);
+            series1.Points.Add(dataPoint3);
+            series1.Points.Add(dataPoint4);
+            series1.Points.Add(dataPoint5);
+            series1.Points.Add(dataPoint6);
+            this.StatisticChart.Series.Add(series1);
             this.StatisticChart.Size = new System.Drawing.Size(937, 411);
             this.StatisticChart.TabIndex = 0;
             this.StatisticChart.Text = "chart1";
@@ -505,6 +575,7 @@
             this.btnExportData.TabIndex = 9;
             this.btnExportData.Text = "Export data";
             this.btnExportData.UseVisualStyleBackColor = true;
+            this.btnExportData.Click += new System.EventHandler(this.btnExportData_Click_1);
             // 
             // label4
             // 
@@ -1205,76 +1276,6 @@
             this.lbxRequests.Name = "lbxRequests";
             this.lbxRequests.Size = new System.Drawing.Size(825, 400);
             this.lbxRequests.TabIndex = 0;
-            // 
-            // calendarDayControlMonday
-            // 
-            this.calendarDayControlMonday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlMonday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlMonday.Location = new System.Drawing.Point(3, 3);
-            this.calendarDayControlMonday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.Name = "calendarDayControlMonday";
-            this.calendarDayControlMonday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlMonday.TabIndex = 0;
-            // 
-            // calendarDayControlTuesday
-            // 
-            this.calendarDayControlTuesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlTuesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlTuesday.Location = new System.Drawing.Point(164, 3);
-            this.calendarDayControlTuesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.Name = "calendarDayControlTuesday";
-            this.calendarDayControlTuesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlTuesday.TabIndex = 1;
-            // 
-            // calendarDayControlWednesday
-            // 
-            this.calendarDayControlWednesday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlWednesday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlWednesday.Location = new System.Drawing.Point(325, 3);
-            this.calendarDayControlWednesday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.Name = "calendarDayControlWednesday";
-            this.calendarDayControlWednesday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlWednesday.TabIndex = 2;
-            // 
-            // calendarDayControlThursday
-            // 
-            this.calendarDayControlThursday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlThursday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlThursday.Location = new System.Drawing.Point(486, 3);
-            this.calendarDayControlThursday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.Name = "calendarDayControlThursday";
-            this.calendarDayControlThursday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlThursday.TabIndex = 3;
-            // 
-            // calendarDayControlFriday
-            // 
-            this.calendarDayControlFriday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlFriday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlFriday.Location = new System.Drawing.Point(647, 3);
-            this.calendarDayControlFriday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.Name = "calendarDayControlFriday";
-            this.calendarDayControlFriday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlFriday.TabIndex = 4;
-            // 
-            // calendarDayControlSaturday
-            // 
-            this.calendarDayControlSaturday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSaturday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSaturday.Location = new System.Drawing.Point(808, 3);
-            this.calendarDayControlSaturday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.Name = "calendarDayControlSaturday";
-            this.calendarDayControlSaturday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSaturday.TabIndex = 5;
-            // 
-            // calendarDayControlSunday
-            // 
-            this.calendarDayControlSunday.BackColor = System.Drawing.SystemColors.Window;
-            this.calendarDayControlSunday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.calendarDayControlSunday.Location = new System.Drawing.Point(969, 3);
-            this.calendarDayControlSunday.MinimumSize = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.Name = "calendarDayControlSunday";
-            this.calendarDayControlSunday.Size = new System.Drawing.Size(155, 230);
-            this.calendarDayControlSunday.TabIndex = 6;
             // 
             // MainWindow
             // 
