@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CeckValidity.cs" />
     <Compile Include="Classes\ConnectionString.cs" />
     <Compile Include="Classes\Department\Department.cs" />
     <Compile Include="Classes\Department\DepartmentMySQL.cs" />
