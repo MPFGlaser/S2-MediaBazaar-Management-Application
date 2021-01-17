@@ -1272,6 +1272,47 @@ namespace MediaBazaar_ManagementSystem
             }
             else MessageBox.Show("Please select an employee!");
         }
+
+        private void btnExportData_Click_1(object sender, EventArgs e)
+        {
+            int index = dataGridViewEmployees.CurrentRow.Index;
+            if (index >= 0)
+            {
+                int employeeID = Convert.ToInt32(dataGridViewEmployees.SelectedCells[0].Value);
+                string employeename = employeeStorage.Get(employeeID).FirstName + " " + employeeStorage.Get(employeeID).SurName;
+                if (cmbxWeekNumber.SelectedIndex != -1)
+                {
+                    // Gets the week number from the combobox
+                    int weekNumber = Convert.ToInt32(cmbxWeekNumber.SelectedItem);
+
+                    // Gets the first date of the week with the aforementioned week number
+                    weekDaysForExport = FirstDateOfWeekISO8601(year, weekNumber);
+                    List<int> minutesworkedperday = new List<int>();
+                    int nrofshifstperday = 0;
+                    int absentminutes = 0;
+
+                    foreach (DateTime date in weekDaysForExport)
+                    {
+                        minutesworkedperday.Add(employeeStorage.GetMinutesWorked(date, employeeID));
+                        nrofshifstperday = employeeStorage.CheckNrOfShifts(employeeID, date.Date.ToString("yyyy-MM-dd"));
+
+                        foreach (string subs in employeeStorage.GetAbsentDaysForEmployee(employeeID))
+                            if (subs == date.Date.ToString("yyyy-MM-dd"))
+                                absentminutes += nrofshifstperday * 240;
+                    }
+
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                    ExcelUtlity obj = new ExcelUtlity();
+                    obj.WriteDataTableToExcel(minutesworkedperday, "Employee Details", path + "\\Mediabazaar data\\", employeeID, employeename, weekNumber, weekDaysForExport[0], absentminutes);
+
+                    MessageBox.Show("Excel created in documents folder");
+                }
+                else MessageBox.Show("Please select a week number!");
+            }
+            else MessageBox.Show("Please select an employee!");
+
+        }
         #endregion
 
         #region element enabling/disabling
